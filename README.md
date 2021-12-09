@@ -158,7 +158,7 @@ const initParams = {
   accountId: 'account1',
 };
 const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
-const key = 'YOUR_CODE'; 
+const key = 'YOUR_KEY'; 
 
 //note the following API will only setup initial configuartion, to start collect analytics use start session
 PendoSDK.setup(key,navigationOptions,null);
@@ -196,7 +196,7 @@ Initial steps 1,2,3 are identical to *React Native*
 
 ### 4. Integration
 
-```typescipt
+```javascript
 const initParams = {
         visitorId: 'visitor1',
         accountId: 'account1',
