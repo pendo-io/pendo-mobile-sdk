@@ -11,9 +11,12 @@ TODO: (Naor) Some description aboout the SDK
 ## Installation Instruction 
 - [Native IOS](#native-ios_anchor)
 - [React Native](#react-native_anchor)
+- [React Native Navigation](#react-native-navigation_anchor)
 - [Xamarin](#xamarin_anchor)
 - [Flutter](#flutter_anchor)
+- [Benchmarks](#benchmarks_anchor)
 - [Pivots](#pivots_anchor)
+- [Limitations](#limitations_anchor)
 
 <a name="native-ios_anchor"></a>
 ## Native IOS
@@ -105,6 +108,12 @@ In order to enable Pendo pairing mode (taging and testing) select your project s
 ## React Native
 
 ### 1. Adding Pendo dependency
+#### Requirements: 
+We support codeless solution for _react-native 0.6 and above and react-navigation 5 and above_
+Please note in order for the codeless solution to work all the elements *MUST be wrapped in react-native ui components*<br>
+As any other anlytics tool we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
+
+
 In the root folder of your react app run the folowing:
 ```
 npm i rn-pendo-sdk  
@@ -177,6 +186,29 @@ export default withPendoRN(YOUR_MAIN_FUNCTION);
 ```
 As soon as you have the user to which you want to relate your guides and analytics please call:
 ```PendoSDK.startSession("visitor1","acoount1", null, null);```
+
+<a name="react-native-navigation_anchor"></a>
+## React Native Navigation
+### Requirements
+We support  _react native navigation 6 or above_
+
+Initial steps 1,2,3 are identical to *React Native*
+
+### 4. Integration
+
+```typescipt
+const initParams = {
+        visitorId: 'visitor1',
+        accountId: 'account1',
+    };
+
+    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+    const pendoKey = 'YOUR_KEY';
+    PendoSDK.setup(pendoKey, initParams,navigationOptions); // initParams is optional.
+```
+As soon as you have the user to which you want to relate your guides and analytics please call:
+```PendoSDK.startSession("visitor1","acoount1", null, null);```
+
 
 <a name="xamarin_anchor"></a>
 ## Xamarin
@@ -261,10 +293,19 @@ await PendoFlutterPlugin.initSDK(pendoKey,
 await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
+<a name="benchmarks_anchor"></a>
+## Benchmarks
+SDK size in production is about _2.3MB_<br>
+The init process which includes  `setup`, `startSession` and downloading amount of 3 guides with 3 step each (_~80KB overall_ ) will take around _3sec_ for all of the guides.<br>
+ The network load is executed in paraller so the the guides with highest priority will be downloaded faster and will be availble before the totall download time.
+
 <a name="pivots_anchor"></a>
 ## Pivots
 Please pay attention to the follwowing api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```statSession``` and call it again as son as u have the vistor. 
 
-
+<a name="limitations_anchor"></a>
+## Limitations 
+We dont support _SwiftUI_ yet <br>
+To suport hybrid mode in Flutter/ React native pelase open a ticket
 
 
