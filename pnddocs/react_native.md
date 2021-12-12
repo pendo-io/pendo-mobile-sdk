@@ -88,4 +88,5 @@ Please pay attention to the follwowing api's ``` setup ``` and ```startSession``
 
 ## Limitations
 * To suport hybrid mode in React native pelase open a ticket
+* We dont currently support M1 by default please use official react native [suggetsion](https://github.com/facebook/react-native/issues/31941)
 
