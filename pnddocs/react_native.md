@@ -21,8 +21,10 @@ yarn add rn-pendo-sdk
 after that `cd ios` and run:
 `pod install `
 
-### 2. Project setup (similar to Native IOS)
-Pelase follow the instrction from the native part [2.Project Setup](#project-setup_anchor)
+### 2. Project Setup
+In order to enable Pendo pairing mode (taging and testing) select your project select the info tab and add Url Type with pendo url scheme 
+
+<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
 ### 3. Production Bundle - Modify Javascript Obfuscation
 In the `metro.config.js` file add the following:
