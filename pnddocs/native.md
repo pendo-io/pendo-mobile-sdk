@@ -1,5 +1,4 @@
 
-<a name="native-ios_anchor"></a>
 ## Native IOS
 
 ### 1. Adding Pendo Dependecy
@@ -79,8 +78,11 @@ As soon as you have the  user to which you want to relate your guides and analyt
 [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"acount1" visitorData:@{} accountData:@{}];
 ```
 
-<a name="project-setup_anchor"></a> 
 ### 2. Project Setup
 In order to enable Pendo pairing mode (taging and testing) select your project select the info tab and add Url Type with pendo url scheme 
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
+
+## Limitations 
+* We dont support _SwiftUI_ yet <br>
+
