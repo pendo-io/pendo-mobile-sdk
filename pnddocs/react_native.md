@@ -82,3 +82,7 @@ export default withPendoRN(YOUR_MAIN_FUNCTION);
 ```
 As soon as you have the user to which you want to relate your guides and analytics please call:
 ```PendoSDK.startSession("visitor1","acoount1", null, null);```
+
+### Limitations
+* To suport hybrid mode in React native pelase open a ticket
+
