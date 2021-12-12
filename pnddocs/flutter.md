@@ -44,3 +44,6 @@ await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 
 
 ### Limitations
 * To suport hybrid mode in Flutter pelase open a ticket
+
+## Pivots
+Please pay attention to the follwowing api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```statSession``` and call it again as son as u have the vistor. 
