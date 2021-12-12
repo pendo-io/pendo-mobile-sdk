@@ -36,5 +36,5 @@ Add Pendo URL Scheme to info.plist file
 <img alt="Screen Shot 2021-12-08 at 16 39 20" src="https://user-images.githubusercontent.com/56674958/145228026-f7a5af6c-33c9-4174-afc9-a0295dd6844e.png" width="500" height="300">
 
 ## Pivots
-Please pay attention to the follwowing api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```statSession``` and call it again as son as u have the vistor. 
+Please pay attention to the following APIs: ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor. 
 
