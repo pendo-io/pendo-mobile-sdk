@@ -9,7 +9,7 @@
 TODO: (Naor) Some description aboout the SDK
 
 ## Installation Instruction 
-- [Native IOS](#native-ios_anchor)
+- [Native IOS](pnddocs/native.md)
 - [React Native](#react-native_anchor)
 - [React Native Navigation](#react-native-navigation_anchor)
 - [Xamarin](#xamarin_anchor)
