@@ -60,4 +60,5 @@ As soon as you have the user to which you want to relate your guides and analyti
 Please pay attention to the follwowing api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```statSession``` and call it again as son as u have the vistor. 
 
 ## Limitations
-* To suport hybrid mode in React native navigation pelase open a ticket
+* To support hybrid mode in React native navigation pelase open a ticket
+* We dont currently support M1 by default please use official react native [suggetsion](https://github.com/facebook/react-native/issues/31941)
