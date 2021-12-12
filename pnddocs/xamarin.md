@@ -30,3 +30,8 @@ As soon as you have the user to which you want to relate your guides and analyti
 ```
 Pendo.PendoManager.SharedManager().StartSession("visitor1", "account1", null, null);
 ```
+### 3. Project setup
+Add Pendo URL Scheme to info.plist file
+
+<img alt="Screen Shot 2021-12-08 at 16 39 20" src="https://user-images.githubusercontent.com/56674958/145228026-f7a5af6c-33c9-4174-afc9-a0295dd6844e.png" width="500" height="300">
+
