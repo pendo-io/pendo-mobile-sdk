@@ -41,3 +41,6 @@ await PendoFlutterPlugin.initSDK(pendoKey,
         initParams);
 await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
+
+### Limitations
+* To suport hybrid mode in Flutter pelase open a ticket
