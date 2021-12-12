@@ -4,7 +4,42 @@
 ### Requirements
 We support  _react native navigation 6 or above_
 
-Initial steps 1,2,3 are identical to *React Native*
+### 1. Adding Pendo dependency
+In the root folder of your react app run the folowing:
+```
+npm i rn-pendo-sdk  
+```
+
+or 
+
+```
+yarn add rn-pendo-sdk
+```
+after that `cd ios` and run:
+`pod install `
+
+### 2. Project Setup
+In order to enable Pendo pairing mode (taging and testing) select your project select the info tab and add Url Type with pendo url scheme 
+
+<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
+
+### 3. Production Bundle - Modify Javascript Obfuscation
+In the `metro.config.js` file add the following:
+```javascript
+module.exports = {
+  transformer: {
+    // ...
+    minifierConfig: {
+        keep_classnames: true, // Preserve class names
+        keep_fnames: true, // Preserve function names
+        mangle: {
+          keep_classnames: true, // Preserve class names
+          keep_fnames: true, // Preserve function names
+        }
+    }
+  }
+}
+```
 
 ### 4. Integration
 
