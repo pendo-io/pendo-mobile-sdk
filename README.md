@@ -10,10 +10,10 @@ TODO: (Naor) Some description aboout the SDK
 
 ## Installation Instruction 
 - [Native IOS](pnddocs/native.md)
-- [React Native](#react-native_anchor)
-- [React Native Navigation](#react-native-navigation_anchor)
-- [Xamarin](#xamarin_anchor)
-- [Flutter](#flutter_anchor)
+- [React Native](pnddocs/react_native.md)
+- [React Native Navigation](pnddocs/react_native_navigation.md)
+- [Xamarin](pnddocs/xamarin.md)
+- [Flutter](pnddocs/flutter.md)
 - [Benchmarks](#benchmarks_anchor)
 - [Pivots](#pivots_anchor)
 - [Limitations](#limitations_anchor)
