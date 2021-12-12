@@ -6,7 +6,13 @@
 ![Cocoapods](https://img.shields.io/badge/manual%20integration-compatibale-brightgreen)
 ![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
 
-TODO: (Naor) Some description aboout the SDK
+The Pendo Mobile SDK provides codeless, retroactive analytics across all of your app versions, as well as in-app messages, tooltips, and multi-step walkthrough guides built with Pendo's Visual Design Studio.
+
+* The integration takes three lines of code.
+
+* The SDK will start collecting analytics right away.
+
+* Tracking analytics and guides will work across all your app versions.
 
 ## Installation Instruction 
 - [Native IOS](pnddocs/native.md)
