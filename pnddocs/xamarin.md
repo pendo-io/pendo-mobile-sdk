@@ -28,6 +28,10 @@ public partial class AppDelegate : FormsApplicationDelegate {
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```csharp
+String visitorId = "John Smith";
+String accountId = "Acme Inc.";
+var visitorData = new NSDictionary("Age": "25", "Country": "USA");
+var accountData = new NSDictionary("Tier": "1", "Size": "Enterprise");
 Pendo.PendoManager.SharedManager().StartSession(visitorId, accountId, visitorData, accountData);
 ```
 ### 3. Project setup

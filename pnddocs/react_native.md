@@ -49,10 +49,6 @@ module.exports = {
 import {withPendoRN, PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
 import { useRef } from 'react';
 
-const initParams = {
-  visitorId: 'visitor1',
-  accountId: 'account1',
-};
 const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
 const key = 'YOUR_KEY'; 
 
