@@ -24,21 +24,25 @@ In the `AppDelegate.m` add the follwing:
 Add the following code as soon as the app start:
 ```dart
 import 'package:pendo_sdk/pendo_sdk.dart';
-var initParams = {
-    'visitorId': 'visitor1',
-    'accountId': 'account1',
-    'visitorData': {
-        'age': 25,
-        'country': 'USA'
-    },
-    'accountData': {
-        'Tier': 1,
-        'Size': 'Enterprise'
-    }
-};
 var pendoKey = 'YOUR_KEY';
-await PendoFlutterPlugin.initSDK(pendoKey,
-        initParams);
+await PendoFlutterPlugin.setup(pendoKey);
+```
+
+Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
+```dart
+import 'package:pendo_sdk/pendo_sdk.dart';
+final String visitorId = 'John Smith';
+final String accountId = 'Acme Inc.';
+final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
+final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
+
+PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+```
+
+Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
+In the application files where you want to track an event, add the following code:
+```dart
+import 'package:pendo_sdk/pendo_sdk.dart';
 await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
@@ -47,6 +51,6 @@ Please pay attention to the follwowing APIs ``` setup ``` and ```startSession```
 
 ## Limitations
 * Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution)
-* To suport hybrid mode in Flutter pelase open a ticket
+* To suport hybrid mode in Flutter please open a ticket
 
 

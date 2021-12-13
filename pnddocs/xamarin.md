@@ -26,9 +26,9 @@ public partial class AppDelegate : FormsApplicationDelegate {
  }
  
 ```
-As soon as you have the user to which you want to relate your guides and analytics call:
-```
-Pendo.PendoManager.SharedManager().StartSession("visitor1", "account1", null, null);
+Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
+```csharp
+Pendo.PendoManager.SharedManager().StartSession(visitorId, accountId, visitorData, accountData);
 ```
 ### 3. Project setup
 Add Pendo URL Scheme to info.plist file

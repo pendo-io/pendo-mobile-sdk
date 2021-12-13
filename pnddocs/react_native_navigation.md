@@ -42,23 +42,25 @@ module.exports = {
 ```
 
 ### 4. Integration
-
+In the application main file (App.js/.ts/.tsx), add the following code:
 ```javascript
-const initParams = {
-        visitorId: 'visitor1',
-        accountId: 'account1',
-    };
-
-    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
-    const pendoKey = 'YOUR_KEY';
-    PendoSDK.setup(pendoKey, initParams,navigationOptions); // initParams is optional.
+const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+const pendoKey = 'YOUR_KEY';
+PendoSDK.setup(pendoKey, navigationOptions);
 ```
-As soon as you have the user to which you want to relate your guides and analytics please call:
-```PendoSDK.startSession("visitor1","acoount1", null, null);```
+Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
+```javascript
+const visitorId = 'John Smith';
+const accountId = 'Acme Inc.';
+const visitorData = {'Age': '25', 'Country': 'USA'};
+const accountData = {'Tier': '1', 'Size': 'Enterprise'};
+
+PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
+```
 
 ## Pivots
 Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor. 
 
 ## Limitations
-* To support hybrid mode in React native navigation pelase open a ticket
+* To support hybrid mode in React native navigation please open a ticket
 * We dont currently support M1 by default please use official react native [suggestion](https://github.com/facebook/react-native/issues/31941)
