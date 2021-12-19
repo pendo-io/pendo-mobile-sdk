@@ -25,5 +25,5 @@ The Pendo Mobile SDK provides codeless, retroactive analytics across all of your
 
 ## Benchmarks
 SDK size in production is about _2.3MB_<br>
-The init process which includes  `setup`, `startSession` and downloading amount of 3 guides with 3 step each (_~80KB overall_ ) will take around _3sec_ for all of the guides.<br>
- The network load is executed in parallel, so the guides with highest priority will be downloaded faster and will be available before the total download time.
+The init process includes `setup`, `startSession` and downloading of 3 guides (_~80KB overall_) will take approximately _3sec_ for all of the guides.<br>
+The network load is executed in parallel, so the guides with highest priority will be downloaded faster and will be available before the total download time.
