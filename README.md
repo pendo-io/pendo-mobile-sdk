@@ -6,13 +6,13 @@
 ![Cocoapods](https://img.shields.io/badge/manual%20integration-compatibale-brightgreen)
 ![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
 
-The Pendo Mobile SDK provides codeless, retroactive analytics across all of your app versions, as well as in-app messages, tooltips, and multi-step walkthrough guides built with Pendo's Visual Design Studio.
+The Pendo Mobile SDK is a code-less, retro-active analytics collector across all of your app's versions. The SDK also allows presentation of in-app messages, tooltips and multi-step walkthrough guides built using Pendo's Visual Design Studio online tool.
 
-* The integration takes three lines of code.
+* The integration requires just three lines of code.
 
-* The SDK will start collecting analytics right away.
+* The SDK will begin collecting all analytics the moment the SDK is integrated, without any additional steps.
 
-* Tracking analytics and guides will work across all your app versions.
+* Tracking the analytics and guides will work across all your app versions.
 
 ## Installation Instruction 
 - [Native IOS](pnddocs/native.md)
@@ -24,6 +24,6 @@ The Pendo Mobile SDK provides codeless, retroactive analytics across all of your
 
 
 ## Benchmarks
-SDK size in production is about _2.3MB_<br>
-The init process includes `setup`, `startSession` and downloading of 3 guides (_~80KB overall_) will take approximately _3sec_ for all of the guides.<br>
-The network load is executed in parallel, so the guides with highest priority will be downloaded faster and will be available before the total download time.
+The SDK will increase your production app (on App Store) by roughly _2.3MB_<br>
+A session including the init process (usage of `setup`, `startSession` methods) and downloading 3 guides (_~80KB overall_) will elapse approximately _3sec_.<br>
+Network load is executed in parallel, prioritizing guides with higher priority to be downloaded first and becoming available earlier during the initialization process of the session.
