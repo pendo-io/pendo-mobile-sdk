@@ -85,9 +85,20 @@ const accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
+If some of your own _custom_ react native components are not taggable as we cant detect it in normal detection flow,
+you can try to add it manually to the scaning flow. In order to do it add a prop `nativeID` to your component.
+For instance:
+```typescript
+<TouchableOpacity onPress={open} nativeID={"myProp"}>      
+</TouchableOpacity> 
+```
+and change your integration to the following:
+```typescript
+export default withPendoRN(YOUR_MAIN_FUNCTION,{nativeIDs:["myProp"]});
+```
 
 ## Pivots
-Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor. 
+Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor.  
 
 ## Limitations
 * To support hybrid mode in React native please open a ticket
