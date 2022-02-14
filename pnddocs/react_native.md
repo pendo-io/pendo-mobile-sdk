@@ -96,6 +96,9 @@ and change your integration to the following:
 ```typescript
 export default withPendoRN(YOUR_MAIN_FUNCTION,{nativeIDs:["myProp"]});
 ```
+Sample app with Pendo integration can be found here:
+[PendoReactNativeIntegration](https://github.com/pendo-io/PendoReactNativeIntegration)
+
 
 ## Pivots
 Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor.  
