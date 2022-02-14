@@ -96,7 +96,7 @@ and change your integration to the following:
 ```typescript
 export default withPendoRN(YOUR_MAIN_FUNCTION,{nativeIDs:["myProp"]});
 ```
-Sample app with Pendo integration could be found here:
+Sample app with Pendo integration can be found here:
 [PendoReactNativeIntegration](https://github.com/pendo-io/PendoReactNativeIntegration)
 
 

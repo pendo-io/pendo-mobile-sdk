@@ -46,7 +46,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-Flutter Codeless POC could be found here:
+Flutter Codeless POC can be found here:
 [Flutter Codeless POC video](https://user-images.githubusercontent.com/56674958/153876161-c1017a0d-ad5e-4837-9746-4317d1183f18.mov)
 
 ## Pivots
