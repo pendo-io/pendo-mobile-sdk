@@ -38,7 +38,7 @@ Obj-C:
 }
 ```
 
-In order to enable Pendo pairing mode (tagging and testing) select your project select the info tab and add Url Type with pendo url scheme 
+To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
