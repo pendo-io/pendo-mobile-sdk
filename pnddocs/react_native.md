@@ -22,7 +22,20 @@ after that `cd ios` and run:
 `pod install `
 
 ### 2. Project Setup
-In order to enable Pendo pairing mode (taging and testing) select your project select the info tab and add Url Type with pendo url scheme 
+In the `AppDelegate.m` add the following:
+```objectivec
+@import Pendo;
+//your code
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    if ([[url scheme] containsString:@"pendo"]) {
+        [[PendoManager sharedManager] initWithUrl:url];
+        return YES;
+    }
+    //  your code here ...
+    return YES;
+}
+```
+To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
@@ -52,7 +65,7 @@ import { useRef } from 'react';
 const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
 const key = 'YOUR_KEY'; 
 
-//note the following API will only setup initial configuartion, to start collect analytics use start session
+//note the following API will only setup initial configuration, to start collect analytics use start session
 PendoSDK.setup(key,navigationOptions,null);
 
 //your code 
@@ -86,7 +99,7 @@ const accountData = {'Tier': '1', 'Size': 'Enterprise'};
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 If some of your own _custom_ react native components are not taggable as we cant detect it in normal detection flow,
-you can try to add it manually to the scaning flow. In order to do it add a prop `nativeID` to your component.
+you can try to add it manually to the scanning flow. In order to do it add a prop `nativeID` to your component.
 For instance:
 ```typescript
 <TouchableOpacity onPress={open} nativeID={"myProp"}>      
@@ -101,9 +114,9 @@ Sample app with Pendo integration can be found here:
 
 
 ## Pivots
-Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor.  
+Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
 
 ## Limitations
 * To support hybrid mode in React native please open a ticket
-* We dont currently support M1 by default please use official react native [suggestion](https://github.com/facebook/react-native/issues/31941)
+
 

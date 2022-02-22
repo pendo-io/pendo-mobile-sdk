@@ -15,6 +15,7 @@ _File -> Add Packages_ in the search window paste:
 and select _Up to Next Major Version_
 
 ### 2. Integration
+In the _AppDelegate_ file <br>
 Swift:
 
 ```swift
@@ -25,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let key = "YOUR_KEY"
-        //please note the following API will only setup initial configuartion, to start collect analytics use start session
+        //please note the following API will only setup initial configuration, to start collect analytics use start session
         PendoManager.shared().setup(key)
         return true
     }
@@ -56,7 +57,7 @@ Obj-C:
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSString *key = @"YOUR_KEY";
-    //note the following API will only setup initial configuartion, to start collect analytics use start session
+    //note the following API will only setup initial configuration, to start collect analytics use start session
     [[PendoManager sharedManager] setup:key];
     return YES;
 }
@@ -75,16 +76,16 @@ Obj-C:
 As soon as you have the  user to which you want to relate your guides and analytics call:
 
 ```objc
-[[PendoManager sharedManager] startSession:@"visitor1" accountId:@"acount1" visitorData:@{} accountData:@{}];
+[[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
 ```
 
-### 2. Project Setup
-In order to enable Pendo pairing mode (taging and testing) select your project select the info tab and add Url Type with pendo url scheme 
+### 3. Project Setup
+To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
 ## Pivots
-Please pay attention to the following api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the vistor. 
+Please pay attention to the following api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 ## Limitations 
 * SwiftUI is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution)
