@@ -95,7 +95,7 @@ Currently SwiftUI support is provided as beta and is available via cocoapods:<br
 ```
 
 Add Pendo pod with all rest of the pods:
-`pod Pendo`
+`pod 'Pendo'`
  
 Pure swiftUI apps don't include `AppDelegate` file by default. Please create one and follow the instructions in step: **2 Integration**. <br>
 SwiftUI apps **doesn't respond** to `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` if the app entry point is struct attributed with `@main`.<br>
