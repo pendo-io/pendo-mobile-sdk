@@ -90,8 +90,8 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 Currently SwiftUI support is provided as beta and is available via cocoapods:<br>
 ```
     #Place it at the top of your Podfile
-    source 'https://github.com/CocoaPods/Specs.git'
     source 'https://github.com/pendo-io/specs-beta.git'
+    source 'https://github.com/CocoaPods/Specs.git'
 ```
 
 Add Pendo pod with all rest of the pods:
