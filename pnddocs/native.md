@@ -87,7 +87,16 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 
 
 # SwiftUI Integration 
-Currently SwiftUI support is provided as beta and is available via cocoapods: `pod PendoSDKAmir`<br>
+Currently SwiftUI support is provided as beta and is available via cocoapods:<br>
+```
+    #Place it at the top of your Podfile
+    source 'https://github.com/CocoaPods/Specs.git'
+    source 'https://github.com/pendo-io/specs-beta.git'
+```
+
+Add Pendo pod with all rest of the pods:
+`pod Pendo`
+ 
 Pure swiftUI apps don't include `AppDelegate` file by default. Please create one and follow the instructions in step: **2 Integration**. <br>
 SwiftUI apps **doesn't respond** to `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` if the app entry point is struct attributed with `@main`.<br>
 In that case please use the following approach:
