@@ -98,8 +98,10 @@ Add Pendo pod with all rest of the pods:
 `pod 'Pendo'`
  
 Pure swiftUI apps don't include `AppDelegate` file by default. Please create one and follow the instructions in step: **2 Integration**. <br>
-SwiftUI apps **doesn't respond** to `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` if the app entry point is struct attributed with `@main`.<br>
-In that case please use the following approach:
+SwiftUI apps **don't respond** to: <br>
+ `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` <br>
+  if the app entry point is struct attributed with `@main`.<br>
+In that case please add `.onOpenURL(perform:)` to your main view, for instance:
 ```swift
 @main
 struct YourApp: App {
