@@ -84,50 +84,7 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
-
-
-# SwiftUI Integration 
-Currently SwiftUI support is provided as beta and is available via cocoapods:<br>
-```
-    #Place it at the top of your Podfile
-    source 'https://github.com/pendo-io/specs-beta.git'
-    source 'https://github.com/CocoaPods/Specs.git'
-```
-
-Add Pendo pod with all rest of the pods:
-`pod 'Pendo'`
- 
-Pure swiftUI apps don't include `AppDelegate` file by default. Please create one and follow the instructions in step: **2 Integration**. <br>
-SwiftUI apps **don't respond** to: <br>
- `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` <br>
-  if the app entry point is struct attributed with `@main`.<br>
-In that case please add `.onOpenURL(perform:)` to your main view, for instance:
-```swift
-@main
-struct YourApp: App {
-    let persistenceController = PersistenceController.shared
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    var body: some Scene {
-        return WindowGroup {
-            TabView {
-                YourView().tabItem {
-                    Image("Icon")
-                    Text("Text")
-                }
-            }
-            .onOpenURL(perform: handleURL)
-        }
-    }
-    
-    func handleURL(_ url: URL) {
-        _ = appDelegate.application(UIApplication.shared, open: url, options: [:])
-
-    }
-``` 
-
 ## Pivots
 Please pay attention to the following api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
-## Limitations 
-* SwiftUI is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution)
 
