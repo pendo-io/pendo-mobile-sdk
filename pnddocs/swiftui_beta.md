@@ -68,4 +68,44 @@ struct YourApp: App {
 ### Project Setup
 To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
 
-<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
+<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300"> <br>
+
+
+# SwiftUI readiness list
+
+This documentation reflects the current progress of Pendo SDK SwiftUI codeless solution.<br>
+Please note that its still in beta and some elements may not be accurate in all scenarios,<br> 
+please open a ticket with code sample in case you find a bug
+
+## Screen change events 
+
+Screen change events are still supported by UIKit implementation with some additional enhancement from SwiftUI<br>
+In addition to UIKit screen change event data Pendo will try to add unique SwiftUI identifier to make sure the analytics are consistent with each screen.<br>
+Currently screen change events will be triggered by embeding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
+
+## Controls support
+
+| SwiftUI | UIKit | Status |
+|:---:|---|---|
+| Button | N/A |:white_check_mark: Taggable, Analytics on click* |
+| onTapGesture (modifier) | N/A |:white_check_mark: Taggable, Analytics on click*|
+| Toggle | UISwitch | :white_check_mark: Taggable, Analytics on click* |
+| Stepper | UIStepper | :white_check_mark: Taggable, Analytics on click* |
+| Picker | UIPicker | :white_check_mark: Taggable, Analytics on click* |
+| ToolbarItem | N/A | :white_check_mark: Taggable, Analytics on click* |
+
+## UIKit In SwiftUI
+UIKit elements should be supported by default.
+
+## SwiftUI In UIKit 
+SwiftUI is represented by `UIHostingController` when its embeded in UIKit so we it should be supported. 
+
+
+## Limitation 
+:technologist: - We are unable to scan the content of `Sheets` and `PopOvers` (in development).<br>
+:technologist: - Analytics on click* - to link analytics for specific element we are attaching additional data of that element, sometimes the  texts of the elements are not attached (BUG) <br>
+:technologist: - Dynamic Content - currently not supported <br>
+:technologist: - Some SwiftUI elements may be also taggable in the Pendo Designer although they are have no user interaction<br>
+:technologist: - Accessibility labels/identifiers are not supported<br>
+
+
