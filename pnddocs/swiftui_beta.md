@@ -98,14 +98,15 @@ Currently screen change events will be triggered by embeding the content of the 
 UIKit elements should be supported by default.
 
 ## SwiftUI In UIKit 
-SwiftUI is represented by `UIHostingController` when its embeded in UIKit so we it should be supported. 
+SwiftUI is represented by `UIHostingController` when its embeded in UIKit so it should be supported. 
 
 
 ## Limitation 
 :technologist: - We are unable to scan the content of `Sheets` and `PopOvers` (in development).<br>
 :technologist: - Analytics on click* - to link analytics for specific element we are attaching additional data of that element, sometimes the  texts of the elements are not attached (BUG) <br>
 :technologist: - Dynamic Content - currently not supported <br>
-:technologist: - Some SwiftUI elements may be also taggable in the Pendo Designer although they are have no user interaction<br>
+:technologist: - Some SwiftUI elements may be also taggable in the Pendo designer although they are have no user interaction<br>
 :technologist: - Accessibility labels/identifiers are not supported<br>
+:technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet 
 
 
