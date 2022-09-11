@@ -1,6 +1,7 @@
 # SwiftUI Integration 
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
 
+## Cocoapods
 Add Pendo pod with all rest of the pods:
 `pod 'PendoSwiftUI'`
 
