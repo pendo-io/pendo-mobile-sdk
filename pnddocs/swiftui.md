@@ -2,18 +2,12 @@
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
 
 ## Cocoapods
-```
-    #Place it at the top of your Podfile
-    source 'https://github.com/pendo-io/specs-beta.git'
-    source 'https://github.com/CocoaPods/Specs.git'
-```
-
 Add Pendo pod with all rest of the pods:
-`pod 'Pendo'`
+`pod 'PendoSwiftUI'`
 
 ## SPM
-In the SPM search for _pendo_ and use `swiftui_beta` branch:<br>
-<img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/180163385-59639b68-df10-4d85-bd72-08dca771bd51.png">
+In the SPM search for _pendo_ and use `swiftui` branch:<br>
+<img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
 Pure swiftUI apps don't include `AppDelegate` file by default. Please create an `AppDelegate` file and complete the following steps:<br> 
