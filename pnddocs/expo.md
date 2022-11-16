@@ -25,8 +25,8 @@ In the `app.json` please add the following
       [
         "rn-pendo-sdk",
         {
-          "ios-scheme": "IOS_URL_SCHEME",
-          "android-scheme": "ANDROID_URL_SCHEME"
+          "ios-scheme": "YOUR_IOS_URL_SCHEME",
+          "android-scheme": "YOUR_ANDROID_URL_SCHEME"
         }
       ]
     ]
