@@ -1,14 +1,12 @@
 ## Expo IOS
-Please note **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin which is not part of the Expo Go app.
-Pendo can be used in development builds *only*. 
-You can read more about development builds [Adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/)
 
 ### 1. Adding Pendo dependency
-#### Requirements: 
-We support codeless solution for _react-native 0.6 and above and react-navigation 5 and above_
+### Requirements: 
+We support codeless solution for react-native 0.6+ ,react-navigation 5+ and EXPO Sdk 41+<br>
 Please note in order for the codeless solution to work all the elements *MUST be wrapped in react-native ui components*<br>
 As any other analytics tool we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
 Which means that codeless tracking analytics is available for screen components only
+
 
 In the root folder of your react app run the following:
 
@@ -108,6 +106,11 @@ export default withPendoRN(YOUR_MAIN_FUNCTION,{nativeIDs:["myProp"]});
 ### 5. Runing the project
 To run the project with Pendo integration you should be able to generate iOS and Android projects.
 You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at any later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
+
+## Limitations 
+Please note **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin which is not part of the Expo Go app.
+Pendo can be used in development builds *only*. 
+You can read more about development builds [Adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/)
 
 ## Pivots
 Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
