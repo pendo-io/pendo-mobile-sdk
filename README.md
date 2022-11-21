@@ -19,6 +19,7 @@ The Pendo Mobile SDK is a code-less, retro-active analytics collector across all
 - [SwiftUI](/pnddocs/swiftui.md)
 - [React Native](/pnddocs/react_native.md)
 - [React Native Navigation](/pnddocs/react_native_navigation.md)
+- [Expo](/pnddocs/expo.md)
 - [Xamarin](/pnddocs/xamarin.md)
 - [Flutter](/pnddocs/flutter.md)
 - [Benchmarks](#benchmarks_anchor)
