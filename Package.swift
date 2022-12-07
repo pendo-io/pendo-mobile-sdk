@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Pendo",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v9)
     ],
     products: [
         .library(
@@ -18,9 +18,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Pendo",
-            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/swiftui/2.18.0.6333/pendo-ios-sdk-xcframework.2.18.0.6333.zip",
-            checksum: "9f4f54c9152ace103a9055357c1b4aff2272c857ae5af9e5ad6f047bf7a02900"
+            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/swiftui/2.20.0.6594/pendo-ios-sdk-xcframework.2.20.0.6594.zip",
+            checksum: "985161f0d2d8a298eb4c4288d8a2d23fca6fae7b935d476c4941d5c56536c50d"
         ),
     ]
 )
-
