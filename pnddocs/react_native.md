@@ -60,36 +60,35 @@ module.exports = {
 ### 4.Integration
 
 ```typescript
-import {withPendoRN, PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
-import { useRef } from 'react';
+import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
 
 const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
 const key = 'YOUR_KEY'; 
 
 //note the following API will only setup initial configuration, to start collect analytics use start session
 PendoSDK.setup(key,navigationOptions,null);
-
-//your code 
-
-function YOUR_MAIN_FUNCTION(props) {
-  const navigationRef = useRef();
-  return (
-    <NavigationContainer 
-    ref={navigationRef}
-    onStateChange={()=> {
-      const state = navigationRef.current.getRootState()
-      props.onStateChange(state);
-    }}
-    onReady ={()=>{
-        const state = navigationRef.current.getRootState()
-        props.onStateChange(state);
-    }} >
-      {MainStackScreen()}
-    </NavigationContainer >
-  )
-};
-export default withPendoRN(YOUR_MAIN_FUNCTION);
 ```
+In the file where the `NavigationContainer` is created.
+    Import `WithPendoReactNavigation`:
+
+```typescript
+    import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
+```
+   
+    Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
+
+```typescript
+    const PendoNavigationContainer = WithPendoReactNabigation (NavigationContainer);    
+```
+    
+    replace `NavigationContainer` tag with `PendoNavigationContainer` tag
+   
+```typescript
+   <PendoNavigationContainer>
+   {/* Rest of your app code */}
+   </PendoNavigationContainer>
+```
+
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
 const visitorId = 'John Smith';
