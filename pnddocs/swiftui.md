@@ -1,5 +1,6 @@
 # SwiftUI Integration 
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
+The codeless solution is supported with IOS 15 and 16. Screen tracking is available since IOS 13. (For Iphones)
 
 ## Cocoapods
 Add Pendo pod with all rest of the pods:
@@ -35,7 +36,8 @@ PendoManager.shared().startSession("visitor1", accountId: "account1", visitorDat
 SwiftUI applications **don't respond** to the method <br>
  `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` <br>
   if the app entry point is a struct attributed with `@main`.<br>
-If this is the case, please add `.onOpenURL(perform:)` to your main view. See the following code example::
+If this is the case, please add `.onOpenURL(perform:)` to your main view. See the following code example:
+Please note `.environment(\.accessibilityEnabled, true)` must be applied to main rootView of the app.
 ```swift
 @main
 struct YourApp: App {
@@ -49,6 +51,7 @@ struct YourApp: App {
                     Text("Text")
                 }
             }
+            .environment(\.accessibilityEnabled, true) 
             .onOpenURL(perform: handleURL)
         }
     }
@@ -71,37 +74,50 @@ This documentation reflects the current progress of Pendo SDK SwiftUI codeless s
 Please note that its still in beta and some elements may not be accurate in all scenarios,<br> 
 please open a ticket with code sample in case you find a bug
 
-## Screen change events 
+## Screen tracking 
 
 Screen change events are still supported by UIKit implementation with some additional enhancement from SwiftUI<br>
 In addition to UIKit screen change event data Pendo will try to add unique SwiftUI identifier to make sure the analytics are consistent with each screen.<br>
 Currently screen change events will be triggered by embeding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
 
+## Accessibility Support
+In case you don't add accessibility modifiers ios will generate a default ones based on the ui elements of your app.
+We should have the support of label/identifier/hint. <br>
+Complex Nested accessibility forms might not be supported 
+
 ## Controls support
 
 | SwiftUI | UIKit | Status |
 |:---:|---|---|
-| Button | N/A |:white_check_mark: Taggable, Analytics on click* |
-| onTapGesture (modifier) | N/A |:white_check_mark: Taggable, Analytics on click*|
-| Toggle | UISwitch | :white_check_mark: Taggable, Analytics on click* |
-| Stepper | UIStepper | :white_check_mark: Taggable, Analytics on click* |
-| Picker | UIPicker | :white_check_mark: Taggable, Analytics on click* |
-| List | UITableView | :white_check_mark: Taggable, Analytics on click* |
-| ToolbarItem | N/A | :white_check_mark: Taggable, Analytics on click* |
+| Button | N/A |:white_check_mark: Taggable, Analytics on click (see *LIMITATION* section)|
+| onTapGesture (modifier) | N/A |:white_check_mark: Taggable, Analytics on click (see *LIMITATION* section)|
+| Toggle | UISwitch | :white_check_mark: Taggable, Analytics on click |
+| Stepper | UIStepper | :white_check_mark: Taggable, Analytics on click |
+| Picker | UIPicker | :white_check_mark: Taggable, Analytics on click |
+| List | UITableView | :white_check_mark: Taggable, Analytics on click |
+| ToolbarItem | N/A | :white_check_mark: Taggable, Analytics on click |
+| Menu | N/A | Not Supported
 
 ## UIKit In SwiftUI
 UIKit elements should be supported by default.
 
 ## SwiftUI In UIKit 
-SwiftUI is represented by `UIHostingController` when its embeded in UIKit so it should be supported. 
-
+SwiftUI is represented by `UIHostingController` when its embeded in UIKit the support is default SwiftUI support.
 
 ## Limitation 
-:technologist: - We are unable to scan the content of `Sheets` and `PopOvers` (in development).<br>
-:technologist: - Analytics on click* - to link analytics for specific element we are attaching additional data of that element, sometimes the  texts of the elements are not attached (BUG) <br>
-:technologist: - Dynamic Content - currently not supported <br>
-:technologist: - Various SwiftUI elements may be also taggable in the Pendo designer although they are have no user interaction<br>
-:technologist: - Accessibility labels/identifiers are not supported<br>
+:technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` for those screens <br>
+:technologist: - Clickable elements buttons/tapGestures etc. When you create a clickable from element tha doesn't has background color of its own like VStack, HStack please set a background color to it (which is NOT transparent)
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet 
+
+## NOTE
+We are highly recommend to use the following sample apps to tag features and see how Pendo ananlytics works.
+(Please pay attention: to *PENDO CHANGE* comments where in some places we needed to have a minor changes)<br>
+
+ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
+TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
+
+
+IF you find any issue with swiftUI please open a github ticket with minimal code sample so we could reproduce it.
+
 
 
