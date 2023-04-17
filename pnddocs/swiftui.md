@@ -11,8 +11,7 @@ In the SPM search for _pendo_ and use `swiftui` branch:<br>
 <img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
-Pure swiftUI apps don't include `AppDelegate` file by default. Please create an `AppDelegate` file and complete the following steps:<br> 
-In the _AppDelegate_ file <br>
+By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend to create an `AppDelegate` file and complete the following steps:
 
 ```swift
 import UIKit
@@ -27,17 +26,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
-As soon as you have the  user to which you want to relate your guides and analytics please call:
+After you have identified the user to which you want to relate your guides and analytics, call `PendoManager.shared().startSession()` with the appropriate parameters.
 
 ```swift
 PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
 ```
 
-SwiftUI applications **don't respond** to the method <br>
- `application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool` <br>
-  if the app entry point is a struct attributed with `@main`.<br>
-If this is the case, please add `.onOpenURL(perform:)` to your main view. See the following code example:
-Please note `.environment(\.accessibilityEnabled, true)` must be applied to main rootView of the app.
+To enable Pendo in your SwiftUI view, use the `enableSwiftUI()` modifier on your `rootView`.
+```swift
+struct YourView: View {
+    var body: some View {
+        Text("Your View")
+            .enableSwiftUI()
+    }
+}
+```
+
+If the entry point to your app is a struct attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
+To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br>
 ```swift
 @main
 struct YourApp: App {
@@ -51,7 +57,7 @@ struct YourApp: App {
                     Text("Text")
                 }
             }
-            .environment(\.accessibilityEnabled, true) 
+            .enableSwiftUI()
             .onOpenURL(perform: handleURL)
         }
     }
@@ -83,7 +89,6 @@ Currently screen change events will be triggered by embeding the content of the 
 ## Accessibility Support
 In case you don't add accessibility modifiers ios will generate a default ones based on the ui elements of your app.
 We should have the support of label/identifier/hint. <br>
-Complex Nested accessibility forms might not be supported 
 
 ## Controls support
 
@@ -106,12 +111,13 @@ SwiftUI is represented by `UIHostingController` when its embeded in UIKit the su
 
 ## Limitation 
 :technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` for those screens <br>
-:technologist: - Clickable elements buttons/tapGestures etc. When you create a clickable from element tha doesn't has background color of its own like VStack, HStack please set a background color to it (which is NOT transparent)
+:technologist: - Clickable elements buttons/tapGestures etc. When you create a clickable element that doesn't has background color of its own like VStack, HStack please set a background color to it that is NOT transparent
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet 
+:technologist: - SwiftUI IOS 16 navigation api's not supported yet
 
 ## NOTE
-We are highly recommend to use the following sample apps to tag features and see how Pendo ananlytics works.
-(Please pay attention: to *PENDO CHANGE* comments where in some places we needed to have a minor changes)<br>
+We are highly recommend to use the following sample apps to tag features and see how Pendo ananlytics works.<br>
+(Please pay attention: to *PENDO CHANGE* comments where in some places we needed to have a minor changes like integration code or background color)<br>
 
 ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
 TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
