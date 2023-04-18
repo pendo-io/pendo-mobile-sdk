@@ -88,8 +88,8 @@ In addition to UIKit screen change event data Pendo will try to add unique Swift
 Currently screen change events will be triggered by embeding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
 
 ## Accessibility Support
-In case you don't add accessibility modifiers ios will generate a default ones based on the ui elements of your app.
-We should have the support of label/identifier/hint. <br>
+If you don't add accessibility labels the OS will assign default values to the UI elements in your app<br>
+Accessibility identifiers, accessibility labels, and accessibility hints are all supported and can be used by Pendo for unique identification <br>
 
 ## Controls support
 
@@ -111,20 +111,20 @@ UIKit elements should be supported by default.
 SwiftUI is represented by `UIHostingController` when its embeded in UIKit the support is default SwiftUI support.
 
 ## Limitation 
-:technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` for those screens <br>
-:technologist: - Clickable elements buttons/tapGestures etc. When you create a clickable element that doesn't has background color of its own like VStack, HStack please set a background color to it that is NOT transparent<br>
+:technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` api for such screens <br>
+:technologist: - Clickable elements buttons/tapGestures etc. When creating clickable elements that don't have a background color set on them (e.x. VStack or HStack) please set a background color to them that is NOT transparent<br>
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet<br>
 :technologist: - SwiftUI IOS 16 navigation api's not supported yet
 
 ## NOTE
-We are highly recommend to use the following sample apps to tag features and see how Pendo ananlytics works.<br>
-(Please pay attention: to *PENDO CHANGE* comments where in some places we needed to have a minor changes like integration code or background color)<br>
+We highly recommend checking out the following sample apps to observe examples of feature tagging and how Pendo analytics work<br>
+(Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)<br>
 
 ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
 TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
 
 
-IF you find any issue with swiftUI please open a github ticket with minimal code sample so we could reproduce it.
+If you encounter issues using SwiftUI please open a GitHub ticket with the minimal sample code required to reproduce it.
 
 
 
