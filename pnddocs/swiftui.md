@@ -127,8 +127,7 @@ TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
 If you encounter issues using SwiftUI please open a GitHub ticket with the minimal sample code required to reproduce it.
 
 ## Integration Demo Video<br>
-<video width="320" height="240" controls>
-  <source src="https://user-images.githubusercontent.com/56674958/232920296-7e546994-7898-4baa-bc1b-13b716728f15.mov" type="video/mp4">
-</video>
+https://user-images.githubusercontent.com/56674958/232920296-7e546994-7898-4baa-bc1b-13b716728f15.mov
+
 
 
