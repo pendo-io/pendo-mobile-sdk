@@ -112,7 +112,7 @@ SwiftUI is represented by `UIHostingController` when its embeded in UIKit the su
 ## Limitation 
 :technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` for those screens <br>
 :technologist: - Clickable elements buttons/tapGestures etc. When you create a clickable element that doesn't has background color of its own like VStack, HStack please set a background color to it that is NOT transparent
-:technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet 
+:technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet<br>
 :technologist: - SwiftUI IOS 16 navigation api's not supported yet
 
 ## NOTE
