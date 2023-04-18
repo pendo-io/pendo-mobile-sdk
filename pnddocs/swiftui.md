@@ -66,6 +66,7 @@ struct YourApp: App {
         _ = appDelegate.application(UIApplication.shared, open: url, options: [:])
 
     }
+}
 ``` 
 
 ### Project Setup
