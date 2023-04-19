@@ -1,6 +1,6 @@
 # SwiftUI Integration 
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
-The codeless solution is supported with IOS 15 and 16. Screen tracking is available since IOS 13. (For Iphones)
+The codeless solution is supported with IOS 15 and 16. Screen navigation tracking is available since IOS 13. (For Iphones)
 
 ## Cocoapods
 Add Pendo pod with all rest of the pods:
