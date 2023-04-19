@@ -1,6 +1,6 @@
 # SwiftUI Integration 
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
-The codeless solution is supported with IOS 15 and 16. Screen navigation tracking is available since IOS 13. (For Iphones)
+The codeless solution is supported with IOS 15 above. Screen navigation tracking is available since IOS 13.
 
 ## Cocoapods
 Add Pendo pod with all rest of the pods:
@@ -11,6 +11,7 @@ In the SPM search for _pendo_ and use `swiftui` branch:<br>
 <img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
+You can find a integration video tutorial [here](#video_integration)<br>
 By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend to create an `AppDelegate` file and complete the following steps:
 
 ```swift
@@ -118,6 +119,7 @@ SwiftUI is represented by `UIHostingController` when its embeded in UIKit the su
 
 ## NOTE
 We highly recommend checking out the following sample apps to observe examples of feature tagging and how Pendo analytics work<br>
+Testing has focused on iPhones. iPads have yet to be tested thoroughly<br>
 (Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)<br>
 
 ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
@@ -126,7 +128,7 @@ TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
 
 If you encounter issues using SwiftUI please open a GitHub ticket with the minimal sample code required to reproduce it.
 
-## Integration Demo Video<br>
+## <a name="#video_integration">Integration Demo Video</a> <br> 
 
 <div align="left">
   <a href="https://youtu.be/ZDUSJZSvO_4"><img src="https://user-images.githubusercontent.com/56674958/232925410-4ed248c1-f75c-4946-ae23-a997bb9686e6.png" width="500" height="300" alt="IMAGE ALT TEXT"></a>
