@@ -32,11 +32,11 @@ After you have identified the user to which you want to relate your guides and a
 PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
 ```
 
-To enable Pendo in your SwiftUI view, use the `enableSwiftUI()` modifier on your `rootView`.
+To support SwiftUI the Pendo SDK requires you to apply the `enableSwiftUI()` modifier on each one of the `rootViews` in your app. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
-        Text("Your View")
+        Text("RootView")
             .enableSwiftUI()
     }
 }
