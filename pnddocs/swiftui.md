@@ -1,4 +1,5 @@
-# SwiftUI Integration 
+# SwiftUI
+
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
 The codeless solution is supported with IOS 15 above. Screen navigation tracking is available since IOS 13.
 
