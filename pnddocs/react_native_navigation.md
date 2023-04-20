@@ -38,7 +38,7 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 
 ### 3. Production Bundle - Modify Javascript Obfuscation
 In the `metro.config.js` file add the following:
-```javascript
+```typescript
 module.exports = {
   transformer: {
     // ...
@@ -56,15 +56,16 @@ module.exports = {
 
 ### 4. Integration
 In the application main file (App.js/.ts/.tsx), add the following code:
-```javascript
+```typescript
 Navigation.events().registerAppLaunchedListener(() => {
     const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
     const pendoKey = 'YOUR_KEY';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
     PendoSDK.setup(pendoKey, navigationOptions);
 });
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
-```javascript
+```typescript
 const visitorId = 'John Smith';
 const accountId = 'Acme Inc.';
 const visitorData = {'Age': 25, 'Country': 'USA'};

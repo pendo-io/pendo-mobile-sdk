@@ -60,11 +60,12 @@ module.exports = {
 ```typescript
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
 
-const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
-const key = 'YOUR_KEY'; 
-
-//note the following API will only setup initial configuration, to start collect analytics use start session
-PendoSDK.setup(key,navigationOptions);
+function initPendo() {
+    const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
+    const key = 'YOUR_KEY';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
+    PendoSDK.setup(key, navigationOptions);
+}
 ```
 
 In the file where the `NavigationContainer` is created.

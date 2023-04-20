@@ -58,14 +58,17 @@ module.exports = {
 ```
 ### 4.Integration
 
+In the application **main file (App.js/.ts/.tsx)**, add the following code:
 ```typescript
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
+function initPendo (){
+    const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
+    const key = 'YOUR_KEY';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
+    PendoSDK.setup(key,navigationOptions);
+}
+initPendo();
 
-const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
-const key = 'YOUR_KEY'; 
-
-//note the following API will only setup initial configuration, to start collect analytics use start session
-PendoSDK.setup(key,navigationOptions);
 ```
 In the file where the `NavigationContainer` is created.
     Import `WithPendoReactNavigation`:
