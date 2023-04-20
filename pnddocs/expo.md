@@ -74,13 +74,13 @@ Import `WithPendoReactNavigation`:
     import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
 ```
 
-    Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
+Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
 
 ```typescript
     const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
 ```
 
-    replace `NavigationContainer` tag with `PendoNavigationContainer` tag
+replace `NavigationContainer` tag with `PendoNavigationContainer` tag
 
 ```typescript
    <PendoNavigationContainer>
