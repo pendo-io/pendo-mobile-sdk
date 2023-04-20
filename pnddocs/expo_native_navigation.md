@@ -74,7 +74,7 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 
 ## Limitations 
 Please note **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin which is not part of the Expo Go app.
-Pendo can be used in development builds *only*. 
+Pendo can be used in development builds **only**. 
 You can read more about development builds [Adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/)
 
 ## Pivots
