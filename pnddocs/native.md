@@ -1,9 +1,8 @@
+## Native iOS
 
-## Native IOS
-
-### 1. Adding Pendo Dependecy
+### 1. Adding Pendo Dependency
 #### cocoapods:
-In the _Podfile_ plase add:
+In the _Podfile_ please add:
 
 `pod 'Pendo'`
 

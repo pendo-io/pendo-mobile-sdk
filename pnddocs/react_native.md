@@ -1,5 +1,4 @@
-
-## React Native
+## React Native iOS using React Navigation
 
 ### 1. Adding Pendo dependency
 #### Requirements: 
@@ -59,14 +58,17 @@ module.exports = {
 ```
 ### 4.Integration
 
+In the application **main file (App.js/.ts/.tsx)**, add the following code:
 ```typescript
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
+function initPendo (){
+    const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
+    const key = 'YOUR_KEY';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
+    PendoSDK.setup(key,navigationOptions);
+}
+initPendo();
 
-const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
-const key = 'YOUR_KEY'; 
-
-//note the following API will only setup initial configuration, to start collect analytics use start session
-PendoSDK.setup(key,navigationOptions,null);
 ```
 In the file where the `NavigationContainer` is created.
     Import `WithPendoReactNavigation`:
@@ -75,13 +77,13 @@ In the file where the `NavigationContainer` is created.
     import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
 ```
    
-    Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
+Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
 
 ```typescript
-    const PendoNavigationContainer = WithPendoReactNabigation (NavigationContainer);    
+    const PendoNavigationContainer = WithPendoReactNavigation (NavigationContainer);    
 ```
     
-    replace `NavigationContainer` tag with `PendoNavigationContainer` tag
+replace `NavigationContainer` tag with `PendoNavigationContainer` tag
    
 ```typescript
    <PendoNavigationContainer>
@@ -93,8 +95,8 @@ Initialize Pendo Session where your visitor is being identified (e.g. login, reg
 ```typescript
 const visitorId = 'John Smith';
 const accountId = 'Acme Inc.';
-const visitorData = {'Age': '25', 'Country': 'USA'};
-const accountData = {'Tier': '1', 'Size': 'Enterprise'};
+const visitorData = {'Age': 25, 'Country': 'USA'};
+const accountData = {'Tier': 1, 'Size': 'Enterprise'};
 
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
@@ -107,7 +109,7 @@ For instance:
 ```
 and change your integration to the following:
 ```typescript
-export default withPendoRN(YOUR_MAIN_FUNCTION,{nativeIDs:["myProp"]});
+const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer,{nativeIDs:["myProp"]});
 ```
 Sample app with Pendo integration can be found here:
 [PendoReactNativeIntegration](https://github.com/pendo-io/PendoReactNativeIntegration)

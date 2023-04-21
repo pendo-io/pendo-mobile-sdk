@@ -1,5 +1,5 @@
-
 ## Flutter
+
 ### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
 ### 1. Adding pendo dependence 
 In the root folder of yout flutter app

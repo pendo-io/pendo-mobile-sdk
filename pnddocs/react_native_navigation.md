@@ -1,11 +1,10 @@
-
-<a name="react-native-navigation_anchor"></a>
-## React Native Navigation
-### Requirements
-We support  _react native navigation 6 or above_
+## React Native iOS using React Native Navigation
 
 ### 1. Adding Pendo dependency
-In the root folder of your react app run the folowing:
+### Requirements
+We support  _React Native Navigation 6 or above_
+
+In the root folder of your react app run the following:
 ```
 npm i rn-pendo-sdk  
 ```
@@ -39,7 +38,7 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 
 ### 3. Production Bundle - Modify Javascript Obfuscation
 In the `metro.config.js` file add the following:
-```javascript
+```typescript
 module.exports = {
   transformer: {
     // ...
@@ -57,17 +56,20 @@ module.exports = {
 
 ### 4. Integration
 In the application main file (App.js/.ts/.tsx), add the following code:
-```javascript
-const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
-const pendoKey = 'YOUR_KEY';
-PendoSDK.setup(pendoKey, navigationOptions);
+```typescript
+Navigation.events().registerAppLaunchedListener(() => {
+    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+    const pendoKey = 'YOUR_KEY';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
+    PendoSDK.setup(pendoKey, navigationOptions);
+});
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
-```javascript
+```typescript
 const visitorId = 'John Smith';
 const accountId = 'Acme Inc.';
-const visitorData = {'Age': '25', 'Country': 'USA'};
-const accountData = {'Tier': '1', 'Size': 'Enterprise'};
+const visitorData = {'Age': 25, 'Country': 'USA'};
+const accountData = {'Tier': 1, 'Size': 'Enterprise'};
 
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
@@ -76,4 +78,4 @@ PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 ## Limitations
-* To support hybrid mode in React native navigation please open a ticket
+* To support hybrid mode with React Native Navigation please open a ticket

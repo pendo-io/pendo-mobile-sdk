@@ -1,6 +1,6 @@
+## Xamarin iOS
 
-## Xamarin
-### 1. Adding Pendo dependecy 
+### 1. Adding Pendo dependency 
 In Visual Studio `Project->Manage Nuget Packages` search for _pendo_ and add the **pendo-sdk-IOS**
 
 ### 2. Integration
