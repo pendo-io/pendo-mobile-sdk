@@ -57,12 +57,13 @@ module.exports = {
 ### 4. Integration
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
-Navigation.events().registerAppLaunchedListener(() => {
+function initPendo() {
     const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
     const pendoKey = 'YOUR_KEY';
-    //note the following API will only setup initial configuration, to start collect analytics use start session
+    //note the following API will only setup initial configuration, to start collect analytics use startSession
     PendoSDK.setup(pendoKey, navigationOptions);
-});
+}
+initPendo();
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
