@@ -1,7 +1,7 @@
 # Pendo Mobile SDK for IOS 
-# ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Pendo)
-# ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo)
-# ![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
+[comment]: <>  ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Pendo)
+[comment]: <>  ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo)
+[comment]: <>  ![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
 
 ![Cocoapods](https://img.shields.io/badge/cocoapods-compatibale-brightgreen)
 ![Cocoapods](https://img.shields.io/badge/xcframework-compatibale-brightgreen)
