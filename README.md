@@ -1,10 +1,16 @@
 # Pendo Mobile SDK for IOS 
-<!-- ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Pendo) 
-![Cocoapods](https://img.shields.io/cocoapods/v/Pendo)
-![Cocoapods](https://img.shields.io/cocoapods/l/Pendo) -->
-![Cocoapods](https://img.shields.io/badge/cocoapods-compatibale-brightgreen)
+
+
+<div align="center">
+
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/pendo-io/pendo-mobile-ios?color=brightgreen&label=version&sort=semver)
 ![Cocoapods](https://img.shields.io/badge/xcframework-compatibale-brightgreen)
+![Cocoapods](https://img.shields.io/badge/cocoapods-compatibale-brightgreen)
 ![Cocoapods](https://img.shields.io/badge/manual%20integration-compatibale-brightgreen)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpendo-io%2Fpendo-mobile-ios%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/pendo-io/pendo-mobile-ios)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpendo-io%2Fpendo-mobile-ios%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/pendo-io/pendo-mobile-ios)
+
+</div>
 
 The Pendo Mobile SDK is a code-less, retro-active analytics collector across all of your app versions. The SDK allows presentation of in-app messages, tooltips and multi-step walkthrough guides built using Pendo's Visual Design Studio.
 
