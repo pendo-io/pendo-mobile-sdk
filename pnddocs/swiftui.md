@@ -124,7 +124,7 @@ Testing has focused on iPhones. iPads have yet to be tested thoroughly.<br>
 (Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)<br>
 
 ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
-TeslaApp      - https://github.com/pendo-io/TeslaSwiftUIApp <br>
+TeslaApp      - https://github.com/pendo-io/Tesla_Clone_Swiftui <br>
 
 
 If you encounter issues using SwiftUI please open a GitHub ticket with the minimal sample code required to reproduce it.
