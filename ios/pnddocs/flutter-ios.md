@@ -1,8 +1,8 @@
 ## Flutter
 
 ### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
-### 1. Adding pendo dependence 
-In the root folder of yout flutter app
+### 1. Add Pendo dependency 
+In the root folder of your flutter app
 `flutter pub add pendo_sdk`
 
 ### 2. Project setup (similar to Native IOS)
@@ -38,19 +38,19 @@ Obj-C:
 }
 ```
 
-To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
+To set up the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the Info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab).
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
 ### 3. Integration
-Add the following code as soon as the app start:
+Add the following code as soon as the app starts:
 ```dart
 import 'package:pendo_sdk/pendo_sdk.dart';
-var pendoKey = 'YOUR_KEY';
+var pendoKey = 'YOUR_APPKEY_HERE';
 await PendoFlutterPlugin.setup(pendoKey);
 ```
 
-Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
+Initialize the Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```dart
 import 'package:pendo_sdk/pendo_sdk.dart';
 final String visitorId = 'John Smith';
@@ -72,10 +72,10 @@ Flutter Codeless POC can be found here:
 [Flutter Codeless POC video](https://user-images.githubusercontent.com/56674958/153876161-c1017a0d-ad5e-4837-9746-4317d1183f18.mov)
 
 ## Pivots
-Please pay attention to the following APIs ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
+Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 ## Limitations
-* Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution)
-* To support hybrid mode in Flutter please open a ticket
+* Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
+* To support hybrid mode in Flutter, please open a ticket.
 
 

@@ -1,17 +1,17 @@
 ## Native iOS
 
-### 1. Adding Pendo Dependency
+### 1. Add Pendo Dependency
 #### cocoapods:
-In the _Podfile_ please add:
+In the _Podfile_ , add:
 
 `pod 'Pendo'`
 
-#### swift package manger:
+#### Swift package manager:
 _File -> Add Packages_ in the search window paste:
 
 `https://github.com/pendo-io/pendo-mobile-ios`
 
-and select _Up to Next Major Version_
+and select Up to Next Major Version_
 
 ### 2. Integration
 In the _AppDelegate_ file <br>
@@ -24,7 +24,7 @@ import Pendo
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let key = "YOUR_KEY"
+        let key = "YOUR_APPKEY_HERE"
         //please note the following API will only setup initial configuration, to start collect analytics use start session
         PendoManager.shared().setup(key)
         return true
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
-As soon as you have the  user to which you want to relate your guides and analytics please call:
+As soon as you have the user you want your guides and analytics to relate to, call:
 
 ```swift
 PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
@@ -55,7 +55,7 @@ Obj-C:
 
 @implementation AppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSString *key = @"YOUR_KEY";
+    NSString *key = @"YOUR_APPKEY_HERE";
     //note the following API will only setup initial configuration, to start collect analytics use start session
     [[PendoManager sharedManager] setup:key];
     return YES;
@@ -72,18 +72,18 @@ Obj-C:
 @end
 ```
 
-As soon as you have the  user to which you want to relate your guides and analytics call:
+As soon as you have the user you want to relate your guides and analytics to relate to, call:
 
 ```objc
 [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
 ```
 
 ### 3. Project Setup
-To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab)
+To set up the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the Info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab).
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
 
 ## Pivots
-Please pay attention to the following api's ``` setup ``` and ```startSession``` the former *must* be called once per session and will create initial setup for the SDK, the later should be called whenever you have the visitor you would like to assign the analytics/guides to. In case you would like to have an anonymous visitor pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
+Pay attention to the following apis ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 
