@@ -1,6 +1,6 @@
 # SwiftUI
 
-Currently SwiftUI support is provided as beta and is available via cocoapods and SPM:<br>
+Currently SwiftUI support is provided as beta and is available via cocoapods and SPM.<br>
 The codeless solution is supported with IOS 15 above. Screen navigation tracking is available since IOS 13.
 
 ## Cocoapods
@@ -8,12 +8,12 @@ Add Pendo pod with all rest of the pods:
 `pod 'PendoSwiftUI'`
 
 ## SPM
-In the SPM search for _pendo_ and use `swiftui` branch:<br>
+In the SPM, search for _pendo_ and use `swiftui` branch:<br>
 <img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
-You can find a integration video tutorial [here](#integration-demo-video)<br>
-By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend to create an `AppDelegate` file and complete the following steps:
+You can find a integration video tutorial [here](#integration-demo-video).<br>
+By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend you create an `AppDelegate` file and complete the following steps:
 
 ```swift
 import UIKit
@@ -21,7 +21,7 @@ import Pendo
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let key = "YOUR_KEY"
+        let key = "YOUR_APPKEY_HERE"
         //// the following API is required to initialize the SDK. To begin the collection of analytics and the usage of guides a call to the startSession method is required as well
         PendoManager.shared().setup(key)
         return true
@@ -34,7 +34,7 @@ After you have identified the user to which you want to relate your guides and a
 PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
 ```
 
-To support SwiftUI the Pendo SDK requires you to apply the `enableSwiftUI()` modifier on each one of the `rootViews` in your app. See example below:
+To support SwiftUI, the Pendo SDK requires you to apply the `enableSwiftUI()` modifier on each one of the `rootViews` in your app. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
@@ -44,7 +44,7 @@ struct YourView: View {
 }
 ```
 
-If the entry point to your app is a struct attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
+If the entry point to your app is a 'struct' attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
 To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br>
 ```swift
 @main
@@ -72,7 +72,7 @@ struct YourApp: App {
 ``` 
 
 ### Project Setup
-To setup the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab).
+To set up the Pendo pairing mode (tagging and test on device), select your project, navigate to the relevant target, select the Info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab).
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300"> <br>
 
@@ -80,17 +80,17 @@ To setup the Pendo pairing mode (tagging and test on device) select your project
 # SwiftUI readiness list
 
 This documentation reflects the current progress of Pendo SDK SwiftUI codeless solution.<br>
-Please note that its still in beta and some elements may not be accurate in all scenarios,<br> 
-please open a ticket with code sample in case you find a bug.
+Note that it is still in beta and some elements may not be accurate in all scenarios.<br> 
+Open a ticket with code sample if you find a bug.
 
 ## Screen tracking 
 
-Screen change events are still supported by UIKit implementation with some additional enhancement from SwiftUI.<br>
-In addition to UIKit screen change event data Pendo will try to add unique SwiftUI identifier to make sure the analytics are consistent with each screen.<br>
-Currently screen change events will be triggered by embeding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
+Screen change events are still supported by UIKit implementation with some additional enhancements from SwiftUI.<br>
+In addition to UIKit screen change event datas Pendo will try to add a unique SwiftUI identifier to make sure the analytics are consistent with each screen.<br>
+Currently screen change events are triggered by embedding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
 
 ## Accessibility Support
-If you don't add accessibility labels the OS will assign default values to the UI elements in your app.<br>
+If you don't add accessibility labelsd the OS assignss default values to the UI elements in your app.<br>
 Accessibility identifiers, accessibility labels, and accessibility hints are all supported and can be used by Pendo for unique identification.<br>
 
 ## Controls support
@@ -107,7 +107,7 @@ Accessibility identifiers, accessibility labels, and accessibility hints are all
 | Menu | N/A | Not Supported
 
 ## UIKit In SwiftUI
-UIKit elements should be supported by default
+UIKit elements should be supported by default.
 
 ## SwiftUI In UIKit 
 SwiftUI is represented by `UIHostingController` when its embeded in UIKit the support is default SwiftUI support.
