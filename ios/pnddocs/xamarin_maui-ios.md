@@ -136,5 +136,5 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
   3. In the Build category list, select the “iOS bundle signing” option.
   4. Select the three dots button of the “Custom Entitlements” field.
   5. Choose the “Entitlements.plist” file from the box and click OK.
-+ Additional support can be found <a href="https://github.com/pendo-io/pendo-mobile-ios" target="_blank">here.</a>
++ Additional support can be found <a href="https://github.com/pendo-io/pendo-mobile-sdk/ios" target="_blank">here.</a>
 

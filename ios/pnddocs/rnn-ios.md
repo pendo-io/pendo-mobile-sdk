@@ -138,4 +138,4 @@ Confirm that you can see your app as Integrated under <a href="https://app.pendo
 ### Troubleshooting
 
 * Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">iOS release notes</a> for any backward compatibility issues.
-* Additional support can be found <a href="https://github.com/pendo-io/pendo-mobile-ios" target="_blank">here.</a>
+* Additional support can be found <a href="https://github.com/pendo-io/pendo-mobile-sdk/ios" target="_blank">here.</a>
