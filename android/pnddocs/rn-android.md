@@ -1,4 +1,4 @@
-## React Native
+## React Native using React Navigation
 
 ### Step 1. Install Pendo SDK
 
