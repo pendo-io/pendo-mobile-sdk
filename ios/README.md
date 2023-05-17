@@ -19,6 +19,7 @@
 
 ## Installation Instructions 
 - [Native](/ios/pnddocs/native-ios.md)
+- [SwiftUI](/ios/pnddocs/swiftui.md)
 - [React Native using React Navigation](/ios/pnddocs/rn-ios.md)
 - [React Native using React Native Navigation](/ios/pnddocs/rnn-ios.md)
 - [Xamarin](/ios/pnddocs/xamarin-ios.md)
@@ -27,7 +28,6 @@
 - [Flutter](/ios/pnddocs/flutter-ios.md)
 - [Expo using React Navigation](/ios/pnddocs/expo_rn.md)
 - [Expo using React Native Navigation](/ios/pnddocs/expo_rnn.md)
-- [SwiftUI](/ios/pnddocs/swiftui.md)
 
 ## Benchmarks
 - [Benchmarks and supported frameworks](/ios/benchmarks/benchmarks.md)
