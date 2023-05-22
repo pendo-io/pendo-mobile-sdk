@@ -14,7 +14,7 @@
 
    Add the following code:
 
-    ```c#
+```c#
     ...
     using PendoSDKXamarin;
     ...
@@ -26,21 +26,21 @@
             ....
             private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
             ....    
-    ``` 
+``` 
 
-    In the **protected override void OnStart()** method, add the following code:
+In the **protected override void OnStart()** method, add the following code:
 
-    ```c#
+```c#
     protected override void OnStart()
     {
        string appKey = "YOUR_APPKEY_HERE";
        Pendo.Setup(appKey);
        ...
-    ```
+```
 
 2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
 
-    ```c#
+```c#
     ...
     using PendoSDKXamarin;
     ...
@@ -74,25 +74,24 @@
             ...
         }
         ...
-    ```
+ ```
 
-   **visitorId**: a user identifier (e.g. John Smith)  
-   **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-   **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-   **accountData** : the account metadata (e.g. tier, level, ARR, etc.)
+**visitorId**: a user identifier (e.g. John Smith)  
+**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+**accountData** : the account metadata (e.g. tier, level, ARR, etc.)
 
-   This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
+This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-   **Tip:** Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+**Tip:** Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 -------------
 
 ### Step 3. Mobile device connectivity for tagging and testing
 
-These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
-and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
+These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
+and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-### iOS
 1. #### Add Pendo URL Scheme to **info.plist** file
 
    Under the iOS App Target > open info.plist > if URL Types doesn't exist, click on 'Add new entry' and name it 'URL types', for the type choose 'Array'.
@@ -105,7 +104,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
    Open ***AppDelegate.cs*** file and the following code:
 
-    ```C#
+```C#
     ...
     using PendoForms;
    
@@ -118,7 +117,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
         }
         return base.OpenUrl(app, url, options);
     }
-    ```
+```
 
 -------------
 

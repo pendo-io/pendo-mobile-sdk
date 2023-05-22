@@ -8,24 +8,22 @@
 
     Using NPM:
 
-    ```shell
+```shell
     npm install --save rn-pendo-sdk
-    ```
+```
     Using YARN:
 
-    ```shell
+```shell
     yarn add rn-pendo-sdk
-    ```
+```
 
 2. #### In the **iOS folder**, run the following command:
 
-    ```shell script 
+```shell script 
     pod install
-    ```
+```
 
 3. #### Add a **bridging header** as described in <a href="https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_objective-c_into_swift" target="_blank">this Apple documentation</a>.
-    Add the following import statement to the bridging header:  
-    `@import Pendo;`
 
 4. #### Modify Javascript Obfuscation
 
@@ -34,7 +32,7 @@
 
     In the application **metro.config.js**, add the following statements in the transformer:  
 
-    ```javascript
+```javascript
     module.exports = {
       transformer: {
         // ...
@@ -48,7 +46,7 @@
         }
       }
     }
-    ```
+```
 
 -------------
 
@@ -56,7 +54,7 @@
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
-    ```javascript
+```typescript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
 
     function initPendo() {
@@ -66,39 +64,39 @@
         PendoSDK.setup(pendoKey, navigationOptions);
     }   
     initPendo();
-    ```
+```
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
 
-    ```javascript
+```typescript
     const visitorId = 'VISITOR-UNIQUE-ID';
     const accountId = 'ACCOUNT-UNIQUE-ID';
     const visitorData = {'Age': '25', 'Country': 'USA'};
     const accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
     PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
-    ```
+```
 
 3. In the file where the `NavigationContainer` is created.
 
    Import `WithPendoReactNavigation`:
 
-    ```javascript
+```typescript
     import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
-    ```
+```
 
    Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
 
-   ```javascript
+```typescript
     const PendoNavigationContainer = WithPendoReactNavigation (NavigationContainer);    
-    ```
+```
 
    replace `NavigationContainer` tag with `PendoNavigationContainer` tag
 
-    ```javascript
+```typescript jsx
    <PendoNavigationContainer>
    {/* Rest of your app code */}
    </PendoNavigationContainer>
-   ```
+```
 
 
 **Notes**  
@@ -113,8 +111,8 @@ Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId
 -------------
 
 ### Step 3. Mobile device connectivity for tagging and testing
-These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
-and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.  
+These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
+and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
 1. #### Add Pendo URL Scheme to **info.plist** file:
   
@@ -122,17 +120,23 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
       Set **Identifier** to pendo-pairing or any name of your choosing.  
       Set **URL Scheme** to `YOUR_SCHEME_HERE`.
 
-2. #### Add or modify the function **application:openURL:options**:
+<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
+
+2. #### In AppDelegate file add or modify the function **application:openURL:options**:
+```objective-c
+   //for objc++(.mm file) please add this import
+   #import <Pendo/Pendo.h>
+```
 
 ```objective-c
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-      if ([[url scheme] containsString:@"pendo"]) {
-         [[PendoManager sharedManager] initWithUrl:url];
+   - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+         if ([[url scheme] containsString:@"pendo"]) {
+            [[PendoManager sharedManager] initWithUrl:url];
+            return YES;
+         }
+         //  your code here ...
          return YES;
-      }
-      //  your code here ...
-      return YES;
-  }
+   }
 ```
 
 -------------
