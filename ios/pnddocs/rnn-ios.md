@@ -22,9 +22,7 @@
     ```
 
 3. #### Add a **bridging header** as described in <a href="https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_objective-c_into_swift" target="_blank">this Apple documentation</a>.
-    Add the following import statement to the bridging header:  
-    `@import Pendo;`
-
+    
 4. #### Modify Javascript Obfuscation
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  
@@ -101,8 +99,11 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
       Set **Identifier** to pendo-pairing or any name of your choosing.  
       Set **URL Scheme** to `YOUR_SCHEME_HERE`.
 
-2. #### Add or modify the function **application:openURL:options**:
-
+2. #### In Appdelegate file add or modify the function**application:openURL:options**:
+```objective-c
+//for objc++(.mm file) please add this import
+#import <Pendo/Pendo.h>
+```
 ```objective-c
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
       if ([[url scheme] containsString:@"pendo"]) {
