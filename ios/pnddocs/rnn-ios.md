@@ -102,7 +102,10 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
       Set **URL Scheme** to `YOUR_SCHEME_HERE`.
 
 2. #### Add or modify the function **application:openURL:options**:
-
+```objective-c
+//for objc++(.mm file) please add this import
+#import <Pendo/Pendo.h>
+```
 ```objective-c
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
       if ([[url scheme] containsString:@"pendo"]) {
