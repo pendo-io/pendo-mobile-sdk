@@ -12,7 +12,7 @@ In the SPM, search for _pendo_ and use `swiftui` branch:<br>
 <img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
-You can find a integration video tutorial [here](#integration-demo-video).<br>
+You can find the integration video tutorial [here](#integration-demo-video).<br>
 By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend you create an `AppDelegate` file and complete the following steps:
 
 ```swift

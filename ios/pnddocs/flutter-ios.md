@@ -1,75 +1,89 @@
 ## Flutter
 
 ### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
-### 1. Add Pendo dependency 
-In the root folder of your flutter app
-`flutter pub add pendo_sdk`
+### Step 1. Add Pendo dependency 
+In the root folder of your flutter app add the Pendo package:
+    `flutter pub add pendo_sdk`
 
-### 2. Project setup (similar to Native IOS)
-In the _AppDelegate_ file <br>
-Swift:
-
-```swift
-import Pendo
-//your code
-@UIApplicationMain
-class AppDelegate:  FlutterAppDelegate {
-    func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
-            return true
-        }
-        // your code here...
-        return true
-    }
-}
-```
-Obj-C:
-```objectivec
-@import Pendo;
-//your code
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    if ([[url scheme] containsString:@"pendo"]) {
-        [[PendoManager sharedManager] initWithUrl:url];
-        return YES;
-    }
-    //  your code here ...
-    return YES;
-}
-```
-
-To set up the Pendo pairing mode (tagging and test on device) select your project, navigate to the relevant target, select the Info tab and create a URL Type using the Pendo url scheme (found in your subscription under the App Details tab).
-
-<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300">
-
-### 3. Integration
+### Step 2. Integration
 Add the following code as soon as the app starts:
 ```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-var pendoKey = 'YOUR_APPKEY_HERE';
-await PendoFlutterPlugin.setup(pendoKey);
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    var pendoKey = 'YOUR_APPKEY_HERE';
+    await PendoFlutterPlugin.setup(pendoKey);
 ```
 
 Initialize the Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-final String visitorId = 'John Smith';
-final String accountId = 'Acme Inc.';
-final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
-final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
-
-PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    final String visitorId = 'John Smith';
+    final String accountId = 'Acme Inc.';
+    final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
+    final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
+    
+    PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
 In the application files where you want to track an event, add the following code:
 ```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-Flutter Codeless POC can be found here:
-[Flutter Codeless POC video](https://user-images.githubusercontent.com/56674958/153876161-c1017a0d-ad5e-4837-9746-4317d1183f18.mov)
+### Step 3. Mobile device connectivity for tagging and testing
+These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
+and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
+
+1. #### Add Pendo URL Scheme to **info.plist** file:
+
+   Under App Target > Info > URL Types, create a new URL by clicking the + button.  
+   Set **Identifier** to pendo-pairing or any name of your choosing.  
+   Set **URL Scheme** to `YOUR_SCHEME_HERE`.
+
+<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
+
+2. #### In AppDelegate file add or modify the **openURL** function:
+**Swift**
+```swift
+    import Pendo
+    //your code
+    @UIApplicationMain
+    class AppDelegate:  FlutterAppDelegate {
+        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            if url.scheme?.range(of: "pendo") != nil {
+                PendoManager.shared().initWith(url)
+                return true
+            }
+            // your code here...
+            return true
+        }
+    }
+```
+**ObjectiveC**
+```objectivec
+    @import Pendo;
+    //your code
+    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+        if ([[url scheme] containsString:@"pendo"]) {
+            [[PendoManager sharedManager] initWithUrl:url];
+            return YES;
+        }
+        //  your code here ...
+        return YES;
+    }
+```
+### Step 4. Verify Installation
+
+* Test using Xcode:  
+  Run the app while attached to Xcode.  
+  Review the device log and look for the following message:  
+  `Pendo Mobile SDK was successfully integrated and connected to the server.`
+* Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
+* Test using the Pendo UI:  
+  Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+
+-------------
 
 ## Pivots
 Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
