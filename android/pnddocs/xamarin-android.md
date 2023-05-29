@@ -2,11 +2,10 @@
 
 ### Step 1. Install Pendo SDK
 
-Right-click on your Android project target.  
-1. Click "Add" and "Add NuGet Packages…".  
-2. If your application is using AndroidX, and only Xamarin, search for **"pendo-sdk-androidx"**.
-3. For Android support and Xamarin, search **"pendo-sdk-android"**.  
-4. Click "Add Package".
+Right-click on your Android project target. 
+1. Click "Add" and "Add NuGet Packages…".
+2. Search for **"pendo-sdk-androidx"**.
+3. Click "Add Package".
 
 ##### Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404197902235" target="_blank">here.</a>
 
