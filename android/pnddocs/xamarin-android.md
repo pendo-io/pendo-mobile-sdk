@@ -2,7 +2,7 @@
 
 ### Step 1. Install Pendo SDK
 
-Right-click on your Android project target.
+Right-click on your Android project target. 
 1. Click "Add" and "Add NuGet Packages…".
 2. Search for **"pendo-sdk-androidx"**.
 3. Click "Add Package".
