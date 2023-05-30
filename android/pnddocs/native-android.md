@@ -93,7 +93,7 @@
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
-1. #### Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
+#### Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
 
     ```xml
     <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">

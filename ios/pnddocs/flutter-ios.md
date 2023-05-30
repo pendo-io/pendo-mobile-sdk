@@ -21,7 +21,7 @@ Initialize the Pendo Session where your visitor is being identified (e.g. login,
     final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
     final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
     
-    PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
