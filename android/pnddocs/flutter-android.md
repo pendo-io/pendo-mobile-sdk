@@ -81,7 +81,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     final Map<String, dynamic> visitorData = {'Age': '25', 'Country': 'USA'};
     final Map<String, dynamic> accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
-    PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
 **Notes**

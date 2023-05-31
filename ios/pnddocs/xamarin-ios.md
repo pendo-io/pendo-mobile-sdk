@@ -14,31 +14,30 @@
 
     In the **FinishedLaunching** method of the application, add the following code:
 
-   ```c#
+```c#
     using Pendo;
     string appKey = "YOUR_APPKEY_HERE";
     PendoManager.SharedManager().Setup(appKey);
-    ```
+```
 
 2. #### Start the visitor's Session in the **viewController** where your visitor is being identified (e.g. login, register, etc.).
 
-    ```c#
+```c#
     PendoManager.SharedManager().StartSession(
         visitorId,
         accountId,
         visitorData,
         accountData
     );
-    ```
+```
+**visitorId**: a user identifier (e.g. John Smith)  
+**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+**accountData** : the account metadata (e.g. tier, level, ARR, etc.)
 
-    **visitorId**: a user identifier (e.g. John Smith)  
-    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-    **accountData** : the account metadata (e.g. tier, level, ARR, etc.)
+This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
-
-    **Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+**Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 -------------
 
@@ -55,7 +54,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 2. #### Add or modify the function **OpenURL**
 
-    ```c#
+```c#
     public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
     {
       if (url.Scheme.Contains("pendo"))
@@ -66,7 +65,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
         //Your code here...
         return true;
     }
-    ```
+```
 
 -------------
 
