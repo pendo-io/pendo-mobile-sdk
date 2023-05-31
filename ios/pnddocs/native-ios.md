@@ -40,9 +40,7 @@ As soon as you have the user you want your guides and analytics to relate to, ca
 Obj-C:
 ```objectivec
     #import "AppDelegate.h"
-    @import Pendo;
-    @interface AppDelegate ()
-    @end
+    @import Pendo;    
     
     @implementation AppDelegate
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
