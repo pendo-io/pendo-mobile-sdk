@@ -113,13 +113,12 @@ UIKit elements should be supported by default.
 SwiftUI is represented by `UIHostingController` when its embeded in UIKit the support is default SwiftUI support.
 
 ## Limitation 
-:technologist: - Dynamic Content (content that appears after your screen was loaded, a button click that triggers new elements to appear inside the same screen) currently not supported, please use `screenContentChanged` api for such screens. <br>
+:technologist: - Dynamic Content (content that appears after the screen has loaded, e.x. new elements or updated texts on the screen that appear as a result of a button clicked on the screen) is currently not supported. Please use the `screenContentChanged()` API for such scenarios. <br>
 :technologist: - Clickable elements buttons/tapGestures etc. When creating clickable elements that don't have a background color set on them (e.x. VStack or HStack) please set a background color to them that is NOT transparent.<br>
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet.<br>
 :technologist: - SwiftUI IOS 16 navigation api's not supported yet.
 
-In general clickable elements should be tagged by default, but if clickable element is not taggable please apply the following api `.enableClickAnalytics()` on your view
-
+Generally, all clickable elements should be taggable. In case you encounter a clickable element that you are not able to tag, please apply the  `enableClickAnalytics()` API on the `View` of this element.
 
 ## NOTE
 We highly recommend checking out the following sample apps to observe examples of feature tagging and how Pendo analytics work.<br>
