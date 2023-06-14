@@ -10,6 +10,8 @@ assignees: ''
 **Platform + Version**
 e.g IOS 16, Android
 
+**SDK Version**
+
 **Framework**
 e.g Native, SwiftUI,<br>
  React Native using React Navigation,
@@ -32,8 +34,8 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Logs**
+If applicable, please add crash logs OR pendo logs (can be turned on with `PendoManager.shared().setDebugMode(true)`)
 
 **Sample Code**
 Code snippet or Sample project
