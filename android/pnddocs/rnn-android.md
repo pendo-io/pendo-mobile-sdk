@@ -125,7 +125,7 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
 **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
 **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 -------------
 
@@ -150,13 +150,14 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 
 ### Step 4. Verify Installation
 
-* Test using Android Studio:  
+1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
 Review the device log and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
-* Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
-* Test using the Pendo UI:  
-Confirm that you can see your app  as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+2. In the Pendo UI, go to Settings>Subscription Settings.
+3. Hover over your app and select View app details.
+4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 -------------
 
@@ -164,10 +165,11 @@ Confirm that you can see your app  as Integrated under <a href="https://app.pend
 
 * API documentation available <a href="https://support.pendo.io/hc/en-us/articles/360057646611-React-Native-API-Developer-Documentation-iOS-Android-" target="_blank">here.</a>
 * Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here.</a>
+
 -------------
 
 ### Troubleshooting
 
 * Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">Android release notes</a> for any backward compatibility issues.
-* Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404065352987-Developer-s-Guide-to-Installing-the-Pendo-Android-SDK#requirements-0-0" target="_blank">here.</a>
 * If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
+* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>
