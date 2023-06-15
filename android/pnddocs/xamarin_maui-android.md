@@ -6,6 +6,15 @@
 2. Search for: **PendoMAUIPlugin** with latest version.<br/>
 3. Press **Add Package**.
 
+#### **Using Proguard / R8**
+
+The rules that must be added to proguard are in this file: <a href="https://cdn.pendo.io/sdk/install-instructions/pendo-proguard.cfg">pendo-proguard.cfg</a>
+
+If using **proguard-android-optimize.txt,** add the following in the optimizations code line:  
+`!code/allocation/variable`  
+Your optimizations line should look like this:  
+`-optimizations *other optimizations*,!code/allocation/variable`
+
 -------------
 
 ### Step 2. Pendo SDK Integration
@@ -102,10 +111,10 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 -------------
 
 ### Step 4. Verify Installation
-1. Using Visual Studio: Run the app and search in the device log for:  
-   `Pendo SDK was successfully integrated and connected to the server.`
-2. Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
-3. Confirm that you can see your app under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a> as Integrated.
+1.  Using Visual Studio: Run the app and search in the device log for:  
+    `Pendo SDK was successfully integrated and connected to the server.`
+2.  In the Pendo UI, under your app's subscription settings, click the Install Settings tab, and look for the Start Verification button. Follow instructions there to make sure you have integrated correctly.  
+3.  Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 -------------
 
@@ -118,7 +127,4 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 ### Troubleshooting
 
 * Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">release notes</a> for any backward compatibility issues.
-* Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404065352987-Developer-s-Guide-to-Installing-the-Pendo-Android-SDK#requirements-0-0" target="_blank">here.</a>
-* If you are encountering **Dex** problems, please refer to:
-  * <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex </a>
-  * <a href="https://docs.microsoft.com/en-us/xamarin/android/deploy-test/release-prep/?tabs=macos#multi-dex" target="_blank">https://docs.microsoft.com/en-us/xamarin/android/deploy-test/release-prep/?tabs=macos#multi-dex </a>
+* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>

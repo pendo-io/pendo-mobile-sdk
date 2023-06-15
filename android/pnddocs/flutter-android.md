@@ -134,7 +134,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 Run the app while attached to the Android Studio.  
 Review the device log and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
-* Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
+* In the Pendo UI, under your app's subscription settings, click the Install Settings tab, and look for the Start Verification button. Follow instructions there to make sure you have integrated correctly.  
 * Test using the Pendo UI:  
 Confirm that you can see your app  as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
@@ -149,5 +149,5 @@ Confirm that you can see your app  as Integrated under <a href="https://app.pend
 ### Troubleshooting
 
 * Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">Android release notes</a> for any backward compatibility issues.
-* Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404065352987-Developer-s-Guide-to-Installing-the-Pendo-Android-SDK#requirements-0-0" target="_blank">here</a>
-  * If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
+* If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
+* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>

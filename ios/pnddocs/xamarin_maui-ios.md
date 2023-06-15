@@ -115,7 +115,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 ### Step 4. Verify Installation
 1. Using Visual Studio: Run the app and search in the device log for:  
    `Pendo SDK was successfully integrated and connected to the server.`
-2. Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
+2. In the Pendo UI, under your app's subscription settings, click the Install Settings tab, and look for the Start Verification button. Follow instructions there to make sure you have integrated correctly.  
 3. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 -------------
