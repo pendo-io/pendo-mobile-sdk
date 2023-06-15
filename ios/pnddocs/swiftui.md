@@ -34,12 +34,12 @@ After you have identified the user to which you want to relate your guides and a
 PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
 ```
 
-To support SwiftUI, the Pendo SDK requires you to apply the `enableSwiftUI()` modifier on each one of the `rootViews` in your app. See example below:
+To support SwiftUI, the Pendo SDK requires you to apply the `pendoEnableSwiftUI()` modifier on each one of the `rootViews` in your app. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
         Text("RootView")
-            .enableSwiftUI()
+            .pendoEnableSwiftUI()
     }
 }
 ```
@@ -59,7 +59,7 @@ struct YourApp: App {
                     Text("Text")
                 }
             }
-            .enableSwiftUI()
+            .pendoEnableSwiftUI()
             .onOpenURL(perform: handleURL)
         }
     }
@@ -90,7 +90,7 @@ In addition to UIKit screen change event datas Pendo will try to add a unique Sw
 Currently screen change events are triggered by embedding the content of the app in `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets`, `PopOvers`
 
 ## Accessibility Support
-If you don't add accessibility labelsd the OS assignss default values to the UI elements in your app.<br>
+If you don't add accessibility labels the OS assignss default values to the UI elements in your app.<br>
 Accessibility identifiers, accessibility labels, and accessibility hints are all supported and can be used by Pendo for unique identification.<br>
 
 ## Controls support
@@ -113,10 +113,12 @@ UIKit elements should be supported by default.
 SwiftUI is represented by `UIHostingController` when its embeded in UIKit the support is default SwiftUI support.
 
 ## Limitation 
-:technologist: - Dynamic Content (content that appears after your screen was loaded, like data loaded from server) currently not supported, please use `screenContentChanged` api for such screens. <br>
+:technologist: - Dynamic Content (content that appears after the screen has loaded, e.x. new elements or updated texts on the screen that appear as a result of a button clicked on the screen) is currently not supported. Please use the `screenContentChanged()` API for such scenarios. <br>
 :technologist: - Clickable elements buttons/tapGestures etc. When creating clickable elements that don't have a background color set on them (e.x. VStack or HStack) please set a background color to them that is NOT transparent.<br>
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet.<br>
 :technologist: - SwiftUI IOS 16 navigation api's not supported yet.
+
+Generally, all clickable elements should be taggable. In case you encounter a clickable element that you are not able to tag, please apply the  `enableClickAnalytics()` API on the `View` of this element.
 
 ## NOTE
 We highly recommend checking out the following sample apps to observe examples of feature tagging and how Pendo analytics work.<br>

@@ -20,10 +20,8 @@
 ```shell script 
     pod install
 ```
-
-3. #### Add a **bridging header** as described in <a href="https://developer.apple.com/documentation/swift/imported_c_and_objective-c_apis/importing_objective-c_into_swift" target="_blank">this Apple documentation</a>.
     
-4. #### Modify Javascript Obfuscation
+3. #### Modify Javascript Obfuscation
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  
     This means that there is no access to the original component names that are used for the codeless solution.
@@ -103,7 +101,6 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 2. #### In AppDelegate file add or modify the function**application:openURL:options**:
 ```objective-c
-   //for objc++(.mm file) please add this import
    #import <Pendo/Pendo.h>
 ```
 ```objective-c
