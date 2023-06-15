@@ -111,9 +111,10 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 
 ### 6. Verify Installation
 
-* Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
-* Test using the Pendo UI:  
-  Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+1. In the Pendo UI, go to Settings>Subscription Settings.
+2. Hover over your app and select View app details.
+3. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
 ## Limitations

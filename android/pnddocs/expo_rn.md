@@ -112,6 +112,13 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer,{n
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
 You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at any later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
 
+### 6. Verify Installation
+
+1. In the Pendo UI, go to Settings>Subscription Settings.
+2. Hover over your app and select View app details.
+3. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+
 ## Limitations
 **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can be used in development builds *only*.

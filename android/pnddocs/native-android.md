@@ -7,7 +7,7 @@
     ```java
     repositories {
       maven {
-      url "https://software.mobile.pendo.io/artifactory/androidx-release"
+        url "https://software.mobile.pendo.io/artifactory/androidx-release"
       }
       mavenCentral()
     } 
@@ -21,8 +21,27 @@
     }
     ```
 
-    ##### Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404065352987-Developer-s-Guide-to-Installing-the-Pendo-Android-SDK#requirements-0-0" target="_blank">here</a>
+- **Minimum and compile SDK Version**  
+If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
 
+  ```java
+  android {
+      minSdkVersion 21
+      compileSdkVersion 31
+  }
+  ```
+
+- **Java 8 Compatibility**  
+If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
+
+  ```java
+  android {
+      compileOptions {
+          targetCompatibility JavaVersion.VERSION_1_8
+      }
+  }
+  ```
+ 
 3. #### Using Proguard
 
     If using **proguard-android-optimize.txt,** add the following in the optimizations code line:  
@@ -93,27 +112,29 @@
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
-#### Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
+#### Add the following activity to the application's AndroidManifest.xml in the <Application> tag:
 
-    ```xml
     <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
-     <intent-filter>
-       <action android:name="android.intent.action.VIEW"/>
-       <category android:name="android.intent.category.DEFAULT"/>
-       <category android:name="android.intent.category.BROWSABLE"/>
-       <data android:scheme="YOUR_SCHEME_HERE"/>
-     </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="YOUR_SCHEME_HERE"/>
+        </intent-filter>
     </activity>
-    ```
 
 -------------
 
 ### Step 4. Verify Installation
 
-1.  Using Android Studio: Run the app and search in the device log for:  
-    `Pendo SDK was successfully integrated and connected to the server.`
-2.  Click to go through a <a href="#" data-start-verification>verification process</a> for the SDK integration.
-3.  Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+1. Test using Android Studio:  
+Run the app while attached to the Android Studio.  
+Review the device log and look for the following message:  
+`Pendo SDK was successfully integrated and connected to the server.`
+2. In the Pendo UI, go to Settings>Subscription Settings.
+3. Hover over your app and select View app details.
+4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 -------------
 
@@ -125,5 +146,5 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 ### Troubleshooting
 
 * Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">release notes</a> for any backward compatibility issues.
-* Review Android minimum requirements (compileSdkVersion, minSdkVersion, etc.) <a href="https://support.pendo.io/hc/en-us/articles/4404065352987-Developer-s-Guide-to-Installing-the-Pendo-Android-SDK#requirements-0-0" target="_blank">here.</a>
 * If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
+* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>
