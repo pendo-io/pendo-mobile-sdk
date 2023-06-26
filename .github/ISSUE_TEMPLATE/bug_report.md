@@ -10,6 +10,12 @@ assignees: ''
 **Platform + Version**
 e.g IOS 16, Android
 
+**Subscription id**
+Pendo subscription id
+
+**App id**
+Pendo app id 
+
 **SDK Version**
 
 **Framework**
