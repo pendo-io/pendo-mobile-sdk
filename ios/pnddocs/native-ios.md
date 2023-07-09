@@ -9,7 +9,7 @@ In the _Podfile_ , add:
 #### Swift package manager:
 _File -> Add Packages_ in the search window paste:
 
-`https://github.com/pendo-io/pendo-mobile-sdk/ios`
+`https://github.com/pendo-io/pendo-mobile-sdk`
 
 and select Up to Next Major Version_
 
