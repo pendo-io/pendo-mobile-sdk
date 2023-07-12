@@ -16,7 +16,7 @@ Pendo subscription id
 **App id**
 Pendo app id 
 
-**SDK Version**
+**Pendo SDK Version**
 
 **Framework**
 e.g Native, SwiftUI,<br>
@@ -26,6 +26,11 @@ e.g Native, SwiftUI,<br>
  Expo using React Native Navigation<br>
  Xamarin, XamarinForms, Maui,<br>
  Flutter
+
+**Dependencies** <br>
+e.g<br>
+For React Native please include `react-navigation` versions from your package.json
+Any additional analytics tools that might interfere or might have an impact
 
 **Describe the bug**
 A clear and concise description of what the bug is.
