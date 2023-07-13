@@ -49,9 +49,10 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     ```
 
-4. Using Proguard / R8  
+4. Using ProGuard / R8  
 The rules that need to be added to proguard are in this file: <a href="https://cdn.pendo.io/sdk/install-instructions/pendo-proguard.cfg">pendo-proguard.cfg</a>  
-If using `proguard-android-optimize.txt`, add the following in the optimizations code line:
+
+For whom is using ProGuard(D8/DX only) to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
