@@ -19,9 +19,9 @@ example:
 
 4. Specify the version number for the Pendo dependency in the gradle file:
 
-example, for version 2.21.1.5360 :
+example, for version 2.22.0.5604 :
 
 ```java
-    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'2.21.1.5360', changing:true)
+    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'2.22.0.5604', changing:true)
 ```
 
