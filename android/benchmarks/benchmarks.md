@@ -1,25 +1,24 @@
 # Android supported frameworks
 ## Native
 - SDK 2.15, 2.16 supports up to Android 11 (API 30)
-- SDK 2.17-2.21 supports up to Android 12 (API 31)
+- SDK 2.17-2.22 supports up to Android 12 (API 31)
 
 ## React Native
 - SDK 2.15-2.18 supported RN version: 0.65-0.69
 - SDK 2.19-2.20 supports RN version: 0.70
-- SDK 2.21 supports RN version: 0.71
+- SDK 2.21-2.22 supports RN version: 0.71
 
 ## React Native Navigation
 - SDK 2.15-2.19 supports RNN version: 5.x
 
 ## React Native Expo
-- SDK 2.19-2.21 supports Expo version: > 41
+- SDK 2.19-2.22 supports Expo version: > 41
 
 ## XamarinForms
-- SDK 2.19-2.21 supports .Net version: .Net5
+- SDK 2.19-2.22 supports .Net version: .Net5
 
 ## Flutter
-- SDK 2.15-2.21 supports Flutter version: 3.0.0
-
+- SDK 2.15-2.22 supports Flutter version: 3.0.0
 
 link: https://pendo-io.atlassian.net/wiki/spaces/ENG/pages/2731343879/Tracking+Frameworks+and+OS+Versions+Updates
 

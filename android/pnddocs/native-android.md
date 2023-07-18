@@ -17,7 +17,7 @@
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'2.21.+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'2.22.+', changing:true
     }
     ```
 
