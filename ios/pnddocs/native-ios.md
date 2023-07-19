@@ -14,6 +14,9 @@ _File -> Add Packages_ in the search window paste:
 and select Up to Next Major Version_
 
 ### Step 2. Integration
+
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 In the _AppDelegate_ file <br>
 Swift:
 
@@ -24,7 +27,7 @@ Swift:
     class AppDelegate: UIResponder, UIApplicationDelegate {
         var window: UIWindow?
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-            let key = "YOUR_APPKEY_HERE"
+            let key = "YOUR_API_KEY_HERE"
             //please note the following API will only setup initial configuration, to start collect analytics use start session
             PendoManager.shared().setup(key)
             return true
@@ -44,7 +47,7 @@ Obj-C:
     
     @implementation AppDelegate
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        NSString *key = @"YOUR_APPKEY_HERE";
+        NSString *key = @"YOUR_API_KEY_HERE";
         //note the following API will only setup initial configuration, to start collect analytics use start session
         [[PendoManager sharedManager] setup:key];
         return YES;
@@ -66,7 +69,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
    Under App Target > Info > URL Types, create a new URL by clicking the + button.  
    Set **Identifier** to pendo-pairing or any name of your choosing.  
-   Set **URL Scheme** to `YOUR_SCHEME_HERE`.
+   Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 

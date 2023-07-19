@@ -10,6 +10,8 @@
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. #### Open the shared application **App.xaml.cs**:
 
     Add the following under 'using'
@@ -26,8 +28,8 @@
     protected override void OnStart()
     {
        PendoInterface Pendo = new PendoInterface();
-       string appKey = "YOUR_APPKEY_HERE";
-       Pendo.Setup(appKey);
+       string apiKey = "YOUR_API_KEY_HERE";
+       Pendo.Setup(apiKey);
        ...
 ```
 
@@ -90,7 +92,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
    Under the iOS App Target > open info.plist > if URL Types doesn't exist, click on 'Add new entry' and name it 'URL types', for the type choose 'Array'.
    Create a new URL by clicking the + button.
    Under the new created Dictionary, change 'Document role' to 'URL Schemes' with type 'Array'.
-   Expand 'URL Schemes' and add the `YOUR_SCHEME_HERE` under the 'Value'.
+   Expand 'URL Schemes' and add the `YOUR_SCHEME_ID` under the 'Value'.
    Under the created Dictionary in the previous step, add new entry with the name 'URL Identifier', type 'string' and set a name of your preference under its 'Value'.
 
 2. #### Add or modify the function **OpenURL**

@@ -93,6 +93,8 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:
 
     ```javascript
@@ -100,7 +102,7 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
 
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
-        const pendoKey = 'YOUR_APPKEY_HERE';
+        const pendoKey = 'YOUR_API_KEY_HERE';
         //note the following API will only setup initial configuration, to start collect analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
     }   
@@ -163,7 +165,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="YOUR_SCHEME_HERE"/>
+        <data android:scheme="YOUR_SCHEME_ID_HERE"/>
     </intent-filter>
 </activity>
 ```

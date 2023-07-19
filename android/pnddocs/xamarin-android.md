@@ -28,14 +28,17 @@ Your optimizations line should look like this:
 -------------
 
 ### Step 2. Pendo SDK Integration
+
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. #### Open the **Application class** that inherits from Android.App.Application.
     Initialize Pendo in the application **onCreate** method with the following code.
 
     ```c#
     using static Sdk.Pendo.IO.Pendo;
     ...
-    const string pendoAppKey = "YOUR_APPKEY_HERE";
-    Setup(this, pendoAppKey, null, null);
+    const string pendoApiKey = "YOUR_API_KEY_HERE";
+    Setup(this, pendoApiKey, null, null);
     ```
 
 Note: A working example of Application class is in the Troubleshooting section below.
@@ -82,7 +85,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
        <action android:name="android.intent.action.VIEW"/>
        <category android:name="android.intent.category.DEFAULT"/>
        <category android:name="android.intent.category.BROWSABLE"/>
-       <data android:scheme="YOUR_SCHEME_HERE"/>
+       <data android:scheme="YOUR_SCHEME_ID_HERE"/>
      </intent-filter>
     </activity>
     ```
@@ -138,8 +141,8 @@ namespace MyAppNameSpace.Android
         {
             base.OnCreate();
 
-            const string pendoAppKey = "YOUR_APPKEY_HERE";
-            Setup(this, pendoAppKey, null, null);
+            const string pendoApiKey = "YOUR_API_KEY_HERE";
+            Setup(this, pendoApiKey, null, null);
         }
 
     }

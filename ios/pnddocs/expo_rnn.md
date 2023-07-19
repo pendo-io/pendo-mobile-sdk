@@ -16,6 +16,9 @@ OR use one of your package managers
     yarn add rn-pendo-sdk
 ```
 ### 2. Project Setup
+
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 In the `app.json`, add the following:
 ```json
     {
@@ -23,8 +26,8 @@ In the `app.json`, add the following:
         [
           "rn-pendo-sdk",
           {
-            "ios-scheme": "YOUR_IOS_URL_SCHEME",
-            "android-scheme": "YOUR_ANDROID_URL_SCHEME"
+            "ios-scheme": "YOUR_IOS_SCHEME_ID",
+            "android-scheme": "YOUR_ANDROID_SCHEME_ID"
           }
         ]
       ]
@@ -54,7 +57,7 @@ In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
-        const pendoKey = 'YOUR_APPKEY_HERE';
+        const pendoKey = 'YOUR_API_KEY_HERE';
         //note the following API will only setup initial configuration, to start collect analytics use start session
         PendoSDK.setup(pendoKey, navigationOptions);
     }

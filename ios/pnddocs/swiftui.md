@@ -12,6 +12,9 @@ In the SPM, search for _pendo_ and use `swiftui` branch:<br>
 <img width="700" alt="SPM" src="https://user-images.githubusercontent.com/56674958/188460208-254ef03d-fef9-49f4-a1e6-5751eb0ee4e4.png">
  
 ### Integration
+
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 You can find the integration video tutorial [here](#integration-demo-video).<br>
 By default, Pure SwiftUI apps do not include an AppDelegate file. To use Pendo in your app, we recommend you create an `AppDelegate` file and complete the following steps:
 
@@ -21,7 +24,7 @@ import Pendo
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let key = "YOUR_APPKEY_HERE"
+        let key = "YOUR_API_KEY_HERE"
         //// the following API is required to initialize the SDK. To begin the collection of analytics and the usage of guides a call to the startSession method is required as well
         PendoManager.shared().setup(key)
         return true
