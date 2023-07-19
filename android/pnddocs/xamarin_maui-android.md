@@ -21,6 +21,8 @@ Your optimizations line should look like this:
 
 Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. #### Open the shared application **App.xaml.cs**
 
     Add the following under 'using':
@@ -37,8 +39,8 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
     protected override void OnStart()
     {
        PendoInterface Pendo = new PendoInterface();
-       string appKey = "YOUR_APPKEY_HERE";
-       Pendo.Setup(appKey);
+       string apiKey = "YOUR_API_KEY_HERE";
+       Pendo.Setup(apiKey);
        ...
     ```
 
@@ -104,7 +106,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
        <action android:name="android.intent.action.VIEW"/>
        <category android:name="android.intent.category.DEFAULT"/>
        <category android:name="android.intent.category.BROWSABLE"/>
-       <data android:scheme="YOUR_SCHEME_HERE"/>
+       <data android:scheme="YOUR_SCHEME_ID_HERE"/>
      </intent-filter>
     </activity>
     ```

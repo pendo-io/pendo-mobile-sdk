@@ -50,6 +50,8 @@
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
 ```typescript
@@ -57,7 +59,7 @@
 
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
-        const pendoKey = 'YOUR_APPKEY_HERE';
+        const pendoKey = 'YOUR_API_KEY_HERE';
         //note the following API will only setup initial configuration, to start collect analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
     }   
@@ -116,7 +118,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
   
       Under App Target > Info > URL Types, create a new URL by clicking the + button.  
       Set **Identifier** to pendo-pairing or any name of your choosing.  
-      Set **URL Scheme** to `YOUR_SCHEME_HERE`.
+      Set **URL Scheme** to `YOUR_SCHEME_ID`.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
 

@@ -10,14 +10,16 @@
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. #### Open the application **AppDelegate class**:
 
     In the **FinishedLaunching** method of the application, add the following code:
 
 ```c#
     using Pendo;
-    string appKey = "YOUR_APPKEY_HERE";
-    PendoManager.SharedManager().Setup(appKey);
+    string apiKey = "YOUR_API_KEY_HERE";
+    PendoManager.SharedManager().Setup(apiKey);
 ```
 
 2. #### Start the visitor's Session in the **viewController** where your visitor is being identified (e.g. login, register, etc.).
@@ -50,7 +52,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
     Under App Target > Info > URL Types, create a new URL by clicking the + button.  
     Set **Identifier** to pendo-pairing or any name of your choosing.  
-    Set **URL Scheme** to `YOUR_SCHEME_HERE`.
+    Set **URL Scheme** to `YOUR_SCHEME_ID`.
 
 2. #### Add or modify the function **OpenURL**
 

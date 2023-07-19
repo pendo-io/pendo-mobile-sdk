@@ -60,6 +60,8 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 In the application **main file (lib/main.dart)**, add the following code:  
 
 ```dart
@@ -69,7 +71,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 1. Add the following code in the `initState` method:
 
     ```dart
-    var pendoKey = 'YOUR_APPKEY_HERE';
+    var pendoKey = 'YOUR_API_KEY_HERE';
     await PendoFlutterPlugin.setup(pendoKey);
     ```
 
@@ -121,7 +123,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="YOUR_SCHEME_HERE"/>
+        <data android:scheme="YOUR_SCHEME_ID_HERE"/>
     </intent-filter>
 </activity>
 ```

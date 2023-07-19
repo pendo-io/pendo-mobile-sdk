@@ -53,6 +53,8 @@ If applicable, configure your app compilation to targetCompatibility **JavaVersi
 
 ### Step 2. Pendo SDK Integration
 
+**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+
 1. #### Set up Pendo on **Application class**.
 
     Add the following code in the **onCreate** method:
@@ -60,11 +62,11 @@ If applicable, configure your app compilation to targetCompatibility **JavaVersi
     ```java
     import sdk.pendo.io.*;
 
-    String pendoAppKey = "YOUR_APPKEY_HERE";
+    String pendoApiKey = "YOUR_API_KEY_HERE";
     
     Pendo.setup(
        this,
-       pendoAppKey,
+       pendoApiKey,
        null,
        null
     );
@@ -119,7 +121,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
             <action android:name="android.intent.action.VIEW"/>
             <category android:name="android.intent.category.DEFAULT"/>
             <category android:name="android.intent.category.BROWSABLE"/>
-            <data android:scheme="YOUR_SCHEME_HERE"/>
+            <data android:scheme="YOUR_SCHEME_ID_HERE"/>
         </intent-filter>
     </activity>
 
