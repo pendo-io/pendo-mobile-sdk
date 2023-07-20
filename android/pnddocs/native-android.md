@@ -44,10 +44,10 @@ If applicable, configure your app compilation to targetCompatibility **JavaVersi
  
 3. #### Using ProGuard
 
-    For whom is using ProGuard(D8/DX only) to perform compile-time code optimization and have `proguard-android-optimize.txt`, add the following in the optimizations code line:  
-    `!code/allocation/variable`  
-    Your optimizations line should look like this:  
-    `-optimizations *other optimizations*,!code/allocation/variable`
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
+`!code/allocation/variable`  
+Your optimizations line should look like this:  
+`-optimizations *other optimizations*,!code/allocation/variable`
 
 -------------
 

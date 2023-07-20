@@ -50,9 +50,9 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     ```
 
 4. Using ProGuard / R8  
-The rules that need to be added to proguard are in this file: <a href="https://cdn.pendo.io/sdk/install-instructions/pendo-proguard.cfg">pendo-proguard.cfg</a>  
+- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/pendo-proguard.cfg">pendo-proguard.cfg</a>  
 
-For whom is using ProGuard(D8/DX only) to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
