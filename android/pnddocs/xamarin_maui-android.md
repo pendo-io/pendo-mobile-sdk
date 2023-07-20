@@ -6,11 +6,11 @@
 2. Search for: **PendoMAUIPlugin** with latest version.<br/>
 3. Press **Add Package**.
 
-#### **Using Proguard / R8**
+4. #### **Using Proguard / R8**
 
-The rules that must be added to proguard are in this file: <a href="https://cdn.pendo.io/sdk/install-instructions/pendo-proguard.cfg">pendo-proguard.cfg</a>
+- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/pendo-proguard.cfg">pendo-proguard.cfg</a>  
 
-If using **proguard-android-optimize.txt,** add the following in the optimizations code line:  
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
