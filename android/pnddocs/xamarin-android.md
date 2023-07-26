@@ -41,8 +41,11 @@ Your optimizations line should look like this:
     Setup(this, pendoApiKey, null, null);
     ```
 
-Note: A working example of Application class is in the Troubleshooting section below.
-
+**Note:**  A working example of Application class is in the Troubleshooting section below.
+**Note:** If you are using SDK 2.22.0 or 2.22.1, please upgrade to 2.22.2 or later, or pass a new `PendoOptions` object instead of `null` - 
+    ```c#
+        Setup(this, pendoApiKey, new PendoOptions(), null);
+    ```
 
 
 2. #### Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
