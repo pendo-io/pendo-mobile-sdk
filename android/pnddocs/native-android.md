@@ -73,6 +73,15 @@ Your optimizations line should look like this:
     ```
 
     **Note:** Get updates on the initialization state using  **PendoPhasesCallbackInterface**. Pass `null` if not needed.
+    **Note:** If you are using SDK 2.22.0 or 2.22.1, please upgrade to 2.22.2 or later, or pass a new `PendoOptions` object instead of `null`- 
+    ```java
+     Pendo.setup(
+       this,
+       pendoApiKey,
+       new PendoOptions(),
+       null
+     );
+    ```
 
 2. #### Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
 
