@@ -18,7 +18,7 @@ and select Up to Next Major Version_
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
 In the _AppDelegate_ file <br>
-Swift:
+**Swift**
 
 ```swift
     import UIKit
@@ -34,13 +34,14 @@ Swift:
         }
     }
 ```
+
 As soon as you have the user you want your guides and analytics to relate to, call:
 
 ```swift
     PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
 ```
 
-Obj-C:
+**ObjectiveC**
 ```objectivec
     #import "AppDelegate.h"
     @import Pendo;    
@@ -61,6 +62,39 @@ As soon as you have the user you want to relate your guides and analytics to rel
     [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
 ```
 
+In case using _SceneDelegate_ file <b>
+**Swift**
+```swift
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    let key = "YOUR_API_KEY_HERE"
+    //// the following API is required to initialize the SDK. To begin the collection of analytics and the usage of guides a call to the startSession method is required as well
+    PendoManager.shared().setup(key)
+}
+```
+
+As soon as you have the user you want your guides and analytics to relate to, call:
+
+```swift
+    PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
+```
+
+**ObjectiveC**
+```objectivec
+- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+    NSURL *url = [[URLContexts allObjects] firstObject].URL;
+    if ([[url scheme] containsString:@"pendo"]) {
+        [[PendoManager sharedManager] initWithUrl:url];
+    }
+    //  your code here ...
+}
+```
+As soon as you have the user you want to relate your guides and analytics to relate to, call:
+
+
+```objectivec
+    [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
+```
+
 ### 3. Mobile device connectivity for tagging and testing
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
@@ -73,7 +107,8 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
-#### In AppDelegate file add or modify the **openURL** function:
+#### To allow pairing from the device
+a. If using AppDelegate, add or modify the **openURL** function:
 **Swift**
 ```swift
     func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -95,6 +130,27 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
         //your code
         return YES;
     }
+```
+
+b. If using SceneDelegate, add or modify the **openURLContexts** function:
+**Swift**
+```swift
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
+        PendoManager.shared().initWith(url)
+    }
+}
+```
+
+**ObjectiveC**
+```objectivec
+- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+    NSURL *url = [[URLContexts allObjects] firstObject].URL;
+    if ([[url scheme] containsString:@"pendo"]) {
+        [[PendoManager sharedManager] initWithUrl:url];
+    }
+    //  your code here ...
+}
 ```
 ### Step 4. Verify Installation
 

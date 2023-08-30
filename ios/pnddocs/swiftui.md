@@ -31,6 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 ```
+In case of usage of `SceneDelegate` file instead of `AppDelegate`, complete the following steps:
+```swift
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    let key = "YOUR_API_KEY_HERE"
+    //// the following API is required to initialize the SDK. To begin the collection of analytics and the usage of guides a call to the startSession method is required as well
+    PendoManager.shared().setup(key)
+}
+```
+
 After you have identified the user to which you want to relate your guides and analytics, call `PendoManager.shared().startSession()` with the appropriate parameters.
 
 ```swift
