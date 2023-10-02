@@ -2,7 +2,7 @@
 
 ### 1. Add Pendo dependency
 ### Requirements:
-We support a codeless solution for react-native 0.6+ ,react-navigation 5+ and EXPO Sdk 41+.<br>
+We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
 Note that for the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
 As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
 which means that codeless tracking analytics is available for screen components only.
@@ -27,7 +27,7 @@ yarn add rn-pendo-sdk
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
-In the `app.json`, add the following:
+In the `app.json` or `app.config.js`, add the following:
 ```
 "plugins": [
       [
@@ -71,7 +71,7 @@ function initPendo() {
 }
 ```
 
-In the file where the `NavigationContainer` is created,
+In the file where the `NavigationContainer` is created:
 import `WithPendoReactNavigation`:
 
 ```typescript
@@ -86,7 +86,7 @@ Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
 
 replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
 
-```typescript
+```typescript jsx
    <PendoNavigationContainer>
    {/* Rest of your app code */}
    </PendoNavigationContainer>
@@ -103,9 +103,9 @@ PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 If some of your own _custom_ react native components are not taggable because we can't detect it in the regular detection flow,
 you can try to add it manually to the scanning flow. To do this, add a prop `nativeID` to your component.
 For instance:
-```typescript
-<TouchableOpacity onPress={open} nativeID={"myProp"}>      
-</TouchableOpacity> 
+```typescript jsx
+    <TouchableOpacity onPress={open} nativeID={"myProp"}>      
+    </TouchableOpacity> 
 ```
 and change your integration to the following:
 ```typescript
@@ -119,11 +119,11 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 
 1. In the Pendo UI, go to Settings>Subscription Settings.
 2. Hover over your app and select View app details.
-3. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+3. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations
-**Expo Go** is not supported by Pendo because Pendo SDK has a native plugin that is not part of the Expo Go app.
+Note that **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can be used in development builds *only*.
 You can read more about development builds [Adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/)
 
