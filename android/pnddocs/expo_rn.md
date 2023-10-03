@@ -27,7 +27,7 @@ yarn add rn-pendo-sdk
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
-In the `app.json` or `app.config.js`, add the following:
+In the `app.config.js` or `app.json`, add the following:
 ```
 "plugins": [
       [
