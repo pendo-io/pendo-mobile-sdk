@@ -2,10 +2,8 @@
 
 ### 1. Add Pendo dependency
 ### Requirements: 
-We support a codeless solution for EXPO Sdk 41+ and React Native Navigation 6+.<br>
-Note that for the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
-As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
-which means that codeless tracking analytics is available for screen components only.
+We support a codeless solution for Expo Sdk 41-48 using React Native Navigation 6+.<br>
+Note that for the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*<br>
 
 In the root folder of your expo app, run the following:
 
@@ -21,17 +19,19 @@ yarn add rn-pendo-sdk
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
-In the `app.json`, add the following:
-```
-"plugins": [
-      [
-        "rn-pendo-sdk",
-        {
-          "ios-scheme": "YOUR_IOS_SCHEME_ID",
-          "android-scheme": "YOUR_ANDROID_SCHEME_ID"
-        }
-      ]
-    ]
+In the `app.config.js` or `app.json`, add the following:
+```json
+    {
+    "plugins": [
+          [
+            "rn-pendo-sdk",
+            {
+              "ios-scheme": "YOUR_IOS_SCHEME_ID",
+              "android-scheme": "YOUR_ANDROID_SCHEME_ID"
+            }
+          ]
+        ]
+    }
 ```
 This configuration allows pendo to enter pair mode to tag pages and features. 
 
@@ -80,11 +80,11 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 
 1. In the Pendo UI, go to Settings>Subscription Settings.
 2. Hover over your app and select View app details.
-3. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+3. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations 
-**Expo Go** is not supported by Pendo because Pendo SDK has a native plugin tjat is not part of the Expo Go app.
+Please note **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin which is not part of the Expo Go app.
 Pendo can be used in development builds **only**. 
 You can read more about development builds here [Adding custom native code with development builds].(https://docs.expo.dev/workflow/customizing/)
 
@@ -92,4 +92,4 @@ You can read more about development builds here [Adding custom native code with 
 Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates an initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
 
 ## Limitations
-* To support hybrid mode with React Native Navigation, open a ticket.
+* To support hybrid mode with React Native Navigation, please open a ticket.
