@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Pendo",
     platforms: [
-        .iOS(.v9)
+        .iOS(.v11)
     ],
     products: [
         .library(
