@@ -1,4 +1,4 @@
-## Flutter
+# Flutter
 
 ### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
 ### Step 1. Add Pendo dependency 
@@ -112,7 +112,6 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
--------------
 
 ## Pivots
 Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
@@ -121,4 +120,13 @@ Pay attention to the following APIs ``` setup ``` and ```startSession```; the fo
 * Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
 * To support hybrid mode in Flutter, please open a ticket.
 
+## Developer Documentation
+
+- API documentation available [here](TODO:missing-link)
+
+## Troubleshooting
+
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
 

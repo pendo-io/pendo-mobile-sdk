@@ -1,14 +1,14 @@
-## MAUI
+# Xamarin forms
 
 ### Step 1. Install Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
-2. Search for: **PendoMAUIPlugin** with latest version.<br/>
+2. Search for: **PendoSDKXamarin** with latest version.<br/>
 3. Press **Add Package**.
 
-4. #### **Using Proguard / R8**
+4. #### Using ProGuard / R8
 
-- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/pendo-proguard.cfg">pendo-proguard.cfg</a>  
+- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android-integration/pendo-proguard.cfg)  
 
 - If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
@@ -19,26 +19,33 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
-Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
+Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
 1. #### Open the shared application **App.xaml.cs**
 
-    Add the following under 'using':
+   Add the following under 'using'
 
     ```c#
     ...
-    using PendoMAUIPlugin;
-    ...   
-    ``` 
+    using PendoSDKXamarin;
+    ...
+
+    namespace ExampleApp
+    {
+        public partial class App : Application
+        {
+            ....
+            private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
+            ....    
+    ```  
 
     In the **protected override void OnStart()** method, add the following code:
 
     ```c#
     protected override void OnStart()
     {
-       PendoInterface Pendo = new PendoInterface();
        string apiKey = "YOUR_API_KEY_HERE";
        Pendo.Setup(apiKey);
        ...
@@ -48,19 +55,19 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
 
     ```c#
     ...
-    using PendoMAUIPlugin;
+    using PendoSDKXamarin;
     ...
 
     namespace ExampleApp
     {
         class ExampleLoginClass
         {
-
+        ...
+        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
+        ...
         public void MethodExample()
         {
             ....
-            PendoInterface Pendo = new PendoInterface();
-            
             var visitorId = "VISITOR-UNIQUE-ID";
             var accountId = "ACCOUNT-UNIQUE-ID";
 
@@ -89,13 +96,13 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
 
    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-   **Tip:** Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+   **Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 -------------
 
 ### Step 3. Mobile device connectivity for tagging and testing
 
-These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging.</a>
+These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 1. #### Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
@@ -113,6 +120,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 -------------
 
 ### Step 4. Verify Installation
+
 1. Test using Visual Studio:  
 Run the app.  
 Review the device log and look for the following message:  
@@ -124,12 +132,13 @@ Review the device log and look for the following message:
 
 -------------
 
-### Developer Documentation
+## Developer Documentation
 
-* API documentation available <a href="https://support.pendo.io/hc/en-us/articles/360057203531-Android-Developer-API-Documentation" target="_blank">here.</a>
+- API documentation available [here](TODO:missing-link)
 
--------------
+## Troubleshooting
 
-### Troubleshooting
-
-* Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">release notes</a> for any backward compatibility issues.
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
