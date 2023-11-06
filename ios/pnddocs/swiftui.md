@@ -1,7 +1,7 @@
 # SwiftUI
 
 Currently SwiftUI support is provided as beta and is available via cocoapods and SPM.<br>
-The codeless solution is supported with IOS 15 above. Screen navigation tracking is available since IOS 13.
+The codeless solution is supported with iOS 15 above. Screen navigation tracking is available since iOS 13.
 
 ## Cocoapods
 Add Pendo pod with all rest of the pods:
@@ -128,7 +128,7 @@ SwiftUI is represented by `UIHostingController` when its embeded in UIKit the su
 :technologist: - Dynamic Content (content that appears after the screen has loaded, e.x. new elements or updated texts on the screen that appear as a result of a button clicked on the screen) is currently not supported. Please use the `screenContentChanged()` API for such scenarios. <br>
 :technologist: - Clickable elements buttons/tapGestures etc. When creating clickable elements that don't have a background color set on them (e.x. VStack or HStack) please set a background color to them that is NOT transparent.<br>
 :technologist: - SwiftUI beta components like `PresentationContainers` are not supported yet.<br>
-:technologist: - SwiftUI IOS 16 navigation api's not supported yet.
+:technologist: - SwiftUI iOS 16 navigation api's not supported yet.
 
 Generally, all clickable elements should be taggable. In case you encounter a clickable element that you are not able to tag, please apply the  `enableClickAnalytics()` API on the `View` of this element.
 
