@@ -1,4 +1,4 @@
-## Expo using React Navigation
+# Expo using React Navigation
 
 ### 1. Add Pendo dependency
 ### Requirements:
@@ -6,7 +6,6 @@ We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
 Note that for the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
 As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
 which means that codeless tracking analytics is available for screen components only.
-
 
 In the root folder of your expo app, run the following:
 
@@ -44,19 +43,19 @@ This configuration allows Pendo to enter pair mode to tag pages and features.
 ### 3. Production Bundle - Modify Javascript Obfuscation
 In the `metro.config.js` file, add the following:
 ```javascript
-module.exports = {
-    transformer: {
-        // ...
-        minifierConfig: {
-            keep_classnames: true, // Preserve class names
-            keep_fnames: true, // Preserve function names
-            mangle: {
+    module.exports = {
+        transformer: {
+            // ...
+            minifierConfig: {
                 keep_classnames: true, // Preserve class names
                 keep_fnames: true, // Preserve function names
+                mangle: {
+                    keep_classnames: true, // Preserve class names
+                    keep_fnames: true, // Preserve function names
+                }
             }
         }
     }
-}
 ```
 ### 4.Integration
 
@@ -122,6 +121,7 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 3. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
+
 ## Limitations
 Note that **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can be used in development builds *only*.
@@ -129,3 +129,13 @@ You can read more about development builds [Adding custom native code with devel
 
 ## Pivots
 Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates the initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
+
+## Developer Documentation
+
+- API documentation available [here](TODO:missing-link)
+
+## Troubleshooting
+
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

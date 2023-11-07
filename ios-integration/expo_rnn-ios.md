@@ -1,4 +1,4 @@
-## Expo using React Native Navigation
+# Expo using React Native Navigation
 
 ### 1. Add Pendo dependency
 ### Requirements: 
@@ -93,3 +93,13 @@ Pay attention to the following APIs, ``` setup ``` and ```startSession```; the f
 
 ## Limitations
 * To support hybrid mode with React Native Navigation, please open a ticket.
+
+## Developer Documentation
+
+- API documentation available [here](TODO:missing-link)
+
+## Troubleshooting
+
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

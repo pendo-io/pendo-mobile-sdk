@@ -1,4 +1,4 @@
-## Xamarin forms
+# Xamarin forms
 
 ### Step 1. Install Pendo SDK
 
@@ -134,21 +134,19 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
--------------
 
-### Developer Documentation
+## Developer Documentation
 
-* API documentation available <a href="https://support.pendo.io/hc/en-us/articles/4405948770715-Xamarin-Developer-API-Documentation-iOS" target="_blank">here.</a>
+- API documentation available [here](TODO:missing-link)
 
--------------
+## Troubleshooting
 
-### Troubleshooting
-
-+ Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">release notes</a> for any backward compatibility issues.
 + If you are encountering the following error: '-E -IIOJWT - Failed to create public key, which results in verification failure. OSStatus = ....', follow steps listed below:
   1. In the Visual Studio Editor, right-click on the project.
   2. Select Options.
   3. In the Build category list, select the “iOS bundle signing” option.
   4. Select the three dots button of the “Custom Entitlements” field.
   5. Choose the “Entitlements.plist” file from the box and click OK.
-+ Additional support can be found <a href="https://github.com/pendo-io/pendo-mobile-sdk/ios" target="_blank">here.</a>
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

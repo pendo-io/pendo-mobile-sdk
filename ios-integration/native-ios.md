@@ -1,4 +1,19 @@
-## Native iOS
+# Native iOS
+
+<!-- ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Pendo)  -->
+![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpendo-io%2Fpendo-mobile-sdk%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/pendo-io/pendo-mobile-sdk)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpendo-io%2Fpendo-mobile-sdk%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/pendo-io/pendo-mobile-sdk)\
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/pendo-io/pendo-mobile-sdk?color=brightgreen&label=version&sort=semver)
+![Cocoapods](https://img.shields.io/badge/cocoapods-compatibale-brightgreen)
+![Cocoapods](https://img.shields.io/badge/xcframework-compatibale-brightgreen)
+![Cocoapods](https://img.shields.io/badge/manual%20integration-compatibale-brightgreen)
+
+<!-- ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo) -->
+
+
+
+
 
 ### Step 1. Add Pendo Dependency
 #### cocoapods:
@@ -162,9 +177,16 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
--------------
 
 ## Pivots
 Pay attention to the following apis ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
+## Developer Documentation
 
+- API documentation available [here](TODO:missing-link)
+
+## Troubleshooting
+
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

@@ -1,8 +1,8 @@
-## React Native using React Navigation
+# React Native using React Navigation
 
 ### Step 1. Install Pendo SDK
 
-#### Pendo now supports Expo SDK 41-48. Follow <a href="expo_rn.md">Expo Integration</a> instruction.
+#### Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/android-integration/expo_rn-android.md) instructions.
 
 1. #### In the **application folder**, run the following command:
 
@@ -183,17 +183,14 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
--------------
+## Developer Documentation
 
-### Developer Documentation
-
-* API documentation available <a href="https://support.pendo.io/hc/en-us/articles/360057646611-React-Native-API-Developer-Documentation-iOS-Android-" target="_blank">here.</a>
+- API documentation available [here](TODO:missing-link)
 * Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Navigation" target="_blank">here.</a>
 
--------------
+## Troubleshooting
 
-### Troubleshooting
-
-* Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">Android release notes</a> for any backward compatibility issues.
-* If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
-* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

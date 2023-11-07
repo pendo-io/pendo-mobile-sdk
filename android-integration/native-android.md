@@ -1,4 +1,4 @@
-## Native Android
+# Native Android
 
 ### Step 1. Install Pendo SDK
 
@@ -44,7 +44,7 @@ If applicable, configure your app compilation to targetCompatibility **JavaVersi
  
 3. #### Using ProGuard
 
-- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have `proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
@@ -154,8 +154,14 @@ Review the device log and look for the following message:
 
 -------------
 
-### Troubleshooting
+## Developer Documentation
 
-* Review the <a href="https://developers.pendo.io/category/mobile-sdk/" target="_blank">release notes</a> for any backward compatibility issues.
-* If you are encountering **Dex** problems, please refer to <a href="https://developer.android.com/studio/build/multidex" target="_blank">https://developer.android.com/studio/build/multidex</a>.
-* If for any reason you need to manually install the SDK - please refer to the <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android_sdk_manual_installation.md">manual installation page</a>
+* API documentation available [here](TODO:missing-link)
+- If for any reason you need to manually install the SDK - please refer to the [manual installation page](/android-integration/android_sdk_manual_installation.md)
+
+## Troubleshooting
+
+- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
+- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
+- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
