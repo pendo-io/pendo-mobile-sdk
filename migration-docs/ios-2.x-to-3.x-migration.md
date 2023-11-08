@@ -40,11 +40,11 @@ In the SPM find the Pendo package and switch the Dependency Rule from `Branch` t
 
 The `enableSwitfUI` method was renamed as `pendoEnableSwitfUI`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 someView.enableSwitfUI()
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 someView.pendoEnableSwitfUI()
 ```
@@ -59,11 +59,11 @@ someView.pendoEnableSwitfUI()
 
 The `enableClickAnalytics` method was renamed as `pendoRecognizeClickAnalytics`. 
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 someView.enableClickAnalytics()
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 someView.pendoRecognizeClickAnalytics()
 ```
@@ -105,7 +105,7 @@ Previously: `iOS 9.0`
 Replace `initSDK` by calling the `setup` API followed by the `startSession` API. 
 <br> The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization paramaters can be passed in directly to the `setup` and `startSession` APIs.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 // set session paramaters
 let pendoInitParams = PendoInitParams()
@@ -118,7 +118,7 @@ pendoInitParams.accountData = ["tier" : 1, "size" : "Enterprise"]
 PendoManager.shared().initSDK("someAppKey", initParams: pendoInitParams)
 ```
 
-3.x code example:
+<b>3.x:</b>
 ```swift
 // establish connection to server
 PendoManager.shared().setup("someAppKey")
@@ -141,11 +141,11 @@ PendoManager.shared().startSession("someVisitorID",
 
 Call the `setup` API instead of `initSDKWithoutVisitor`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().initSDKWithoutVisitor("someAppKey", with: nil)
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().setup("someAppKey", with: nil)
 ```
@@ -161,13 +161,13 @@ PendoManager.shared().setup("someAppKey", with: nil)
 
 Call the `startSession` API with `nil` values instead of `clearVisitor`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 // start a session with an anonymous visitor
 PendoManager.shared().clearVisitor()
 ```
 
-3.x code example:
+<b>3.x:</b>
 ```swift
 // start a session with an anonymous visitor
 PendoManager.shared().startSession(nil, 
@@ -187,14 +187,14 @@ PendoManager.shared().startSession(nil,
 
 Call the `startSession` API instead of `switchVisitor`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().switchVisitor("someVisitorID", 
       accountId: "someAccountID", 
       visitorData: ["age" : 27, "country" : "USA"], 
       accountData: ["tier" : 1, "size" : "Enterprise"])
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().startSession("someVisitorID", 
       accountId: "someAccountID", 
@@ -213,11 +213,11 @@ PendoManager.shared().startSession("someVisitorID",
 
 Pass a boolean value to `pauseGuides` to control the dismissal of guides displayed when the API is invoked. The removed API by default set this value to `true`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().pauseGuides()
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 ```
@@ -233,11 +233,11 @@ PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 
 Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a paramater of `PendoManager.shared().enableClickAnalytics`.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().enableClickAnalytics(someUIView)
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 someUIView.pendoRecognizeClickAnalytics()
 ```
@@ -253,11 +253,11 @@ someUIView.pendoRecognizeClickAnalytics()
 
 Call `startSession` with the new account id value instead of setting the account id as a value of the `PendoManager.shared().accountId` property.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().accountId = "someAccountId"
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().startSession("someVisitorID", 
       accountId: "someAccountID", 
@@ -276,7 +276,7 @@ PendoManager.shared().startSession("someVisitorID",
 
 This property has been removed and no longer exists.
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 let appKey = PendoManager.shared().appKey
 ```
@@ -304,11 +304,11 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <td align=center> startSession </td>
 <td>
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().startSession("someJWT", "someSigningKeyName")
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 ```
@@ -322,11 +322,11 @@ PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 <td align=center> setVisitorData </td>
 <td>
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().setVisitorData("someJWT", "someSigningKeyName")
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 ```
@@ -339,11 +339,11 @@ PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 <td align=center> setAccountData </td>
 <td>
 
-legacy 2.x code example:
+<b>2.x:</b>
 ```swift
 PendoManager.shared().setAccountData("someJWT", "someSigningKeyName")
 ```
-3.x code example:
+<b>3.x:</b>
 ```swift
 PendoManager.shared().jwt.setAccountData("someJWT", "someSigningKeyName")
 ```
