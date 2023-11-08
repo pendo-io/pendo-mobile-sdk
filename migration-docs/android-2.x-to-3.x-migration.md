@@ -2,7 +2,7 @@
 
 ## Changes Relevant to All Native Android Apps
 
-The following deprecated APIs have benn removed. Follow these instructions to replace them: 
+The following deprecated APIs have been removed. Follow these instructions to replace them: 
 
 
 <table border =2>
@@ -172,7 +172,7 @@ Pendo.setAccountId("someAccountID")
 </td>
 <td>
 
-Call `Pendo.startSession`` with the new account id value instead of `Pendo.setAccountId`:
+Call `Pendo.startSession` with the new account id value instead of `Pendo.setAccountId`:
 
 ```kotlin
 // start a new session passing in the new accountId 

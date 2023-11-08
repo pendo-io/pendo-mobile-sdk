@@ -9,4 +9,4 @@ Follow our migration instructions to solve breaking changes when upgrading from 
 - [MAUI](/migration-docs/maui-2.x-to-3.x-migration.md)
 - [Flutter](/migration-docs/flutter-2.x-to-3.x-migration.md)
 
-Xamarin iOS and Xamarin Android are no longer supurted in 3.x. Please move to MAUI or Xamarin Forms SDKs. This requires creating a new Pendo App and recapturing the app pages and features.
+Xamarin iOS and Xamarin Android are no longer supported in 3.x. Please move to MAUI or Xamarin Forms SDKs. This requires creating a new Pendo App and recapturing the app pages and features.
