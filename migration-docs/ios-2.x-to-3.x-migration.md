@@ -78,7 +78,7 @@ The enableClickAnalytics method was renamed as pendoRecognizeClickAnalytics: `so
 The following deprecated APIs have benn removed. Follow these instructions to replace them:
 
 
-<table border =2>
+<table border =2 style="width:1007px">
 
 <tr>
 <td> </td>
