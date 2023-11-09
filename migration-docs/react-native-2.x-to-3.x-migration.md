@@ -61,7 +61,7 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `PendoSDK.initSDK` by calling `PendoSDK.setup` and then `PendoSDK.startSession`:
+Replace `initSDK` by calling `setup` and then `startSession`.
 
 <b>2.x:</b>
 
@@ -103,7 +103,7 @@ PendoSDK.startSession('someVisitorID',
 <td align=center><b>initSDKWithoutVisitor </td>
 <td>
 
-Call `PendoSDK.setup` instead of `PendoSDK.initSDKWithoutVisitor`:
+Call `setup` instead of `initSDKWithoutVisitor`.
 
 <b>2.x:</b>
 
@@ -130,7 +130,7 @@ PendoSDK.setup('someAppKey', navigationOptions);
 <td align=center><b>clearVisitor </td>
 <td>
 
-Call `PendoSDK.startSession` with `null` values instead of `PendoSDK.clearVisitor`: 
+Call `startSession` with `null` values instead of `clearVisitor`.
 
 <b>2.x:</b>
 
@@ -155,7 +155,7 @@ PendoSDK.startSession(null, null, null, null);
 <td align=center><b>switchVisitor </td>
 <td>
 
-Call `PendoSDK.startSession` instead of `PendoSDK.switchVisitor`:
+Call `startSession` instead of `switchVisitor`.
 
 <b>2.x:</b>
 
@@ -184,7 +184,7 @@ PendoSDK.startSession('someVisitorID',
 <td align=center><b>setAccountId </td>
 <td>
 
-Call `PendoSDK.startSession` with the new account id value instead of `PendoSDK.setAccountId`:
+Call `startSession` with the new account id value instead of `setAccountId`.
 
 <b>2.x:</b>
 

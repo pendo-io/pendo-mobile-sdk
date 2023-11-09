@@ -18,10 +18,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `Pendo.initSDK` by calling `Pendo.setup` and then `Pendo.startSession`.
-
-The `PendoInitParams` class 
- no longer exists.
+Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
 
  <b>2.x:</b>
 
@@ -70,7 +67,7 @@ Pendo.startSession(
 <td align=center><b>initSDKWithoutVisitor </td>
 <td>
 
-Call `Pendo.setup` instead of `Pendo.initSDKWithoutVisitor`:
+Call `setup` instead of `initSDKWithoutVisitor`.
 
 <b>2.x:</b>
 
@@ -105,7 +102,7 @@ Pendo.setup(
 <td align=center><b>clearVisitor </td>
 <td>
 
-Call `Pendo.startSession` with `null` values instead of `Pendo.clearVisitor`:
+Call `startSession` with `null` values instead of `clearVisitor`.
 
 <b>2.x:</b>
 
@@ -135,7 +132,7 @@ Pendo.startSession(
 <td align=center><b>switchVisitor </td>
 <td>
 
-Call `Pendo.startSession` instead of `Pendo.switchVisitor`:
+Call `startSession` instead of `switchVisitor`.
 
 <b>2.x:</b>
 
@@ -168,7 +165,7 @@ Pendo.startSession(
 <td align=center><b>setAccountId </td>
 <td>
 
-Call `Pendo.startSession` with the new account id value instead of `Pendo.setAccountId`:
+Call `startSession` with the new account id value instead of `setAccountId`.
 
 <b>2.x:</b>
 
@@ -194,10 +191,10 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center><b>pauseGuides <i>(without dismissGuides argument)</i> </td>
+<td align=center><b>pauseGuides</b> <br> <i>(without any arguments)</i> </td>
 <td>
 
-Pass a boolean value to `Pendo.pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`:
+Pass a boolean value to `pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`.
 
 <b>2.x:</b>
 
@@ -220,7 +217,7 @@ Pendo.pauseGuides(true) // true == dismiss any displayed guide
 <td align=center><b>isInitStarted callback </td>
 <td>
 
-The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`:
+The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`.
 
 <b>3.x:</b>
 

@@ -108,8 +108,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `initSDK` by calling the `setup` API followed by the `startSession` API. 
-<br> The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters can be passed in directly to the `setup` and `startSession` APIs.
+Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
 
 <b>2.x:</b>
 

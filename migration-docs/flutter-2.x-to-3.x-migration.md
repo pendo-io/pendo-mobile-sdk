@@ -16,7 +16,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `PendoFlutterPlugin.initSDK` by calling `PendoFlutterPlugin.setup` and then `PendoFlutterPlugin.startSession`:
+Replace `initSDK` by calling `setup` and then `startSession`.
 
 <b>2.x:</b>
 
@@ -55,7 +55,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 <td align=center><b>initSDKWithoutVisitor </td>
 <td>
 
-Call `PendoFlutterPlugin.setup` instead of `PendoFlutterPlugin.initSDKWithoutVisitor`:
+Call `setup` instead of `initSDKWithoutVisitor`.
 
 <b>2.x:</b>
 
@@ -85,7 +85,7 @@ await PendoFlutterPlugin.setup('someAppKey'
 <td align=center><b>clearVisitor </td>
 <td>
 
-Call `PendoFlutterPlugin.startSession` with `null` values instead of `PendoFlutterPlugin.clearVisitor`:
+Call `startSession` with `null` values instead of `clearVisitor`.
 
 <b>2.x:</b>
 
@@ -110,7 +110,7 @@ await PendoFlutterPlugin.startSession(null, null, null, null);
 <td align=center><b>switchVisitor </td>
 <td>
 
-Call `PendoFlutterPlugin.startSession` instead of `PendoFlutterPlugin.switchVisitor`:
+Call `startSession` instead of `switchVisitor`.
 
 <b>2.x:</b>
 
@@ -139,7 +139,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 <td align=center><b>setAccountId </td>
 <td>
 
-Call `PendoFlutterPlugin.startSession` with the new account id value instead of `PendoFlutterPlugin.setAccountId`:
+Call `startSession` with the new account id value instead of `setAccountId`.
 
 <b>2.x:</b>
 
