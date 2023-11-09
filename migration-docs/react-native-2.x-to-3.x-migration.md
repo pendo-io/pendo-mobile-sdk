@@ -16,7 +16,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>withPendoRN </td>
 <td>
 
-Replace `withPendoRN` with `withPendoReactNavigation`:
+Replace `withPendoRN` with `WithPendoReactNavigation`:
 
 <b>2.x:</b>
 
@@ -24,7 +24,7 @@ Replace `withPendoRN` with `withPendoReactNavigation`:
 // in the file where the NavigationContainer is created
 import {withPendoRN} from 'rn-pendo-sdk'    
 
-// wrap NavigationContainer with withPendoReactNavigation HOC
+// wrap NavigationContainer with WithPendoReactNavigation HOC
 const PendoNavigationContainer = withPendoRN(NavigationContainer);    
 
 // replace NavigationContainer tag with PendoNavigationContainer tag
@@ -39,10 +39,10 @@ const PendoNavigationContainer = withPendoRN(NavigationContainer);
 
 ```javascript
 // in the file where the NavigationContainer is created
-import {withPendoReactNavigation} from 'rn-pendo-sdk'    
+import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
 
-// wrap NavigationContainer with withPendoReactNavigation HOC
-const PendoNavigationContainer = withPendoReactNavigation(NavigationContainer);    
+// wrap NavigationContainer with WithPendoReactNavigation HOC
+const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
 
 // replace NavigationContainer tag with PendoNavigationContainer tag
 <PendoNavigationContainer>

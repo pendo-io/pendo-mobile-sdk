@@ -11,7 +11,7 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Obtaining the Pendo Instance</b></td>
+<td align=center><b>Obtaining the <br> Pendo Instance</b></td>
 
 <td>
 
@@ -20,13 +20,20 @@ Fetch the `Pendo` instance using the the `PendoServerFactory` instead of creatin
 <b>2.x:</b>
 
 ```C#
-PendoInterface Pendo = new PendoInterface();
+PendoInterface pendo = new PendoInterface();
 ```
 
 <b>3.x:</b>
 
 ```C#
-IPendoService Pendo = PendoServiceFactory.CreatePendoService();
+IPendoService pendo = PendoServiceFactory.CreatePendoService();
+
+// if your app supports additional Platforms other than iOS and Android, verify the Pendo instance is not null
+if (pendo != null) { 
+
+    // the rest of your Pendo code
+
+}
 ```
 
 </td>
