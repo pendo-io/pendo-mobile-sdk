@@ -1,6 +1,6 @@
 # Native iOS Migration From 2.x to 3.x
 
-## Changes Relevant to SwiftUI Migration
+## Mandatory Migration Instructions for SwiftUI beta SDK  
 
 Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support please move to the iOS native SDK integration as described in the table below:
 
@@ -13,7 +13,7 @@ Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS
 <!--- new row --->
 
 <tr>
-<td align=center>Integration with Cocoapods</td>
+<td align=center><b>Integration with Cocoapods</td>
 <td>
 
 In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
@@ -24,7 +24,7 @@ In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
 <!--- new row --->
 
 <tr>
-<td align=center>Integration with SPM</td>
+<td align=center><b>Integration with SPM</td>
 <td>
 
 In the SPM find the Pendo package and switch the Dependency Rule from `Branch` to `Up to Next Major Version` 
@@ -34,17 +34,19 @@ In the SPM find the Pendo package and switch the Dependency Rule from `Branch` t
 <!--- new row --->
 
 <tr>
-<td align=center>enableSwiftUI</b></td>
+<td align=center><b>enableSwiftUI</b></td>
 </td>
 <td>
 
 The `enableSwitfUI` method was renamed as `pendoEnableSwitfUI`.
 
 <b>2.x:</b>
+
 ```swift
 someView.enableSwitfUI()
 ```
 <b>3.x:</b>
+
 ```swift
 someView.pendoEnableSwitfUI()
 ```
@@ -54,16 +56,18 @@ someView.pendoEnableSwitfUI()
 <!--- new row --->
 
 <tr>
-<td align=center>enableClickAnalytics</td>
+<td align=center><b>enableClickAnalytics</td>
 <td>
 
 The `enableClickAnalytics` method was renamed as `pendoRecognizeClickAnalytics`. 
 
 <b>2.x:</b>
+
 ```swift
 someView.enableClickAnalytics()
 ```
 <b>3.x:</b>
+
 ```swift
 someView.pendoRecognizeClickAnalytics()
 ```
@@ -88,26 +92,29 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
-<td align=center>minimum <br> deployment target</td>
+<td align=center><b>minimum <br> deployment target</td>
 <td>
 
-Previously: `iOS 9.0`
-<br> Going forward: `iOS 11.0`
+<b>2.x:</b> 
+`iOS 9.0`
+<br><b>3.x:</b> 
+`iOS 11.0`
 </td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center> initSDK </td>
+<td align=center><b>initSDK </td>
 <td>
 
 Replace `initSDK` by calling the `setup` API followed by the `startSession` API. 
-<br> The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization paramaters can be passed in directly to the `setup` and `startSession` APIs.
+<br> The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters can be passed in directly to the `setup` and `startSession` APIs.
 
 <b>2.x:</b>
+
 ```swift
-// set session paramaters
+// set session parameters
 let pendoInitParams = PendoInitParams()
 pendoInitParams.visitorId = "someVisitorID"
 pendoInitParams.accountId = "someAccountID"
@@ -119,6 +126,7 @@ PendoManager.shared().initSDK("someAppKey", initParams: pendoInitParams)
 ```
 
 <b>3.x:</b>
+
 ```swift
 // establish connection to server
 PendoManager.shared().setup("someAppKey")
@@ -136,16 +144,18 @@ PendoManager.shared().startSession("someVisitorID",
 <!--- new row --->
 
 <tr>
-<td align=center> initSDKWithoutVisitor </td>
+<td align=center><b>initSDKWithoutVisitor </td>
 <td>
 
 Call the `setup` API instead of `initSDKWithoutVisitor`.
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().initSDKWithoutVisitor("someAppKey", with: nil)
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().setup("someAppKey", with: nil)
 ```
@@ -156,18 +166,20 @@ PendoManager.shared().setup("someAppKey", with: nil)
 <!--- new row --->
 
 <tr>
-<td align=center> clearVisitor </td>
+<td align=center><b>clearVisitor </td>
 <td>
 
 Call the `startSession` API with `nil` values instead of `clearVisitor`.
 
 <b>2.x:</b>
+
 ```swift
 // start a session with an anonymous visitor
 PendoManager.shared().clearVisitor()
 ```
 
 <b>3.x:</b>
+
 ```swift
 // start a session with an anonymous visitor
 PendoManager.shared().startSession(nil, 
@@ -182,12 +194,13 @@ PendoManager.shared().startSession(nil,
 <!--- new row --->
 
 <tr>
-<td align=center> switchVisitor </td>
+<td align=center><b>switchVisitor </td>
 <td>
 
 Call the `startSession` API instead of `switchVisitor`.
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().switchVisitor("someVisitorID", 
       accountId: "someAccountID", 
@@ -195,6 +208,7 @@ PendoManager.shared().switchVisitor("someVisitorID",
       accountData: ["tier" : 1, "size" : "Enterprise"])
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().startSession("someVisitorID", 
       accountId: "someAccountID", 
@@ -208,16 +222,18 @@ PendoManager.shared().startSession("someVisitorID",
 <!--- new row --->
 
 <tr>
-<td align=center> pauseGuides <i>(without dismissGuides argument)</i> </td>
+<td align=center><b>pauseGuides</b><br> <i>(without any arguments)</i> </td>
 <td>
 
 Pass a boolean value to `pauseGuides` to control the dismissal of guides displayed when the API is invoked. The removed API by default set this value to `true`.
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().pauseGuides()
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 ```
@@ -228,16 +244,18 @@ PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 <!--- new row --->
 
 <tr>
-<td align=center> enableClickAnalytics </td>
+<td align=center><b>enableClickAnalytics </td>
 <td>
 
 Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a paramater of `PendoManager.shared().enableClickAnalytics`.
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().enableClickAnalytics(someUIView)
 ```
 <b>3.x:</b>
+
 ```swift
 someUIView.pendoRecognizeClickAnalytics()
 ```
@@ -248,16 +266,18 @@ someUIView.pendoRecognizeClickAnalytics()
 <!--- new row --->
 
 <tr>
-<td align=center> accountId property setter </td>
+<td align=center><b>accountId property setter </td>
 <td>
 
 Call `startSession` with the new account id value instead of setting the account id as a value of the `PendoManager.shared().accountId` property.
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().accountId = "someAccountId"
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().startSession("someVisitorID", 
       accountId: "someAccountID", 
@@ -271,12 +291,13 @@ PendoManager.shared().startSession("someVisitorID",
 <!--- new row --->
 
 <tr>
-<td align=center> appkey property getter </td>
+<td align=center><b>appkey property getter </td>
 <td>
 
 This property has been removed and no longer exists.
 
 <b>2.x:</b>
+
 ```swift
 let appKey = PendoManager.shared().appKey
 ```
@@ -301,14 +322,16 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <!--- new row --->
 
 <tr>
-<td align=center> startSession </td>
+<td align=center><b>startSession </td>
 <td>
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().startSession("someJWT", "someSigningKeyName")
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 ```
@@ -319,14 +342,16 @@ PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 <!--- new row --->
 
 <tr>
-<td align=center> setVisitorData </td>
+<td align=center><b>setVisitorData </td>
 <td>
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().setVisitorData("someJWT", "someSigningKeyName")
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 ```
@@ -336,14 +361,16 @@ PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 <!--- new row --->
 
 <tr>
-<td align=center> setAccountData </td>
+<td align=center><b>setAccountData </td>
 <td>
 
 <b>2.x:</b>
+
 ```swift
 PendoManager.shared().setAccountData("someJWT", "someSigningKeyName")
 ```
 <b>3.x:</b>
+
 ```swift
 PendoManager.shared().jwt.setAccountData("someJWT", "someSigningKeyName")
 ```

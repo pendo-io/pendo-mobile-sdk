@@ -8,19 +8,25 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <table border =2>
 
 <tr>
-<td> </td>
-<td><b> 2.x</b></td>
-<td><b>3.x</b></td>
+<td align=center><b>Component / API</td>
+<td align=center><b>Instructions</b></td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center> initSDK </td>
+<td align=center><b>initSDK </td>
 <td>
 
+Replace `Pendo.initSDK` by calling `Pendo.setup` and then `Pendo.startSession`.
+
+The `PendoInitParams` class 
+ no longer exists.
+
+ <b>2.x:</b>
+
 ```kotlin
-// set session paramaters
+// set session parameters
 val pendoParams = Pendo.PendoInitParams()
 pendoParams.visitorId = "someVisitorID"
 pendoParams.accountId = "someAccountID"
@@ -35,13 +41,7 @@ Pendo.initSDK(
 )
 ```
 
-</td>
-<td>
-
-Replace `Pendo.initSDK` by calling `Pendo.setup` and then `Pendo.startSession`.
-
-The `PendoInitParams` class 
- no longer exists.
+<b>3.x:</b>
 
 ```kotlin
 // establish connection to server
@@ -67,8 +67,12 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center> initSDKWithoutVisitor </td>
+<td align=center><b>initSDKWithoutVisitor </td>
 <td>
+
+Call `Pendo.setup` instead of `Pendo.initSDKWithoutVisitor`:
+
+<b>2.x:</b>
 
 ```kotlin
 // establish connection to server
@@ -80,10 +84,7 @@ Pendo.initSDKWithoutVisitor(
 )
 ```
 
-</td>
-<td>
-
-Call `Pendo.setup` instead of `Pendo.initSDKWithoutVisitor`:
+<b>3.x:</b>
 
 ```kotlin
 // establish connection to server
@@ -101,18 +102,19 @@ Pendo.setup(
 <!--- new row --->
 
 <tr>
-<td align=center> clearVisitor </td>
+<td align=center><b>clearVisitor </td>
 <td>
+
+Call `Pendo.startSession` with `null` values instead of `Pendo.clearVisitor`:
+
+<b>2.x:</b>
 
 ```kotlin
 // start a session with an anonymous visitor
 Pendo.clearVisitor()
 ```
 
-</td>
-<td>
-
-Call `Pendo.startSession` with `null` values instead of `Pendo.clearVisitor`:
+<b>3.x:</b>
 
 ```kotlin
 // start a session with an anonymous visitor
@@ -130,8 +132,12 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center> switchVisitor </td>
+<td align=center><b>switchVisitor </td>
 <td>
+
+Call `Pendo.startSession` instead of `Pendo.switchVisitor`:
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.switchVisitor(
@@ -142,10 +148,7 @@ Pendo.switchVisitor(
 )
 ```
 
-</td>
-<td>
-
-Call `Pendo.startSession` instead of `Pendo.switchVisitor`:
+<b>3.x:</b>
 
 ```kotlin
 Pendo.startSession(
@@ -162,17 +165,18 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center> setAccountId </td>
+<td align=center><b>setAccountId </td>
 <td>
+
+Call `Pendo.startSession` with the new account id value instead of `Pendo.setAccountId`:
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.setAccountId("someAccountID")
 ```
 
-</td>
-<td>
-
-Call `Pendo.startSession` with the new account id value instead of `Pendo.setAccountId`:
+<b>3.x:</b>
 
 ```kotlin
 // start a new session passing in the new accountId 
@@ -190,17 +194,18 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center> pauseGuides <i>(without dismissGuides argument)</i> </td>
+<td align=center><b>pauseGuides <i>(without dismissGuides argument)</i> </td>
 <td>
+
+Pass a boolean value to `Pendo.pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`:
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.pauseGuides()
 ```
 
-</td>
-<td>
-
-Pass a boolean value to `Pendo.pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`:
+<b>3.x:</b>
 
 ```kotlin
 Pendo.pauseGuides(true) // true == dismiss any displayed guide
@@ -212,8 +217,12 @@ Pendo.pauseGuides(true) // true == dismiss any displayed guide
 <!--- new row --->
 
 <tr>
-<td align=center> isInitStarted callback </td>
+<td align=center><b>isInitStarted callback </td>
 <td>
+
+The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`:
+
+<b>3.x:</b>
 
 ```kotlin
 class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
@@ -223,10 +232,7 @@ class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
 }
 ```
 
-</td>
-<td>
-
-The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`:
+<b>3.x:</b>
 
 ```kotlin
 class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
@@ -247,23 +253,23 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <table border =2>
 
 <tr>
-<td> </td>
-<td><b> 2.x</b></td>
-<td><b>3.x</b></td>
+<td align=center><b>Component / API</td>
+<td align=center><b>Instructions</b></td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center> startSession </td>
+<td align=center><b>startSession </td>
 <td>
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.startSession("someJWT", "someSigningKeyName")
 ```
 
-</td>
-<td>
+<b>3.x:</b>
 
 ```kotlin
 Pendo.jwt.startSession("someJWT", "someSigningKeyName")
@@ -275,15 +281,16 @@ Pendo.jwt.startSession("someJWT", "someSigningKeyName")
 <!--- new row --->
 
 <tr>
-<td align=center> setVisitorData </td>
+<td align=center><b>setVisitorData </td>
 <td>
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.setVisitorData("someJWT", "someSigningKeyName")
 ```
 
-</td>
-<td>
+<b>3.x:</b>
 
 ```kotlin
 Pendo.jwt.setVisitorData("someJWT", "someSigningKeyName")
@@ -295,15 +302,16 @@ Pendo.jwt.setVisitorData("someJWT", "someSigningKeyName")
 <!--- new row --->
 
 <tr>
-<td align=center> setAccountData </td>
+<td align=center><b>setAccountData </td>
 <td>
+
+<b>2.x:</b>
 
 ```kotlin
 Pendo.setAccountData("someJWT", "someSigningKeyName")
 ```
 
-</td>
-<td>
+<b>3.x:</b>
 
 ```kotlin
 Pendo.jwt.setAccountData("someJWT", "someSigningKeyName")

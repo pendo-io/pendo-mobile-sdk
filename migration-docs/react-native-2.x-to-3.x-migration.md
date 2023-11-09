@@ -6,16 +6,19 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <table border =2>
 
 <tr>
-<td> </td>
-<td><b> 2.x</b></td>
-<td><b>3.x</b></td>
+<td align=center><b>Component / API </td>
+<td align=center><b>Instructions</b></td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center> withPendoRN </td>
+<td align=center><b>withPendoRN </td>
 <td>
+
+Replace `withPendoRN` with `WithPendoReactNavigation`:
+
+<b>2.x:</b>
 
 ```javascript
 // in the file where the NavigationContainer is created
@@ -32,10 +35,7 @@ const PendoNavigationContainer = withPendoRN(NavigationContainer);
 </PendoNavigationContainer>
 ```
 
-</td>
-<td>
-
-Replace `withPendoRN` with `WithPendoReactNavigation`:
+<b>3.x:</b>
 
 ```javascript
 // in the file where the NavigationContainer is created
@@ -58,11 +58,15 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
 <!--- new row --->
 
 <tr>
-<td align=center> initSDK </td>
+<td align=center><b>initSDK </td>
 <td>
 
+Replace `PendoSDK.initSDK` by calling `PendoSDK.setup` and then `PendoSDK.startSession`:
+
+<b>2.x:</b>
+
 ```javascript
-// set session paramaters
+// set session parameters
 const pendoParams = {'visitorId': 'someVisitorID',
                      'accountId': 'someAccountID',
                      'vistiorData':  {'age': '25', 'country': 'USA'},
@@ -76,10 +80,7 @@ PendoSDK.initSdk('someAppKey',
                   navigationOptions);
 ```
 
-</td>
-<td>
-
-Replace `PendoSDK.initSDK` by calling `PendoSDK.setup` and then `PendoSDK.startSession`:
+<b>3.x:</b>
 
 ```javascript
 // establish connection to server
@@ -99,8 +100,12 @@ PendoSDK.startSession('someVisitorID',
 <!--- new row --->
 
 <tr>
-<td align=center> initSDKWithoutVisitor </td>
+<td align=center><b>initSDKWithoutVisitor </td>
 <td>
+
+Call `PendoSDK.setup` instead of `PendoSDK.initSDKWithoutVisitor`:
+
+<b>2.x:</b>
 
 ```javascript
 // establish connection to server
@@ -108,10 +113,7 @@ const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
 PendoSDK.initSDKWithoutVisitor('someAppKey', navigationOptions);
 ```
 
-</td>
-<td>
-
-Call `PendoSDK.setup` instead of `PendoSDK.initSDKWithoutVisitor`:
+<b>3.x:</b>
 
 ```javascript
 // establish connection to server
@@ -125,18 +127,19 @@ PendoSDK.setup('someAppKey', navigationOptions);
 <!--- new row --->
 
 <tr>
-<td align=center> clearVisitor </td>
+<td align=center><b>clearVisitor </td>
 <td>
+
+Call `PendoSDK.startSession` with `null` values instead of `PendoSDK.clearVisitor`: 
+
+<b>2.x:</b>
 
 ```javascript
 // start a session with an anonymous visitor
 PendoSDK.clearVisitor()
 ```
 
-</td>
-<td>
-
-Call `PendoSDK.startSession` with `null` values instead of `PendoSDK.clearVisitor`: 
+<b>3.x:</b>
 
 ```javascript
 // start a session with an anonymous visitor
@@ -149,8 +152,12 @@ PendoSDK.startSession(null, null, null, null);
 <!--- new row --->
 
 <tr>
-<td align=center> switchVisitor </td>
+<td align=center><b>switchVisitor </td>
 <td>
+
+Call `PendoSDK.startSession` instead of `PendoSDK.switchVisitor`:
+
+<b>2.x:</b>
 
 ```javascript
 PendoSDK.switchVisitor('someVisitorID', 
@@ -159,10 +166,7 @@ PendoSDK.switchVisitor('someVisitorID',
             {'tier': '1', 'size': 'Enterprise'});
 ```
 
-</td>
-<td>
-
-Call `PendoSDK.startSession` instead of `PendoSDK.switchVisitor`:
+<b>3.x:</b>
 
 ```javascript
 PendoSDK.startSession('someVisitorID', 
@@ -177,17 +181,18 @@ PendoSDK.startSession('someVisitorID',
 <!--- new row --->
 
 <tr>
-<td align=center> setAccountId </td>
+<td align=center><b>setAccountId </td>
 <td>
+
+Call `PendoSDK.startSession` with the new account id value instead of `PendoSDK.setAccountId`:
+
+<b>2.x:</b>
 
 ```javascript
 PendoSDK.setAccountId('someAccountID');
 ```
 
-</td>
-<td>
-
-Call `PendoSDK.startSession` with the new account id value instead of `PendoSDK.setAccountId`:
+<b>3.x:</b>
 
 ```javascript
 // start a new session passing in the new accountId 

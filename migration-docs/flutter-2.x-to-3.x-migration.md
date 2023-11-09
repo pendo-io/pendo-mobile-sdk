@@ -6,16 +6,19 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <table border =2>
 
 <tr>
-<td> </td>
-<td><b> 2.x</b></td>
-<td><b>3.x</b></td>
+<td align=center><b>Component / API</td>
+<td align=center><b>Instructions</b></td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center> initSDK </td>
+<td align=center><b>initSDK </td>
 <td>
+
+Replace `PendoFlutterPlugin.initSDK` by calling `PendoFlutterPlugin.setup` and then `PendoFlutterPlugin.startSession`:
+
+<b>2.x:</b>
 
 ```dart
 // set session paramaters
@@ -28,10 +31,7 @@ final dynamic pendoParams = {'visitorId':'someVisitorID',
 await PendoFlutterPlugin.startSession('someAppKey', pendoParams);
 ```
 
-</td>
-<td>
-
-Replace `PendoFlutterPlugin.initSDK` by calling `PendoFlutterPlugin.setup` and then `PendoFlutterPlugin.startSession`:
+<b>3.x:</b>
 
 ```dart
 // establish connection to server
@@ -52,8 +52,12 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 <!--- new row --->
 
 <tr>
-<td align=center> initSDKWithoutVisitor </td>
+<td align=center><b>initSDKWithoutVisitor </td>
 <td>
+
+Call `PendoFlutterPlugin.setup` instead of `PendoFlutterPlugin.initSDKWithoutVisitor`:
+
+<b>2.x:</b>
 
 ```dart
 // establish connection to server
@@ -62,10 +66,8 @@ await PendoFlutterPlugin.initSDKWithoutVisitor('someAppKey'
 );
 ```
 
-</td>
-<td>
+<b>3.x:</b>
 
-Call `PendoFlutterPlugin.setup` instead of `PendoFlutterPlugin.initSDKWithoutVisitor`:
 
 ```dart
 // establish connection to server
@@ -80,18 +82,19 @@ await PendoFlutterPlugin.setup('someAppKey'
 <!--- new row --->
 
 <tr>
-<td align=center> clearVisitor </td>
+<td align=center><b>clearVisitor </td>
 <td>
+
+Call `PendoFlutterPlugin.startSession` with `null` values instead of `PendoFlutterPlugin.clearVisitor`:
+
+<b>2.x:</b>
 
 ```dart
 // start a session with an anonymous visitor
 await PendoFlutterPlugin.clearVisitor()
 ```
 
-</td>
-<td>
-
-Call `PendoFlutterPlugin.startSession` with `null` values instead of `PendoFlutterPlugin.clearVisitor`:
+<b>3.x:</b>
 
 ```dart
 // start a session with an anonymous visitor
@@ -104,8 +107,12 @@ await PendoFlutterPlugin.startSession(null, null, null, null);
 <!--- new row --->
 
 <tr>
-<td align=center> switchVisitor </td>
+<td align=center><b>switchVisitor </td>
 <td>
+
+Call `PendoFlutterPlugin.startSession` instead of `PendoFlutterPlugin.switchVisitor`:
+
+<b>2.x:</b>
 
 ```dart
 await PendoFlutterPlugin.switchVisitor('someVisitorID', 
@@ -114,10 +121,7 @@ await PendoFlutterPlugin.switchVisitor('someVisitorID',
             {'tier': '1', 'size': 'Enterprise'});
 ```
 
-</td>
-<td>
-
-Call `PendoFlutterPlugin.startSession` instead of `PendoFlutterPlugin.switchVisitor`:
+<b>3.x:</b>
 
 ```dart
 await PendoFlutterPlugin.startSession('someVisitorID', 
@@ -132,17 +136,18 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 <!--- new row --->
 
 <tr>
-<td align=center> setAccountId </td>
+<td align=center><b>setAccountId </td>
 <td>
+
+Call `PendoFlutterPlugin.startSession` with the new account id value instead of `PendoFlutterPlugin.setAccountId`:
+
+<b>2.x:</b>
 
 ```dart
 await PendoFlutterPlugin.setAccountId('someAccountID');
 ```
 
-</td>
-<td>
-
-Call `PendoFlutterPlugin.startSession` with the new account id value instead of `PendoFlutterPlugin.setAccountId`:
+<b>3.x:</b>
 
 ```dart
 // start a new session passing in the new accountId 

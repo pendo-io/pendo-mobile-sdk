@@ -4,24 +4,26 @@ The following changes are required:
 
 <table border=2>
 <tr>
-<td> </td>
-<td><b> 2.x</b></td>
-<td><b>3.x</b></td>
+<td align=center><b>Component / API </td>
+<td align=center><b>Instructions</b></td>
 </tr>
 
 <!--- new row --->
 
 <tr>
-<td align=center>Obtaining the Pendo Instance</td>
+<td align=center><b>Obtaining the Pendo Instance</b></td>
+
 <td>
+
+Fetch the `Pendo` instance using the the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
+
+<b>2.x:</b>
 
 ```C#
 PendoInterface Pendo = new PendoInterface();
 ```
-</td>
-<td>
 
-Fetch the `Pendo` instance using the the `PendoServerFactory` as follows:
+<b>3.x:</b>
 
 ```C#
 IPendoService Pendo = PendoServiceFactory.CreatePendoService();
