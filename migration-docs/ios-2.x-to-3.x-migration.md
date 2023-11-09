@@ -1,6 +1,11 @@
 # Native iOS Migration From 2.x to 3.x
 
-## Mandatory Migration Instructions for SwiftUI beta SDK  
+## Table of Contents:
+- [Instructions for SwiftUI Beta SDK](#mandatory-migration-instructions-for-swiftui-beta-sdk)
+- [Instructions for All Native iOS SDK Integrations](#changes-relevant-to-all-native-ios-apps)
+- [Instructions for Secure Metadata Sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
+
+## Mandatory Migration Instructions for SwiftUI Beta SDK  
 
 Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support please move to the iOS native SDK integration as described in the table below:
 

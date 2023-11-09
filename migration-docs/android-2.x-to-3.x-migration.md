@@ -1,5 +1,9 @@
 # Native Android Migration From 2.x to 3.x
 
+## Table of Contents:
+- [Instructions for All Native Android SDK Integrations](#changes-relevant-to-all-native-android-apps)
+- [Instructions for Secure Metadata Sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
+
 ## Changes Relevant to All Native Android Apps
 
 The following deprecated APIs have been removed. Follow these instructions to replace them: 
