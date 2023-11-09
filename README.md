@@ -11,7 +11,7 @@ The Pendo Mobile SDK is a codeless, retroactive analytics collector across all v
 
 ## Integration Instructions 
 
-The following integration insructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](TODO:missing-link) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 
 - Native: 
@@ -55,7 +55,7 @@ The following integration insructions are relevant for SDK 3.0 or higher. Follow
 
 - [Supported Mobile Frameworks and OS Versions](https://support.pendo.io/hc/en-us/articles/360031861572-Supported-mobile-frameworks-and-OS-versions)
 - [Configuring CNAME Hostnames](https://support.pendo.io/hc/en-us/articles/360047607631-Configure-CNAME-for-Pendo-Mobile)
-- [Integraton using JWT Sessions with Signed Meta Data](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JSON-web-token)
+- [Integration using JWT Sessions with Signed Meta Data](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JSON-web-token)
 
 Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile) for additional documentation 
 
