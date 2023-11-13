@@ -19,7 +19,7 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
-Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0
+Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
