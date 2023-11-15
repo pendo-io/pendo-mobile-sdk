@@ -16,69 +16,83 @@
 
     Add the following under 'using'
 
-```c#
-    ...
-    using PendoMAUIPlugin;
-    ...   
-``` 
+    ```c#
+        ...
+        using PendoMAUIPlugin;
+        ...   
+    ``` 
+
 
     In the **protected override void OnStart()** method, add the following code:
 
-```c#
-    protected override void OnStart()
-    {
-       PendoInterface Pendo = new PendoInterface();
-       string apiKey = "YOUR_API_KEY_HERE";
-       Pendo.Setup(apiKey);
-       ...
-```
+    ```c#
+        protected override void OnStart()
+        {
+            IPendoService pendo = PendoServiceFactory.CreatePendoService();
+
+            /** if your app supports additional Platforms other than iOS and Android
+            verify the Pendo instance is not null */
+            if (pendo != null) { 
+                string apiKey = "YOUR_API_KEY_HERE";
+                pendo.Setup(apiKey);
+            }
+
+            ...
+            
+        }
+    ```
 
 2. #### Start the visitor's Session in the page where your visitor is being identified (e.g. login, register, etc.).
 
-```c#
-    ...
-    using PendoMAUIPlugin;
-    ...
+    ```c#
+        ...
+        using PendoMAUIPlugin;
+        ...
 
-    namespace ExampleApp
-    {
-        class ExampleLoginClass
+        namespace ExampleApp
         {
-
-        public void MethodExample()
-        {
-            ....
-            PendoInterface Pendo = new PendoInterface();
-            
-            var visitorId = "VISITOR-UNIQUE-ID";
-            var accountId = "ACCOUNT-UNIQUE-ID";
-
-            var visitorData = new Dictionary<string, object>
+            class ExampleLoginClass
             {
-                { "age", 27 },
-                { "country", "USA" }
-            };
 
-            var accountData = new Dictionary<string, object>
+            public void MethodExample()
             {
-                { "Tier", 1 },
-                { "Size", "Enterprise" }
-            };
+                ....
+                IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
-            Pendo.StartSession(visitorId, accountId, visitorData, accountData);
+                if (pendo != null) { 
+
+                    var visitorId = "VISITOR-UNIQUE-ID";
+                    var accountId = "ACCOUNT-UNIQUE-ID";
+
+                    var visitorData = new Dictionary<string, object>
+                    {
+                        { "age", 27 },
+                        { "country", "USA" }
+                    };
+
+                    var accountData = new Dictionary<string, object>
+                    {
+                        { "Tier", 1 },
+                        { "Size", "Enterprise" }
+                    };
+
+                    pendo.StartSession(visitorId, accountId, visitorData, accountData);
+
+                }
+                ...
+            }
             ...
         }
-        ...
-```
+    ```
 
-**visitorId**: a user identifier (e.g. John Smith)  
-**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-**accountData** : the account metadata (e.g. tier, level, ARR, etc.)
+    **visitorId**: a user identifier (e.g. John Smith)  
+    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+    **accountData** : the account metadata (e.g. tier, level, ARR, etc.)
 
-This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
+    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-**Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+    **Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 -------------
 
@@ -100,17 +114,22 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
    Open ***AppDelegate.cs*** file and add ***using PendoMaui;*** 
    add the following code under ***OpenUrl*** method:
 
-```c#
-    public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-    {
-        if (url.Scheme.Contains("pendo"))
+    ```c#
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
         {
-            PendoManager.InitWithUrl(url.AbsoluteString);
-            return true;
+            if (url.Scheme.Contains("pendo"))
+            {
+                IPendoService pendo = PendoServiceFactory.CreatePendoService();
+
+                if (pendo != null) { 
+                    pendo.InitWithUrl(url.AbsoluteString);
+                }
+
+                return true;
+            }
+            return base.OpenUrl(app, url, options);
         }
-        return base.OpenUrl(app, url, options);
-    }
-```
+    ```
 
 -------------
 

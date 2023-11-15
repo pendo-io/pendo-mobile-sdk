@@ -13,6 +13,19 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
+<td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td>
+
+<b>2.x:</b> 
+
+<b>3.x:</b> `1.8.0`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>initSDK </td>
 <td>
 

@@ -3,7 +3,7 @@
 ### Step 1. Install Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
-2. Search for: **PendoSDKXamarin** with latest version.<br/>
+2. Search for: **pendo-xamarin-forms** with latest version.<br/>
 3. Press **Add Package**.
 
 4. #### Using ProGuard / R8
@@ -19,7 +19,7 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
-Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0
+Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 

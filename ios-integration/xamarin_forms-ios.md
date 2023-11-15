@@ -3,7 +3,7 @@
 ### Step 1. Install Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
-2. Search for: **PendoSDKXamarin** with latest version. <br/>
+2. Search for: **pendo-xamarin-forms** with latest version. <br/>
 3. Press **Add Package**.
 
 -------------

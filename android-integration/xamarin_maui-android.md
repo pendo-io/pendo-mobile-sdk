@@ -19,8 +19,6 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
-Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
-
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
 1. #### Open the shared application **App.xaml.cs**
@@ -38,10 +36,18 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
     ```c#
     protected override void OnStart()
     {
-       PendoInterface Pendo = new PendoInterface();
-       string apiKey = "YOUR_API_KEY_HERE";
-       Pendo.Setup(apiKey);
-       ...
+        IPendoService pendo = PendoServiceFactory.CreatePendoService();
+
+        /** if your app supports additional Platforms other than iOS and Android
+        verify the Pendo instance is not null */
+        if (pendo != null) {            
+            string apiKey = "YOUR_API_KEY_HERE";
+            Pendo.Setup(apiKey);
+        }
+
+        ...
+
+    }
     ```
 
 2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
@@ -58,28 +64,36 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v12.0.
 
         public void MethodExample()
         {
-            ....
-            PendoInterface Pendo = new PendoInterface();
-            
-            var visitorId = "VISITOR-UNIQUE-ID";
-            var accountId = "ACCOUNT-UNIQUE-ID";
-
-            var visitorData = new Dictionary<string, object>
-            {
-                { "age", 27 },
-                { "country", "USA" }
-            };
-
-            var accountData = new Dictionary<string, object>
-            {
-                { "Tier", 1 },
-                { "Size", "Enterprise" }
-            };
-
-            Pendo.StartSession(visitorId, accountId, visitorData, accountData);
             ...
+
+            IPendoService pendo = PendoServiceFactory.CreatePendoService();
+
+            if (pendo != null) {             
+                var visitorId = "VISITOR-UNIQUE-ID";
+                var accountId = "ACCOUNT-UNIQUE-ID";
+
+                var visitorData = new Dictionary<string, object>
+                {
+                    { "age", 27 },
+                    { "country", "USA" }
+                };
+
+                var accountData = new Dictionary<string, object>
+                {
+                    { "Tier", 1 },
+                    { "Size", "Enterprise" }
+                };
+
+                pendo.StartSession(visitorId, accountId, visitorData, accountData);
+            }
+
+            ...
+
         }
+
         ...
+        
+    }
     ```
 
    **visitorId**: a user identifier (e.g. John Smith)  

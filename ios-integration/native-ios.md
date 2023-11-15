@@ -11,179 +11,274 @@
 
 <!-- ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo) -->
 
+### Important Note:
+
+<b> SwiftUI</b> full support full codeless solution is supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
+
+## Step 1. Add the Pendo SDK
+### Cocoapods:
+
+1. Open the _Podfile_  
+2. Add: `pod 'Pendo'`
+
+### Swift Package Manager:
+
+1. Open _File -> Add Packages_ 
+2. Search for: `https://github.com/pendo-io/pendo-mobile-sdk`
+3. Select _Up to Next Major Version_
+
+## Step 2. Establish a Connection to Pendo's Server on App Launch
+
+<b>Note:</b> Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription under the App Details section.
+
+Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app you will need to create one of them.  
 
 
+1. If using the `AppDelegate` file, implement the following: <br>
 
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
-### Step 1. Add Pendo Dependency
-#### cocoapods:
-In the _Podfile_ , add:
-
-`pod 'Pendo'`
-
-#### Swift package manager:
-_File -> Add Packages_ in the search window paste:
-
-`https://github.com/pendo-io/pendo-mobile-sdk`
-
-and select Up to Next Major Version_
-
-### Step 2. Integration
-
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
-
-In the _AppDelegate_ file <br>
-**Swift**
-
-```swift
+    ```swift
     import UIKit
     import Pendo
+    
     @UIApplicationMain
     class AppDelegate: UIResponder, UIApplicationDelegate {
         var window: UIWindow?
         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-            let key = "YOUR_API_KEY_HERE"
-            //please note the following API will only setup initial configuration, to start collect analytics use start session
-            PendoManager.shared().setup(key)
+            PendoManager.shared().setup("YOUR_API_KEY_HERE")
+            //  your code here ...
             return true
         }
     }
-```
+    ```
+    </details>
 
-As soon as you have the user you want your guides and analytics to relate to, call:
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
-```swift
-    PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
-```
+    ```objectivec
+        #import "AppDelegate.h"
+        #import "Pendo.h";    
+        
+        @implementation AppDelegate
+        - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+            [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
+            //  your code here ...
+            return YES;
+        }
+        @end
+    ```
+    </details>
 
-**ObjectiveC**
-```objectivec
-    #import "AppDelegate.h"
-    @import Pendo;    
-    
-    @implementation AppDelegate
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-        NSString *key = @"YOUR_API_KEY_HERE";
-        //note the following API will only setup initial configuration, to start collect analytics use start session
-        [[PendoManager sharedManager] setup:key];
-        return YES;
+<br>
+
+2. If using the `SceneDelegate` file, implement the following:
+
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        PendoManager.shared().setup("YOUR_API_KEY_HERE")
+        //  your code here ...
     }
-    @end
-```
+    ```
+    </details>
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
-As soon as you have the user you want to relate your guides and analytics to relate to, call:
+    ```objectivec
+    - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {}
+        [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
+        //  your code here ...
+    }
+    ```
+    </details>
+
+
+## Step 3. Start a New Session to Track a Visitor and to Display Guides
+
+To begin tracking a visitor's analytics and display guides call the `startSession` API. The call to the `startSession` API can be conducted immediately after calling the `setup` API or anywhere else in the code, such as completing the log in process of your app. To begin a session for an anonymous visitor, pass ```nil``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+
+<details open>
+<summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+
+```swift
+PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visitorData:[], accountData: [])
+```
+</details>
+
+<details>
+<summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
 ```objectivec
-    [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
+[[PendoManager sharedManager] startSession:@"someVisitor" accountId:@"someAccount" visitorData:@{} accountData:@{}];
 ```
+</details>
 
-In case using _SceneDelegate_ file <b>
-**Swift**
+### Supporting SwiftUI
+
+To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be called on each of the `rootViews` in your app. See example below:
 ```swift
-func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    let key = "YOUR_API_KEY_HERE"
-    //// the following API is required to initialize the SDK. To begin the collection of analytics and the usage of guides a call to the startSession method is required as well
-    PendoManager.shared().setup(key)
+struct YourView: View {
+    var body: some View {
+        Text("RootView")
+            .pendoEnableSwiftUI()
+    }
 }
 ```
 
-As soon as you have the user you want your guides and analytics to relate to, call:
+## Step 4. Configure Pairing Mode for Tagging and Testing
 
-```swift
-    PendoManager.shared().startSession("visitor1", accountId: "account1", visitorData:[], accountData: [])
-```
+For additional information see: <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
+and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a>.
 
-**ObjectiveC**
-```objectivec
-- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {}
-    NSString *key = @"YOUR_API_KEY_HERE";
-    //note the following API will only setup initial configuration, to start collect analytics use start session
-    [[PendoManager sharedManager] setup:key];
-    //  your code here ...
-}
-```
-As soon as you have the user you want to relate your guides and analytics to relate to, call:
+### Add the Pendo URL Scheme to the **info.plist** File
 
 
-```objectivec
-    [[PendoManager sharedManager] startSession:@"visitor1" accountId:@"account1" visitorData:@{} accountData:@{}];
-```
+Navigate to your **App Target > Info > URL Types** and create a new URL by clicking the plus (+) button.
 
-### 3. Mobile device connectivity for tagging and testing
-These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
-and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
+Set the **Identifier** to `pendo-pairing` or an identifiable name of your choosing.  
+Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
-#### Add Pendo URL Scheme to **info.plist** file:
-
-   Under App Target > Info > URL Types, create a new URL by clicking the + button.  
-   Set **Identifier** to pendo-pairing or any name of your choosing.  
-   Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
+<b>Note:</b> The `Scheme ID` can be found in your Pendo Subscription under the App Details section.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
-#### To allow pairing from the device
-a. If using AppDelegate, add or modify the **openURL** function:
-**Swift**
-```swift
-    func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
+### Configure the App to Connect to Pairing Mode
+1. If using `AppDelegate`, add or modify the `openURL` function:
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            if url.scheme?.range(of: "pendo") != nil {
+                PendoManager.shared().initWith(url)
+                return true
+            }
+            // your code here...
             return true
         }
-        // your code here...
-        return true
-    }
-```
-**ObjectiveC**
-```objectivec
-    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-        if ([[url scheme] containsString:@"pendo"]) {
-            [[PendoManager sharedManager] initWithUrl:url];
+    ```
+    </details>
+
+
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>```objectivec
+        - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+            if ([[url scheme] containsString:@"pendo"]) {
+                [[PendoManager sharedManager] initWithUrl:url];
+                return YES;
+            }
+            //your code
             return YES;
         }
-        //your code
-        return YES;
-    }
-```
+    ```
+    </details>
 
-b. If using SceneDelegate, add or modify the **openURLContexts** function:
-**Swift**
+<br>
+
+2. If using `SceneDelegate`, add or modify the `openURLContexts` function:
+
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
+            PendoManager.shared().initWith(url)
+        }
+    }
+    ```
+    </details>
+
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```objectivec
+    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+        NSURL *url = [[URLContexts allObjects] firstObject].URL;
+        if ([[url scheme] containsString:@"pendo"]) {
+            [[PendoManager sharedManager] initWithUrl:url];
+        }
+        //  your code here ...
+    }
+    ```
+    </details>
+
+### An Additional Required Step to Configure Pairing Mode for SwiftUI
+
+In case the entry point to your app is a `struct` attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
+To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br>
 ```swift
-func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-        PendoManager.shared().initWith(url)
+@main
+struct YourApp: App {
+    let persistenceController = PersistenceController.shared
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    var body: some Scene {
+        return WindowGroup {
+            TabView {
+                YourView().tabItem {
+                    Image("Icon")
+                    Text("Text")
+                }
+            }
+            .pendoEnableSwiftUI()
+            .onOpenURL(perform: handleURL)
+        }
     }
-}
-```
+    
+    func handleURL(_ url: URL) {
+        _ = appDelegate.application(UIApplication.shared, open: url, options: [:])
 
-**ObjectiveC**
-```objectivec
-- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-    NSURL *url = [[URLContexts allObjects] firstObject].URL;
-    if ([[url scheme] containsString:@"pendo"]) {
-        [[PendoManager sharedManager] initWithUrl:url];
     }
-    //  your code here ...
 }
-```
-### Step 4. Verify Installation
+``` 
+
+## Step 5. Verify Installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  
 Review the device log and look for the following message:  
 `Pendo Mobile SDK was successfully integrated and connected to the server.`
-2. In the Pendo UI, go to Settings>Subscription Settings.
+2. In the Pendo UI, go to Settings > Subscription Settings.
 3. Hover over your app and select View app details.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
-## Pivots
-Pay attention to the following apis ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
+## Limitations 
+
+### SwiftUI 
+- Clickable elements (e.x. Buttons / TapGestures) have a transparent background color  or that are created without a set background color (e.x. VStack or HStack) may encounter issues with identification by our SDK. To resolve this issue invoke the `pendoRecognizeClickAnalytics()` API on the `View` of this element.
+
+- The `iOS 16 Navigation APIs` are not supported at the moment.
+
+- The `PresentationContainer` is not supported at the moment.
+
+- The `Menu` Control is not supported at the moment.
+
+### Other Limitations
+
+- Codeless support for dynamic content on a page (see **) does not exist. To remedy such scenarios invoke the `screenContentChanged()` API after the dynamic content has been rendered on the screen.
+    <br><br><i>\*\* 
+    Content that is rendered on the screen after the screen's initial load. <br>(e.x. delayed loading of elements or elements/text that update on the screen as a result of a button tapped or a network response) </i>
+
+## Accessibility Support
+The OS assigns default accessibility values to UI elements in the app if you do not set accessibility values yourself. The accessibility identifiers, accessibility labels, and accessibility hints are all collected by Pendo and can be utilized for unique identification of features and pages.<br>
 
 ## Developer Documentation
 
 - API documentation available [here](TODO:missing-link)
+
+- Sample apps with examples of feature tagging and how Pendo analytics work.<br>
+(Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)<br>
+
+    ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
+TeslaApp      - https://github.com/pendo-io/Tesla_Clone_Swiftui <br>
 
 ## Troubleshooting
 
