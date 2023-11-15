@@ -1,13 +1,13 @@
-# Native iOS Migration From 2.x to 3.x
+# Native iOS migration from version 2.x to version 3.x
 
-## Table of Contents:
-- [Instructions for SwiftUI Beta SDK](#mandatory-migration-instructions-for-swiftui-beta-sdk)
-- [Instructions for All Native iOS SDK Integrations](#changes-relevant-to-all-native-ios-apps)
-- [Instructions for Secure Metadata Sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
+## Table of contents:
+- [Instructions for SwiftUI beta SDK](#mandatory-migration-instructions-for-the-swiftui-beta-sdk)
+- [Instructions for all native iOS SDK integrations](#changes-relevant-to-all-native-ios-apps)
+- [Instructions for secure metadata sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
 
-## Mandatory Migration Instructions for SwiftUI Beta SDK  
+## Mandatory migration instructions for the SwiftUI beta SDK  
 
-Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support please move to the iOS native SDK integration as described in the table below:
+Pendo’s SwiftUI support is GA and its library is now merged into the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support, follow the instructions in the table to switch over to the iOS native SDK.
 
 <table border=2>
 <tr>
@@ -21,7 +21,7 @@ Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS
 <td align=center><b>Integration with Cocoapods</td>
 <td>
 
-In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
+In the podfile, replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`.
 
 </td>
 </tr>
@@ -32,7 +32,7 @@ In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
 <td align=center><b>Integration with SPM</td>
 <td>
 
-In the SPM find the Pendo package and switch the Dependency Rule from `Branch` to `Up to Next Major Version` 
+In the SPM, find the Pendo package and switch the Dependency Rule from `Branch` to `Up to Next Major Version`. 
 </td>
 </tr>
 
@@ -43,9 +43,9 @@ In the SPM find the Pendo package and switch the Dependency Rule from `Branch` t
 </td>
 <td>
 
-The `enableSwitfUI` method was renamed as `pendoEnableSwitfUI`.
+The `enableSwitfUI` method has been renamed to `pendoEnableSwitfUI`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 someView.enableSwitfUI()
@@ -64,9 +64,9 @@ someView.pendoEnableSwitfUI()
 <td align=center><b>enableClickAnalytics</td>
 <td>
 
-The `enableClickAnalytics` method was renamed as `pendoRecognizeClickAnalytics`. 
+The `enableClickAnalytics` method has been renamed to `pendoRecognizeClickAnalytics`. 
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 someView.enableClickAnalytics()
@@ -82,9 +82,9 @@ someView.pendoRecognizeClickAnalytics()
 </tr>
 </table>
 
-## Changes Relevant to All Native iOS Apps
+## Changes relevant to all native iOS apps
 
-The following deprecated APIs have been removed. Follow these instructions to replace them:
+Follow these instructions to resolve breaking changes in your app:
 
 
 <table border =2 style="width:1007px">
@@ -97,10 +97,10 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
-<td align=center><b>minimum <br> deployment target</td>
+<td align=center><b>Minimum <br> deployment target</td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 `iOS 9.0`
 <br><b>3.x:</b> 
 `iOS 11.0`
@@ -113,9 +113,9 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
+Replace `initSDK` by calling the `setup` API, followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed directly to the `setup` and `startSession` APIs.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 // set session parameters
@@ -153,7 +153,7 @@ PendoManager.shared().startSession("someVisitorID",
 
 Call the `setup` API instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().initSDKWithoutVisitor("someAppKey", with: nil)
@@ -175,7 +175,7 @@ PendoManager.shared().setup("someAppKey", with: nil)
 
 Call the `startSession` API with `nil` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 // start a session with an anonymous visitor
@@ -203,7 +203,7 @@ PendoManager.shared().startSession(nil,
 
 Call the `startSession` API instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().switchVisitor("someVisitorID", 
@@ -226,12 +226,12 @@ PendoManager.shared().startSession("someVisitorID",
 <!--- new row --->
 
 <tr>
-<td align=center><b>pauseGuides</b><br> <i>(without any arguments)</i> </td>
+<td align=center><b>pauseGuides</b><br> <i>(without arguments)</i> </td>
 <td>
 
-Pass a boolean value to `pauseGuides` to control the dismissal of guides displayed when the API is invoked. The removed API by default set this value to `true`.
+Pass a boolean value to `pauseGuides` to control dismissal of a guide if displayed when the API is invoked. By default, the deprecated API set the value to `true`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().pauseGuides()
@@ -251,9 +251,9 @@ PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 <td align=center><b>enableClickAnalytics </td>
 <td>
 
-Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a paramater of `PendoManager.shared().enableClickAnalytics`.
+Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a parameter of `PendoManager.shared().enableClickAnalytics`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().enableClickAnalytics(someUIView)
@@ -275,7 +275,7 @@ someUIView.pendoRecognizeClickAnalytics()
 
 Call `startSession` with the new account id value instead of setting the account id as a value of the `PendoManager.shared().accountId` property.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().accountId = "someAccountId"
@@ -298,9 +298,9 @@ PendoManager.shared().startSession("someVisitorID",
 <td align=center><b>appkey property getter </td>
 <td>
 
-This property has been removed and no longer exists.
+This property no longer exists.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 let appKey = PendoManager.shared().appKey
@@ -311,9 +311,9 @@ let appKey = PendoManager.shared().appKey
 </table>
 
 
-## Changes Relevant to Secure Metadata Sessions Using JWT
+## Changes relevant to secure metadata sessions using JWT
 
-JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
+JWT-related methods have been moved to a sub-namespace called `jwt`.
 
 <table border =2>
 
@@ -329,7 +329,7 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <td align=center><b>startSession </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().startSession("someJWT", "someSigningKeyName")
@@ -349,7 +349,7 @@ PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 <td align=center><b>setVisitorData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().setVisitorData("someJWT", "someSigningKeyName")
@@ -368,7 +368,7 @@ PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 <td align=center><b>setAccountData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().setAccountData("someJWT", "someSigningKeyName")

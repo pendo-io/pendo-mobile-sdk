@@ -1,12 +1,12 @@
-# Native Android Migration From 2.x to 3.x
+# Native Android migration from version 2.x to version 3.x
 
-## Table of Contents:
-- [Instructions for All Native Android SDK Integrations](#changes-relevant-to-all-native-android-apps)
-- [Instructions for Secure Metadata Sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
+## Table of contents:
+- [Instructions for all native Android SDK integrations](#changes-relevant-to-all-native-android-apps)
+- [Instructions for secure metadata sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
 
-## Changes Relevant to All Native Android Apps
+## Changes relevant to all native Android apps
 
-The following deprecated APIs have been removed. Follow these instructions to replace them: 
+Follow these instructions to resolve breaking changes in your app: 
 
 
 <table border =2>
@@ -19,12 +19,38 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
+<td align=center><b>Minimum <br> JAVA version</b> <br> </td>
+<td>
+
+<b>2.x (deprecated):</b> `JAVA 8`
+<br>
+<b>3.x:</b> `JAVA 11`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> </td>
+<td>
+
+<b>2.x (deprecated):</b> `1.7.20`
+<br>
+<b>3.x:</b> `1.9.0`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
+Replace `initSDK` by calling the `setup` API, followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed directly to the `setup` and `startSession` APIs.
 
- <b>2.x:</b>
+ <b>2.x (deprecated):</b>
 
 ```kotlin
 // set session parameters
@@ -73,7 +99,7 @@ Pendo.startSession(
 
 Call `setup` instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 // establish connection to server
@@ -108,7 +134,7 @@ Pendo.setup(
 
 Call `startSession` with `null` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 // start a session with an anonymous visitor
@@ -138,7 +164,7 @@ Pendo.startSession(
 
 Call `startSession` instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.switchVisitor(
@@ -171,7 +197,7 @@ Pendo.startSession(
 
 Call `startSession` with the new account id value instead of `setAccountId`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.setAccountId("someAccountID")
@@ -195,12 +221,12 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center><b>pauseGuides</b> <br> <i>(without any arguments)</i> </td>
+<td align=center><b>pauseGuides</b> <br> <i>(without arguments)</i> </td>
 <td>
 
-Pass a boolean value to `pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`.
+Pass a boolean value to `pauseGuides` to control dismissal of a guide if displayed when the API is invoked. By default, the deprecated API set the value to `true`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.pauseGuides()
@@ -221,9 +247,9 @@ Pendo.pauseGuides(true) // true == dismiss any displayed guide
 <td align=center><b>isInitStarted callback </td>
 <td>
 
-The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`.
+The `onInitStarted` callback has been removed from the `PendoPhasesCallbackInterface`.
 
-<b>3.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
@@ -247,9 +273,9 @@ class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
 </table>
 
 
-## Changes Relevant to Secure Metadata Sessions Using JWT
+## Changes relevant to secure metadata sessions using JWT
 
-JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
+JWT-related methods have been moved to a sub-namespace called `jwt`.
 
 <table border =2>
 
@@ -264,7 +290,7 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <td align=center><b>startSession </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.startSession("someJWT", "someSigningKeyName")
@@ -285,7 +311,7 @@ Pendo.jwt.startSession("someJWT", "someSigningKeyName")
 <td align=center><b>setVisitorData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.setVisitorData("someJWT", "someSigningKeyName")
@@ -306,7 +332,7 @@ Pendo.jwt.setVisitorData("someJWT", "someSigningKeyName")
 <td align=center><b>setAccountData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```kotlin
 Pendo.setAccountData("someJWT", "someSigningKeyName")

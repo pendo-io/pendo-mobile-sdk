@@ -1,6 +1,9 @@
 # Flutter
 
-### Step 1. Install Pendo SDK
+>[!IMPORTANT]
+>Flutter is supported by our track events only solution. The codeless solution is still in progress.
+
+## Step 1. Install Pendo SDK
 
 1. In the **application folder**, run the following command:
 
@@ -21,25 +24,16 @@
     ```
 
 - Minimum and compile SDK Version:  
-If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
+If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
 
     ```java
     android {
         minSdkVersion 21
-        compileSdkVersion 31
+        compileSdkVersion 33
     }
     ```
 
-- Java 8 Compatibility  
-If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8** :
 
-    ```java
-    android {
-        compileOptions {
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
-    }
-    ```
 
 3. In the application **Android.manifest** file:  
 If applicable, add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
@@ -57,11 +51,10 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
--------------
+## Step 2. Pendo SDK integration
 
-### Step 2. Pendo SDK Integration
-
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 In the application **main file (lib/main.dart)**, add the following code:  
 
@@ -73,7 +66,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 
     ```dart
     var pendoKey = 'YOUR_API_KEY_HERE';
-    await PendoFlutterPlugin.setup(pendoKey);
+    await PendoSDK.setup(pendoKey);
     ```
 
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
@@ -84,36 +77,38 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     final Map<String, dynamic> visitorData = {'Age': '25', 'Country': 'USA'};
     final Map<String, dynamic> accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
-    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    await PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
-**Notes**
+    **Notes:**
 
-**visitorId**: a user identifier (e.g. John Smith)  
-**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-**accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
+    **visitorId**: a user identifier (e.g. John Smith)  
+    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+    **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-Passing `null` or `""` or not setting the `visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
-<br></br>
+>[!TIP]
+>Passing `null` or `""` or not setting the `visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
-#### Track Events
+3. Track events
 
-Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
+    Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
 
-In the application files where you want to track an event, add the following code:
+    In the application files where you want to track an event, add the following code:
 
-```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-```
+    ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    ```
 
-```dart
-await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
-```
+    ```dart
+    await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+    ```
 
--------------
+## Step 3. Mobile device connectivity for testing
 
-### Step 3. Mobile device connectivity for testing
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
 Add the following `<activity>` to the manifest in the `<application>` tag:
@@ -129,9 +124,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 </activity>
 ```
 
--------------
-
-### Step 4. Verify Installation
+## Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -142,7 +135,7 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
-## Developer Documentation
+## Developer documentation
 
 * API documentation available [here](TODO:missing-link)
 
@@ -150,5 +143,4 @@ Review the device log and look for the following message:
 
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
 - For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
