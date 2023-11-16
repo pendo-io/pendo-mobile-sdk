@@ -16,67 +16,77 @@
 
    Add the following code:
 
-```c#
-    ...
+    ```c#
     using PendoSDKXamarin;
-    ...
 
     namespace ExampleApp
     {
         public partial class App : Application
         {
-            ....
-            private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
-            ....    
-``` 
+            private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+            
+            ...    
+        
+        }
 
-In the **protected override void OnStart()** method, add the following code:
+        ...
+    ``` 
 
-```c#
+    In the **protected override void OnStart()** method, add the following code:
+
+    ```c#
     protected override void OnStart()
     {
-       string apiKey = "YOUR_API_KEY_HERE";
-       Pendo.Setup(apiKey);
-       ...
-```
+        string apiKey = "YOUR_API_KEY_HERE";
+        pendo.Setup(apiKey);
+        
+        ...
+
+    }
+    ```
 
 2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
 
-```c#
-    ...
+    ```c#
     using PendoSDKXamarin;
-    ...
 
     namespace ExampleApp
     {
+
         class ExampleLoginClass
         {
-        ...
-        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
-        ...
-        public void MethodExample()
-        {
-            ....
-            var visitorId = "VISITOR-UNIQUE-ID";
-            var accountId = "ACCOUNT-UNIQUE-ID";
+            private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
 
-            var visitorData = new Dictionary<string, object>
+            public void ExampleMethod()
             {
-                { "age", 27 },
-                { "country", "USA" }
-            };
+                ...
 
-            var accountData = new Dictionary<string, object>
-            {
-                { "Tier", 1 },
-                { "Size", "Enterprise" }
-            };
+                var visitorId = "VISITOR-UNIQUE-ID";
+                var accountId = "ACCOUNT-UNIQUE-ID";
 
-            Pendo.StartSession(visitorId, accountId, visitorData, accountData);
+                var visitorData = new Dictionary<string, object>
+                {
+                    { "age", 27 },
+                    { "country", "USA" }
+                };
+
+                var accountData = new Dictionary<string, object>
+                {
+                    { "Tier", 1 },
+                    { "Size", "Enterprise" }
+                };
+
+                pendo.StartSession(visitorId, accountId, visitorData, accountData);
+
+                ...
+
+            }
+
             ...
+
         }
-        ...
- ```
+    }
+    ```
 
 **visitorId**: a user identifier (e.g. John Smith)  
 **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
@@ -106,20 +116,26 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
    Open ***AppDelegate.cs*** file and the following code:
 
-```C#
+    ```C#
+    using PendoSDKXamarin;
+
     ...
-    using PendoForms;
-   
-    public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-    {
-        if (url.Scheme.Contains("pendo"))
+
+        private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+
+        ...
+
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
         {
-            PendoManager.InitWithUrl(url.AbsoluteString);
-            return true;
+            if (url.Scheme.Contains("pendo"))
+            {
+                pendo.InitWithUrl(url.AbsoluteString);
+
+                return true;
+            }
+            return base.OpenUrl(app, url, options);
         }
-        return base.OpenUrl(app, url, options);
-    }
-```
+    ```
 
 -------------
 
@@ -141,12 +157,6 @@ Review the device log and look for the following message:
 
 ## Troubleshooting
 
-+ If you are encountering the following error: '-E -IIOJWT - Failed to create public key, which results in verification failure. OSStatus = ....', follow steps listed below:
-  1. In the Visual Studio Editor, right-click on the project.
-  2. Select Options.
-  3. In the Build category list, select the “iOS bundle signing” option.
-  4. Select the three dots button of the “Custom Entitlements” field.
-  5. Choose the “Entitlements.plist” file from the box and click OK.
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
 - For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

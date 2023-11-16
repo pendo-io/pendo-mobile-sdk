@@ -19,7 +19,7 @@ Your optimizations line should look like this:
 
 ### Step 2. Pendo SDK Integration
 
-Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
+Note: pendo-xamarin-forms plugin requires TargetFrameworkVersion v13.0
 
 **Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
 
@@ -28,17 +28,18 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
    Add the following under 'using'
 
     ```c#
-    ...
     using PendoSDKXamarin;
-    ...
 
     namespace ExampleApp
     {
         public partial class App : Application
         {
-            ....
-            private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
-            ....    
+            private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+            
+            ...
+
+        }
+    } 
     ```  
 
     In the **protected override void OnStart()** method, add the following code:
@@ -47,16 +48,16 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
     protected override void OnStart()
     {
        string apiKey = "YOUR_API_KEY_HERE";
-       Pendo.Setup(apiKey);
+       pendo.Setup(apiKey);
+
        ...
+    }
     ```
 
 2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
 
     ```c#
-    ...
     using PendoSDKXamarin;
-    ...
 
     namespace ExampleApp
     {
@@ -64,10 +65,12 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
         {
         ...
         private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
-        ...
+
         public void MethodExample()
         {
-            ....
+            
+            ...
+
             var visitorId = "VISITOR-UNIQUE-ID";
             var accountId = "ACCOUNT-UNIQUE-ID";
 
@@ -83,10 +86,14 @@ Note: PendoSDKXamarin plugin requires TargetFrameworkVersion v13.0
                 { "Size", "Enterprise" }
             };
 
-            Pendo.StartSession(visitorId, accountId, visitorData, accountData);
+            pendo.StartSession(visitorId, accountId, visitorData, accountData);
+            
             ...
         }
+
         ...
+
+    }
     ```
 
    **visitorId**: a user identifier (e.g. John Smith)  

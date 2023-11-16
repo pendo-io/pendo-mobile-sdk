@@ -121,7 +121,7 @@ PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visi
 
 ### Supporting SwiftUI
 
-To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be called on each of the `rootViews` in your app. See example below:
+To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. In case of multiple rootViews (e.x. usage of multiple UIHostingControllers), apply the modifier to each of these rootViews parameter. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
@@ -144,7 +144,7 @@ Navigate to your **App Target > Info > URL Types** and create a new URL by click
 Set the **Identifier** to `pendo-pairing` or an identifiable name of your choosing.  
 Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
-<b>Note:</b> The `Scheme ID` can be found in your Pendo Subscription under the App Details section.
+<b>Note:</b> The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 

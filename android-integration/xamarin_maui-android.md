@@ -26,9 +26,7 @@ Your optimizations line should look like this:
     Add the following under 'using':
 
     ```c#
-    ...
     using PendoMAUIPlugin;
-    ...   
     ``` 
 
     In the **protected override void OnStart()** method, add the following code:
@@ -42,7 +40,7 @@ Your optimizations line should look like this:
         verify the Pendo instance is not null */
         if (pendo != null) {            
             string apiKey = "YOUR_API_KEY_HERE";
-            Pendo.Setup(apiKey);
+            pendo.Setup(apiKey);
         }
 
         ...
@@ -62,12 +60,14 @@ Your optimizations line should look like this:
         class ExampleLoginClass
         {
 
-        public void MethodExample()
+        public void ExampleMethod()
         {
             ...
 
             IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
+            /** if your app supports additional Platforms other than iOS and Android
+            verify the Pendo instance is not null */
             if (pendo != null) {             
                 var visitorId = "VISITOR-UNIQUE-ID";
                 var accountId = "ACCOUNT-UNIQUE-ID";
@@ -89,10 +89,7 @@ Your optimizations line should look like this:
 
             ...
 
-        }
-
-        ...
-        
+        }        
     }
     ```
 
@@ -146,5 +143,4 @@ Review the device log and look for the following message:
 
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
 - For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

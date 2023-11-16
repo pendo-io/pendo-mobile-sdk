@@ -17,72 +17,72 @@
     Add the following under 'using'
 
     ```c#
-        ...
-        using PendoMAUIPlugin;
-        ...   
+    using PendoMAUIPlugin;
     ``` 
 
 
     In the **protected override void OnStart()** method, add the following code:
 
     ```c#
-        protected override void OnStart()
-        {
-            IPendoService pendo = PendoServiceFactory.CreatePendoService();
+    protected override void OnStart()
+    {
+        IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
-            /** if your app supports additional Platforms other than iOS and Android
-            verify the Pendo instance is not null */
-            if (pendo != null) { 
-                string apiKey = "YOUR_API_KEY_HERE";
-                pendo.Setup(apiKey);
-            }
-
-            ...
-            
+        /** if your app supports additional Platforms other than iOS and Android
+        verify the Pendo instance is not null */
+        if (pendo != null) { 
+            string apiKey = "YOUR_API_KEY_HERE";
+            pendo.Setup(apiKey);
         }
+
+        ...
+        
+    }
     ```
 
 2. #### Start the visitor's Session in the page where your visitor is being identified (e.g. login, register, etc.).
 
     ```c#
-        ...
-        using PendoMAUIPlugin;
-        ...
+    using PendoMAUIPlugin;
 
-        namespace ExampleApp
+    namespace ExampleApp
+    {
+        class ExampleLoginClass
         {
-            class ExampleLoginClass
-            {
 
-            public void MethodExample()
-            {
-                ....
-                IPendoService pendo = PendoServiceFactory.CreatePendoService();
+        public void MethodExample()
+        {
+            IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
-                if (pendo != null) { 
-
-                    var visitorId = "VISITOR-UNIQUE-ID";
-                    var accountId = "ACCOUNT-UNIQUE-ID";
-
-                    var visitorData = new Dictionary<string, object>
-                    {
-                        { "age", 27 },
-                        { "country", "USA" }
-                    };
-
-                    var accountData = new Dictionary<string, object>
-                    {
-                        { "Tier", 1 },
-                        { "Size", "Enterprise" }
-                    };
-
-                    pendo.StartSession(visitorId, accountId, visitorData, accountData);
-
-                }
-                ...
-            }
             ...
+
+            /** if your app supports additional Platforms other than iOS and Android
+            verify the Pendo instance is not null */
+            if (pendo != null) { 
+
+                var visitorId = "VISITOR-UNIQUE-ID";
+                var accountId = "ACCOUNT-UNIQUE-ID";
+
+                var visitorData = new Dictionary<string, object>
+                {
+                    { "age", 27 },
+                    { "country", "USA" }
+                };
+
+                var accountData = new Dictionary<string, object>
+                {
+                    { "Tier", 1 },
+                    { "Size", "Enterprise" }
+                };
+
+                pendo.StartSession(visitorId, accountId, visitorData, accountData);
+
+            }
+
+            ...
+
         }
+    }
     ```
 
     **visitorId**: a user identifier (e.g. John Smith)  
@@ -115,12 +115,18 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
    add the following code under ***OpenUrl*** method:
 
     ```c#
+    using PendoMAUIPlugin;
+
+    ...
+
         public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
         {
             if (url.Scheme.Contains("pendo"))
             {
                 IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
+                /** if your app supports additional Platforms other than iOS and Android
+                verify the Pendo instance is not null */
                 if (pendo != null) { 
                     pendo.InitWithUrl(url.AbsoluteString);
                 }

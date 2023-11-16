@@ -11,6 +11,19 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
+<td align=center><b>.NET</td>
+<td>
+
+<b>2.x (deprecated):</b> `.NET 6`
+
+<b>3.x:</b> `.NET 7`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
