@@ -45,7 +45,7 @@ In the SPM find the Pendo package and switch the Dependency Rule from `Branch` t
 
 The `enableSwitfUI` method was renamed as `pendoEnableSwitfUI`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 someView.enableSwitfUI()
@@ -66,7 +66,7 @@ someView.pendoEnableSwitfUI()
 
 The `enableClickAnalytics` method was renamed as `pendoRecognizeClickAnalytics`. 
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 someView.enableClickAnalytics()
@@ -100,7 +100,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>minimum <br> deployment target</td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 `iOS 9.0`
 <br><b>3.x:</b> 
 `iOS 11.0`
@@ -115,7 +115,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 
 Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 // set session parameters
@@ -153,7 +153,7 @@ PendoManager.shared().startSession("someVisitorID",
 
 Call the `setup` API instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().initSDKWithoutVisitor("someAppKey", with: nil)
@@ -175,7 +175,7 @@ PendoManager.shared().setup("someAppKey", with: nil)
 
 Call the `startSession` API with `nil` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 // start a session with an anonymous visitor
@@ -203,7 +203,7 @@ PendoManager.shared().startSession(nil,
 
 Call the `startSession` API instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().switchVisitor("someVisitorID", 
@@ -231,7 +231,7 @@ PendoManager.shared().startSession("someVisitorID",
 
 Pass a boolean value to `pauseGuides` to control the dismissal of guides displayed when the API is invoked. The removed API by default set this value to `true`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().pauseGuides()
@@ -253,7 +253,7 @@ PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 
 Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a paramater of `PendoManager.shared().enableClickAnalytics`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().enableClickAnalytics(someUIView)
@@ -275,7 +275,7 @@ someUIView.pendoRecognizeClickAnalytics()
 
 Call `startSession` with the new account id value instead of setting the account id as a value of the `PendoManager.shared().accountId` property.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().accountId = "someAccountId"
@@ -300,7 +300,7 @@ PendoManager.shared().startSession("someVisitorID",
 
 This property has been removed and no longer exists.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 let appKey = PendoManager.shared().appKey
@@ -329,7 +329,7 @@ JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 <td align=center><b>startSession </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().startSession("someJWT", "someSigningKeyName")
@@ -349,7 +349,7 @@ PendoManager.shared().jwt.startSession("someJWT", "someSigningKeyName")
 <td align=center><b>setVisitorData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().setVisitorData("someJWT", "someSigningKeyName")
@@ -368,7 +368,7 @@ PendoManager.shared().jwt.setVisitorData("someJWT", "someSigningKeyName")
 <td align=center><b>setAccountData </td>
 <td>
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```swift
 PendoManager.shared().setAccountData("someJWT", "someSigningKeyName")

@@ -1,6 +1,6 @@
-# Migration Instructions From 2.x to 3.x 
+# Migrating from version 2.x to version 3.x
 
-Follow our migration instructions to solve breaking changes when upgrading from SDK version 2.x to 3.0:
+Follow our migration instructions to resolve breaking changes when upgrading from SDK version 2.x to version 3.x:
 
 - [Native Android](/migration-docs/android-2.x-to-3.x-migration.md)
 - [Native iOS](/migration-docs/ios-2.x-to-3.x-migration.md)
@@ -9,4 +9,4 @@ Follow our migration instructions to solve breaking changes when upgrading from 
 - [MAUI](/migration-docs/maui-2.x-to-3.x-migration.md)
 - [Flutter](/migration-docs/flutter-2.x-to-3.x-migration.md)
 
-Xamarin iOS and Xamarin Android are no longer supported in 3.x. Please move to MAUI or Xamarin Forms SDKs. This requires creating a new Pendo App and recapturing the app pages and features.
+Xamarin iOS and Xamarin Android are no longer supported in 3.x. Please use the SDK for MAUI or Xamarin Forms. This requires creating a new Pendo App and recapturing the app's Pages and Features.

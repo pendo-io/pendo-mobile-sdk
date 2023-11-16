@@ -11,10 +11,10 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Xamarin.Forms version</td>
+<td align=center><b>Minimum Xamarin.Forms version</td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 `5.0.0.0`
 <br><b>3.x:</b> 
 `5.0.0.2612`
@@ -24,10 +24,10 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 
 <b>3.x:</b> `1.8.0`
 

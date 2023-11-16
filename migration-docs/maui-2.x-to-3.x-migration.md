@@ -14,7 +14,7 @@ The following changes are required:
 <td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 
 <b>3.x:</b> `1.8.0`
 
@@ -30,7 +30,7 @@ The following changes are required:
 
 Fetch the `Pendo` instance using the the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```C#
 PendoInterface pendo = new PendoInterface();

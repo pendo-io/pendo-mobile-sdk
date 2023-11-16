@@ -16,7 +16,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 
 <b>3.x:</b> `1.8.0`
 
@@ -31,7 +31,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 
 Replace `withPendoRN` with `WithPendoReactNavigation`:
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // in the file where the NavigationContainer is created
@@ -76,7 +76,7 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
 
 Replace `initSDK` by calling `setup` and then `startSession`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // set session parameters
@@ -118,7 +118,7 @@ PendoSDK.startSession('someVisitorID',
 
 Call `setup` instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // establish connection to server
@@ -145,7 +145,7 @@ PendoSDK.setup('someAppKey', navigationOptions);
 
 Call `startSession` with `null` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // start a session with an anonymous visitor
@@ -170,7 +170,7 @@ PendoSDK.startSession(null, null, null, null);
 
 Call `startSession` instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 PendoSDK.switchVisitor('someVisitorID', 
@@ -199,7 +199,7 @@ PendoSDK.startSession('someVisitorID',
 
 Call `startSession` with the new account id value instead of `setAccountId`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 PendoSDK.setAccountId('someAccountID');

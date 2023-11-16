@@ -16,7 +16,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
-<b>2.x:</b> 
+<b>2.x (deprecated):</b> 
 
 <b>3.x:</b> `1.8.0`
 
@@ -31,7 +31,7 @@ The following deprecated APIs have been removed. Follow these instructions to re
 
 Replace `initSDK` by calling `setup` and then `startSession`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // set session paramaters
@@ -70,7 +70,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 
 Call `setup` instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // establish connection to server
@@ -100,7 +100,7 @@ await PendoFlutterPlugin.setup('someAppKey'
 
 Call `startSession` with `null` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // start a session with an anonymous visitor
@@ -125,7 +125,7 @@ await PendoFlutterPlugin.startSession(null, null, null, null);
 
 Call `startSession` instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 await PendoFlutterPlugin.switchVisitor('someVisitorID', 
@@ -154,7 +154,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 
 Call `startSession` with the new account id value instead of `setAccountId`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 await PendoFlutterPlugin.setAccountId('someAccountID');
