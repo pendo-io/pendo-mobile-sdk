@@ -1,6 +1,6 @@
 # React Native using React Native Navigation
 
-### Step 1. Install Pendo SDK
+### Step 1. Install the Pendo SDK
 
 #### Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/android-integration/expo_rnn-android.md) instruction.
 
@@ -29,7 +29,7 @@
     }
     ```
 
-- **Minimum and compile Sdk Version**  
+- **Minimum and compile Sdk versions**  
 If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
 
     ```java
@@ -39,7 +39,7 @@ If applicable, set your app to be compiled with **compileSdkVersion 31** or high
     }
     ```
 
-- **Java 8 Compatibility**  
+- **Java 8 compatibility**  
 If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
 
     ```java
@@ -91,9 +91,9 @@ Your optimizations line should look like this:
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:
 
@@ -150,7 +150,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -161,7 +161,7 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 * Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here.</a>

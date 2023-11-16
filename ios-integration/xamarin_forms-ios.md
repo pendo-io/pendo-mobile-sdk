@@ -1,4 +1,8 @@
-# Xamarin forms
+# Xamarin Forms
+
+### Requirements:
+
+- Xamarin.Forms version 5.0.0.2612 or higher
 
 ### Step 1. Install Pendo SDK
 
@@ -8,9 +12,9 @@
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 1. #### Open the shared application **App.xaml.cs**:
 
@@ -139,7 +143,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Visual Studio:  
 Run the app.  
@@ -151,7 +155,7 @@ Review the device log and look for the following message:
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 

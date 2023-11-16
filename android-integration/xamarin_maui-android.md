@@ -1,6 +1,11 @@
 # MAUI
 
-### Step 1. Install Pendo SDK
+### Requirements:
+
+- .NET 7
+- Kotlin version 1.8.0 or higher
+
+### Step 1. Install the Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
 2. Search for: **PendoMAUIPlugin** with latest version.<br/>
@@ -17,9 +22,9 @@ Your optimizations line should look like this:
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 1. #### Open the shared application **App.xaml.cs**
 
@@ -123,7 +128,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 1. Test using Visual Studio:  
 Run the app.  
 Review the device log and look for the following message:  
@@ -133,9 +138,8 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
--------------
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 

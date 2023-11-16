@@ -1,11 +1,11 @@
-# Native iOS Migration From 2.x to 3.x
+# Native iOS migration from version 2.x to version 3.x
 
-## Table of Contents:
-- [Instructions for SwiftUI Beta SDK](#mandatory-migration-instructions-for-swiftui-beta-sdk)
-- [Instructions for All Native iOS SDK Integrations](#changes-relevant-to-all-native-ios-apps)
-- [Instructions for Secure Metadata Sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
+## Table of contents:
+- [Instructions for SwiftUI beta SDK](#mandatory-migration-instructions-for-the-swiftui-beta-sdk)
+- [Instructions for all native iOS SDK integrations](#changes-relevant-to-all-native-ios-apps)
+- [Instructions for secure metadata sessions using JWT](#changes-relevant-to-secure-metadata-sessions-using-jwt)
 
-## Mandatory Migration Instructions for SwiftUI Beta SDK  
+## Mandatory migration instructions for the SwiftUI beta SDK  
 
 Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support please move to the iOS native SDK integration as described in the table below:
 
@@ -82,7 +82,7 @@ someView.pendoRecognizeClickAnalytics()
 </tr>
 </table>
 
-## Changes Relevant to All Native iOS Apps
+## Changes relevant to all native iOS apps
 
 The following deprecated APIs have been removed. Follow these instructions to replace them:
 
@@ -311,7 +311,7 @@ let appKey = PendoManager.shared().appKey
 </table>
 
 
-## Changes Relevant to Secure Metadata Sessions Using JWT
+## Changes relevant to secure metadata sessions using JWT
 
 JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
 

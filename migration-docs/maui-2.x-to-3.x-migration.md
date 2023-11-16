@@ -1,4 +1,4 @@
-# MAUI Migration From 2.x to 3.x
+# MAUI migration from version 2.x to version 3.x
 
 The following changes are required:
 

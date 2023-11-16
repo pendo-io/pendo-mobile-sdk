@@ -1,8 +1,12 @@
 # Native Android
 
+### Requirements
+
+- Kotlin version 1.8.0 or higher
+
 ### Step 1. Install Pendo SDK
 
-1. #### Add Pendo Repository to **build.gradle**
+1. #### Add the Pendo repository to **build.gradle**
 
     ```java
     repositories {
@@ -13,7 +17,7 @@
     } 
     ```
 
-2. #### Add Pendo a dependency to **build.gradle**
+2. #### Add Pendo as a dependency to **build.gradle** file
 
     ```shell
     dependencies {
@@ -21,7 +25,7 @@
     }
     ```
 
-- **Minimum and compile SDK Version**  
+- **Minimum and compile SDK versions**  
 If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
 
   ```java
@@ -31,7 +35,7 @@ If applicable, set your app to be compiled with **compileSdkVersion 31** or high
   }
   ```
 
-- **Java 8 Compatibility**  
+- **Java 8 compatibility**  
 If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
 
   ```java
@@ -51,11 +55,11 @@ Your optimizations line should look like this:
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
-1. #### Set up Pendo on **Application class**.
+1. #### Set up Pendo in the **Application class**.
 
     Add the following code in the **onCreate** method:
 
@@ -136,7 +140,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -146,13 +150,6 @@ Review the device log and look for the following message:
 3. Hover over your app and select View app details.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
-
--------------
-
-### Developer Documentation
-* API documentation available <a href="https://support.pendo.io/hc/en-us/articles/360057203531-Android-Developer-API-Documentation" target="_blank">here.</a>
-
--------------
 
 ## Developer Documentation
 

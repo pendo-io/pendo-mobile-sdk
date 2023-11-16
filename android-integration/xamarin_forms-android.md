@@ -1,4 +1,9 @@
-# Xamarin forms
+# Xamarin Forms
+
+### Requirements:
+
+- Kotlin version 1.8.0 or higher
+- Xamarin.Forms version 5.0.0.2612 or higher
 
 ### Step 1. Install Pendo SDK
 
@@ -17,11 +22,11 @@ Your optimizations line should look like this:
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
 Note: pendo-xamarin-forms plugin requires TargetFrameworkVersion v13.0
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 1. #### Open the shared application **App.xaml.cs**
 
@@ -126,7 +131,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Visual Studio:  
 Run the app.  
@@ -139,7 +144,7 @@ Review the device log and look for the following message:
 
 -------------
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 

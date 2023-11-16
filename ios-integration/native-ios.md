@@ -27,9 +27,9 @@
 2. Search for: `https://github.com/pendo-io/pendo-mobile-sdk`
 3. Select _Up to Next Major Version_
 
-## Step 2. Establish a Connection to Pendo's Server on App Launch
+## Step 2. Establish a connection to Pendo's server on app launch
 
-<b>Note:</b> Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription under the App Details section.
+<b>Note:</b> Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app you will need to create one of them.  
 
@@ -98,7 +98,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     </details>
 
 
-## Step 3. Start a New Session to Track a Visitor and to Display Guides
+## Step 3. Start a new session to track a visitor and to display guides
 
 To begin tracking a visitor's analytics and display guides call the `startSession` API. The call to the `startSession` API can be conducted immediately after calling the `setup` API or anywhere else in the code, such as completing the log in process of your app. To begin a session for an anonymous visitor, pass ```nil``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
@@ -121,7 +121,7 @@ PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visi
 
 ### Supporting SwiftUI
 
-To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. In case of multiple rootViews (e.x. usage of multiple UIHostingControllers), apply the modifier to each of these rootViews parameter. See example below:
+To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. In case of multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
@@ -131,7 +131,7 @@ struct YourView: View {
 }
 ```
 
-## Step 4. Configure Pairing Mode for Tagging and Testing
+## Step 4. Configure Pairing Mode for tagging and testing
 
 For additional information see: <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a>.
@@ -148,7 +148,7 @@ Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
-### Configure the App to Connect to Pairing Mode
+### Configure the app to connect to Pairing Mode
 1. If using `AppDelegate`, add or modify the `openURL` function:
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
@@ -209,7 +209,7 @@ Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
     ```
     </details>
 
-### An Additional Required Step to Configure Pairing Mode for SwiftUI
+### An additional required Step to configure Pairing Mode for SwiftUI
 
 In case the entry point to your app is a `struct` attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
 To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br>
@@ -238,7 +238,7 @@ struct YourApp: App {
 }
 ``` 
 
-## Step 5. Verify Installation
+## Step 5. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  
@@ -250,27 +250,20 @@ Review the device log and look for the following message:
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
-## Limitations 
+## SwiftUI limitations 
 
-### SwiftUI 
-- Clickable elements (e.x. Buttons / TapGestures) have a transparent background color  or that are created without a set background color (e.x. VStack or HStack) may encounter issues with identification by our SDK. To resolve this issue invoke the `pendoRecognizeClickAnalytics()` API on the `View` of this element.
+- SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will no be tracked by our SDK.
+
+- When encountering tagging issues of clickable elements try calling the `pendoRecognizeClickAnalytics()` API on the `View` of clickable element.
 
 - The `iOS 16 Navigation APIs` are not supported at the moment.
 
-- The `PresentationContainer` is not supported at the moment.
-
 - The `Menu` Control is not supported at the moment.
 
-### Other Limitations
-
-- Codeless support for dynamic content on a page (see **) does not exist. To remedy such scenarios invoke the `screenContentChanged()` API after the dynamic content has been rendered on the screen.
-    <br><br><i>\*\* 
-    Content that is rendered on the screen after the screen's initial load. <br>(e.x. delayed loading of elements or elements/text that update on the screen as a result of a button tapped or a network response) </i>
-
-## Accessibility Support
+## Accessibility support
 The OS assigns default accessibility values to UI elements in the app if you do not set accessibility values yourself. The accessibility identifiers, accessibility labels, and accessibility hints are all collected by Pendo and can be utilized for unique identification of features and pages.<br>
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 

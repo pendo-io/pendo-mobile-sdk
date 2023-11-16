@@ -59,9 +59,9 @@ Your optimizations line should look like this:
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 In the application **main file (lib/main.dart)**, add the following code:  
 
@@ -97,7 +97,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 Passing `null` or `""` or not setting the `visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 <br></br>
 
-#### Track Events
+#### Track events
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
 
@@ -131,7 +131,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -142,7 +142,7 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
-## Developer Documentation
+## Developer documentation
 
 * API documentation available [here](TODO:missing-link)
 

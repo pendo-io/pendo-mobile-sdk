@@ -1,4 +1,4 @@
-# Pendo SDK Android Manual Installation
+# Pendo SDK Android manual installation
 
 If you are having problems installing the SDK, please follow these steps - 
 
@@ -25,7 +25,7 @@ example, for version 2.22.0.5604 :
     implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'2.22.0.5604', changing:true)
 ```
 
-## Developer Documentation
+## Developer documentation
 
 * API documentation available [here](TODO:missing-link)
 

@@ -1,4 +1,4 @@
-# React Native Migration From 2.x to 3.x
+# React Native migration from version 2.x to version 3.x
 
 
 The following deprecated APIs have been removed. Follow these instructions to replace them:

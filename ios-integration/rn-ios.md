@@ -23,7 +23,7 @@
     pod install
 ```
 
-3. #### Modify Javascript Obfuscation
+3. #### Modify Javascript obfuscation
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  
     This means there is no access to the original component names that are used for the codeless solution.
@@ -48,9 +48,9 @@
 
 -------------
 
-### Step 2. Pendo SDK Integration
+### Step 2. Pendo SDK integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
@@ -173,7 +173,7 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 
 -------------
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  
@@ -185,7 +185,7 @@ Review the device log and look for the following message:
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 * Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Navigation" target="_blank">here</a>

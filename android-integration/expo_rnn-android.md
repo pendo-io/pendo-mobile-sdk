@@ -1,9 +1,10 @@
 # Expo using React Native Navigation
 
-### 1. Add Pendo dependency
 ### Requirements: 
-We support a codeless solution for Expo Sdk 41-48 using React Native Navigation 6+.<br>
-Note that for the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*<br>
+- We support a codeless solution for Expo Sdk 41-48 using React Native Navigation 6+.<br>
+- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*<br>
+
+### Step 1. Add Pendo dependency
 
 In the root folder of your expo app, run the following:
 
@@ -15,9 +16,9 @@ OR use one of your package managers
 npm i rn-pendo-sdk  
 yarn add rn-pendo-sdk
 ```
-### 2. Project Setup
+### Step 2. Project setup
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
@@ -35,7 +36,7 @@ In the `app.config.js` or `app.json`, add the following:
 ```
 This configuration allows pendo to enter pair mode to tag pages and features. 
 
-### 3. Production Bundle - Modify Javascript Obfuscation
+### Step 3. Production bundle - modify Javascript obfuscation
 In the `metro.config.js` file, add the following:
 ```typescript
 module.exports = {
@@ -52,7 +53,7 @@ module.exports = {
   }
 }
 ```
-### 4. Integration
+### Step 4. Integration
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
 function initPendo() {
@@ -72,11 +73,11 @@ const accountData = {'Tier': 1, 'Size': 'Enterprise'};
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
-### 5. Running the project
+### Step 5. Running the project
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
 You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at a later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
 
-### 6. Verify Installation
+### Step 6. Verify installation
 
 1. In the Pendo UI, go to Settings>Subscription Settings.
 2. Hover over your app and select View app details.
@@ -94,7 +95,7 @@ Pay attention to the following APIs, ``` setup ``` and ```startSession```; the f
 ## Limitations
 * To support hybrid mode with React Native Navigation, please open a ticket.
 
-## Developer Documentation
+## Developer documentation
 
 * API documentation available [here](TODO:missing-link)
 

@@ -7,7 +7,7 @@ In the root folder of your flutter app add the Pendo package:
 
 ### Step 2. Integration
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
 Add the following code as soon as the app starts:
 ```dart
@@ -101,7 +101,7 @@ func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>)
 }
 ```
 
-### Step 4. Verify Installation
+### Step 4. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  
@@ -120,7 +120,7 @@ Pay attention to the following APIs ``` setup ``` and ```startSession```; the fo
 * Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
 * To support hybrid mode in Flutter, please open a ticket.
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 
