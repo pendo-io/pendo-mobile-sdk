@@ -2,8 +2,10 @@
 
 ### Requirements:
 
-- Kotlin version 1.8.0 or higher
+- .NET 4
 - Xamarin.Forms version 5.0.0.2612 or higher
+- Kotlin version 1.9.0 or higher
+- Target Android Version 13.0 or higher
 
 ### Step 1. Install Pendo SDK
 
@@ -23,8 +25,6 @@ Your optimizations line should look like this:
 -------------
 
 ### Step 2. Pendo SDK integration
-
-Note: pendo-xamarin-forms plugin requires TargetFrameworkVersion v13.0
 
 **Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
 
@@ -47,10 +47,10 @@ Note: pendo-xamarin-forms plugin requires TargetFrameworkVersion v13.0
     } 
     ```  
 
-    In the **protected override void OnStart()** method, add the following code:
+    In the **protected override void OnCreate()** method, add the following code:
 
     ```c#
-    protected override void OnStart()
+    protected override void OnCreate()
     {
        string apiKey = "YOUR_API_KEY_HERE";
        pendo.Setup(apiKey);

@@ -21,12 +21,12 @@
     ```
 
 - Minimum and compile SDK Version:  
-If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
+If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
 
     ```java
     android {
         minSdkVersion 21
-        compileSdkVersion 31
+        compileSdkVersion 33
     }
     ```
 
@@ -73,7 +73,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 
     ```dart
     var pendoKey = 'YOUR_API_KEY_HERE';
-    await PendoFlutterPlugin.setup(pendoKey);
+    await PendoSDK.setup(pendoKey);
     ```
 
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
@@ -84,7 +84,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     final Map<String, dynamic> visitorData = {'Age': '25', 'Country': 'USA'};
     final Map<String, dynamic> accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
-    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    await PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
 **Notes**
@@ -108,7 +108,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 ```
 
 ```dart
-await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
 -------------

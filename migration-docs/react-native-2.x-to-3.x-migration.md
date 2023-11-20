@@ -17,7 +17,7 @@ Follow these instructions to resolve breaking changes in your app:
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
-
+<br>
 <b>3.x:</b> `JAVA 11`
 
 </td>
@@ -30,7 +30,7 @@ Follow these instructions to resolve breaking changes in your app:
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
-
+<br>
 <b>3.x:</b> `1.9.0`
 
 </td>
@@ -42,7 +42,7 @@ Follow these instructions to resolve breaking changes in your app:
 <td align=center><b>withPendoRN </td>
 <td>
 
-Replace `withPendoRN` with `WithPendoReactNavigation`:
+Use `WithPendoReactNavigation` instead of `withPendoRN` and remove any Pendo related code (ref, onStateChange and onReady implementations):
 
 <b>2.x (deprecated):</b>
 
@@ -50,15 +50,24 @@ Replace `withPendoRN` with `WithPendoReactNavigation`:
 // in the file where the NavigationContainer is created
 import {withPendoRN} from 'rn-pendo-sdk'    
 
-// wrap NavigationContainer with WithPendoReactNavigation HOC
-const PendoNavigationContainer = withPendoRN(NavigationContainer);    
-
-// replace NavigationContainer tag with PendoNavigationContainer tag
-<PendoNavigationContainer>
-
-{/* The rest of your app code */}
-
-</PendoNavigationContainer>
+function RootNavigator(props) {
+    const navigationRef = useRef();
+    return (    
+        <NavigationContainer
+            ref={navigationRef}
+            onStateChange={()=> {
+                const state = navigationRef.current.getRootState()
+                props.onStateChange(state);
+            }}
+            onReady ={()=>{
+                const state = navigationRef.current.getRootState()
+                props.onStateChange(state);
+            }}>
+            {MainStackScreen()}
+        </NavigationContainer>
+    )
+    export default withPendoRN(RootNavigator);  
+}
 ```
 
 <b>3.x:</b>

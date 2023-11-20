@@ -3,7 +3,9 @@
 ### Requirements:
 
 - .NET 7
-- Kotlin version 1.8.0 or higher
+- Kotlin version 1.9.0 or higher
+- Target Android Version 13.0 or higher
+
 
 ### Step 1. Install the Pendo SDK
 
@@ -34,10 +36,10 @@ Your optimizations line should look like this:
     using PendoMAUIPlugin;
     ``` 
 
-    In the **protected override void OnStart()** method, add the following code:
+    In the **protected override void OnCreate()** method, add the following code:
 
     ```c#
-    protected override void OnStart()
+    protected override void OnCreate()
     {
         IPendoService pendo = PendoServiceFactory.CreatePendoService();
 

@@ -54,6 +54,7 @@
 
 ```typescript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+    import { Navigation } from "react-native-navigation";
 ```
 
 ```typescript

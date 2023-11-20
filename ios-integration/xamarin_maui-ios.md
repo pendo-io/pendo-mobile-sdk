@@ -25,10 +25,10 @@
     ``` 
 
 
-    In the **protected override void OnStart()** method, add the following code:
+    In the **protected override void OnCreate()** method, add the following code:
 
     ```c#
-    protected override void OnStart()
+    protected override void OnCreate()
     {
         IPendoService pendo = PendoServiceFactory.CreatePendoService();
 

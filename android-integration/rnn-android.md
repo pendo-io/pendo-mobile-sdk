@@ -30,23 +30,12 @@
     ```
 
 - **Minimum and compile Sdk versions**  
-If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
+If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
 
     ```java
     android {
         minSdkVersion 21
-        compileSdkVersion 31
-    }
-    ```
-
-- **Java 8 compatibility**  
-If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
-
-    ```java
-    android {
-        compileOptions {
-            targetCompatibility JavaVersion.VERSION_1_8
-        }
+        compileSdkVersion 33
     }
     ```
  
@@ -99,6 +88,7 @@ Your optimizations line should look like this:
 
     ```javascript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+    import { Navigation } from "react-native-navigation";
 
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};

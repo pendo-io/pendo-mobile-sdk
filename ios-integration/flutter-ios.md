@@ -13,7 +13,7 @@ Add the following code as soon as the app starts:
 ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
     var pendoKey = 'YOUR_API_KEY_HERE';
-    await PendoFlutterPlugin.setup(pendoKey);
+    await PendoSDK.setup(pendoKey);
 ```
 
 Initialize the Pendo Session where your visitor is being identified (e.g. login, register, etc.).
@@ -24,14 +24,14 @@ Initialize the Pendo Session where your visitor is being identified (e.g. login,
     final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
     final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
     
-    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+    await PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
 In the application files where you want to track an event, add the following code:
 ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
-    await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+    await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
 ### Step 3. Mobile device connectivity for tagging and testing

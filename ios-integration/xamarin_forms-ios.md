@@ -2,6 +2,7 @@
 
 ### Requirements:
 
+- .NET 4
 - Xamarin.Forms version 5.0.0.2612 or higher
 
 ### Step 1. Install Pendo SDK
@@ -36,10 +37,10 @@
         ...
     ``` 
 
-    In the **protected override void OnStart()** method, add the following code:
+    In the **protected override void OnCreate()** method, add the following code:
 
     ```c#
-    protected override void OnStart()
+    protected override void OnCreate()
     {
         string apiKey = "YOUR_API_KEY_HERE";
         pendo.Setup(apiKey);

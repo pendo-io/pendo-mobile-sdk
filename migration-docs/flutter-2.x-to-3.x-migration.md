@@ -17,7 +17,7 @@ Follow these instructions to resolve breaking changes in your app::
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
-
+<br>
 <b>3.x:</b> `JAVA 11`
 
 </td>
@@ -30,7 +30,7 @@ Follow these instructions to resolve breaking changes in your app::
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
-
+<br>
 <b>3.x:</b> `1.9.0`
 
 </td>

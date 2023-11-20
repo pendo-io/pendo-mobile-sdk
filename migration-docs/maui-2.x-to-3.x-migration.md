@@ -15,7 +15,7 @@ The following changes are required:
 <td>
 
 <b>2.x (deprecated):</b> `.NET 6`
-
+<br>
 <b>3.x:</b> `.NET 7`
 
 </td>
@@ -28,7 +28,7 @@ The following changes are required:
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
-
+<br>
 <b>3.x:</b> `JAVA 11`
 
 </td>
@@ -41,8 +41,21 @@ The following changes are required:
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
-
+<br>
 <b>3.x:</b> `1.9.0`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Target <br> Android Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td>
+
+<b>2.x (deprecated):</b> `API Level 31`
+<br>
+<b>3.x:</b> `API Level 33`
 
 </td>
 </tr>
