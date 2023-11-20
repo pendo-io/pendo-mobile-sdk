@@ -84,7 +84,7 @@ someView.pendoRecognizeClickAnalytics()
 
 ## Changes relevant to all native iOS apps
 
-The following deprecated APIs have been removed. Follow these instructions to replace them:
+Follow these instructions to resolve breaking changes in your app:
 
 
 <table border =2 style="width:1007px">

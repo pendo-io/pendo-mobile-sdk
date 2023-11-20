@@ -1,7 +1,7 @@
 # Flutter migration from version 2.x to version 3.x
 
 
-The following deprecated APIs have been removed. Follow these instructions to replace them:
+Follow these instructions to resolve breaking changes in your app::
 
 <table border =2>
 
@@ -13,12 +13,25 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android Apps only) </td>
 <td>
 
-<b>2.x (deprecated):</b> 
+<b>2.x (deprecated):</b> `JAVA 8`
 
-<b>3.x:</b> `1.8.0`
+<b>3.x:</b> `JAVA 11`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td>
+
+<b>2.x (deprecated):</b> `1.7.20`
+
+<b>3.x:</b> `1.9.0`
 
 </td>
 </tr>

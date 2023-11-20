@@ -34,17 +34,6 @@ If applicable, set your app to be compiled with **compileSdkVersion 31** or high
       compileSdkVersion 31
   }
   ```
-
-- **Java 8 compatibility**  
-If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
-
-  ```java
-  android {
-      compileOptions {
-          targetCompatibility JavaVersion.VERSION_1_8
-      }
-  }
-  ```
  
 3. #### Using ProGuard
 
