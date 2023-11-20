@@ -103,53 +103,69 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
 
 2. #### To allow pairing from the device
-a. If using AppDelegate, add or modify the **openURL** function:
-**Swift**
-```swift
-    func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
+    a. If using AppDelegate, add or modify the **openURL** function:
+    
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+            if url.scheme?.range(of: "pendo") != nil {
+                PendoManager.shared().initWith(url)
+                return true
+            }
+            // your code here...
             return true
         }
-        // your code here...
-        return true
-    }
-```
-**ObjectiveC**
-```objective-c
-   @import Pendo;
+    ```
+    </details>
 
-   - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-         if ([[url scheme] containsString:@"pendo"]) {
-            [[PendoManager sharedManager] initWithUrl:url];
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```objective-c
+    @import Pendo;
+
+    - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+            if ([[url scheme] containsString:@"pendo"]) {
+                [[PendoManager sharedManager] initWithUrl:url];
+                return YES;
+            }
+            //  your code here ...
             return YES;
-         }
-         //  your code here ...
-         return YES;
-   }
-```
-
-b. If using SceneDelegate, add or modify the **openURLContexts** function:
-
-**Swift**
-```swift
-func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-        PendoManager.shared().initWith(url)
     }
-}
-```
+    ```
+    </details>
 
-**ObjectiveC**
-```objectivec
-- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-    NSURL *url = [[URLContexts allObjects] firstObject].URL;
-    if ([[url scheme] containsString:@"pendo"]) {
-        [[PendoManager sharedManager] initWithUrl:url];
+    <br>
+
+    b. If using SceneDelegate, add or modify the **openURLContexts** function:
+
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
+            PendoManager.shared().initWith(url)
+        }
     }
-    //  your code here ...
-}
-```
+    ```
+    </details>
+
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```objectivec
+    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+        NSURL *url = [[URLContexts allObjects] firstObject].URL;
+        if ([[url scheme] containsString:@"pendo"]) {
+            [[PendoManager sharedManager] initWithUrl:url];
+        }
+        //  your code here ...
+    }
+    ```
+    </details>
 -------------
 
 ### Step 4. Verify installation
