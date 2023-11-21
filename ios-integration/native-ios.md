@@ -11,6 +11,10 @@
 
 <!-- ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo) -->
 
+### Integration instructions 
+
+The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+
 ### Important Note:
 
 <b> SwiftUI</b> full support full codeless solution is supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.

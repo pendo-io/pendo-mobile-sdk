@@ -19,10 +19,10 @@ example:
 
 4. Specify the version number for the Pendo dependency in the gradle file:
 
-example, for version 2.22.0.5604 :
+example, for version 3.0.0.x :
 
 ```java
-    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'2.22.0.5604', changing:true)
+    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.0.0.x', changing:true)
 ```
 
 ## Developer documentation
