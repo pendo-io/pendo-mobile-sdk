@@ -1,6 +1,6 @@
 # Expo using React Navigation
 
->[!NOTE]
+>[!IMPORTANT]
 >- We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
 >- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
 >- As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
@@ -21,7 +21,7 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 In the `app.config.js` or `app.json`, add the following:
 ```
@@ -55,6 +55,9 @@ module.exports = {
 }
 ```
 ## Step 4. Integration
+
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 ```typescript
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";

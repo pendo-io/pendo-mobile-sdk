@@ -1,6 +1,6 @@
 # Expo using React Native Navigation
 
->[!NOTE]
+>[!IMPORTANT]
 >- We support a codeless solution for Expo Sdk 41-48 using React Native Navigation 6+.<br>
 >- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*<br>
 
@@ -20,7 +20,7 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
@@ -57,6 +57,9 @@ module.exports = {
 }
 ```
 ## Step 4. Integration
+
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
