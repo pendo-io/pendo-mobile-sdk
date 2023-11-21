@@ -14,7 +14,7 @@ The following changes are required:
 <td align=center><b>library import</td>
 <td>
 
-Replace the Nuget package `PendoSDKXamarin` with the NuGet `pendo-xamarin-forms`.
+Replace the NuGet package `PendoSDKXamarin` with the NuGet package `pendo-xamarin-forms`.
 
 </td>
 </tr>
@@ -22,7 +22,7 @@ Replace the Nuget package `PendoSDKXamarin` with the NuGet `pendo-xamarin-forms`
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
@@ -49,7 +49,7 @@ Replace the Nuget package `PendoSDKXamarin` with the NuGet `pendo-xamarin-forms`
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
@@ -62,7 +62,7 @@ Replace the Nuget package `PendoSDKXamarin` with the NuGet `pendo-xamarin-forms`
 <!--- new row --->
 
 <tr>
-<td align=center><b>Target <br> Android Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Target <br> Android version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `API Level 31`

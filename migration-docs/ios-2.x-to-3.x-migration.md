@@ -7,7 +7,7 @@
 
 ## Mandatory migration instructions for the SwiftUI beta SDK  
 
-Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support please move to the iOS native SDK integration as described in the table below:
+Pendo’s SwiftUI support is GA and its library is now merged into the iOS native SDK. The SwiftUI beta integration is no longer in use. If using SwiftUI beta support, follow the instructions in the table to switch over to the iOS native SDK.
 
 <table border=2>
 <tr>
@@ -21,7 +21,7 @@ Pendo’s SwiftUI support is moving to GA and is now offered as part for the iOS
 <td align=center><b>Integration with Cocoapods</td>
 <td>
 
-In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
+In the podfile, replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`.
 
 </td>
 </tr>
@@ -32,7 +32,7 @@ In the podfile replace `pod 'PendoSwiftUI'` with `pod 'Pendo'`
 <td align=center><b>Integration with SPM</td>
 <td>
 
-In the SPM find the Pendo package and switch the Dependency Rule from `Branch` to `Up to Next Major Version` 
+In the SPM, find the Pendo package and switch the Dependency Rule from `Branch` to `Up to Next Major Version`. 
 </td>
 </tr>
 
@@ -43,7 +43,7 @@ In the SPM find the Pendo package and switch the Dependency Rule from `Branch` t
 </td>
 <td>
 
-The `enableSwitfUI` method was renamed as `pendoEnableSwitfUI`.
+The `enableSwitfUI` method has been renamed to `pendoEnableSwitfUI`.
 
 <b>2.x (deprecated):</b>
 
@@ -64,7 +64,7 @@ someView.pendoEnableSwitfUI()
 <td align=center><b>enableClickAnalytics</td>
 <td>
 
-The `enableClickAnalytics` method was renamed as `pendoRecognizeClickAnalytics`. 
+The `enableClickAnalytics` method has been renamed to `pendoRecognizeClickAnalytics`. 
 
 <b>2.x (deprecated):</b>
 
@@ -97,7 +97,7 @@ Follow these instructions to resolve breaking changes in your app:
 <!--- new row --->
 
 <tr>
-<td align=center><b>minimum <br> deployment target</td>
+<td align=center><b>Minimum <br> deployment target</td>
 <td>
 
 <b>2.x (deprecated):</b> 
@@ -113,7 +113,7 @@ Follow these instructions to resolve breaking changes in your app:
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed in directly to the `setup` and `startSession` APIs.
+Replace `initSDK` by calling the `setup` API, followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed directly to the `setup` and `startSession` APIs.
 
 <b>2.x (deprecated):</b>
 
@@ -226,10 +226,10 @@ PendoManager.shared().startSession("someVisitorID",
 <!--- new row --->
 
 <tr>
-<td align=center><b>pauseGuides</b><br> <i>(without any arguments)</i> </td>
+<td align=center><b>pauseGuides</b><br> <i>(without arguments)</i> </td>
 <td>
 
-Pass a boolean value to `pauseGuides` to control the dismissal of guides displayed when the API is invoked. The removed API by default set this value to `true`.
+Pass a boolean value to `pauseGuides` to control dismissal of a guide if displayed when the API is invoked. By default, the deprecated API set the value to `true`.
 
 <b>2.x (deprecated):</b>
 
@@ -251,7 +251,7 @@ PendoManager.shared().pauseGuides(true) // true == dismiss any displayed guide
 <td align=center><b>enableClickAnalytics </td>
 <td>
 
-Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a paramater of `PendoManager.shared().enableClickAnalytics`.
+Call the `pendoRecognizeClickAnalytics` method on the UIView instance instead of passing the UIView instance as a parameter of `PendoManager.shared().enableClickAnalytics`.
 
 <b>2.x (deprecated):</b>
 
@@ -298,7 +298,7 @@ PendoManager.shared().startSession("someVisitorID",
 <td align=center><b>appkey property getter </td>
 <td>
 
-This property has been removed and no longer exists.
+This property no longer exists.
 
 <b>2.x (deprecated):</b>
 
@@ -313,7 +313,7 @@ let appKey = PendoManager.shared().appKey
 
 ## Changes relevant to secure metadata sessions using JWT
 
-JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
+JWT-related methods have been moved to a sub-namespace called `jwt`.
 
 <table border =2>
 

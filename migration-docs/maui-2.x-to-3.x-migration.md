@@ -24,7 +24,7 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
@@ -37,7 +37,7 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
@@ -50,7 +50,7 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Target <br> Android Version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Target <br> Android version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `API Level 31`
@@ -63,11 +63,11 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Obtaining the <br> Pendo Instance</b></td>
+<td align=center><b>Obtain  the <br> Pendo instance</b></td>
 
 <td>
 
-Fetch the `Pendo` instance using the the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
+Obtain the `Pendo` instance using the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
 
 <b>2.x (deprecated):</b>
 

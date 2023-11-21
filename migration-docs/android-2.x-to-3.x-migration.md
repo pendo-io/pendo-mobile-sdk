@@ -19,7 +19,7 @@ Follow these instructions to resolve breaking changes in your app:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> JAVA Version</b> <br> </td>
+<td align=center><b>Minimum <br> JAVA version</b> <br> </td>
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
@@ -32,7 +32,7 @@ Follow these instructions to resolve breaking changes in your app:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin Version</b> <br> </td>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> </td>
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
@@ -48,7 +48,7 @@ Follow these instructions to resolve breaking changes in your app:
 <td align=center><b>initSDK </td>
 <td>
 
-Replace `initSDK` by calling the `setup` API followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed directly to the `setup` and `startSession` APIs.
+Replace `initSDK` by calling the `setup` API, followed by the `startSession` API. The `PendoInitParams` instance passed into `initSDK` no longer exists. The initialization parameters should be passed directly to the `setup` and `startSession` APIs.
 
  <b>2.x (deprecated):</b>
 
@@ -221,10 +221,10 @@ Pendo.startSession(
 <!--- new row --->
 
 <tr>
-<td align=center><b>pauseGuides</b> <br> <i>(without any arguments)</i> </td>
+<td align=center><b>pauseGuides</b> <br> <i>(without arguments)</i> </td>
 <td>
 
-Pass a boolean value to `pauseGuides` to control the dismissal of any guide displayed when the API is invoked. The removed API by default set the value to `true`.
+Pass a boolean value to `pauseGuides` to control dismissal of a guide if displayed when the API is invoked. By default, the deprecated API set the value to `true`.
 
 <b>2.x (deprecated):</b>
 
@@ -247,7 +247,7 @@ Pendo.pauseGuides(true) // true == dismiss any displayed guide
 <td align=center><b>isInitStarted callback </td>
 <td>
 
-The `onInitStarted` callback was removed from the `PendoPhasesCallbackInterface`.
+The `onInitStarted` callback has been removed from the `PendoPhasesCallbackInterface`.
 
 <b>2.x (deprecated):</b>
 
@@ -275,7 +275,7 @@ class myPendoCallbackImplementation : PendoPhasesCallbackInterface {
 
 ## Changes relevant to secure metadata sessions using JWT
 
-JWT-related methods have been moved to a sub-namespace called `jwt` as follows:
+JWT-related methods have been moved to a sub-namespace called `jwt`.
 
 <table border =2>
 

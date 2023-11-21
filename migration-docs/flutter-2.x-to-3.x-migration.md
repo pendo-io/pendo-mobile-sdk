@@ -13,7 +13,7 @@ Follow these instructions to resolve breaking changes in your app::
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `JAVA 8`
@@ -26,7 +26,7 @@ Follow these instructions to resolve breaking changes in your app::
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android Apps only) </td>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
 <b>2.x (deprecated):</b> `1.7.20`
