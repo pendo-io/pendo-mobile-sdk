@@ -54,7 +54,7 @@ Your optimizations line should look like this:
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 In the application **main file (lib/main.dart)**, add the following code:  
 
@@ -90,8 +90,6 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 >[!TIP]
 >Passing `null` or `""` or not setting the `visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
-<br>
-
 3. Track events
 
     Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
@@ -109,7 +107,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 ## Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 

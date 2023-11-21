@@ -20,7 +20,7 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
-> Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under App Details section
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
@@ -56,6 +56,10 @@ module.exports = {
 }
 ```
 ## Step 4. Integration
+
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
 function initPendo() {

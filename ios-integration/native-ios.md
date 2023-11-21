@@ -32,7 +32,7 @@
 ## Step 2. Establish a connection to Pendo's server on app launch
 
 >[!NOTE]
->Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app you will need to create one of them.  
 
@@ -152,6 +152,7 @@ Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
 ### Configure the app to connect to Pairing Mode
+
 1. If using `AppDelegate`, add or modify the `openURL` function:
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>

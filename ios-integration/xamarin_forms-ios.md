@@ -18,7 +18,7 @@
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section.
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 1. Open the shared application **App.xaml.cs**:
 
@@ -103,11 +103,14 @@
 
     This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-    >[!TIP]
-    >Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>[!TIP]
+>Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.

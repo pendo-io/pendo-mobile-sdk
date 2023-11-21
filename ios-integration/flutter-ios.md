@@ -9,7 +9,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
 ## Step 2. Integration
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 Add the following code as soon as the app starts:
 ```dart
@@ -37,6 +37,10 @@ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondPro
 ```
 
 ## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 

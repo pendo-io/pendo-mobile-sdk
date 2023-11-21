@@ -49,7 +49,7 @@
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
@@ -86,10 +86,15 @@
     **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-    Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` generates an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>[!TIP]
+>Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` generates an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 

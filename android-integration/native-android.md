@@ -48,7 +48,7 @@ Your optimizations line should look like this:
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section.
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 1. Set up Pendo in the **Application class**.
 
@@ -109,10 +109,14 @@ Your optimizations line should look like this:
 &nbsp;  
     This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.  
 &nbsp;  
-    **Tip:** Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>[!TIP]
+>Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
