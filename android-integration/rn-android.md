@@ -1,10 +1,13 @@
 # React Native using React Navigation
 
-### Step 1. Install Pendo SDK
+>[!NOTE]
+>Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/android-integration/expo_rn-android.md) instructions.
 
-#### Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/android-integration/expo_rn-android.md) instructions.
 
-1. #### In the **application folder**, run the following command:
+## Step 1. Install Pendo SDK
+
+
+1. In the **application folder**, run the following command:
 
     Using NPM:
     ```shell
@@ -15,7 +18,7 @@
     yarn add rn-pendo-sdk
     ```
 
-2. #### In the application **build.gradle** file.  
+2. In the application **build.gradle** file.  
 - **Add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
@@ -47,7 +50,7 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     ```
 
-4. Modify Javascript Minification
+4. #### Modify Javascript Minification
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.
   
@@ -78,11 +81,10 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
--------------
+## Step 2. Pendo SDK integration
 
-### Step 2. Pendo SDK integration
-
-**Both `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+>[!NOTE]
+>Both `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section.
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:
 
@@ -131,18 +133,18 @@ Your optimizations line should look like this:
    </PendoNavigationContainer>
    ```
 
-**Notes**  
+    **Notes:**  
 
-**visitorId**: a user identifier (e.g. John Smith)  
-**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-**accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
+    **visitorId**: a user identifier (e.g. John Smith)  
+    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+    **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+    >[!TIP]
+    Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
--------------
 
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
@@ -159,9 +161,7 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 </activity>
 ```
 
--------------
-
-### Step 4. Verify installation
+## Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  

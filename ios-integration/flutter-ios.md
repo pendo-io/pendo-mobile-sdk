@@ -1,12 +1,15 @@
 # Flutter
 
-### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
-### Step 1. Add Pendo dependency 
+>[!IMPORTANT]
+>Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
+
+## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`
 
-### Step 2. Integration
+## Step 2. Integration
 
-**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+>[!NOTE]
+>Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
 
 Add the following code as soon as the app starts:
 ```dart
@@ -33,11 +36,11 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-1. #### Add Pendo URL Scheme to **info.plist** file:
+1. **Add Pendo URL Scheme to **info.plist** file:**
 
    Under App Target > Info > URL Types, create a new URL by clicking the + button.  
    Set **Identifier** to pendo-pairing or any name of your choosing.  
@@ -45,7 +48,8 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
     <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
-2. #### To allow pairing from the device
+2. **To allow pairing from the device:**
+
     a. If using AppDelegate, add or modify the **openURL** function:
 
     <details open>
@@ -116,7 +120,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
     </details>
 
-### Step 4. Verify installation
+## Step 4. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  

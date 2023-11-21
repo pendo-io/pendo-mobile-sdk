@@ -1,32 +1,28 @@
 # Expo using React Navigation
 
-### Requirements:
-
-- We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
-- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
-- As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
+>[!NOTE]
+>- We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
+>- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
+>- As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
 which means that codeless tracking analytics is available for screen components only.
 
-### Step 1. Add Pendo dependency
+## Step 1. Add Pendo dependency
 
-In the root folder of your expo app, run the following:
+Inside the root folder of your expo app, either run:
 
 ```
 npx expo install rn-pendo-sdk
 ```
-OR use one of your package managers
+or use one of your package managers
 ```
-npm i rn-pendo-sdk  
-```
-
-or
-
-```
+npm i rn-pendo-sdk 
 yarn add rn-pendo-sdk
 ```
-### Step 2. Project setup
 
-**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+## Step 2. Project setup
+
+>[!NOTE]
+Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
 
 In the `app.config.js` or `app.json`, add the following:
 ```
@@ -42,7 +38,7 @@ In the `app.config.js` or `app.json`, add the following:
 ```
 This configuration allows Pendo to enter pair mode to tag pages and features.
 
-### Step 3. Production bundle - modify Javascript obfuscation
+## Step 3. Production bundle - modify Javascript obfuscation
 In the `metro.config.js` file, add the following:
 ```javascript
     module.exports = {
@@ -59,7 +55,7 @@ In the `metro.config.js` file, add the following:
         }
     }
 ```
-### Step 4.Integration
+## Step 4.Integration
 
 ```typescript
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
@@ -85,7 +81,7 @@ Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
 const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
 ```
 
-replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
+Replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
 
 ```typescript jsx
 <PendoNavigationContainer>
@@ -112,11 +108,11 @@ and change your integration to the following:
 ```typescript
 const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer,{nativeIDs:["myProp"]});
 ```
-### Step 5. Running the project
+## Step 5. Running the project
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
 You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at any later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
 
-### Step 6. Verify installation
+## Step 6. Verify installation
 
 1. In the Pendo UI, go to Settings>Subscription Settings.
 2. Hover over your app and select View app details.

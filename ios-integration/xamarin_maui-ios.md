@@ -1,26 +1,26 @@
 # MAUI
 
-### Integration instructions 
 
-The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+>[!NOTE]
+>The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
-### Requirements:
+>[!IMPORTANT]
+>Requirements:
+>- .NET 7
 
-- .NET 7
-
-### Step 1. Install the Pendo SDK
+## Step 1. Install the Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
 2. Search for: **PendoMAUIPlugin** with latest version.<br/>
 3. Press **Add Package**.
 
--------------
 
-### Step 2. Pendo SDK Integration
+## Step 2. Pendo SDK Integration
 
-**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+>[!NOTE]
+>Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
 
-1. #### Open the shared application **App.xaml.cs**:
+1. Open the shared application **App.xaml.cs**:
 
     Add the following under 'using'
 
@@ -48,7 +48,7 @@ The following integration instructions are relevant for SDK 3.0 or higher. Follo
     }
     ```
 
-2. #### Start the visitor's Session in the page where your visitor is being identified (e.g. login, register, etc.).
+2. Start the visitor's Session in the page where your visitor is being identified (e.g. login, register, etc.).
 
     ```c#
     using PendoMAUIPlugin;
@@ -100,16 +100,15 @@ The following integration instructions are relevant for SDK 3.0 or higher. Follo
 
     This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-    **Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+    >[!TIP]
+    >Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
--------------
-
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
 
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
-1. #### Add Pendo URL Scheme to **info.plist** file
+1. Add Pendo URL Scheme to **info.plist** file
 
    Under the iOS App Target > open info.plist > if URL Types doesn't exist, click on 'Add new entry' and name it 'URL types', for the type choose 'Array'.
    Create a new URL by clicking the + button.
@@ -117,7 +116,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
    Expand 'URL Schemes' and add the `YOUR_SCHEME_ID` under the 'Value'.
    Under the created Dictionary in the previous step, add new entry with the name 'URL Identifier', type 'string' and set a name of your preference under its 'Value'.
 
-2. #### Add or modify the function **OpenURL**
+2. Add or modify the function **OpenURL**
 
    Open ***AppDelegate.cs*** file and add ***using PendoMaui;*** 
    add the following code under ***OpenUrl*** method:
@@ -145,9 +144,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
         }
     ```
 
--------------
-
-### Step 4. Verify installation
+## Step 4. Verify installation
 
 1. Test using Visual Studio:  
 Run the app.  

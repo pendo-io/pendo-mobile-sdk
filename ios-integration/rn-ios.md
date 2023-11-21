@@ -1,10 +1,11 @@
 # React Native using React Navigation
 
-### Step 1. Install Pendo SDK
+>[!NOTE]
+>Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/ios-integration/expo_rn-ios.md).
 
-#### Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/ios-integration/expo_rn-ios.md).
+## Step 1. Install Pendo SDK
 
-1. #### In the **application folder**, run the following command:
+1. In the **application folder**, run the following command:
 
     Using NPM:
 
@@ -17,13 +18,13 @@
     yarn add rn-pendo-sdk
     ```
 
-2. #### In the **iOS folder**, run the following command:
+2. In the **iOS folder**, run the following command:
 
     ```shell script 
     pod install
     ```
 
-3. #### Modify Javascript obfuscation
+3. **Modify Javascript obfuscation**
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  
     This means there is no access to the original component names that are used for the codeless solution.
@@ -46,11 +47,10 @@
     }
     ```
 
--------------
+## Step 2. Pendo SDK integration
 
-### Step 2. Pendo SDK integration
-
-**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+>[!NOTE]
+>Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
@@ -98,31 +98,28 @@
     </PendoNavigationContainer>
     ```
 
+    **Notes:**  
+    **visitorId**: a user identifier (e.g. John Smith)  
+    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
+    **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-**Notes**  
+    Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
-**visitorId**: a user identifier (e.g. John Smith)  
-**visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-**accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-**accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
-
--------------
-
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-1. #### Add Pendo URL Scheme to **info.plist** file:
+1. Add Pendo URL Scheme to **info.plist** file:
   
       Under App Target > Info > URL Types, create a new URL by clicking the + button.  
       Set **Identifier** to pendo-pairing or any name of your choosing.  
       Set **URL Scheme** to `YOUR_SCHEME_ID`.
 
-    <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
+    <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/> <br>
 
-2. #### To allow pairing from the device
+2. To allow pairing from the device
     a. If using AppDelegate, add or modify the **openURL** function:
 
     <details open>
@@ -187,9 +184,8 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
     </details>
 
--------------
 
-### Step 4. Verify installation
+## Step 4. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  

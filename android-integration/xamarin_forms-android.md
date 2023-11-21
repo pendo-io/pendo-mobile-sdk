@@ -1,22 +1,20 @@
 # Xamarin Forms
 
-### Integration instructions 
+>[!NOTE]
+>The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
-The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+>[!IMPORTANT]
+>Requirements:
+>- .NET 4
+>- Xamarin.Forms version 5.0.0.2612 or higher
+>- Kotlin version 1.9.0 or higher
+>- Target Android Version 13.0 or higher
 
-### Requirements:
-
-- .NET 4
-- Xamarin.Forms version 5.0.0.2612 or higher
-- Kotlin version 1.9.0 or higher
-- Target Android Version 13.0 or higher
-
-### Step 1. Install Pendo SDK
+## Step 1. Install Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
 2. Search for: **pendo-xamarin-forms** with latest version.<br/>
 3. Press **Add Package**.
-
 4. #### Using ProGuard / R8
 
 - If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android-integration/pendo-proguard.cfg)  
@@ -26,11 +24,11 @@ The following integration instructions are relevant for SDK 3.0 or higher. Follo
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
--------------
 
-### Step 2. Pendo SDK integration
+## Step 2. Pendo SDK integration
 
-**Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section**
+>[!NOTE]
+>Both the `Scheme ID` and `API Key` can be found in your Pendo Subscription Settings under the App Details section.
 
 1. #### Open the shared application **App.xaml.cs**
 
@@ -112,30 +110,28 @@ Your optimizations line should look like this:
 
    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
-   **Tip:** Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+   >[!TIP]
+   >Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
--------------
+## Step 3. Mobile device connectivity for tagging and testing
 
-### Step 3. Mobile device connectivity for tagging and testing
-
-These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
+This step allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
-1. #### Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
+Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
 
-    ```xml
-    <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
-     <intent-filter>
-       <action android:name="android.intent.action.VIEW"/>
-       <category android:name="android.intent.category.DEFAULT"/>
-       <category android:name="android.intent.category.BROWSABLE"/>
-       <data android:scheme="YOUR_SCHEME_ID_HERE"/>
-     </intent-filter>
-    </activity>
-    ```
--------------
+```xml
+<activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
+    <intent-filter>
+    <action android:name="android.intent.action.VIEW"/>
+    <category android:name="android.intent.category.DEFAULT"/>
+    <category android:name="android.intent.category.BROWSABLE"/>
+    <data android:scheme="YOUR_SCHEME_ID_HERE"/>
+    </intent-filter>
+</activity>
+```
 
-### Step 4. Verify installation
+## Step 4. Verify installation
 
 1. Test using Visual Studio:  
 Run the app.  

@@ -11,13 +11,11 @@
 
 <!-- ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo) -->
 
-### Integration instructions 
+>[!NOTE]
+>The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
-The following integration instructions are relevant for SDK 3.0 or higher. Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
-
-### Important Note:
-
-<b> SwiftUI</b> full support full codeless solution is supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
+>[!IMPORTANT]
+><b>SwiftUI</b> full support full codeless solution is supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
 
 ## Step 1. Add the Pendo SDK
 ### Cocoapods:
@@ -33,7 +31,8 @@ The following integration instructions are relevant for SDK 3.0 or higher. Follo
 
 ## Step 2. Establish a connection to Pendo's server on app launch
 
-<b>Note:</b> Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
+>[!NOTE]
+>Both the `API Key` and the `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app you will need to create one of them.  
 
@@ -137,18 +136,18 @@ struct YourView: View {
 
 ## Step 4. Configure Pairing Mode for tagging and testing
 
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
+
 For additional information see: <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a>.
 
 ### Add the Pendo URL Scheme to the **info.plist** File
 
-
 Navigate to your **App Target > Info > URL Types** and create a new URL by clicking the plus (+) button.
 
 Set the **Identifier** to `pendo-pairing` or an identifiable name of your choosing.  
 Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
-
-<b>Note:</b> The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
