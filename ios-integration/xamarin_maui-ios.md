@@ -163,13 +163,6 @@ Review the device log and look for the following message:
 - API documentation available [here](TODO:missing-link)
 
 ## Troubleshooting
-
-+ If you are encountering the following error: '-E -IIOJWT - Failed to create public key, which results in verification failure. OSStatus = ....', follow steps listed below:
-  1. In the Visual Studio Editor, right-click on the project.
-  2. Select Options.
-  3. In the Build category list, select the “iOS bundle signing” option.
-  4. Select the three dots button of the “Custom Entitlements” field.
-  5. Choose the “Entitlements.plist” file from the box and click OK.
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
 - For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
