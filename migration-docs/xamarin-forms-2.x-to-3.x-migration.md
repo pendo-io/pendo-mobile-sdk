@@ -11,7 +11,7 @@ The following changes are required:
 <!--- new row --->
 
 <tr>
-<td align=center><b>library import</td>
+<td align=center><b>Library import</td>
 <td>
 
 Replace the NuGet package `PendoSDKXamarin` with the NuGet package `pendo-xamarin-forms`.
