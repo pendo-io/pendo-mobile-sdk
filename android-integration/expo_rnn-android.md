@@ -22,17 +22,17 @@ yarn add rn-pendo-sdk
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
-    {
-    "plugins": [
-          [
-            "rn-pendo-sdk",
-            {
-              "ios-scheme": "YOUR_IOS_SCHEME_ID",
-              "android-scheme": "YOUR_ANDROID_SCHEME_ID"
-            }
-          ]
-        ]
-    }
+{
+"plugins": [
+      [
+        "rn-pendo-sdk",
+        {
+          "ios-scheme": "YOUR_IOS_SCHEME_ID",
+          "android-scheme": "YOUR_ANDROID_SCHEME_ID"
+        }
+      ]
+    ]
+}
 ```
 This configuration allows pendo to enter pair mode to tag pages and features. 
 

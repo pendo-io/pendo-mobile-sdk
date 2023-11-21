@@ -76,21 +76,21 @@ In the file where the `NavigationContainer` is created:
 import `WithPendoReactNavigation`:
 
 ```typescript
-    import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
+import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
 ```
 
 Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
 
 ```typescript
-    const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
+const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
 ```
 
 replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
 
 ```typescript jsx
-   <PendoNavigationContainer>
-   {/* Rest of your app code */}
-   </PendoNavigationContainer>
+<PendoNavigationContainer>
+{/* Rest of your app code */}
+</PendoNavigationContainer>
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
@@ -105,8 +105,8 @@ If some of your own _custom_ react native components are not taggable because we
 you can try to add it manually to the scanning flow. To do this, add a prop `nativeID` to your component.
 For instance:
 ```typescript jsx
-    <TouchableOpacity onPress={open} nativeID={"myProp"}>      
-    </TouchableOpacity> 
+<TouchableOpacity onPress={open} nativeID={"myProp"}>      
+</TouchableOpacity> 
 ```
 and change your integration to the following:
 ```typescript

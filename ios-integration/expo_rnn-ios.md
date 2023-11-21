@@ -9,12 +9,12 @@
 In the root folder of your expo app, run the following:
 
 ```
-    npx expo install rn-pendo-sdk
+npx expo install rn-pendo-sdk
 ```
 OR use one of your package managers 
 ```
-    npm i rn-pendo-sdk  
-    yarn add rn-pendo-sdk
+npm i rn-pendo-sdk  
+yarn add rn-pendo-sdk
 ```
 ### Step 2. Project setup
 
@@ -22,55 +22,55 @@ OR use one of your package managers
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
-    {
-      "plugins": [
-        [
-          "rn-pendo-sdk",
-          {
-            "ios-scheme": "YOUR_IOS_SCHEME_ID",
-            "android-scheme": "YOUR_ANDROID_SCHEME_ID"
-          }
-        ]
-      ]
-    }
+{
+  "plugins": [
+    [
+      "rn-pendo-sdk",
+      {
+        "ios-scheme": "YOUR_IOS_SCHEME_ID",
+        "android-scheme": "YOUR_ANDROID_SCHEME_ID"
+      }
+    ]
+  ]
+}
 ```
 This configuration allows pendo to enter pair mode to tag pages and features. 
 
 ### Step 3. Production bundle - modify Javascript obfuscation
 In the `metro.config.js` file, add the following:
 ```typescript
-    module.exports = {
-      transformer: {
-        // ...
-        minifierConfig: {
-            keep_classnames: true, // Preserve class names
-            keep_fnames: true, // Preserve function names
-            mangle: {
-              keep_classnames: true, // Preserve class names
-              keep_fnames: true, // Preserve function names
-            }
+module.exports = {
+  transformer: {
+    // ...
+    minifierConfig: {
+        keep_classnames: true, // Preserve class names
+        keep_fnames: true, // Preserve function names
+        mangle: {
+          keep_classnames: true, // Preserve class names
+          keep_fnames: true, // Preserve function names
         }
-      }
     }
+  }
+}
 ```
 ### Step 4. Integration
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
-    function initPendo() {
-        const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
-        const pendoKey = 'YOUR_API_KEY_HERE';
-        //note the following API will only setup initial configuration, to start collect analytics use start session
-        PendoSDK.setup(pendoKey, navigationOptions);
-    }
+function initPendo() {
+    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+    const pendoKey = 'YOUR_API_KEY_HERE';
+    //note the following API will only setup initial configuration, to start collect analytics use start session
+    PendoSDK.setup(pendoKey, navigationOptions);
+}
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
-    const visitorId = 'John Smith';
-    const accountId = 'Acme Inc.';
-    const visitorData = {'Age': 25, 'Country': 'USA'};
-    const accountData = {'Tier': 1, 'Size': 'Enterprise'};
-    
-    PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
+const visitorId = 'John Smith';
+const accountId = 'Acme Inc.';
+const visitorData = {'Age': 25, 'Country': 'USA'};
+const accountData = {'Tier': 1, 'Size': 'Enterprise'};
+
+PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 ### Step 5. Running the project

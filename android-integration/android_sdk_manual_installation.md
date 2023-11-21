@@ -7,23 +7,23 @@ If you are having problems installing the SDK, please follow these steps -
 2. Unzip the downloaded file.
 
 3. Add the local directory to the gradle file.
+  <br>example:
 
-example:
-```java
-    repositories {
-      maven {
-         url "/path/to/local/file"
-      }
-    } 
-```
+  ```java
+  repositories {
+    maven {
+        url "/path/to/local/file"
+    }
+  } 
+  ```
 
 4. Specify the version number for the Pendo dependency in the gradle file:
+  <br>
+  example, for version 3.0.0.x: 
 
-example, for version 3.0.0.x :
-
-```java
-    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.0.0.x', changing:true)
-```
+  ```java
+  implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.0.0.x', changing:true)
+  ```
 
 ## Developer documentation
 

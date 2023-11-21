@@ -8,20 +8,20 @@
 
     Using NPM:
 
-```shell
+    ```shell
     npm install --save rn-pendo-sdk
-```
+    ```
     Using YARN:
 
-```shell
+    ```shell
     yarn add rn-pendo-sdk
-```
+    ```
 
 2. #### In the **iOS folder**, run the following command:
 
-```shell script 
+    ```shell script 
     pod install
-```
+    ```
 
 3. #### Modify Javascript obfuscation
 
@@ -30,21 +30,21 @@
 
     In the application **metro.config.js**, add the following statements in the transformer:  
 
-```javascript
+    ```javascript
     module.exports = {
-      transformer: {
+        transformer: {
         // ...
         minifierConfig: {
             keep_classnames: true, // Preserve class names
             keep_fnames: true, // Preserve function names
             mangle: {
-              keep_classnames: true, // Preserve class names
-              keep_fnames: true, // Preserve function names
+                keep_classnames: true, // Preserve class names
+                keep_fnames: true, // Preserve function names
             }
         }
-      }
+        }
     }
-```
+    ```
 
 -------------
 
@@ -54,7 +54,7 @@
 
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
-```typescript
+    ```typescript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
 
     function initPendo() {
@@ -64,39 +64,39 @@
         PendoSDK.setup(pendoKey, navigationOptions);
     }   
     initPendo();
-```
+    ```
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
 
-```typescript
+    ```typescript
     const visitorId = 'VISITOR-UNIQUE-ID';
     const accountId = 'ACCOUNT-UNIQUE-ID';
     const visitorData = {'Age': '25', 'Country': 'USA'};
     const accountData = {'Tier': '1', 'Size': 'Enterprise'};
 
     PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
-```
+    ```
 
 3. In the file where the `NavigationContainer` is created.
 
    Import `WithPendoReactNavigation`:
 
-```typescript
+    ```typescript
     import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
-```
+    ```
 
    Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
 
-```typescript
+    ```typescript
     const PendoNavigationContainer = WithPendoReactNavigation (NavigationContainer);    
-```
+    ```
 
    replace `NavigationContainer` tag with `PendoNavigationContainer` tag
 
-```typescript jsx
-   <PendoNavigationContainer>
-   {/* Rest of your app code */}
-   </PendoNavigationContainer>
-```
+    ```typescript jsx
+    <PendoNavigationContainer>
+    {/* Rest of your app code */}
+    </PendoNavigationContainer>
+    ```
 
 
 **Notes**  
@@ -120,7 +120,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
       Set **Identifier** to pendo-pairing or any name of your choosing.  
       Set **URL Scheme** to `YOUR_SCHEME_ID`.
 
-<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
+    <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging"/>
 
 2. #### To allow pairing from the device
     a. If using AppDelegate, add or modify the **openURL** function:
