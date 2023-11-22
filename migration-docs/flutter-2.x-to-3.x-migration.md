@@ -1,7 +1,7 @@
-# Flutter Migration From 2.x to 3.x
+# Flutter migration from version 2.x to version 3.x
 
 
-The following deprecated APIs have been removed. Follow these instructions to replace them:
+Follow these instructions to resolve breaking changes in your app::
 
 <table border =2>
 
@@ -13,12 +13,38 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <!--- new row --->
 
 <tr>
+<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
+<td>
+
+<b>2.x (deprecated):</b> `JAVA 8`
+<br>
+<b>3.x:</b> `JAVA 11`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android apps only) </td>
+<td>
+
+<b>2.x (deprecated):</b> `1.7.20`
+<br>
+<b>3.x:</b> `1.9.0`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>initSDK </td>
 <td>
 
 Replace `initSDK` by calling `setup` and then `startSession`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // set session paramaters
@@ -57,7 +83,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 
 Call `setup` instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // establish connection to server
@@ -87,7 +113,7 @@ await PendoFlutterPlugin.setup('someAppKey'
 
 Call `startSession` with `null` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 // start a session with an anonymous visitor
@@ -112,7 +138,7 @@ await PendoFlutterPlugin.startSession(null, null, null, null);
 
 Call `startSession` instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 await PendoFlutterPlugin.switchVisitor('someVisitorID', 
@@ -141,7 +167,7 @@ await PendoFlutterPlugin.startSession('someVisitorID',
 
 Call `startSession` with the new account id value instead of `setAccountId`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```dart
 await PendoFlutterPlugin.setAccountId('someAccountID');

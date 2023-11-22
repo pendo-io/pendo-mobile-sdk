@@ -1,56 +1,65 @@
 # Flutter
 
-### Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
-### Step 1. Add Pendo dependency 
-In the root folder of your flutter app add the Pendo package:
-    `flutter pub add pendo_sdk`
+>[!IMPORTANT]
+>Flutter is supported by our track events only solution. The codeless solution is still in progress.
 
-### Step 2. Integration
+## Step 1. Add Pendo dependency 
+In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
+## Step 2. Integration
+
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
 Add the following code as soon as the app starts:
 ```dart
-    import 'package:pendo_sdk/pendo_sdk.dart';
-    var pendoKey = 'YOUR_API_KEY_HERE';
-    await PendoFlutterPlugin.setup(pendoKey);
+import 'package:pendo_sdk/pendo_sdk.dart';
+var pendoKey = 'YOUR_API_KEY_HERE';
+await PendoSDK.setup(pendoKey);
 ```
 
 Initialize the Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```dart
-    import 'package:pendo_sdk/pendo_sdk.dart';
-    final String visitorId = 'John Smith';
-    final String accountId = 'Acme Inc.';
-    final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
-    final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
-    
-    await PendoFlutterPlugin.startSession(visitorId, accountId, visitorData, accountData);
+import 'package:pendo_sdk/pendo_sdk.dart';
+final String visitorId = 'John Smith';
+final String accountId = 'Acme Inc.';
+final dynamic visitorData = {'Age': '25', 'Country': 'USA'};
+final dynamic accountData = {'Tier': '1', 'Size': 'Enterprise'};
+
+await PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
 In the application files where you want to track an event, add the following code:
 ```dart
-    import 'package:pendo_sdk/pendo_sdk.dart';
-    await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+import 'package:pendo_sdk/pendo_sdk.dart';
+await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+
 These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-1. #### Add Pendo URL Scheme to **info.plist** file:
+1. **Add Pendo URL Scheme to **info.plist** file:**
 
    Under App Target > Info > URL Types, create a new URL by clicking the + button.  
    Set **Identifier** to pendo-pairing or any name of your choosing.  
    Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
-<img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
+    <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
-2. #### To allow pairing from the device
-a. If using AppDelegate, add or modify the **openURL** function:
+2. **To allow pairing from the device:**
 
-**Swift**
-```swift
+    a. If using AppDelegate, add or modify the **openURL** function:
+
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
     import Pendo
     //your code
     @UIApplicationMain
@@ -64,9 +73,13 @@ a. If using AppDelegate, add or modify the **openURL** function:
             return true
         }
     }
-```
-**ObjectiveC**
-```objectivec
+    ```
+    </details>
+
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```objectivec
     @import Pendo;
     //your code
     - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
@@ -77,31 +90,41 @@ a. If using AppDelegate, add or modify the **openURL** function:
         //  your code here ...
         return YES;
     }
-```
+    ```
+    </details>
 
-b. If using SceneDelegate, add or modify the **openURLContexts** function:
+    </br>
 
-**Swift**
-```swift
-func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-        PendoManager.shared().initWith(url)
+    b. If using SceneDelegate, add or modify the **openURLContexts** function:
+
+    <details open>
+    <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```swift
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
+            PendoManager.shared().initWith(url)
+        }
     }
-}
-```
+    ```
+    </details>
 
-**ObjectiveC**
-```objectivec
-- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-    NSURL *url = [[URLContexts allObjects] firstObject].URL;
-    if ([[url scheme] containsString:@"pendo"]) {
-        [[PendoManager sharedManager] initWithUrl:url];
+    </details>
+    <details>
+    <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
+
+    ```objectivec
+    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
+        NSURL *url = [[URLContexts allObjects] firstObject].URL;
+        if ([[url scheme] containsString:@"pendo"]) {
+            [[PendoManager sharedManager] initWithUrl:url];
+        }
+        //  your code here ...
     }
-    //  your code here ...
-}
-```
+    ```
+    </details>
 
-### Step 4. Verify Installation
+## Step 4. Verify installation
 
 1. Test using Xcode:  
 Run the app while attached to Xcode.  
@@ -120,7 +143,7 @@ Pay attention to the following APIs ``` setup ``` and ```startSession```; the fo
 * Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
 * To support hybrid mode in Flutter, please open a ticket.
 
-## Developer Documentation
+## Developer documentation
 
 - API documentation available [here](TODO:missing-link)
 

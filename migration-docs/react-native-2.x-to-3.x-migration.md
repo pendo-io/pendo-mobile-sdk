@@ -1,7 +1,7 @@
-# React Native Migration From 2.x to 3.x
+# React Native migration from version 2.x to version 3.x
 
 
-The following deprecated APIs have been removed. Follow these instructions to replace them:
+Follow these instructions to resolve breaking changes in your app:
 
 <table border =2>
 
@@ -16,23 +16,32 @@ The following deprecated APIs have been removed. Follow these instructions to re
 <td align=center><b>withPendoRN </td>
 <td>
 
-Replace `withPendoRN` with `WithPendoReactNavigation`:
+Use `WithPendoReactNavigation` instead of `withPendoRN` and remove any Pendo related code (ref, onStateChange and onReady implementations):
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // in the file where the NavigationContainer is created
 import {withPendoRN} from 'rn-pendo-sdk'    
 
-// wrap NavigationContainer with WithPendoReactNavigation HOC
-const PendoNavigationContainer = withPendoRN(NavigationContainer);    
-
-// replace NavigationContainer tag with PendoNavigationContainer tag
-<PendoNavigationContainer>
-
-{/* The rest of your app code */}
-
-</PendoNavigationContainer>
+function RootNavigator(props) {
+    const navigationRef = useRef();
+    return (    
+        <NavigationContainer
+            ref={navigationRef}
+            onStateChange={()=> {
+                const state = navigationRef.current.getRootState()
+                props.onStateChange(state);
+            }}
+            onReady ={()=>{
+                const state = navigationRef.current.getRootState()
+                props.onStateChange(state);
+            }}>
+            {MainStackScreen()}
+        </NavigationContainer>
+    )
+    export default withPendoRN(RootNavigator);  
+}
 ```
 
 <b>3.x:</b>
@@ -63,7 +72,7 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
 
 Replace `initSDK` by calling `setup` and then `startSession`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // set session parameters
@@ -105,7 +114,7 @@ PendoSDK.startSession('someVisitorID',
 
 Call `setup` instead of `initSDKWithoutVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // establish connection to server
@@ -132,7 +141,7 @@ PendoSDK.setup('someAppKey', navigationOptions);
 
 Call `startSession` with `null` values instead of `clearVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 // start a session with an anonymous visitor
@@ -157,7 +166,7 @@ PendoSDK.startSession(null, null, null, null);
 
 Call `startSession` instead of `switchVisitor`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 PendoSDK.switchVisitor('someVisitorID', 
@@ -186,7 +195,7 @@ PendoSDK.startSession('someVisitorID',
 
 Call `startSession` with the new account id value instead of `setAccountId`.
 
-<b>2.x:</b>
+<b>2.x (deprecated):</b>
 
 ```javascript
 PendoSDK.setAccountId('someAccountID');

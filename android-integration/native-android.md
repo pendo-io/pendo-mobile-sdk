@@ -1,8 +1,15 @@
 # Native Android
 
-### Step 1. Install Pendo SDK
+>[!NOTE]
+>The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
-1. #### Add Pendo Repository to **build.gradle**
+>[!IMPORTANT]
+>Requirements:
+>- Kotlin version 1.9.0 or higher
+
+## Step 1. Install Pendo SDK
+
+1. #### Add the Pendo repository to **build.gradle**
 
     ```java
     repositories {
@@ -13,32 +20,21 @@
     } 
     ```
 
-2. #### Add Pendo a dependency to **build.gradle**
+2. #### Add Pendo as a dependency to **build.gradle** file
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'2.22.+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.0.+', changing:true
     }
     ```
 
-- **Minimum and compile SDK Version**  
-If applicable, set your app to be compiled with **compileSdkVersion 31** or higher and **minSdkVersion 21** or higher:
+- **Minimum and compile SDK versions**  
+If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
 
   ```java
   android {
       minSdkVersion 21
-      compileSdkVersion 31
-  }
-  ```
-
-- **Java 8 Compatibility**  
-If applicable, configure your app compilation to targetCompatibility **JavaVersion.VERSION_1_8**:
-
-  ```java
-  android {
-      compileOptions {
-          targetCompatibility JavaVersion.VERSION_1_8
-      }
+      compileSdkVersion 33
   }
   ```
  
@@ -49,13 +45,12 @@ If applicable, configure your app compilation to targetCompatibility **JavaVersi
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
--------------
+## Step 2. Pendo SDK integration
 
-### Step 2. Pendo SDK Integration
+>[!NOTE]
+>The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
-**Both Scheme ID and API Key can be found in your Pendo Subscription under App Details**
-
-1. #### Set up Pendo on **Application class**.
+1. Set up Pendo in the **Application class**.
 
     Add the following code in the **onCreate** method:
 
@@ -83,7 +78,7 @@ Your optimizations line should look like this:
      );
     ```
 
-2. #### Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
+2. Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
 
     ```java
     String visitorId = "VISITOR-UNIQUE-ID";
@@ -114,16 +109,19 @@ Your optimizations line should look like this:
 &nbsp;  
     This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.  
 &nbsp;  
-    **Tip:** Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>[!TIP]
+>Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
--------------
 
-### Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity for tagging and testing
+
+>[!NOTE]
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
 These steps allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
-#### Add the following activity to the application's AndroidManifest.xml in the <Application> tag:
+ Add the following activity to the application's AndroidManifest.xml in the <Application> tag:
 
     <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
         <intent-filter>
@@ -134,9 +132,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
         </intent-filter>
     </activity>
 
--------------
-
-### Step 4. Verify Installation
+## Step 4. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -146,13 +142,6 @@ Review the device log and look for the following message:
 3. Hover over your app and select View app details.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
-
--------------
-
-### Developer Documentation
-* API documentation available <a href="https://support.pendo.io/hc/en-us/articles/360057203531-Android-Developer-API-Documentation" target="_blank">here.</a>
-
--------------
 
 ## Developer Documentation
 
