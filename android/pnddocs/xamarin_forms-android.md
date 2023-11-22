@@ -1,103 +1,105 @@
-# MAUI
+# Xamarin Forms Android
 
 >[!NOTE]
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
 >Requirements:
->- .NET 7
+>- .NET 4
+>- Xamarin.Forms version 5.0.0.2612 or higher
 >- Kotlin version 1.9.0 or higher
 >- Target Android Version 13.0 or higher
 
-## Step 1. Install the Pendo SDK
+## Step 1. Install Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
-2. Search for: **PendoMAUIPlugin** with latest version.<br/>
+2. Search for: **pendo-xamarin-forms** with latest version.<br/>
 3. Press **Add Package**.
+4. #### Using ProGuard / R8
 
-4. #### **Using Proguard / R8**
-
-- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: <a href="https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android-integration/pendo-proguard.cfg">pendo-proguard.cfg</a>  
+- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg)  
 
 - If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
+
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
-1. Open the shared application **App.xaml.cs**
+1. #### Open the shared application **App.xaml.cs**
 
-    Add the following under 'using':
-
-    ```c#
-    using PendoMAUIPlugin;
-    ``` 
-
-    In the **protected override void OnCreate()** method, add the following code:
+   Add the following under 'using'
 
     ```c#
-    protected override void OnCreate()
+    using PendoSDKXamarin;
+
+    namespace ExampleApp
     {
-        IPendoService pendo = PendoServiceFactory.CreatePendoService();
+        public partial class App : Application
+        {
+            private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+            
+            ...
 
-        /** if your app supports additional Platforms other than iOS and Android
-        verify the Pendo instance is not null */
-        if (pendo != null) {            
-            string apiKey = "YOUR_API_KEY_HERE";
-            pendo.Setup(apiKey);
         }
+    } 
+    ```  
 
-        ...
+    In the **protected override void OnStart()** method, add the following code:
 
+    ```c#
+    protected override void OnStart()
+    {
+       string apiKey = "YOUR_API_KEY_HERE";
+       pendo.Setup(apiKey);
+
+       ...
     }
     ```
 
-2. Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
+2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
 
     ```c#
-    ...
-    using PendoMAUIPlugin;
-    ...
+    using PendoSDKXamarin;
 
     namespace ExampleApp
     {
         class ExampleLoginClass
         {
+        ...
+        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
 
-        public void ExampleMethod()
+        public void MethodExample()
         {
+            
             ...
 
-            IPendoService pendo = PendoServiceFactory.CreatePendoService();
+            var visitorId = "VISITOR-UNIQUE-ID";
+            var accountId = "ACCOUNT-UNIQUE-ID";
 
-            /** if your app supports additional Platforms other than iOS and Android
-            verify the Pendo instance is not null */
-            if (pendo != null) {             
-                var visitorId = "VISITOR-UNIQUE-ID";
-                var accountId = "ACCOUNT-UNIQUE-ID";
+            var visitorData = new Dictionary<string, object>
+            {
+                { "age", 27 },
+                { "country", "USA" }
+            };
 
-                var visitorData = new Dictionary<string, object>
-                {
-                    { "age", 27 },
-                    { "country", "USA" }
-                };
+            var accountData = new Dictionary<string, object>
+            {
+                { "Tier", 1 },
+                { "Size", "Enterprise" }
+            };
 
-                var accountData = new Dictionary<string, object>
-                {
-                    { "Tier", 1 },
-                    { "Size", "Enterprise" }
-                };
-
-                pendo.StartSession(visitorId, accountId, visitorData, accountData);
-            }
-
+            pendo.StartSession(visitorId, accountId, visitorData, accountData);
+            
             ...
+        }
 
-        }        
+        ...
+
     }
     ```
 
@@ -109,14 +111,14 @@ Your optimizations line should look like this:
    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
 >[!TIP]
->Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>Passing `null` or `""` as the visitorId will generate <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 ## Step 3. Mobile device connectivity for tagging and testing
 
 >[!NOTE]
 >The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
 
-This step allows page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging.</a>
+This step allow page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
@@ -133,6 +135,7 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 ```
 
 ## Step 4. Verify installation
+
 1. Test using Visual Studio:  
 Run the app.  
 Review the device log and look for the following message:  
@@ -142,10 +145,11 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
+-------------
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/xamarin-forms-apis.md)
 
 ## Troubleshooting
 

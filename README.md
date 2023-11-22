@@ -10,40 +10,40 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 
 
 - Native: 
-[Android](/android-integration/native-android.md) | 
-[iOS](/ios-integration/native-ios.md)
+[Android](/android/pnddocs/native-android.md) | 
+[iOS](/ios/pnddocs/native-ios.md)
 - React Native:
     - Using React Navigation:
-    [Android](/android-integration/rn-android.md) | 
-    [iOS](/ios-integration/rn-ios.md)
+    [Android](/android/pnddocs/rn-android.md) | 
+    [iOS](/ios/pnddocs/rn-ios.md)
     - Using React Native Navigation: 
-    [Android](/android-integration/rnn-android.md) | 
-    [iOS](/ios-integration/rnn-ios.md)
+    [Android](/android/pnddocs/rnn-android.md) | 
+    [iOS](/ios/pnddocs/rnn-ios.md)
     - Using Expo with React Navigation:
-    [Android](/android-integration/expo_rn-android.md) | 
-    [iOS](/ios-integration/expo_rn-ios.md)
+    [Android](/android/pnddocs/expo_rn-android.md) | 
+    [iOS](/ios/pnddocs/expo_rn-ios.md)
     - Using Expo with React Native Navigation 
-    [Android](/android-integration/expo_rnn-android.md) | 
-    [iOS](/ios-integration/expo_rnn-ios.md)
+    [Android](/android/pnddocs/expo_rnn-android.md) | 
+    [iOS](/ios/pnddocs/expo_rnn-ios.md)
 - Xamarin Forms: 
-[Android](/android-integration/xamarin_forms-android.md) | 
-[iOS](/ios-integration/xamarin_forms-ios.md)
+[Android](/android/pnddocs/xamarin_forms-android.md) | 
+[iOS](/ios/pnddocs/xamarin_forms-ios.md)
 - MAUI: 
-[Android](/android-integration/xamarin_maui-android.md) | 
-[iOS](/ios-integration/xamarin_maui-ios.md)
+[Android](/android/pnddocs/xamarin_maui-android.md) | 
+[iOS](/ios/pnddocs/xamarin_maui-ios.md)
 - Flutter: 
-[Android](/android-integration/flutter-android.md) | 
-[iOS](/ios-integration/flutter-ios.md)
+[Android](/android/pnddocs/flutter-android.md) | 
+[iOS](/ios/pnddocs/flutter-ios.md)
 
 
 ## API documentation
 
-- [Native Android](TODO:missing-link)
-- [Native iOS](TODO:missing-link)
-- [React Native](TODO:missing-link)
-- [Xamarin Forms](TODO:missing-link)
-- [MAUI](TODO:missing-link)
-- [Flutter](TODO:missing-link)
+- [Native Android](/api-documentation/native-android-apis.md)
+- [Native iOS](/api-documentation/native-ios-apis.md)
+- [React Native](/api-documentation/rn-apis.md)
+- [Xamarin Forms](/api-documentation/xamarin-forms-apis.md)
+- [MAUI](/api-documentation/xamarin-maui-apis.md)
+- [Flutter](/api-documentation/flutter-apis.md)
 
 
 ## Additional resources 

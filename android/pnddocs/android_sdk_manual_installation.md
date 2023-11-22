@@ -24,7 +24,7 @@ If you are having problems installing the SDK, please follow these steps:
 
 ## Developer documentation
 
-* API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/native-android-apis.md)
 
 
 ## Troubleshooting

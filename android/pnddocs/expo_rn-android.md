@@ -1,4 +1,4 @@
-# Expo using React Navigation
+# Expo Android using React Navigation
 
 >[!IMPORTANT]
 >- **Expo SDK** 41-48 using React Navigation 5+ is supported by our codeless solution.<br>
@@ -43,21 +43,21 @@ This configuration allows Pendo to enter pair mode to tag pages and features.
 ## Step 3. Production bundle - modify Javascript obfuscation
 In the `metro.config.js` file, add the following:
 ```javascript
-    module.exports = {
-        transformer: {
-            // ...
-            minifierConfig: {
+module.exports = {
+    transformer: {
+        // ...
+        minifierConfig: {
+            keep_classnames: true, // Preserve class names
+            keep_fnames: true, // Preserve function names
+            mangle: {
                 keep_classnames: true, // Preserve class names
                 keep_fnames: true, // Preserve function names
-                mangle: {
-                    keep_classnames: true, // Preserve class names
-                    keep_fnames: true, // Preserve function names
-                }
             }
         }
     }
+}
 ```
-## Step 4.Integration
+## Step 4. Integration
 
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
@@ -86,7 +86,7 @@ Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
 const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
 ```
 
-Replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
+replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
 
 ```typescript jsx
 <PendoNavigationContainer>
@@ -124,7 +124,6 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 3. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
-
 ## Limitations
 For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
 As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
@@ -135,7 +134,7 @@ Pay attention to the following APIs, ``` setup ``` and ```startSession```; the f
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/rn-apis.md)
 
 ## Troubleshooting
 

@@ -1,4 +1,4 @@
-# Xamarin Forms
+# Xamarin Forms iOS
 
 
 >[!NOTE]
@@ -40,10 +40,10 @@
         ...
     ``` 
 
-    In the **protected override void OnCreate()** method, add the following code:
+    In the **protected override void OnStart()** method, add the following code:
 
     ```c#
-    protected override void OnCreate()
+    protected override void OnStart()
     {
         string apiKey = "YOUR_API_KEY_HERE";
         pendo.Setup(apiKey);
@@ -162,7 +162,7 @@ Review the device log and look for the following message:
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/xamarin-forms-apis.md)
 
 ## Troubleshooting
 
