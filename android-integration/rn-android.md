@@ -8,7 +8,6 @@
 
 ## Step 1. Install the Pendo SDK
 
-
 1. In the **application folder**, add Pendo using one of your package managers: 
 
     ```shell

@@ -122,8 +122,6 @@ PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visi
 ```
 </details>
 
-<br>
-
 >[!TIP]
 >To begin a session for an anonymous visitor, pass ```nil``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
