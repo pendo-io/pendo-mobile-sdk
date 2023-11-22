@@ -1,7 +1,7 @@
 # Flutter
 
 >[!IMPORTANT]
->Important: Pendo supports track events only in Flutter, the codeless solution is still in progress
+>Flutter is supported by our track events only solution. The codeless solution is still in progress.
 
 ## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`

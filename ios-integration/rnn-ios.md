@@ -1,7 +1,10 @@
 # React Native using React Native Navigation
 
 >[!NOTE]
->Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/ios-integration/expo_rnn-ios.md).
+>**Expo SDK** 41-48 using React Native Navigation 6+ is supported. See dedicated installation [Expo integration instructions](/ios-integration/expo_rnn-ios.md).
+
+>[!IMPORTANT]
+>We support a codeless solution for React Native 0.6-0.71 using react-native-navigation 6+.
 
 ## Step 1. Install the Pendo SDK
 

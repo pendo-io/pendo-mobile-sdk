@@ -1,8 +1,10 @@
 # React Native using React Navigation
 
 >[!NOTE]
->Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/android-integration/expo_rn-android.md) instructions.
+>**Expo SDK** 41-48 using React Navigation 5+ is supported. See dedicated installation [Expo integration instructions](/android-integration/expo_rn-android.md).
 
+>[!IMPORTANT]
+>We support a codeless solution for React Native 0.6-0.71 using react-navigation 5+.
 
 ## Step 1. Install the Pendo SDK
 
@@ -184,5 +186,4 @@ Review the device log and look for the following message:
 
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
 - For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

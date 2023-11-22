@@ -54,9 +54,9 @@ Replace the NuGet package `PendoSDKXamarin` with the NuGet package `pendo-xamari
 <td align=center><b>Target <br> Android version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
-<b>2.x (deprecated):</b> `API Level 31`
+<b>2.x (deprecated):</b> `API Level 31 (v12.0)`
 <br>
-<b>3.x:</b> `API Level 33`
+<b>3.x:</b> `API Level 33 (v13.0)`
 
 </td>
 </tr>

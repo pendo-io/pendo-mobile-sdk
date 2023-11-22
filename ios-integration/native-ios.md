@@ -15,7 +15,7 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
-><b>SwiftUI</b> full support full codeless solution is supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
+><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
 
 ## Step 1. Add the Pendo SDK
 ### Cocoapods:
@@ -103,7 +103,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
 
 ## Step 3. Start a new session to track a visitor and to display guides
 
-To begin tracking a visitor's analytics and display guides call the `startSession` API. The call to the `startSession` API can be conducted immediately after calling the `setup` API or anywhere else in the code, such as completing the log in process of your app. To begin a session for an anonymous visitor, pass ```nil``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+To begin tracking a visitor's analytics and to display guides call the `startSession` API. The call to the `startSession` API can be conducted immediately after calling the `setup` API or anywhere else in the code, such as completing the login process of your app. 
 
 <details open>
 <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
@@ -121,6 +121,11 @@ PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visi
 [[PendoManager sharedManager] startSession:@"someVisitor" accountId:@"someAccount" visitorData:@{} accountData:@{}];
 ```
 </details>
+
+<br>
+
+>[!TIP]
+>To begin a session for an anonymous visitor, pass ```nil``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ### Supporting SwiftUI
 

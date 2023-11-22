@@ -13,32 +13,6 @@ Follow these instructions to resolve breaking changes in your app:
 <!--- new row --->
 
 <tr>
-<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
-<td>
-
-<b>2.x (deprecated):</b> `JAVA 8`
-<br>
-<b>3.x:</b> `JAVA 11`
-
-</td>
-</tr>
-
-<!--- new row --->
-
-<tr>
-<td align=center><b>Minimum <br> Kotlin version</b> <br> <i> (Relevant for Android apps only) </td>
-<td>
-
-<b>2.x (deprecated):</b> `1.7.20`
-<br>
-<b>3.x:</b> `1.9.0`
-
-</td>
-</tr>
-
-<!--- new row --->
-
-<tr>
 <td align=center><b>withPendoRN </td>
 <td>
 

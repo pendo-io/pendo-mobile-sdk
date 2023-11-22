@@ -1,10 +1,10 @@
 # Expo using React Navigation
 
->[!NOTE]
->- We support a codeless solution for Expo Sdk 41-48 using react-navigation 5+.<br>
->- For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
->- As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
-which means that codeless tracking analytics is available for screen components only.
+>[!IMPORTANT]
+>- **Expo SDK** 41-48 using React Navigation 5+ is supported by our codeless solution.<br>
+>- **Expo Router** is supported by our track events only solution. We have plans to develop codeless support in the future.
+>- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
+Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
 
 ## Step 1. Add Pendo dependency
 
@@ -126,9 +126,9 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 
 
 ## Limitations
-Note that **Expo Go** is not supported by Pendo because Pendo SDK has a native plugin that is not part of the Expo Go app.
-Pendo can be used in development builds *only*.
-You can read more about development builds [Adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/)
+For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
+As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
+which means that codeless tracking analytics is available for screen components only.
 
 ## Pivots
 Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates the initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
