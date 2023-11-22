@@ -1,4 +1,4 @@
-# Pendo SDK Android manual installation
+# Pendo Android SDK manual installation
 
 If you are having problems installing the SDK, please follow these steps:
 
@@ -16,7 +16,7 @@ If you are having problems installing the SDK, please follow these steps:
     } 
     ```
 
-4. Specify the version number for the Pendo dependency in the gradle file. For example, for version 3.0.0.x it should look like this: 
+4. Specify the version number for the Pendo dependency in the gradle file. <br>For example, for version 3.0.0.x it should look like this: 
 
     ```java
     implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.0.0.x', changing:true)

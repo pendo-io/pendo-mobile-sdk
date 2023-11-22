@@ -19,18 +19,7 @@ Replace the NuGet package `PendoSDKXamarin` with the NuGet package `pendo-xamari
 </td>
 </tr>
 
-<!--- new row --->
 
-<tr>
-<td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
-<td>
-
-<b>2.x (deprecated):</b> `JAVA 8`
-<br>
-<b>3.x:</b> `JAVA 11`
-
-</td>
-</tr>
 
 <!--- new row --->
 

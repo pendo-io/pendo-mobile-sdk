@@ -6,14 +6,16 @@
 
 ## Step 1. Add Pendo dependency
 
-Inside the root folder of your expo app, either run:
+In the **root folder of your expo app**, add Pendo using one of your package managers: 
 
-```
+```shell
+#example with npx expo
 npx expo install rn-pendo-sdk
-```
-or use one of your package managers: 
-```
-npm i rn-pendo-sdk  
+
+#example with npm
+npm install --save rn-pendo-sdk
+
+#example with yarn
 yarn add rn-pendo-sdk
 ```
 

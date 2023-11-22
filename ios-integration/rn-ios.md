@@ -3,18 +3,15 @@
 >[!NOTE]
 >Pendo now supports Expo SDK 41-48. Follow [Expo Integration](/ios-integration/expo_rn-ios.md).
 
-## Step 1. Install Pendo SDK
+## Step 1. Install the Pendo SDK
 
-1. In the **application folder**, run the following command:
-
-    Using NPM:
+1. In the **application folder**, add Pendo using one of your package managers: 
 
     ```shell
+    #example with npm
     npm install --save rn-pendo-sdk
-    ```
-    Using YARN:
 
-    ```shell
+    #example with yarn
     yarn add rn-pendo-sdk
     ```
 
