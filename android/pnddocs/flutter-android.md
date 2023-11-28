@@ -1,7 +1,12 @@
-# Flutter
+# Flutter Android
 
 >[!IMPORTANT]
 >Flutter is supported by our track events only solution. The codeless solution is still in progress.
+
+>[!IMPORTANT]
+>Requirements:
+>- Flutter 3.3 and above
+>- Dart 2.18 and above 
 
 ## Step 1. Install Pendo SDK
 
@@ -44,7 +49,7 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     ```
 
 4. Using ProGuard / R8  
-- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android-integration/pendo-proguard.cfg)
+- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg)
 
 - If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
@@ -135,9 +140,16 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
+## Pivots
+Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
+
+## Limitations
+- Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
+- To support hybrid mode in Flutter, please open a ticket.
+
 ## Developer documentation
 
-* API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/flutter-apis.md)
 
 ## Troubleshooting
 

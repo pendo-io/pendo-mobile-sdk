@@ -1,4 +1,4 @@
-# MAUI
+# MAUI iOS
 
 
 >[!NOTE]
@@ -29,10 +29,10 @@
     ``` 
 
 
-    In the **protected override void OnCreate()** method, add the following code:
+    In the **protected override void OnStart()** method, add the following code:
 
     ```c#
-    protected override void OnCreate()
+    protected override void OnStart()
     {
         IPendoService pendo = PendoServiceFactory.CreatePendoService();
 
@@ -160,7 +160,7 @@ Review the device log and look for the following message:
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/xamarin-maui-apis.md)
 
 ## Troubleshooting
 - For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).

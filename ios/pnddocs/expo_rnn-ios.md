@@ -1,4 +1,4 @@
-# Expo using React Native Navigation
+# Expo iOS using React Native Navigation
 
 >[!IMPORTANT]
 >- **Expo SDK** 41-48 using React Native Navigation 6+ is supported by our codeless solution.<br>
@@ -103,11 +103,11 @@ which means that codeless tracking analytics is available for screen components 
 Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates an initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
 
 ## Limitations
-* To support hybrid mode with React Native Navigation, please open a ticket.
+- To support hybrid mode with React Native Navigation, please open a ticket.
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/rn-apis.md)
 
 ## Troubleshooting
 

@@ -1,7 +1,12 @@
-# Flutter
+# Flutter iOS
 
 >[!IMPORTANT]
 >Flutter is supported by our track events only solution. The codeless solution is still in progress.
+
+>[!IMPORTANT]
+>Requirements:
+>- Flutter 3.3 and above
+>- Dart 2.18 and above 
 
 ## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`
@@ -140,12 +145,12 @@ Review the device log and look for the following message:
 Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 ## Limitations
-* Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
-* To support hybrid mode in Flutter, please open a ticket.
+- Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
+- To support hybrid mode in Flutter, please open a ticket.
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/flutter-apis.md)
 
 ## Troubleshooting
 

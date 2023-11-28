@@ -1,12 +1,13 @@
-# React Native using React Navigation
+# React Native iOS using React Native Navigation
 
 >[!NOTE]
->**Expo SDK** 41-48 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/ios-integration/expo_rn-ios.md).
+>**Expo SDK** 41-48 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rnn-ios.md).
 
 >[!IMPORTANT]
->We support a codeless solution for React Native 0.6-0.71 using react-navigation 5+.
+>We support a codeless solution for React Native 0.6-0.72 using react-native-navigation 6+.
 
 ## Step 1. Install the Pendo SDK
+
 
 1. In the **application folder**, add Pendo using one of your package managers: 
 
@@ -23,11 +24,11 @@
     ```shell script 
     pod install
     ```
-
+    
 3. **Modify Javascript obfuscation**
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  
-    This means there is no access to the original component names that are used for the codeless solution.
+    This means that there is no access to the original component names that are used for the codeless solution.
 
     In the application **metro.config.js**, add the following statements in the transformer:  
 
@@ -51,19 +52,25 @@
 
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
     ```typescript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+    import { Navigation } from "react-native-navigation";
+    ```
 
+    ```typescript
     function initPendo() {
-        const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
+        const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
         const pendoKey = 'YOUR_API_KEY_HERE';
         //note the following API will only setup initial configuration, to start collect analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
-    }   
+    }
     initPendo();
     ```
+
+
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
 
     ```typescript
@@ -75,28 +82,6 @@
     PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
-3. In the file where the `NavigationContainer` is created.
-
-   Import `WithPendoReactNavigation`:
-
-    ```typescript
-    import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
-    ```
-
-   Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
-
-    ```typescript
-    const PendoNavigationContainer = WithPendoReactNavigation (NavigationContainer);    
-    ```
-
-   replace `NavigationContainer` tag with `PendoNavigationContainer` tag
-
-    ```typescript jsx
-    <PendoNavigationContainer>
-    {/* Rest of your app code */}
-    </PendoNavigationContainer>
-    ```
-
     **Notes:**  
     **visitorId**: a user identifier (e.g. John Smith)  
     **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
@@ -104,7 +89,7 @@
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
 >[!TIP]
->Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>Passing `null` or `""` to the visitorId or not setting the `initParams.visitorId` generates an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
@@ -116,7 +101,7 @@ These steps allow <a href="https://support.pendo.io/hc/en-us/articles/3600336096
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
 1. Add Pendo URL Scheme to **info.plist** file:
-  
+
       Under App Target > Info > URL Types, create a new URL by clicking the + button.  
       Set **Identifier** to pendo-pairing or any name of your choosing.  
       Set **URL Scheme** to `YOUR_SCHEME_ID`.
@@ -125,19 +110,19 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 2. To allow pairing from the device
     a. If using AppDelegate, add or modify the **openURL** function:
-
+    
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
     ```swift
-        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-            if url.scheme?.range(of: "pendo") != nil {
-                PendoManager.shared().initWith(url)
-                return true
-            }
-            // your code here...
+    func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.scheme?.range(of: "pendo") != nil {
+            PendoManager.shared().initWith(url)
             return true
         }
+        // your code here...
+        return true
+    }
     ```
     </details>
 
@@ -145,7 +130,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     <summary> <b>Objective-C Instructions</b><i> - Click to Expand / Collapse</i></summary>
 
     ```objective-c
-    #import <Pendo/Pendo.h>
+    @import Pendo;
 
     - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
             if ([[url scheme] containsString:@"pendo"]) {
@@ -188,7 +173,6 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
     </details>
 
-
 ## Step 4. Verify installation
 
 1. Test using Xcode:  
@@ -200,11 +184,10 @@ Review the device log and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
-
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
-* Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Navigation" target="_blank">here</a>
+- API documentation available [here](/api-documentation/rn-apis.md)
+- Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here.</a>
 
 ## Troubleshooting
 

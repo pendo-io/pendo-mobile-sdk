@@ -1,10 +1,10 @@
-# React Native using React Navigation
+# React Native Android using React Native Navigation
 
 >[!NOTE]
->**Expo SDK** 41-48 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android-integration/expo_rn-android.md).
+>**Expo SDK** 41-48 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rnn-android.md).
 
 >[!IMPORTANT]
->We support a codeless solution for React Native 0.6-0.71 using react-navigation 5+.
+>We support a codeless solution for React Native 0.6-0.72 using react-native-navigation 6+.
 
 ## Step 1. Install the Pendo SDK
 
@@ -19,7 +19,7 @@
     ```
 
 2. In the application **build.gradle** file.  
-- **Add the Pendo Repository to the repositories section under the allprojects section**
+- **add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
     allprojects { 
@@ -32,17 +32,17 @@
     }
     ```
 
-- **Minimum and compile SDK versions**  
+- **Minimum and compile Sdk versions**  
 If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
 
-  ```java
-  android {
-      minSdkVersion 21
-      compileSdkVersion 33
-  }
-  ```
+    ```java
+    android {
+        minSdkVersion 21
+        compileSdkVersion 33
+    }
+    ```
  
-3. In the application **Android.manifest** file:  
+3. In the application **Android.manifest** file.  
 If applicable, add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
 
     ```xml
@@ -50,33 +50,33 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     ```
 
-4. #### Modify Javascript Minification
+4. Modify Javascript Minification
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle.
-  
+    
     This means there is no access to the original component names that are used for the codeless solution.
 
     In the application **metro.config.js**, add the following statements in the transformer:
 
     ```javascript
     module.exports = {
-      transformer: {
+    transformer: {
         // ...
         minifierConfig: {
             keep_classnames: true, // Preserve class names
             keep_fnames: true, // Preserve function names
             mangle: {
-              keep_classnames: true, // Preserve class names
-              keep_fnames: true, // Preserve function names
+            keep_classnames: true, // Preserve class names
+            keep_fnames: true, // Preserve function names
             }
         }
-      }
+    }
     }
     ```
 
 5.  #### Using ProGuard 
   
-- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
+ - If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
 `!code/allocation/variable`  
 Your optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
@@ -90,9 +90,10 @@ Your optimizations line should look like this:
 
     ```javascript
     import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+    import { Navigation } from "react-native-navigation";
 
     function initPendo() {
-        const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
+        const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
         const pendoKey = 'YOUR_API_KEY_HERE';
         //note the following API will only setup initial configuration, to start collect analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
@@ -111,28 +112,6 @@ Your optimizations line should look like this:
     PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
-3. In the file where the `NavigationContainer` is created.
-
-   Import `WithPendoReactNavigation`:
-
-    ```javascript
-    import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
-    ```
-
-   Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
-
-   ```javascript
-    const PendoNavigationContainer = WithPendoReactNavigation (NavigationContainer);    
-    ```
-
-   replace `NavigationContainer` tag with `PendoNavigationContainer` tag
-
-    ```javascript
-   <PendoNavigationContainer>
-   {/* Rest of your app code */}
-   </PendoNavigationContainer>
-   ```
-
     **Notes:**  
 
     **visitorId**: a user identifier (e.g. John Smith)  
@@ -141,7 +120,7 @@ Your optimizations line should look like this:
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
 >[!TIP]
-Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>Passing `null` or `""` as the visitorId will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
@@ -178,8 +157,8 @@ Review the device log and look for the following message:
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
-* Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Navigation" target="_blank">here.</a>
+- API documentation available [here](/api-documentation/rn-apis.md)
+- Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here.</a>
 
 ## Troubleshooting
 

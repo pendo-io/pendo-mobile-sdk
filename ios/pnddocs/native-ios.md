@@ -272,13 +272,12 @@ The OS assigns default accessibility values to UI elements in the app if you do 
 
 ## Developer documentation
 
-- API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/native-ios-apis.md)
 
 - Sample apps with examples of feature tagging and how Pendo analytics work.<br>
-(Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)<br>
-
-    ACHNBrowserUI - https://github.com/pendo-io/ACHNBrowserUI <br>
-TeslaApp      - https://github.com/pendo-io/Tesla_Clone_Swiftui <br>
+(Please pay attention to comments with _PENDO CHANGE_ which in some places require minor changes like integration code or adding a background color)
+    - [ACHNBrowserUI](https://github.com/pendo-io/ACHNBrowserUI)
+    - [TeslaApp](https://github.com/pendo-io/Tesla_Clone_Swiftui)
 
 ## Troubleshooting
 

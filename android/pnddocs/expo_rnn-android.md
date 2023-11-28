@@ -1,7 +1,7 @@
-# Expo using React Navigation
+# Expo Android using React Native Navigation
 
 >[!IMPORTANT]
->- **Expo SDK** 41-48 using React Navigation 5+ is supported by our codeless solution.<br>
+>- **Expo SDK** 41-48 using React Native Navigation 6+ is supported by our codeless solution.<br>
 >- **Expo Router** is supported by our track events only solution. We have plans to develop codeless support in the future.
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
@@ -24,10 +24,11 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details section.
 
 In the `app.config.js` or `app.json`, add the following:
-```
+```json
+{
 "plugins": [
       [
         "rn-pendo-sdk",
@@ -37,24 +38,26 @@ In the `app.config.js` or `app.json`, add the following:
         }
       ]
     ]
+}
 ```
-This configuration allows Pendo to enter pair mode to tag pages and features.
+This configuration allows pendo to enter pair mode to tag pages and features. 
 
 ## Step 3. Production bundle - modify Javascript obfuscation
+
 In the `metro.config.js` file, add the following:
-```javascript
+```typescript
 module.exports = {
-    transformer: {
-        // ...
-        minifierConfig: {
-            keep_classnames: true, // Preserve class names
-            keep_fnames: true, // Preserve function names
-            mangle: {
-                keep_classnames: true, // Preserve class names
-                keep_fnames: true, // Preserve function names
-            }
+  transformer: {
+    // ...
+    minifierConfig: {
+        keep_classnames: true, // Preserve class names
+        keep_fnames: true, // Preserve function names
+        mangle: {
+          keep_classnames: true, // Preserve class names
+          keep_fnames: true, // Preserve function names
         }
     }
+  }
 }
 ```
 ## Step 4. Integration
@@ -62,36 +65,14 @@ module.exports = {
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
 
+In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
-import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
-
 function initPendo() {
-    const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
-    const key = 'YOUR_API_KEY_HERE';
+    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+    const pendoKey = 'YOUR_API_KEY_HERE';
     //note the following API will only setup initial configuration, to start collect analytics use start session
-    PendoSDK.setup(key, navigationOptions);
+    PendoSDK.setup(pendoKey, navigationOptions);
 }
-```
-
-In the file where the `NavigationContainer` is created:
-import `WithPendoReactNavigation`:
-
-```typescript
-import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
-```
-
-Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
-
-```typescript
-const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
-```
-
-replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
-
-```typescript jsx
-<PendoNavigationContainer>
-{/* Rest of your app code */}
-</PendoNavigationContainer>
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
@@ -102,20 +83,11 @@ const accountData = {'Tier': 1, 'Size': 'Enterprise'};
 
 PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
-If some of your own _custom_ react native components are not taggable because we can't detect it in the regular detection flow,
-you can try to add it manually to the scanning flow. To do this, add a prop `nativeID` to your component.
-For instance:
-```typescript jsx
-<TouchableOpacity onPress={open} nativeID={"myProp"}>      
-</TouchableOpacity> 
-```
-and change your integration to the following:
-```typescript
-const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer,{nativeIDs:["myProp"]});
-```
+
 ## Step 5. Running the project
+
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
-You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at any later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
+You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at a later time (Additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild) )
 
 ## Step 6. Verify installation
 
@@ -130,11 +102,14 @@ As with other analytics tools, we are dependent on react-navigation [screen chan
 which means that codeless tracking analytics is available for screen components only.
 
 ## Pivots
-Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates the initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
+Pay attention to the following APIs, ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates an initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor.  
+
+## Limitations
+- To support hybrid mode with React Native Navigation, please open a ticket.
 
 ## Developer documentation
 
-* API documentation available [here](TODO:missing-link)
+- API documentation available [here](/api-documentation/rn-apis.md)
 
 ## Troubleshooting
 
