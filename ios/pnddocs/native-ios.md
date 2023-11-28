@@ -17,6 +17,12 @@
 >[!IMPORTANT]
 ><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
 
+>[!IMPORTANT]
+>Requirements:
+>- Deployment target of `iOS 11` or higher 
+>- Swift Compatibility `5.7` or higher
+>- Xcode `14` or higher
+
 ## Step 1. Add the Pendo SDK
 ### Cocoapods:
 

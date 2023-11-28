@@ -110,6 +110,32 @@ Follow these instructions to resolve breaking changes in your app:
 <!--- new row --->
 
 <tr>
+<td align=center><b>Minimum <br> xCode version</td>
+<td>
+
+<b>2.x (deprecated):</b> 
+`13`
+<br><b>3.x:</b> 
+`14`
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Minimum <br> Swift compatibility</td>
+<td>
+
+<b>2.x (deprecated):</b> 
+`5.6`
+<br><b>3.x:</b> 
+`5.7`
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>initSDK </td>
 <td>
 

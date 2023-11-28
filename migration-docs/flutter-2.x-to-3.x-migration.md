@@ -13,6 +13,32 @@ Follow these instructions to resolve breaking changes in your app::
 <!--- new row --->
 
 <tr>
+<td align=center><b>Minimum <br> Flutter version</b> <br></td>
+<td>
+
+<b>2.x (deprecated):</b> `2.0.0 - 2.10.5`
+<br>
+<b>3.x:</b> `3.3.0`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Minimum <br> Dart version</b> <br></td>
+<td>
+
+<b>2.x (deprecated):</b> `2.12.0 - 2.16.2`
+<br>
+<b>3.x:</b> `2.18`
+
+</td>
+</tr>
+
+<!--- new row --->
+
+<tr>
 <td align=center><b>Minimum <br> JAVA version</b> <br> <i> (Relevant for Android apps only) </td>
 <td>
 
