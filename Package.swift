@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Pendo",
     platforms: [
-        .iOS(.v9)
+        .iOS(.v11)
     ],
     products: [
         .library(
@@ -18,8 +18,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Pendo",
-            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/2.22.5.7748/pendo-ios-sdk-xcframework.2.22.5.7748.zip",
-            checksum: "7404c2f53315db98344391a4881eedf9b9e91d4a5c0d20613b0581d92666bdbd"
+            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/3.0.0.7964/pendo-ios-sdk-xcframework.3.0.0.7964.zip",
+            checksum: "b5ce7e189dbe5c75c6537ab5bc7c9e7692e74fa50c0cec2ace3faffcb7fb9786"
         ),
     ]
 )
