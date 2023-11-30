@@ -44,7 +44,7 @@ static synchronized void setup(Context context, String appKey, PendoOptions opti
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -57,7 +57,7 @@ static synchronized void setup(Context context, String appKey, PendoOptions opti
 | Param  | Type | Description |
 | :---: | :---: | :--- |
 | context | Context | The hosting application Context (Activity / Service / Application) |
-| appKey | String | The App Key is listed in your Pendo Subscription Settings under the App Details section |
+| appKey | String | The App Key is listed in your Pendo Subscription Settings in App Details |
 | pendoOptions | PendoOptions | PendoOptions should be null unless instructed otherwise by Pendo Support |
 | pendoPhasesCallback | PendoPhasesCallbackInterface | See the PendoPhasesCallbackInterface method table below for more details. Using these callbacks is optional |
 
@@ -82,7 +82,7 @@ static void startSession(final String visitorId, final String accountId, final M
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -125,7 +125,7 @@ static void setVisitorData(Map<String, Object> visitorData)
 
 >Updates the visitor metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -162,7 +162,7 @@ static void setAccountData(Map<String, Object> accountData)
 
 >Updates the account metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -203,7 +203,7 @@ static void endSession()
 
 
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -231,7 +231,7 @@ static void track(String eventName, @Nullable Map<String, Object> properties)
 >Sends a track event with the specified properties.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: void<br>
@@ -265,10 +265,10 @@ static void screenContentChanged()
 >- The View was added dynamically to the View Hierarchy.
 >- The screen content was scrolled.
 
->In case multiple page captures were used to tag all features on the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
+>If multiple page captures were used to tag all features on the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: void<br>
@@ -293,7 +293,7 @@ static boolean sendClickAnalytics(View view)
 >The View's clickable attribute must be set as `true` in the xml / activity. Call the API in your code as part of the action implementation (e.g., onTouchListener, onClickListener, etc).
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: boolean<br>
@@ -319,7 +319,7 @@ static synchronized void pauseGuides(boolean dismissGuides)
 >Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -346,7 +346,7 @@ static synchronized void resumeGuides()
 >Resumes displaying guides during the ongoing session. This API reverses the logic of the `pauseGuides` API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -367,7 +367,7 @@ static synchronized void dismissVisibleGuides()
 >Dismisses any visible guide.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -388,7 +388,7 @@ static String getDeviceId()
 >Returns the device's unique Pendo-generated ID. 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> String<br>
@@ -409,7 +409,7 @@ static String getVisitorId()
 >Returns the ID of the visitor in the active session.
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> String<br>
@@ -430,7 +430,7 @@ static String getAccountId()
 >Returns the ID of the account in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> String<br>
@@ -454,7 +454,7 @@ static final JWT jwt
 
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> Pendo<br>
 <b>Kind:</b> static property getter<br>
 <b>Returns:</b> JWT<br>
@@ -476,7 +476,7 @@ static synchronized void setDebugMode(boolean enableDebugMode)
 
 >Debug logs are turned off by default. Releasing your production app with the debug logs enabled is not recommended and may have performance repercussions on your app.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -515,7 +515,7 @@ void onInitComplete()
 > Guides that are not triggered on app launch may take a few additional moments after this callback to be ready for display.
 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -555,7 +555,7 @@ void onInitFailed()
 
 >This callback is triggered on a failed attempt to establish a connection with Pendo's server or on a failed attempt to start a new session when calling Pendo's Setup or StartSession APIs respectively.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -612,7 +612,7 @@ static void startSession(final String jwt,  final String signingKeyName)
 
 > The JWT payload must contain both the visitor and account elements, each with an `id` property and value. To generate an anonymous visitor use an empty string as the value of the `id` property of the visitor element. The account `id` property may be set to an empty string as well. Additional visitor and account properties are optional.
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -670,7 +670,7 @@ static void setVisitorData(final String jwt,  final String signingKeyName)
 
 >The JWT payload should not include the account element, and the visitor ‘id’ property value must match the visitor ‘id’ value used to start the session.
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -728,7 +728,7 @@ static void setAccountData(final String jwt,  final String signingKeyName)
 >The JWT payload should not include the visitor element, and the account ‘id’ property value must match the account ‘id’ value used to start the session.
 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 

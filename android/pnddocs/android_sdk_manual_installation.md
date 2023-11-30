@@ -24,12 +24,12 @@ If you are having problems installing the SDK, please follow these steps:
 
 ## Developer documentation
 
-- API documentation available [here](/api-documentation/native-android-apis.md)
+- API documentation available [here](/api-documentation/native-android-apis.md).
 
 
 ## Troubleshooting
 
-- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
 - For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
-- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

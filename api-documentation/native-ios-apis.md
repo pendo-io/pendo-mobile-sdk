@@ -55,7 +55,7 @@ class func shared() -> Self
 
 >Returns a shared instance of the PendoManager class. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -80,7 +80,7 @@ func setup(_ appKey: String, with options: PendoOptions?)
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -92,7 +92,7 @@ func setup(_ appKey: String, with options: PendoOptions?)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | String | The App Key is listed in your Pendo Subscription Settings under the App Details section |
+| appKey | String | The App Key is listed in your Pendo Subscription Settings in App Details |
 | pendoOptions | PendoOptions | PendoOptions should be `nil` unless instructed otherwise by Pendo Support |
 
 
@@ -114,11 +114,11 @@ func initWith(_ url: URL)
 
 >This API should be called either in the appDelegate or sceneDelegate class inside the openURL or openURLContexts method respectively.
 
->Setting up the Pendo URL scheme in your app is required for your device to pair. The scheme ID can be found in your Pendo Subscription Settings under the App Details section. 
+>Setting up the Pendo URL scheme in your app is required for your device to pair. The scheme ID can be found in your Pendo Subscription Settings in App Details. 
 
 >For more information see the native iOS installation instructions. Additional steps for pure SwiftUI applications are required and can be found in the installation instructions as well. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -136,6 +136,10 @@ func initWith(_ url: URL)
     
 ```swift
 // Implementation example in the AppDelegate file 
+
+import Pendo
+
+...
 
 func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     if url.scheme?.range(of: "pendo") != nil {
@@ -160,7 +164,7 @@ func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHas
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -195,7 +199,7 @@ func setVisitorData(_ visitorData: [AnyHashable : Any])
 
 >Updates the visitor metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -228,7 +232,7 @@ func setAccountData(_ accountData: [AnyHashable : Any])
 
 >Updates the account metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -263,7 +267,7 @@ func endSession()
 
 >This API is commonly used when the user logs out of your application.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -291,7 +295,7 @@ func track(_ event: String, properties: [AnyHashable : Any]?)
 >Sends a track event with the specified properties.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: PendoManager<br>
 <b>Kind</b>: class method<br>
 <b>Returns</b>: void<br>
@@ -322,7 +326,7 @@ func screenContentChanged()
 >The logic applied by this API is automatically invoked when scrolling the screen content of the app. Elements below the fold created dynamically while scrolling will be identified automatically by the SDK and there is no need to call the screenContentChanged API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: PendoManager<br>
 <b>Kind</b>: class method<br>
 <b>Returns</b>: void<br>
@@ -344,7 +348,7 @@ func pauseGuides(_ dismissGuides: Bool)
 >Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> void<br>
@@ -371,7 +375,7 @@ func resumeGuides()
 >Resumes displaying guides during the ongoing session. This API reverses the logic of the `pauseGuides` API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> void<br>
@@ -392,7 +396,7 @@ func dismissVisibleGuides()
 >Dismisses any visible guide.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> void<br>
@@ -413,7 +417,7 @@ func getDeviceId() -> String
 >Returns the device's unique Pendo-generated ID. 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> String<br>
@@ -434,7 +438,7 @@ private(set) var visitorId: String?
 >Returns the ID of the visitor in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> property getter<br>
 <b>Returns:</b> String<br>
@@ -455,7 +459,7 @@ private(set) var accountId: String?
 >Returns the ID of the account in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> property getter<br>
 <b>Returns:</b> String<br>
@@ -478,7 +482,7 @@ private(set) var jwt: PendoJWT
 >To use secure metadata sessions, contact Pendo support to enable this feature.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoManager<br>
 <b>Kind:</b> property getter<br>
 <b>Returns:</b> PendoJWT<br>
@@ -500,7 +504,7 @@ func setDebugMode(_ isDebugEnabled: Bool)
 
 >Debug logs are turned off by default. Releasing your production app with the debug logs enabled is not recommended and may have performance repercussions on your app.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -538,7 +542,7 @@ func pendoRecognizeClickAnalytics()
 >This API will only work on UIViews that inherit from UIResponder.
 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -570,7 +574,7 @@ func pendoEnableSwiftUI()
 
 >See the iOS native installation instructions for additional information and examples.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -601,7 +605,7 @@ func pendoRecognizeClickAnalytics()
 
 >Call this method on the View to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable feature.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -628,7 +632,7 @@ someView.pendoRecognizeClickAnalytics();
 
 >Guides that are not triggered on app launch may take a few additional moments after this notification has been sent to be ready for display.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -658,7 +662,7 @@ NotificationCenter.default.removeObserver(self,
 
 >An NSNotification will be sent on a failed attempt to establish a connection with Pendo's server or on a failed attempt to start a new session when calling Pendo's Setup or StartSession APIs respectively.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -709,7 +713,7 @@ func startSession(_ jwt: String, signingKeyName: String)
 
 > The JWT payload must contain both the visitor and account elements, each with an `id` property and value. To generate an anonymous visitor use an empty string as the value of the `id` property of the visitor element. The account `id` property may be set to an empty string as well. Additional visitor and account properties are optional.
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -767,7 +771,7 @@ func setVisitorData(_ jwt: String, signingKeyName: String)
 
 >The JWT payload should not include the account element, and the visitor ‘id’ property value must match the visitor ‘id’ value used to start the session.
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -823,7 +827,7 @@ func setAccountData(_ jwt: String, signingKeyName: String)
 >The JWT payload should not include the visitor element, and the account ‘id’ property value must match the account ‘id’ value used to start the session.
 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 

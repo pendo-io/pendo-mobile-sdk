@@ -16,7 +16,7 @@
     flutter pub add pendo_sdk
     ```
 
-2. In the application **build.gradle** file:  
+2. In the application **android/build.gradle** file:  
 - Add the Pendo Repository to the repositories section:
 
     ```java
@@ -40,8 +40,8 @@ If applicable, set your app to be compiled with **compileSdkVersion 33** or high
 
 
 
-3. In the application **Android.manifest** file:  
-If applicable, add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
+3. In the application **AndroidManifest.xml** file:  
+Add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
 
     ```xml
     <uses-permission android:name="android.permission.INTERNET" />
@@ -49,17 +49,17 @@ If applicable, add the following `<uses-permission>` to the manifest in the `<ma
     ```
 
 4. Using ProGuard / R8  
-- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg)
+- If you are using **ProGuard**, the rules that need to be added to ProGuard can be found here: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg).
 
-- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
-`!code/allocation/variable`  
-Your optimizations line should look like this:  
+
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization, and have `{Android SDK Location}/tools/proguard/proguard-android-optimize.txt`, add `!code/allocation/variable` to the `-optimizations` line in your `app/proguard-rules.pro` file. 
+The optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
 In the application **main file (lib/main.dart)**, add the following code:  
 
@@ -93,7 +93,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
 >[!TIP]
->Passing `null` or `""` or not setting the `visitorId` will generate an <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 3. Track events
 
@@ -112,11 +112,11 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 ## Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
 
-These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
+This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
-Add the following `<activity>` to the manifest in the `<application>` tag:
+Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
 
 ```xml
 <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
@@ -133,15 +133,12 @@ Add the following `<activity>` to the manifest in the `<application>` tag:
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
-Review the device log and look for the following message:  
+Review the Android Studio logcat and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Hover over your app and select View app details.
+3. Select the **Applications** tab and then your application.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
-
-## Pivots
-Pay attention to the following APIs ``` setup ``` and ```startSession```; the former *must* be called once per session and it creates initial setup for the SDK, the latter should be called when you have the visitor you would like to assign the analytics/guides to. If you want an anonymous visitor, pass ```nil``` to the ```startSession``` and call it again as soon as you have the visitor. 
 
 ## Limitations
 - Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
@@ -149,10 +146,10 @@ Pay attention to the following APIs ``` setup ``` and ```startSession```; the fo
 
 ## Developer documentation
 
-- API documentation available [here](/api-documentation/flutter-apis.md)
+- API documentation available [here](/api-documentation/flutter-apis.md).
 
 ## Troubleshooting
 
-- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

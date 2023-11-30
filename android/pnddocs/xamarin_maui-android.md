@@ -17,18 +17,17 @@
 
 4. #### **Using Proguard / R8**
 
-- If you are using **ProGuard**, the rules that need to be added to ProGuard are in this file: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg)  
+- If you are using **ProGuard**, the rules that need to be added to ProGuard can be found here: [pendo-proguard.cfg](/android/pnddocs/pendo-proguard.cfg).
 
 
-- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization and have`proguard-android-optimize.txt`, add the following in the optimizations code line:
-`!code/allocation/variable`  
-Your optimizations line should look like this:  
+- If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization, and have `{Android SDK Location}/tools/proguard/proguard-android-optimize.txt`, add `!code/allocation/variable` to the `-optimizations` line in your `app/proguard-rules.pro` file. 
+The optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
 1. Open the shared application **App.xaml.cs**
 
@@ -110,14 +109,14 @@ Your optimizations line should look like this:
    This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
 >[!TIP]
->Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ## Step 3. Mobile device connectivity for tagging and testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
 
-This step allows page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging.</a>
+This step enables page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging.</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
@@ -136,10 +135,10 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 ## Step 4. Verify installation
 1. Test using Visual Studio:  
 Run the app.  
-Review the device log and look for the following message:  
+Review the Android Studio logcat and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Hover over your app and select View app details.
+3. Select the **Applications** tab and then your application.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
@@ -150,6 +149,6 @@ Review the device log and look for the following message:
 
 ## Troubleshooting
 
-- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
