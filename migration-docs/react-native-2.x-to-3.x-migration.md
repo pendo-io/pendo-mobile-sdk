@@ -75,13 +75,21 @@ Replace `initSDK` by calling `setup` and then `startSession`.
 <b>2.x (deprecated):</b>
 
 ```javascript
+import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+
+// only if using React Native Navigation
+import { Navigation } from "react-native-navigation";
+
 // set session parameters
 const pendoParams = {'visitorId': 'someVisitorID',
                      'accountId': 'someAccountID',
                      'vistiorData':  {'age': '25', 'country': 'USA'},
                      'accountData':  {'tier': '1', 'size': 'Enterprise'}};
-                     
-const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
+
+// select the correct NavigationLibraryType according to your application
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+const navigationOptions = {library: NavigationLibraryType.Other}; 
 
 // establish connection to server and start a session
 PendoSDK.initSdk('someAppKey', 
@@ -92,8 +100,18 @@ PendoSDK.initSdk('someAppKey',
 <b>3.x:</b>
 
 ```javascript
+import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+
+// only if using React Native Navigation
+import { Navigation } from "react-native-navigation";
+
+
+// select the correct NavigationLibraryType according to your application
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+const navigationOptions = {library: NavigationLibraryType.Other};
+
 // establish connection to server
-const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
 PendoSDK.setup('someAppKey', navigationOptions);
 
 // start a session
@@ -117,16 +135,36 @@ Call `setup` instead of `initSDKWithoutVisitor`.
 <b>2.x (deprecated):</b>
 
 ```javascript
+import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+
+// only if using React Native Navigation
+import { Navigation } from "react-native-navigation";
+
+
+// select the correct NavigationLibraryType according to your application
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+const navigationOptions = {library: NavigationLibraryType.Other};
+
 // establish connection to server
-const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
 PendoSDK.initSDKWithoutVisitor('someAppKey', navigationOptions);
 ```
 
 <b>3.x:</b>
 
 ```javascript
+import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+
+// only if using React Native Navigation
+import { Navigation } from "react-native-navigation";
+
+
+// select the correct NavigationLibraryType according to your application
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+const navigationOptions = {library: NavigationLibraryType.Other};
+
 // establish connection to server
-const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
 PendoSDK.setup('someAppKey', navigationOptions);
 ```
 
@@ -164,7 +202,7 @@ PendoSDK.startSession(null, null, null, null);
 <td align=center><b>switchVisitor </td>
 <td>
 
-Call `startSession` instead of `switchVisitor`.
+Call `startSession` with a new visitor or account id instead of `switchVisitor`.
 
 <b>2.x (deprecated):</b>
 

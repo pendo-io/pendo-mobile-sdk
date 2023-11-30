@@ -30,7 +30,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s main file (lib/main.dart). The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -42,7 +42,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | String | The App Key is listed in your Pendo Subscription Settings under the App Details section |
+| appKey | String | The App Key is listed in your Pendo Subscription Settings in App Details |
 | pendoOptions | Map<String, dynamic>? | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
 
 
@@ -66,7 +66,7 @@ static Future<void> startSession(String? visitorId, String? accountId, Map<Strin
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -104,7 +104,7 @@ static Future<void> setVisitorData(Map<String, dynamic> visitorData) async
 
 >Updates the visitor metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -138,7 +138,7 @@ static Future<void> setAccountData(Map<String, dynamic> accountData) async
 
 >Updates the account metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -177,7 +177,7 @@ static Future<void> endSession() async
 
 
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -205,7 +205,7 @@ static Future<void> track(String event, Map<String, dynamic>? properties) async
 >Sends a track event with the specified properties.
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 
 <b>Class</b>: PendoSDK<br>
 <b>Kind</b>: static method<br>
@@ -233,7 +233,7 @@ static Future<void> pauseGuides(bool dismissGuides) async
 >Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -260,7 +260,7 @@ static Future<void> resumeGuides() async
 >Resumes displaying guides during the ongoing session. This API reverses the logic of the `pauseGuides` API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 <br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
@@ -282,7 +282,7 @@ static Future<void> dismissVisibleGuides() async
 >Dismisses any visible guide.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -303,7 +303,7 @@ static Future<String?> getDeviceId() async
 >Returns the device's unique Pendo-generated ID. 
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 <br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
@@ -325,7 +325,7 @@ static Future<String?> getVisitorId() async
 >Returns the ID of the visitor in the active session.
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 <br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
@@ -347,7 +347,7 @@ static Future<String?> getAccountId() async
 >Returns the ID of the account in the active session.
 
 <details>
-    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> String<br>
@@ -369,7 +369,7 @@ static Future<void> setDebugMode(bool isDebugEnabled) async
 
 >Debug logs are turned off by default. Releasing your production app with the debug logs enabled is not recommended and may have performance repercussions on your app.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
