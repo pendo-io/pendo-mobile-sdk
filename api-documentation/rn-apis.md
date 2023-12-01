@@ -48,7 +48,7 @@ WithPendoReactNavigation(NavigationContainer)
 
 >Only for apps that use React Navigation library. This function wraps the navigation container to track the navigation state. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -83,7 +83,7 @@ WithPendoModal(ModalComponent)
 
 >Only for apps that use React Navigation library. This function wraps the modal component so the SDK can track the modal.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -122,7 +122,7 @@ static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s main file (App.js/.ts/.tsx). The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -134,7 +134,7 @@ static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | string | The App Key is listed in your Pendo Subscription Settings under the App Details section |
+| appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
 | navigationOptions | NavigationOptions | Convey the navigation library used by your app |
 | pendoOptions | PendoOptions | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
 
@@ -162,7 +162,7 @@ static startSession(visitorId?: string, accountId?: string, visitorData?: object
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -200,7 +200,7 @@ static setVisitorData(visitorData: object): void
 
 >Updates the visitor metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -234,7 +234,7 @@ static setAccountData(accountData: object): void
 
 >Updates the account metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -272,7 +272,7 @@ static endSession(): void
 
 
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -300,7 +300,7 @@ static track(name: string, params?: object): void
 >Sends a track event with the specified properties.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 
 <b>Class</b>: PendoSDK<br>
 <b>Kind</b>: static method<br>
@@ -330,11 +330,11 @@ static screenContentChanged(): void
 
 >This method manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions where the delayed appearance of some elements on the screen is not recognized by the SDK.
 
->In case multiple page captures were used to tag all features in the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
+>If multiple page captures were used to tag all features in the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: void<br>
@@ -360,7 +360,7 @@ static sendClickAnalytic(nativeID: string): void
 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: boolean<br>
@@ -387,7 +387,7 @@ static pauseGuides(dismissGuides: boolean): void
 >Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -414,7 +414,7 @@ static resumeGuides(): void
 >Resumes displaying guides during the ongoing session. This API reverses the logic of the `pauseGuides` API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -435,7 +435,7 @@ static dismissVisibleGuides(): void
 >Dismisses any visible guide.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> void<br>
@@ -456,7 +456,7 @@ static async getDeviceId(): Promise<string | null>
 >Returns the device's unique Pendo-generated ID. 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> Promise &lt string | null &gt <br>
@@ -483,7 +483,7 @@ static async getVisitorId(): Promise<string | null>
 >Returns the ID of the visitor in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
 <b>Returns:</b> Promise &lt string | null &gt <br>
@@ -539,7 +539,7 @@ static setDebugMode(isDebugEnabled: boolean): void
 
 >Debug logs are turned off by default. Releasing your production app with the debug logs enabled is not recommended and may have performance repercussions on your app.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -578,7 +578,7 @@ NavigationOptions(library: NavigationLibraryType, navigation?: any)
 
 >A NavigationOptions is required to call the setup API and establish a connection to Pendo’s server.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 

@@ -56,7 +56,7 @@ The following changes are required:
 
 <td>
 
-Obtain the `Pendo` instance using the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
+Obtain the shared project `Pendo` instance using the `PendoServerFactory` instead of creating a new `PendoInterface` instance.
 
 <b>2.x (deprecated):</b>
 

@@ -162,7 +162,7 @@ Pendo.startSession(
 <td align=center><b>switchVisitor </td>
 <td>
 
-Call `startSession` instead of `switchVisitor`.
+Call `startSession` with a new visitor or account id instead of `switchVisitor`.
 
 <b>2.x (deprecated):</b>
 

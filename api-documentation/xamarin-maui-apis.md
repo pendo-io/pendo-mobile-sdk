@@ -31,7 +31,7 @@ interface IPendoService
 
 >The interface of the Pendo shared instance. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -69,7 +69,7 @@ static void Setup(string appKey)
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s OnStart() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -81,7 +81,7 @@ static void Setup(string appKey)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | string | The App Key is listed in your Pendo Subscription Settings under the App Details section |
+| appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
 
 <b>Example</b>:
     
@@ -103,7 +103,7 @@ void StartSession(string visitorId, string accountId, Dictionary<string, object>
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -150,7 +150,7 @@ void SetVisitorData(Dictionary<string, object> visitorData)
 
 >Updates the visitor metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -189,7 +189,7 @@ void SetAccountData(Dictionary<string, object> accountData)
 
 >Updates the account metadata of the ongoing session.
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -232,7 +232,7 @@ void EndSession()
 
 
   
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
@@ -261,7 +261,7 @@ Dictionary<string, object> trackData)
 >Sends a track event with the specified properties.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 
 <b>Class</b>: PendoInterface<br>
 <b>Kind</b>: class method<br>
@@ -294,7 +294,7 @@ void PauseGuides(bool dismissGuides)
 >Pauses any guides from appearing during an active session. If the `DismissGuides` value is set to `true`, then any visible guide will be dismissed.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> void<br>
@@ -321,7 +321,7 @@ void ResumeGuides()
 >Resumes displaying guides during the ongoing session. This API reverses the logic of the `PauseGuides` API.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> void<br>
@@ -364,7 +364,7 @@ string GetDeviceId()
 >Returns the device's unique Pendo-generated ID. 
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> String<br>
@@ -385,7 +385,7 @@ string GetVisitorId()
 >Returns the ID of the visitor in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> String<br>
@@ -406,7 +406,7 @@ string GetAccountId()
 >Returns the ID of the account in the active session.
 
 <details>
-<summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary><br>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface<br>
 <b>Kind:</b> class method<br>
 <b>Returns:</b> String<br>
@@ -428,7 +428,7 @@ void SetDebugMode(bool isDebugEnabled)
 
 >Debug logs are turned off by default. Releasing your production app with the debug logs enabled is not recommended and may have performance repercussions on your app.
 
-<details>    <summary> <b>Details</b><i> - Click to Expand / Collapse</i></summary>
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 

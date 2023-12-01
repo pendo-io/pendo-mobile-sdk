@@ -11,16 +11,16 @@
 
 ## Step 1. Install Pendo SDK
 
-1. In **Visual Studio** Solution Explorer, right-click on your project, then select "Add" - > "Add NuGet Packages…".
+1. In **Visual Studio** Solution Explorer, right-click on your shared project, then select "Add" - > "Add NuGet Packages…".
 2. Search for: **pendo-xamarin-forms** with latest version. <br/>
 3. Press **Add Package**.
 
 ## Step 2. Pendo SDK integration
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
-1. Open the shared application **App.xaml.cs**:
+1. Open the shared project **App.xaml.cs**:
 
    Add the following code:
 
@@ -104,18 +104,18 @@
     This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
 
 >[!TIP]
->Passing `null` or `""` as the visitorId generates <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor id</a>.
+>To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 ## Step 3. Mobile device connectivity for tagging and testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings under the App Details Section.
+>The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
 
-These steps allow <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
+These steps enable <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-1. Add Pendo URL Scheme to **info.plist** file
+1. Add Pendo URL scheme to **info.plist** file:
 
    Under the iOS App Target > open info.plist > if URL Types doesn't exist, click on 'Add new entry' and name it 'URL types', for the type choose 'Array'.
    Create a new URL by clicking the + button.
@@ -123,49 +123,45 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
    Expand 'URL Schemes' and add the `YOUR_SCHEME_ID` under the 'Value'.
    Under the created Dictionary in the previous step, add new entry with the name 'URL Identifier', type 'string' and set a name of your preference under its 'Value'.
 
-2. Add or modify the function **OpenURL**
+2. Add or modify the function **OpenURL**:
 
    Open ***AppDelegate.cs*** file and the following code:
 
     ```C#
-    using PendoSDKXamarin;
+    using PendoForms;
 
     ...
 
-        private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
-
-        ...
-
-        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+    public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+    {
+        if (url.Scheme.Contains("pendo"))
         {
-            if (url.Scheme.Contains("pendo"))
-            {
-                pendo.InitWithUrl(url.AbsoluteString);
+            PendoManager.InitWithUrl(url.AbsoluteString);
 
-                return true;
-            }
-            return base.OpenUrl(app, url, options);
+            return true;
         }
+        return base.OpenUrl(app, url, options);
+    }
     ```
 
 ## Step 4. Verify installation
 
 1. Test using Visual Studio:  
 Run the app.  
-Review the device log and look for the following message:  
+Review the Xcode console and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Hover over your app and select View app details.
+3. Select the **Applications** tab and then your application.
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
 ## Developer documentation
 
-- API documentation available [here](/api-documentation/xamarin-forms-apis.md)
+- API documentation available [here](/api-documentation/xamarin-forms-apis.md).
 
 ## Troubleshooting
 
-- For technical issues please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
