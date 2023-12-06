@@ -68,16 +68,16 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
     ```objectivec
-        #import "AppDelegate.h"
-        #import "Pendo.h";    
-        
-        @implementation AppDelegate
-        - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-            [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
-            //  your code here ...
-            return YES;
-        }
-        @end
+    #import "AppDelegate.h"
+    #import "Pendo.h";    
+    
+    @implementation AppDelegate
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+        [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
+        //  your code here ...
+        return YES;
+    }
+    @end
     ```
     </details>
 
@@ -89,6 +89,8 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
 
     ```swift
+    import Pendo
+
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         PendoManager.shared().setup("YOUR_API_KEY_HERE")
         //  your code here ...
@@ -99,6 +101,8 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
     ```objectivec
+    #import "Pendo.h";    
+
     - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {}
         [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
         //  your code here ...
@@ -116,7 +120,11 @@ To begin tracking a visitor's analytics and to display guides, call the `startSe
 
 
 ```swift
-PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visitorData:[], accountData: [])
+var visitorId = "John Doe"
+var accountId = "ACME"
+var visitorData = ["age": 27, "country": "USA"]      
+var accountData = ["Tier": 1, "size": "Enterprise"]  
+PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:visitorData, accountData:accountData)  
 ```
 </details>
 
@@ -124,7 +132,7 @@ PendoManager.shared().startSession("someVisitor", accountId: "someAccount", visi
 <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
 ```objectivec
-[[PendoManager sharedManager] startSession:@"someVisitor" accountId:@"someAccount" visitorData:@{} accountData:@{}];
+[[PendoManager sharedManager] startSession:@"someVisitor" accountId:@"someAccount" visitorData:@{@"age": @27, @"country": @"USA"} accountData:@{@"Tier": @1, @"size": @"Enterprise"}];
 ```
 </details>
 
