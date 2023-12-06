@@ -115,13 +115,13 @@
 These steps enable <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
 
-1. Add Pendo URL scheme to **info.plist** file:
+1. Add a Pendo URL scheme to the **info.plist** file:
 
-   Under the iOS App Target > open info.plist > if URL Types doesn't exist, click on 'Add new entry' and name it 'URL types', for the type choose 'Array'.
-   Create a new URL by clicking the + button.
-   Under the new created Dictionary, change 'Document role' to 'URL Schemes' with type 'Array'.
-   Expand 'URL Schemes' and add the `YOUR_SCHEME_ID` under the 'Value'.
-   Under the created Dictionary in the previous step, add new entry with the name 'URL Identifier', type 'string' and set a name of your preference under its 'Value'.
+   <img width="953" alt="Screenshot 2023-12-05 at 22 01 30" src="https://github.com/pendo-io/pendo-mobile-sdk/assets/45537976/ed156f85-1817-483d-ae99-ab485ed25288" alt="info.plist schemeId">
+
+   Under the iOS App Target > open info.plist > if `URL Types` doesn't exist, click on 'Add new entry' of type `Array` and name it `URL types`. Create a new `Dictionary` inside the `Array` with two entries:
+    - `URL identifier` of type `String` with a value that begins with `pendo` (ex. `pendo-scheme-d`).
+    - `URL Schemes` of type `Array`. Add a `String` item with `YOUR_SCHEME_ID` as the value.
 
 2. Add or modify the function **OpenURL**:
 

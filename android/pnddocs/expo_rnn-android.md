@@ -34,9 +34,7 @@ In the `app.config.js` or `app.json`, add the following:
         "rn-pendo-sdk",
         {
           "ios-scheme": "YOUR_IOS_SCHEME_ID",
-          "android-scheme": "YOUR_ANDROID_SCHEME_ID", 
-          "ios-pod-source": "source 'https://github.com/pendo-io/specs.git'",
-          "android-repository": "maven {\n url \"https://software.mobile.pendo.io/artifactory/androidx-release\"\n }"
+          "android-scheme": "YOUR_ANDROID_SCHEME_ID"
         }
       ]
     ]
