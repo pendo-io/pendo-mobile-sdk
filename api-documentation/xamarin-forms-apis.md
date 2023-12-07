@@ -89,7 +89,7 @@ pendo.Setup("your.app.key");
 void StartSession(string visitorId, string accountId, Dictionary<string, object> visitorData, Dictionary<string, object> accountData)
 ```
 
->Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin.
+>Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
 >To generate an anonymous visitor, pass `null` as the visitorId. Visitor data and Account data are optional.
 
