@@ -156,7 +156,7 @@ PendoSDK.setup('your.app.key', navigationOptions);
 static startSession(visitorId?: string, accountId?: string, visitorData?: object, accountData?: object): void
 ```
 
->Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin.
+>Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
 >To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
 
@@ -576,7 +576,7 @@ PendoSDK.setup('your.app.key', navigationOptions);
 NavigationOptions(library: NavigationLibraryType, navigation?: any)
 ```
 
->A NavigationOptions is required to call the setup API and establish a connection to Pendo’s server.
+>A NavigationOptions instance is required to call the setup API and establish a connection to Pendo’s server.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -585,17 +585,22 @@ NavigationOptions(library: NavigationLibraryType, navigation?: any)
 | Param  | Type | Description |
 | :---: | :---: | :--- |
 | library | NavigationLibraryType | The navigation library used by the app |
-| navigation | any? | The Navigation object when integrating the React Native Navigation SDK. Otherwise ignore this parameter |
+| navigation | any? | The navigation property is required if and only if the React Native Navigation library is used for navigation. |
 
 
-<b>Example</b>:
+<b>Example using React Native</b>:
 
 ```typescript
-PendoSDK.setDebugMode(true);
-
-// example using React Navigation 
 const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+PendoSDK.setup('your.app.key', navigationOptions);  
+```
 
+<b>Example using React Native Navigation</b>:
+
+```typescript
+import { Navigation } from "react-native-navigation";
+
+const navigationOptions = { library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation };
 PendoSDK.setup('your.app.key', navigationOptions);  
 ```
 </details>

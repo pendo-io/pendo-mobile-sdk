@@ -158,7 +158,7 @@ func application(_ app: UIApplication,open url: URL, options: [UIApplication.Ope
 func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHashable : Any]?, accountData: [AnyHashable : Any]?)
 ```
 
->Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin.
+>Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
 >To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
 
@@ -709,7 +709,7 @@ func startSession(_ jwt: String, signingKeyName: String)
 
 >Starts a mobile session with the provided JWT and the signing-key name used to sign the JWT. Create the signed JWT on your server-side and pass it to the device, together with the signing-key name, before calling the startSession API.
 
-> If a session is already in progress, the current session will terminate and a new session will begin.
+> If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
 > The JWT payload must contain both the visitor and account elements, each with an `id` property and value. To generate an anonymous visitor use an empty string as the value of the `id` property of the visitor element. The account `id` property may be set to an empty string as well. Additional visitor and account properties are optional.
  
