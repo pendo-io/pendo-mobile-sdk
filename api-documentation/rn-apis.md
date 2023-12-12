@@ -588,7 +588,7 @@ NavigationOptions(library: NavigationLibraryType, navigation?: any)
 | navigation | any? | The navigation property is required if and only if the React Native Navigation library is used for navigation. |
 
 
-<b>Example using React Native</b>:
+<b>Example using React Navigation</b>:
 
 ```typescript
 const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
