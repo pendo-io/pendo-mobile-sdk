@@ -12,10 +12,10 @@
 <!-- ![Cocoapods](https://img.shields.io/cocoapods/v/Pendo) -->
 
 >[!NOTE]
->The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+>The following integration instructions are relevant for SDK 3.0 or higher. <br/> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
-><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
+><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br/> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
 
 >[!IMPORTANT]
 >Requirements:
@@ -43,7 +43,7 @@
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app, you will need to create one of them.  
 
 
-1. If using the `AppDelegate` file, implement the following: <br>
+1. If using the `AppDelegate` file, implement the following: <br/>
 
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
@@ -81,7 +81,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     ```
     </details>
 
-<br>
+<br/>
 
 2. If using the `SceneDelegate` file, implement the following:
 
@@ -188,23 +188,26 @@ Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
         return true
     }
     ```
+   
     </details>
 
-
     <details>
-    <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>```objectivec
-        - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
+
+   ```objectivec
+   
+        - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
             if ([[url scheme] containsString:@"pendo"]) {
                 [[PendoManager sharedManager] initWithUrl:url];
                 return YES;
             }
-            //your code
+            //your code here...
             return YES;
-        }
+        }                
     ```
     </details>
 
-<br>
+<br/>
 
 2. If using `SceneDelegate`, add or modify the `openURLContexts` function:
 
@@ -240,8 +243,8 @@ Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
 ### An additional required Step to configure Pairing Mode for SwiftUI
 
-If the entry point to your app is a `struct` attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br>
-To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br>
+If the entry point to your app is a `struct` attributed with `@main`, your SwiftUI application will not respond to the method `application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool`.<br/>
+To handle URL schemes in your SwiftUI app, add the `.onOpenURL()` modifier to your main view.<br/>
 ```swift
 import Pendo
 
@@ -277,7 +280,7 @@ Review the Xcode console and look for the following message:
 `Pendo Mobile SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to Settings > Subscription Settings.
 3. Select the **Applications** tab and then your application.
-4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
+4. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
@@ -292,13 +295,13 @@ Review the Xcode console and look for the following message:
 - The `Menu` Control is not supported at the moment.
 
 ## Accessibility support
-The OS assigns default accessibility values to UI elements in the app if you do not set accessibility values yourself. The accessibility identifiers, accessibility labels, and accessibility hints are all collected by Pendo and can be utilized for unique identification of features and pages.<br>
+The OS assigns default accessibility values to UI elements in the app if you do not set accessibility values yourself. The accessibility identifiers, accessibility labels, and accessibility hints are all collected by Pendo and can be utilized for unique identification of features and pages.<br/>
 
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/native-ios-apis.md).
 
-- Sample apps with examples of feature tagging and how Pendo analytics work.<br>
+- Sample apps with examples of feature tagging and how Pendo analytics work.<br/>
 (pay attention to comments with _PENDO CHANGE_. In some cases these require minor changes of integration code or adding a background color)
     - [ACHNBrowserUI](https://github.com/pendo-io/ACHNBrowserUI)
     - [TeslaApp](https://github.com/pendo-io/Tesla_Clone_Swiftui)
