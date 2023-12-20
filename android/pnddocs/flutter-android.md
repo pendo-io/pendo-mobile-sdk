@@ -116,7 +116,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 
 This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
-Add the following **activity** to the application **AndroidManifest.xml** in the **<Application>** tag:
+Add the following **activity** to the application **AndroidManifest.xml** in the `<Application>` tag:
 
 ```xml
 <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
