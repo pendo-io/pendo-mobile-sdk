@@ -122,8 +122,8 @@ To begin tracking a visitor's analytics and to display guides, call the `startSe
 ```swift
 var visitorId = "John Doe"
 var accountId = "ACME"
-var visitorData = ["age": 27, "country": "USA"]      
-var accountData = ["Tier": 1, "size": "Enterprise"]  
+var visitorData: [String : any Hashable] = ["age": 27, "country": "USA"]
+var accountData: [String : any Hashable] = ["Tier": 1, "size": "Enterprise"]
 PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:visitorData, accountData:accountData)  
 ```
 </details>
