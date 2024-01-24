@@ -283,7 +283,7 @@ pendo.Track("App Opened", trackEventProperties);
 void PauseGuides(bool dismissGuides)
 ```
 
->Pauses any guides from appearing during an active session. If the `DismissGuides` value is set to `true`, then any visible guide will be dismissed.
+>Pauses any guides from appearing during an active session. If the `DismissGuides` value is set to `true`, then any visible guide will be dismissed. Calling this API affects the current session. Starting a new session reverts this logic, enabling guides to be presented.
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
@@ -294,7 +294,7 @@ void PauseGuides(bool dismissGuides)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| dismissGuides | bool | Determines wether the displayed guide, if one is visible, will be dismissed when pausing the display of further guides |
+| dismissGuides | bool | Determines whether the displayed guide, if one is visible, is dismissed when pausing the display of the further guides |
 
 <b>Example:</b>
 
