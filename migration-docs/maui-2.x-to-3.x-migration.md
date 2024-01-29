@@ -79,4 +79,38 @@ if (pendo != null) {
 
 </td>
 </tr>
+
+<!--- new row --->
+
+<tr>
+<td align=center><b>Register <br> Pendo Effects</b> </td>
+<td>
+
+<b>2.x (deprecated):</b> N/A
+<br>
+<b>3.x:</b> 
+If your app is using Gestures, you must upgrade to SDK version 3.1 or above and then register <b>Pendo Effects</b> (PendoRoutingEffect, PendoPlatformEffect) in your <b>MauiProgram.cs</b> file as shown in the code below.
+
+```C#
+...
+using PendoMAUIPlugin;
+...
+
+public static class MauiProgram
+{
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder.UseMauiApp<App>();
+
+        builder.ConfigureEffects(effects =>
+        {
+            effects.Add<PendoRoutingEffect, PendoPlatformEffect>();
+        });
+        return builder.Build();
+    }
+}
+```
+</td>
+</tr>
 </table>
