@@ -139,10 +139,9 @@ PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:v
 >[!TIP]
 >To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```nil``` or an empty string ```""``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
-### Supporting SwiftUI
+### Supporting SwiftUI with older SDK (below 3.1) additional step required
 
-**The following requirement applies to SDK 3.0.x or lower.** <br>
-To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. If there are multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:
+If using SDK below 3.1 the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. If there are multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:
 ```swift
 struct YourView: View {
     var body: some View {
