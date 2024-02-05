@@ -43,19 +43,27 @@ In the SPM, find the Pendo package and switch the Dependency Rule from `Branch` 
 </td>
 <td>
 
-The `enableSwitfUI` method has been renamed to `pendoEnableSwitfUI`.
+The `enableSwitfUI` method has been renamed to `pendoEnableSwiftUI`.
 
 <b>2.x (deprecated):</b>
 
 ```swift
-someView.enableSwitfUI()
+someView.enableSwiftUI()
 ```
-<b>3.x:</b>
+<b>3.0:</b>
 
 ```swift
-someView.pendoEnableSwitfUI()
+someView.pendoEnableSwiftUI()
 ```
+
+<b>3.1 (deprecated):</b>
+
+```swift
+someView.pendoEnableSwiftUI()
+```
+
 </td>
+
 </tr>
 
 <!--- new row --->
