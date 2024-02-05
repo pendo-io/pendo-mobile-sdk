@@ -141,7 +141,7 @@ PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:v
 
 ### Supporting SwiftUI
 
-**The following rquirement is For SDK 3.0.x or lower.** <br>
+**The following requirement applies to SDK 3.0.x or lower.** <br>
 To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. If there are multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:
 ```swift
 struct YourView: View {
