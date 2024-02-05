@@ -58,9 +58,7 @@ someView.pendoEnableSwiftUI()
 
 <b>3.1 (deprecated):</b>
 
-```swift
-someView.pendoEnableSwiftUI()
-```
+The API has been deprecated and calling it will be ignored. The SDK automatically performs the logic removing the need to use this API.
 
 </td>
 
