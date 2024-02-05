@@ -564,7 +564,7 @@ someUIView.pendoRecognizeClickAnalytics();
 ## View
 [View.pendoEnableSwiftUI](#pendoenableswiftui) ⇒ `void` <br>
 
-### `View.pendoEnableSwiftUI`
+### `View.pendoEnableSwiftUI (deprecated in SDK 3.1)` 
 
 ```swift 
 func pendoEnableSwiftUI() 
