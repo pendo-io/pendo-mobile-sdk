@@ -345,7 +345,7 @@ PendoManager.shared().screenContentChanged();
 func pauseGuides(_ dismissGuides: Bool)
 ```
 
->Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed.
+>Pauses any guides from appearing during an active session. If the `dismissGuides` value is set to `true`, then any visible guide will be dismissed. Calling this API affects the current session. Starting a new session reverts this logic, enabling guides to be presented.
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
@@ -356,7 +356,7 @@ func pauseGuides(_ dismissGuides: Bool)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| dismissGuides | Bool | Determines wether the displayed guide, if one is visible, will be dismissed when pausing the display of further guides |
+| dismissGuides | Bool | Determines whether the displayed guide, if one is visible, is dismissed when pausing the display of the further guides |
 
 <b>Example:</b>
 
