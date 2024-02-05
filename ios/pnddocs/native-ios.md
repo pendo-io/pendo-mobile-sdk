@@ -141,6 +141,7 @@ PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:v
 
 ### Supporting SwiftUI
 
+**The following requirement applies to SDK 3.0.x or lower.** <br>
 To support SwiftUI, the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. If there are multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:
 ```swift
 struct YourView: View {
@@ -289,8 +290,6 @@ Review the Xcode console and look for the following message:
 - SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will no be tracked by our SDK.
 
 - When encountering tagging issues of clickable elements try calling the `pendoRecognizeClickAnalytics()` API on the `View` of clickable element.
-
-- The `iOS 16 Navigation APIs` are not supported at the moment.
 
 - The `Menu` Control is not supported at the moment.
 
