@@ -43,7 +43,7 @@ In the SPM, find the Pendo package and switch the Dependency Rule from `Branch` 
 </td>
 <td>
 
-The `enableSwitfUI` method has been renamed to `pendoEnableSwiftUI`.
+The `enableSwiftUI` method has been renamed to `pendoEnableSwiftUI`.
 
 <b>2.x (deprecated):</b>
 
