@@ -44,13 +44,12 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-## Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
 >The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
 
-These steps enable <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
-and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
+These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
 1. **Add Pendo URL scheme to **info.plist** file:**
 
