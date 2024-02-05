@@ -1,7 +1,7 @@
 # Expo iOS using React Navigation
 
 >[!IMPORTANT]
->- **Expo SDK** 41-49 using React Navigation 5+ is supported by our codeless solution.<br>
+>- **Expo SDK** 41-50 using React Navigation 5+ is supported by our codeless solution.<br>
 >- **Expo Router** is supported by our track events only solution. We have plans to develop codeless support in the future.
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
@@ -146,4 +146,4 @@ which means that codeless tracking analytics is available for screen components 
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
