@@ -57,7 +57,7 @@ namespace ExampleApp
 ### `Setup`
 
 ```c# 
-static void Setup(string appKey)
+void Setup(string appKey)
 ```
 
 >Establishes a connection with Pendo’s server. Call this API in your application’s OnStart() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
