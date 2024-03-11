@@ -6,7 +6,7 @@
 >The `SetDebugMode` API is the exception to that rule and may be called anywhere in the code.
 
 ### IPendoInterface APIs
-[PendoInterface](#ipendoservice) ⇒ `IPendoService` <br>
+[IPendoService](#ipendoservice) ⇒ `IPendoService` <br>
 [Setup](#setup) ⇒ `void` <br>
 [StartSession](#startsession) ⇒ `void` <br>
 [SetVisitorData](#setvisitordata) ⇒ `void` <br>
@@ -45,7 +45,7 @@ namespace ExampleApp
 {
     public partial class App : Application
     {
-        IPendoService pendo = PendoServiceFactory.CreatePendoService();
+        IPendoService Pendo = PendoServiceFactory.CreatePendoService();
 
         /** if your app supports additional Platforms other than iOS and Android
         verify the Pendo instance is not null */

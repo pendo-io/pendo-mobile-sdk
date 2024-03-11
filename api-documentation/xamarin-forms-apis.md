@@ -6,7 +6,7 @@
 >The `SetDebugMode` API is the exception to that rule and may be called anywhere in the code.
 
 ### IPendoInterface APIs
-[PendoInterface](#ipendointerface) ⇒ `IPendoInterface` <br>
+[IPendoInterface](#ipendointerface) ⇒ `IPendoInterface` <br>
 [Setup](#setup) ⇒ `void` <br>
 [StartSession](#startsession) ⇒ `void` <br>
 [SetVisitorData](#setvisitordata) ⇒ `void` <br>
@@ -45,7 +45,7 @@ namespace ExampleApp
 {
     public partial class App : Application
     {
-        private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
         
         // the rest of your code
 
@@ -287,7 +287,6 @@ void PauseGuides(bool dismissGuides)
 <b>Class:</b> PendoInterface
 <br><b>Kind:</b> class method<br>
 <br><b>Returns:</b> void
-<br>
 <br>
 
 |     Param     | Type | Description                                                                                                             |
