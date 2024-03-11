@@ -6,7 +6,7 @@
 >The `SetDebugMode` API is the exception to that rule and may be called anywhere in the code.
 
 ### IPendoInterface APIs
-[PendoInterface](#pendointerface) ⇒ `IPendoInterface` <br>
+[PendoInterface](#ipendointerface) ⇒ `IPendoInterface` <br>
 [Setup](#setup) ⇒ `void` <br>
 [StartSession](#startsession) ⇒ `void` <br>
 [SetVisitorData](#setvisitordata) ⇒ `void` <br>
@@ -20,10 +20,11 @@
 [GetVisitorId](#getvisitorid) ⇒ `string` <br>
 [GetAccountId](#getaccountid) ⇒ `string` <br>
 [SetDebugMode](#setdebugmode) ⇒ `void`<br>
+[ScreenContentChanged](#screencontentchanged) ⇒ `void`<br>
 
 ## IPendoInterface APIs
 
-### `PendoSDK`
+### `IPendoInterface`
 
 ```c# 
 interface IPendoInterface
@@ -35,7 +36,7 @@ interface IPendoInterface
 
 <br>
 
-<b>Example</b>:
+<b>Example:</b>
     
 ```c#
 using PendoSDKXamarin;
@@ -65,20 +66,20 @@ static void Setup(string appKey)
 
 <br>
 
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
-<br>
-<b>Returns</b>: void
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
+| Param  |  Type  | Description                                                              |
+|:------:|:------:|:-------------------------------------------------------------------------|
 | appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
 
-<b>Example</b>:
+<br>
+<b>Example:</b>
     
 ```c#
-pendo.Setup("your.app.key");  
+Pendo.Setup("your.app.key");  
 ```
 </details>
 
@@ -99,22 +100,20 @@ void StartSession(string visitorId, string accountId, Dictionary<string, object>
 
 <br>
 
-
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
-<br>
-<b>Returns</b>: void
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| visitorId | string | The session visitor ID. For an anonymous visitor set to `null` |
-| accountId | string | The session account ID |
-| visitorData | Dictionary<string, object> | Additional visitor metadata |
-| accountData | Dictionary<string, object> | Additional account metadata |
+|    Param    |            Type            | Description                                                    |
+|:-----------:|:--------------------------:|:---------------------------------------------------------------|
+|  visitorId  |           string           | The session visitor ID. For an anonymous visitor set to `null` |
+|  accountId  |           string           | The session account ID                                         |
+| visitorData | Dictionary<string, object> | Additional visitor metadata                                    |
+| accountData | Dictionary<string, object> | Additional account metadata                                    |
 
-
-<b>Example</b>:
+<br>
+<b>Example:</b>
     
 ```c#
 var visitorData = new Dictionary<string, object>
@@ -129,7 +128,7 @@ var accountData = new Dictionary<string, object>
     { "Size", "Enterprise" }
 };
 
-pendo.StartSession("John Doe", "ACME", visitorData, accountData);
+Pendo.StartSession("John Doe", "ACME", visitorData, accountData);
 ```
 
 </details>
@@ -147,18 +146,17 @@ void SetVisitorData(Dictionary<string, object> visitorData)
 <br>
 
 
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
-<br>
-<b>Returns</b>: void
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
+|    Param    |            Type            | Description                        |
+|:-----------:|:--------------------------:|:-----------------------------------|
 | visitorData | Dictionary<string, object> | The visitor metadata to be updated |
 
-
-<b>Example</b>:
+<br>
+<b>Example:</b>
     
 ```c#
 var visitorData = new Dictionary<string, object>
@@ -168,7 +166,7 @@ var visitorData = new Dictionary<string, object>
     { "birthday", "01-01-1990" }
 };
 
-pendo.SetVisitorData(visitorData);
+Pendo.SetVisitorData(visitorData);
 ```
 
 </details>
@@ -186,18 +184,17 @@ void SetAccountData(Dictionary<string, object> accountData)
 <br>
 
 
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
-<br>
-<b>Returns</b>: void
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
+|    Param    |            Type            | Description                        |
+|:-----------:|:--------------------------:|:-----------------------------------|
 | accountData | Dictionary<string, object> | The account metadata to be updated |
 
-
-<b>Example</b>:
+<br>
+<b>Example:</b>
     
 ```c#
 var accountData = new Dictionary<string, object>
@@ -207,7 +204,7 @@ var accountData = new Dictionary<string, object>
     { "signing-date", "01-01-2020" }
 };
 
-pendo.SetAccountData(accountData);
+Pendo.SetAccountData(accountData);
 ```
 
 </details>
@@ -229,16 +226,15 @@ void EndSession()
 <br>
 
 
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
-<b>Returns</b>: void
 <br>
-
-<b>Example</b>:
+<b>Example:</b>
     
 ```c#
-pendo.EndSession(); 
+Pendo.EndSession(); 
 ```
 
 </details>
@@ -255,16 +251,17 @@ Dictionary<string, object> trackData)
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 
-<b>Class</b>: PendoInterface<br>
-<b>Kind</b>: class method<br>
-<b>Returns</b>: void<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| eventName | string | The track event name |
+|   Param    |            Type            | Description                                               |
+|:----------:|:--------------------------:|:----------------------------------------------------------|
+| eventName  |           string           | The track event name                                      |
 | properties | Dictionary<string, object> | Additional metadata to be sent as part of the track event |
 
+<br>
 <b>Example:</b>
 
 ```c#
@@ -273,7 +270,7 @@ var trackEventProperties = new Dictionary<string, object>
     { "Theme", "Dark Mode" },
 };
 
-pendo.Track("App Opened", trackEventProperties);
+Pendo.Track("App Opened", trackEventProperties);
 ```
 </details>
 
@@ -287,19 +284,20 @@ void PauseGuides(bool dismissGuides)
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> void<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method<br>
+<br><b>Returns:</b> void
+<br>
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
+|     Param     | Type | Description                                                                                                             |
+|:-------------:|:----:|:------------------------------------------------------------------------------------------------------------------------
 | dismissGuides | bool | Determines whether the displayed guide, if one is visible, is dismissed when pausing the display of the further guides |
 
 <b>Example:</b>
 
 ```c#
-pendo.PauseGuides(false);
+Pendo.PauseGuides(false);
 ```
 </details>
 
@@ -314,9 +312,10 @@ void ResumeGuides()
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> void<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
+<br>
 <br>
 <b>Example:</b>
 
@@ -335,9 +334,10 @@ void DismissVisibleGuides()
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> void<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
+<br>
 <br>
 <b>Example:</b>
 
@@ -356,9 +356,10 @@ string GetDeviceId()
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> String<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> string
+<br>
 <br>
 <b>Example:</b>
 
@@ -377,9 +378,10 @@ string GetVisitorId()
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> String<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> string
+<br>
 <br>
 <b>Example:</b>
 
@@ -398,9 +400,10 @@ string GetAccountId()
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class:</b> PendoInterface<br>
-<b>Kind:</b> class method<br>
-<b>Returns:</b> String<br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> string
+<br>
 <br>
 <b>Example:</b>
 
@@ -423,21 +426,46 @@ void SetDebugMode(bool isDebugEnabled)
 
 <br>
 
-<b>Class</b>: PendoInterface
-<br><b>Kind</b>: class method
-<br>
-<b>Returns</b>: void
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
 <br>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
+|     Param      | Type | Description                                            |
+|:--------------:|:----:|:-------------------------------------------------------|
 | isDebugEnabled | bool | Set to `true` to enable debug logs, `false` to disable |
 
-
-<b>Example</b>:
+<br>
+<b>Example:</b>
 
 ```c#
 Pendo.SetDebugMode(true);
 Pendo.Setup("your.app.key");
+```
+</details>
+
+### `ScreenContentChanged`
+
+```c# 
+void ScreenContentChanged()
+```
+
+>Rescans the page enabling the Pendo SDK to identify changes that have occurred since the page loaded.
+
+>Using this API is required to display tooltip guides on elements that weren't present, or have been modified since the initial page load.
+
+>The API does not generate an additional page load event.
+
+<details>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+<b>Class:</b> PendoInterface
+<br><b>Kind:</b> class method
+<br><b>Returns:</b> void
+<br>
+<br>
+<b>Example:</b>
+
+```c#
+Pendo.ScreenContentChanged();
 ```
 </details>
