@@ -285,12 +285,12 @@ void PauseGuides(bool dismissGuides)
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoInterface
-<br><b>Kind:</b> class method<br>
+<br><b>Kind:</b> class method
 <br><b>Returns:</b> void
 <br>
 
-|     Param     | Type | Description                                                                                                             |
-|:-------------:|:----:|:------------------------------------------------------------------------------------------------------------------------
+|     Param     | Type | Description                                                                                                            |
+|:-------------:|:----:|:-----------------------------------------------------------------------------------------------------------------------|
 | dismissGuides | bool | Determines whether the displayed guide, if one is visible, is dismissed when pausing the display of the further guides |
 
 <b>Example:</b>
