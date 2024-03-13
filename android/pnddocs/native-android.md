@@ -4,6 +4,9 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
+>**Jetpack Compose** is supported by our track events only solution. We plan to add codeless support in the future.
+
+>[!IMPORTANT]
 >Requirements:
 >- Android Gradle Plugin `7.2` or higher
 >- Kotlin version `1.9.0` or higher
