@@ -5,7 +5,7 @@
 
 >[!IMPORTANT]
 >Requirements:
->- .NET 7
+>- .NET 7 or .NET 8
 >- Kotlin version 1.9.0 or higher
 >- Target Android Version 13.0 or higher
 

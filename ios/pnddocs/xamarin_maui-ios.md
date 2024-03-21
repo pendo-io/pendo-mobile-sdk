@@ -6,7 +6,7 @@
 
 >[!IMPORTANT]
 >Requirements:
->- .NET 7
+>- .NET 7 or .NET 8
 
 ## Step 1. Install the Pendo SDK
 
