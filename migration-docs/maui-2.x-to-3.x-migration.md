@@ -16,7 +16,7 @@ The following changes are required:
 
 <b>2.x (deprecated):</b> `.NET 6`
 <br>
-<b>3.x:</b> `.NET 7`
+<b>3.x:</b> `.NET 7` or `.NET 8` 
 
 </td>
 </tr>
