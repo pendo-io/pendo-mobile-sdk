@@ -108,7 +108,7 @@ PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 >[!TIP]
->To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 If some of your own _custom_ react native components are not taggable because we can't detect it in the regular detection flow,
 you can try to add it manually to the scanning flow. To do this, add a prop `nativeID` to your component.
