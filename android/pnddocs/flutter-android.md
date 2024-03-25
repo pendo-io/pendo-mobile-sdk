@@ -93,7 +93,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
 >[!TIP]
->To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 3. Track events
 
@@ -141,7 +141,7 @@ Review the Android Studio logcat and look for the following message:
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations
-- Flutter is currently only supported by our [Track-Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
+- Flutter is currently only supported by our [Track Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
 - To support hybrid mode in Flutter, please open a ticket.
 
 ## Developer documentation
