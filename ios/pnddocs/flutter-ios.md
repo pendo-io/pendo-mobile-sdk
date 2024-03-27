@@ -72,7 +72,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
     @UIApplicationMain
     class AppDelegate:  FlutterAppDelegate {
-        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        override func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
             if url.scheme?.range(of: "pendo") != nil {
                 PendoManager.shared().initWith(url)
                 return true
@@ -101,7 +101,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
     </details>
 
-    </br>
+    <br>
 
     b. If using SceneDelegate, add or modify the **openURLContexts** function:
 
