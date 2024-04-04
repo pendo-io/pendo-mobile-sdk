@@ -298,6 +298,8 @@ The OS assigns default accessibility values to UI elements in the app if you do 
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/native-ios-apis.md).
+- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
+
 
 - Sample apps with examples of feature tagging and how Pendo analytics work.<br/>
 (pay attention to comments with _PENDO CHANGE_. In some cases these require minor changes of integration code or adding a background color)

@@ -141,6 +141,7 @@ Review the Android Studio logcat and look for the following message:
 ## Developer Documentation
 
 - API documentation available [here](/api-documentation/native-android-apis.md).
+- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
 - If for any reason you need to manually install the SDK - please refer to the [manual installation page](/android/pnddocs/android_sdk_manual_installation.md).
 
 ## Troubleshooting

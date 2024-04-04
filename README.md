@@ -33,7 +33,10 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 [iOS](/ios/pnddocs/xamarin_maui-ios.md)
 - Flutter: 
 [Android](/android/pnddocs/flutter-android.md) | 
-[iOS](/ios/pnddocs/flutter-ios.md)
+[iOS](/ios/pnddocs/flutter-ios.md) |
+[Native with Flutter components](/other/native-with-flutter-components.md)
+
+For integration using signed metadata see: [JWT integration instructions](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JSON-web-token)
 
 
 ## API documentation
@@ -48,12 +51,19 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 
 ## Additional resources 
 
+- [Release notes](https://developers.pendo.io/category/mobile-sdk/)
+- [Plan your mobile implementation](https://support.pendo.io/hc/en-us/articles/23527373013275-Plan-your-mobile-implementation)
 - [Supported Mobile Frameworks and OS Versions](https://support.pendo.io/hc/en-us/articles/360031861572-Supported-mobile-frameworks-and-OS-versions)
+- [Codeless tracking vs Track Events](https://support.pendo.io/hc/en-us/articles/360061487572-Codeless-tracking-vs-Track-Events)
+- [Using Pendo with hybrid apps](https://support.pendo.io/hc/en-us/articles/23804736263195-Use-Pendo-with-hybrid-apps)
 - [Configuring CNAME Hostnames](https://support.pendo.io/hc/en-us/articles/360047607631-Configure-CNAME-for-Pendo-Mobile)
-- [Integration using JWT Sessions with Signed Meta Data](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JSON-web-token)
 
-Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile) For additional documentation,. 
+Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation) For additional documentation.
 
+## Troubleshooting
+
+- For technical issues, [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
+- For Dex issues with Android applications, refer to this [resource](https://developer.android.com/studio/build/multidex).
 
 ## Performance benchmarks
 
@@ -93,9 +103,3 @@ The analytics captured by the SDK include starting a session, the application st
 A session with a single guide including four steps, 6 session analytics, 42 page transitions, 65 feature clicks, 13 guide events
 and 3 track events, recorded ~120KB of data received and ~320KB of data transmitted.
 
-
-## Troubleshooting
-- For technical issues, [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For Dex issues with Android applications, refer to this [resource](https://developer.android.com/studio/build/multidex).
-- For additional documentation, visit the Mobile section in our [Help Center](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).

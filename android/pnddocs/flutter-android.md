@@ -147,6 +147,8 @@ Review the Android Studio logcat and look for the following message:
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/flutter-apis.md).
+- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
+
 
 ## Troubleshooting
 

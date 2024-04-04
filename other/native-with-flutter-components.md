@@ -404,9 +404,9 @@ await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 
 
 ## Developer documentation
 
-- Flutter plugin API documentation available [here](/api-documentation/flutter-apis.md).
 - Android native API documentation available [here](/api-documentation/native-android-apis.md).
 - iOS native API documentation available [here](/api-documentation/native-ios-apis.md).
+- Flutter plugin API documentation available [here](/api-documentation/flutter-apis.md).
 
 
 ## Troubleshooting
