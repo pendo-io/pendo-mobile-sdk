@@ -695,7 +695,7 @@ NotificationCenter.default.removeObserver(self,
 ## JWT APIs
 
 > [!IMPORTANT]
-> To use secure metadata sessions, contact Pendo support to enable this feature. <br> For full details on how to use secure metadata sessions and what information needs to be included in the JWTs see the [mobile installation using signed metadata with JWT](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JWT) article.
+> To use secure metadata sessions, contact Pendo support to enable this feature. <br> For full details on how to use secure metadata sessions and what information needs to be included in the JWTs see the [mobile installation using signed metadata with JWT](https://support.pendo.io/hc/en-us/articles/360039616892-Send-signed-metadata-with-JWT) article.
 
 > [!NOTE]
 >To generate or find your JWT signing-key name and corresponding secret value go to your app’s Install Settings section in your Pendo Subscription Settings.

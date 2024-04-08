@@ -9,7 +9,7 @@
 >- Dart 2.18 and above 
 
 >[!NOTE]
->These instructions assume prior knowledge of Flutter component integration into your native app. If you don't, use this official Flutter documentation to learn how this can be done.
+>These instructions assume prior knowledge of [Flutter integrated into your existing native app piecemeal, as a library or module](https://docs.flutter.dev/add-to-app).
 
 ## Table of contents:
 - [Add the Pendo dependency](#add-the-pendo-dependency)
@@ -26,7 +26,7 @@
 In the `pubspec.yaml` file, add the Pendo plugin under the dependencies section:
 ```shell
 # make sure you are using the latest version. This is just an example:
-pendo_sdk: ^3.0.0 
+pendo_sdk: ^3.2.0 
 ```
 
 In the terminal, run: `flutter pub get`
@@ -55,7 +55,7 @@ In the terminal, run: `flutter pub get`
 
     ```java
     dependencies {
-        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'2.21.+', changing:true
+        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.2.+', changing:true
     }
     ```
 

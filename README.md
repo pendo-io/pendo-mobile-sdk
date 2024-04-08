@@ -36,7 +36,7 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 [iOS](/ios/pnddocs/flutter-ios.md) |
 [Native with Flutter components](/other/native-with-flutter-components.md)
 
-For integration using signed metadata see: [JWT integration instructions](https://support.pendo.io/hc/en-us/articles/4427183644827-Mobile-installation-using-signed-metadata-with-JSON-web-token)
+For integration using signed metadata see: [JWT integration instructions](https://support.pendo.io/hc/en-us/articles/360039616892-Send-signed-metadata-with-JWT)
 
 
 ## API documentation
