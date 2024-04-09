@@ -9,9 +9,13 @@
 >- Dart 2.18 and above 
 
 >[!NOTE]
->These instructions assume prior knowledge of [Flutter integrated into your existing native app piecemeal, as a library or module](https://docs.flutter.dev/add-to-app).
+>These instructions assume prior knowledge of [Flutter integrated into your existing native app as a library or module](https://docs.flutter.dev/add-to-app).
+
 
 ## Table of contents:
+
+For native applications using Flutter components, use this guide to track your entire app.
+
 - [Add the Pendo dependency](#add-the-pendo-dependency)
 - [Android integration](#android-integration)
 - [iOS integration](#ios-integration)
@@ -31,8 +35,21 @@ pendo_sdk: ^3.2.0
 
 In the terminal, run: `flutter pub get`
 
+<br>
 
 ## Android integration
+
+>[!IMPORTANT]
+>**Jetpack Compose** is supported by our track events only solution. We plan to add codeless support in the future.
+
+
+>[!IMPORTANT]
+>Requirements:
+>- Android Gradle Plugin `7.2` or higher
+>- Kotlin version `1.9.0` or higher
+>- JAVA version `11` or higher
+>- minSdkVersion `21` or higher
+>- compileSDKVersion `33` or higher
 
 ### Step 1. Install the Pendo SDK
 
@@ -182,7 +199,21 @@ Review the Android Studio logcat and look for the following message:
 
 
 
+
+
+<br>
+
 ## iOS integration
+
+>[!IMPORTANT]
+><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br/> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
+
+>[!IMPORTANT]
+>Requirements:
+>- Deployment target of `iOS 11` or higher 
+>- Swift Compatibility `5.7` or higher
+>- Xcode `14` or higher
+
 
 ### Step 1. Install the Pendo SDK
 
@@ -199,7 +230,7 @@ In your native app folder, run: `pod install`
 
 <br>
 
-Using Swift, to access the PendoSDK.h, include it in the Bridging-Header.h of your app, adding: <br> `#import "PendoSDK.h"`
+Using Swift, to access the PendoSDK.h, include it in the Bridging-Header.h of your app, adding: <br> `#import "PendoFlutterPlugin.h"`
 
 Setup the SDK in the native code and register the plugin as follows:
 
@@ -232,7 +263,7 @@ class AppDelegate: FlutterAppDelegate {
         GeneratedPluginRegistrant.register(with: self.flutterEngine)
 
         // Register the Pendo Plugin
-        PendoSDK.registerWithRegistry(self.flutterEngine)
+        PendoFlutterPlugin.registerWithRegistry(self.flutterEngine)
 
         return super.application(application, didFinishLaunchingWithOptions: launchOptions);
     }
@@ -250,7 +281,7 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
 ```objectivec
 @import Flutter;
 @import Pendo;
-#import "PendoSDK.h"
+#import "PendoFlutterPlugin.h"
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
@@ -271,15 +302,6 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
     [PendoFlutterPlugin registerWithRegistry:flutterEngine];
 
     return YES;
-}
-
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-   if ([[url scheme] containsString:@"pendo"]) {
-      [[PendoManager sharedManager] initWithUrl:url];
-      return YES;
-   }
-
-   return YES;
 }
 ```
 </details>
@@ -304,7 +326,7 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
 
 2. **To enable pairing from the device:**
 
-    a. If using AppDelegate, add or modify the **openURL** function:
+    In the AppDelegate file add or modify the **openURL** function:
 
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
@@ -343,41 +365,6 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
     ```
     </details>
 
-    </br>
-
-    b. If using SceneDelegate, add or modify the **openURLContexts** function:
-
-    <details open>
-    <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```swift
-    import Pendo
-
-    ...
-
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
-        }
-    }
-    ```
-    </details>
-
-    </details>
-    <details>
-    <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```objectivec
-    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-        NSURL *url = [[URLContexts allObjects] firstObject].URL;
-        if ([[url scheme] containsString:@"pendo"]) {
-            [[PendoManager sharedManager] initWithUrl:url];
-        }
-        //  your code here ...
-    }
-    ```
-    </details>
-
 ### Step 4. Verify installation
 
 1. Test using Xcode:  
@@ -389,6 +376,8 @@ Review the Xcode console and look for the following message:
 4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
+<br>
+
 ## Sending a track event from the dart side
 
 Configure Pendo Track Events to capture analytics to notify Pendo of analytics events. In the application files where you want to track an event, add the following code:
@@ -396,8 +385,9 @@ Configure Pendo Track Events to capture analytics to notify Pendo of analytics e
 ```dart
 import 'package:pendo_sdk/pendo_sdk.dart';
 
-await PendoFlutterPlugin.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
+<br>
 
 ## Limitations
 - Flutter is currently only supported by our [Track Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Codeless-tracking-vs-Track-Events).
