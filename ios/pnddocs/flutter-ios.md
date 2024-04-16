@@ -61,7 +61,7 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
 
 2. **To enable pairing from the device:**
 
-    a. If using AppDelegate, add or modify the **openURL** function:
+    In the AppDelegate file add or modify the **openURL** function:
 
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
@@ -96,41 +96,6 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
         }
         //  your code here ...
         return YES;
-    }
-    ```
-    </details>
-
-    <br>
-
-    b. If using SceneDelegate, add or modify the **openURLContexts** function:
-
-    <details open>
-    <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```swift
-    import Pendo
-
-    ...
-
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
-        }
-    }
-    ```
-    </details>
-
-    </details>
-    <details>
-    <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```objectivec
-    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-        NSURL *url = [[URLContexts allObjects] firstObject].URL;
-        if ([[url scheme] containsString:@"pendo"]) {
-            [[PendoManager sharedManager] initWithUrl:url];
-        }
-        //  your code here ...
     }
     ```
     </details>

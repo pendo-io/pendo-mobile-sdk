@@ -240,8 +240,8 @@ import Flutter
 import FlutterPluginRegistrant
 import Pendo
 
+@UIApplicationMain
 class AppDelegate: FlutterAppDelegate {
-
     lazy var flutterEngine = FlutterEngine(name: "my flutter engine")
 
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -279,9 +279,14 @@ class AppDelegate: FlutterAppDelegate {
 Setup the SDK in the native code in your `AppDelegate` file and register the plugin as follows:
 
 ```objectivec
+@import UIKit;
 @import Flutter;
 @import Pendo;
+#import <FlutterPluginRegistrant/GeneratedPluginRegistrant.h>
 #import "PendoFlutterPlugin.h"
+#import "AppDelegate.h"
+
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
@@ -303,6 +308,8 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
 
     return YES;
 }
+
+@end
 ```
 </details>
 
@@ -336,7 +343,7 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
 
     @UIApplicationMain
     class AppDelegate:  FlutterAppDelegate {
-        func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        override func application(_ app: UIApplication,open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
             if url.scheme?.range(of: "pendo") != nil {
                 PendoManager.shared().initWith(url)
                 return true
