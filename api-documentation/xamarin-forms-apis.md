@@ -451,7 +451,7 @@ void ScreenContentChanged()
 
 >Rescans the page enabling the Pendo SDK to identify changes that have occurred since the page loaded.
 
->Using this API is required to display tooltip guides on elements that weren't present, or have been modified since the initial page load.
+>Using this API is required to display tooltip guides and fix inaccurate analytics on elements that weren't present, or have been modified since the initial page load.
 
 >The API does not generate an additional page load event.
 
