@@ -44,13 +44,12 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
-## Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
 >The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
 
-These steps enable <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
-and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a> capabilities.
+These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
 1. **Add Pendo URL scheme to **info.plist** file:**
 
@@ -62,7 +61,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 2. **To enable pairing from the device:**
 
-    a. If using AppDelegate, add or modify the **openURL** function:
+    In the AppDelegate file add or modify the **openURL** function:
 
     <details open>
     <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
@@ -101,41 +100,6 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     ```
     </details>
 
-    <br>
-
-    b. If using SceneDelegate, add or modify the **openURLContexts** function:
-
-    <details open>
-    <summary> <b>Swift Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```swift
-    import Pendo
-
-    ...
-
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        if let url = URLContexts.first?.url, url.scheme?.range(of: "pendo") != nil {
-            PendoManager.shared().initWith(url)
-        }
-    }
-    ```
-    </details>
-
-    </details>
-    <details>
-    <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
-
-    ```objectivec
-    - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
-        NSURL *url = [[URLContexts allObjects] firstObject].URL;
-        if ([[url scheme] containsString:@"pendo"]) {
-            [[PendoManager sharedManager] initWithUrl:url];
-        }
-        //  your code here ...
-    }
-    ```
-    </details>
-
 ## Step 4. Verify installation
 
 1. Test using Xcode:  
@@ -154,10 +118,12 @@ Review the Xcode console and look for the following message:
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/flutter-apis.md).
+- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
+
 
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
 

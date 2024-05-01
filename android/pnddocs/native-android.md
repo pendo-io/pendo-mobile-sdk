@@ -141,6 +141,7 @@ Review the Android Studio logcat and look for the following message:
 ## Developer Documentation
 
 - API documentation available [here](/api-documentation/native-android-apis.md).
+- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
 - If for any reason you need to manually install the SDK - please refer to the [manual installation page](/android/pnddocs/android_sdk_manual_installation.md).
 
 ## Troubleshooting
@@ -148,4 +149,4 @@ Review the Android Studio logcat and look for the following message:
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
 - For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
