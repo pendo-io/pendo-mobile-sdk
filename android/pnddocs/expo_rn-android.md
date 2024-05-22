@@ -6,6 +6,14 @@
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
 
+>[!IMPORTANT]
+>Requirements:
+>- Android Gradle Plugin `7.2` or higher
+>- Kotlin version `1.9.0` or higher
+>- JAVA version `11` or higher
+>- minSdkVersion `21` or higher
+>- compileSDKVersion `33` or higher
+
 ## Step 1. Add Pendo dependency
 
 In the **root folder of your expo app**, add Pendo using one of your package managers: 

@@ -6,6 +6,14 @@
 >[!IMPORTANT]
 >We support a codeless solution for React Native 0.6-0.72 using react-navigation 5+.
 
+>[!IMPORTANT]
+>Requirements:
+>- Android Gradle Plugin `7.2` or higher
+>- Kotlin version `1.9.0` or higher
+>- JAVA version `11` or higher
+>- minSdkVersion `21` or higher
+>- compileSDKVersion `33` or higher
+
 ## Step 1. Install the Pendo SDK
 
 1. In the **root folder of your project**, add Pendo using one of your package managers: 
