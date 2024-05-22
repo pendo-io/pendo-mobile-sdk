@@ -6,6 +6,12 @@
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
 
+>[!IMPORTANT]
+>Requirements:
+>- Deployment target of `iOS 11` or higher 
+>- Swift Compatibility `5.7` or higher
+>- Xcode `14` or higher
+
 ## Step 1. Add Pendo dependency
 
 In the **root folder of your expo app**, add Pendo using one of your package managers: 

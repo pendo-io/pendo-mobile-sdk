@@ -6,6 +6,12 @@
 >[!IMPORTANT]
 >We support a codeless solution for React Native 0.6-0.72 using react-native-navigation 6+.
 
+>[!IMPORTANT]
+>Requirements:
+>- Deployment target of `iOS 11` or higher 
+>- Swift Compatibility `5.7` or higher
+>- Xcode `14` or higher
+
 ## Step 1. Install the Pendo SDK
 
 
