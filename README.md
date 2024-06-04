@@ -19,6 +19,9 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
     - Using React Native Navigation: 
     [Android](/android/pnddocs/rnn-android.md) | 
     [iOS](/ios/pnddocs/rnn-ios.md)
+    - Using Expo with Expo Router:
+    [Android](/android/pnddocs/expo_router-android.md) |
+    [iOS](/ios/pnddocs/expo_router-ios.md)
     - Using Expo with React Navigation:
     [Android](/android/pnddocs/expo_rn-android.md) | 
     [iOS](/ios/pnddocs/expo_rn-ios.md)

@@ -5,14 +5,6 @@
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
 
->[!IMPORTANT]
->Requirements:
->- Android Gradle Plugin `7.2` or higher
->- Kotlin version `1.9.0` or higher
->- JAVA version `11` or higher
->- minSdkVersion `21` or higher
->- compileSDKVersion `33` or higher
-
 ## Step 1. Add Pendo dependency
 
 In the **root folder of your expo app**, add Pendo using one of your package managers: 
@@ -77,32 +69,38 @@ In the application main file (App.js/.ts/.tsx), add the following code:
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
 
 function initPendo() {
-    const navigationOptions = { 'library': NavigationLibraryType.ReactNavigation };
+    const navigationOptions = { 'library': NavigationLibraryType.ExpoRouter };
     const key = 'YOUR_API_KEY_HERE';
     //note the following API will only setup initial configuration, to start collect analytics use start session
     PendoSDK.setup(key, navigationOptions);
 }
 ```
 
-In the file where the `NavigationContainer` is created:
-import `WithPendoReactNavigation`:
+In the file where your Root Layout is created
+import `WithPendoExpoRouter`, `usePathname` and `useGlobalSearchParams`:
 
 ```typescript
-import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
+import {WithPendoExpoRouter} from 'rn-pendo-sdk'
+import {useGlobalSearchParams, usePathname} from 'expo-router';
 ```
 
-Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC:
+Add the following code to your Root Layout component. Make sure to pass props to your Root Layout component.
 
 ```typescript
-const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
+function RootLayout(props: any): ReactNode {
+    ...
+    let pathname = usePathname();
+    const params = useGlobalSearchParams();
+    
+    useEffect(() => {
+        props.onExpoRouterStateChange(pathname, params);
+    }, [pathname, params, props]);
+    ...
+}
 ```
-
-replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
-
+Wrap your Root Layout component with WithPendoExpoRouter:
 ```typescript
-<PendoNavigationContainer>
-{/* Rest of your app code */}
-</PendoNavigationContainer>
+export default WithPendoExpoRouter(RootLayout);
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript
@@ -152,4 +150,4 @@ which means that codeless tracking analytics is available for screen components 
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/4403654621851-Mobile).
