@@ -4,7 +4,7 @@
 >**Expo SDK** 41-49 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rn-ios.md).
 
 >[!IMPORTANT]
->We support a codeless solution for React Native 0.6-0.72 using react-navigation 5+.
+>We support a codeless solution for React Native 0.6-0.74 using react-navigation 5+.
 
 >[!IMPORTANT]
 >Requirements:
