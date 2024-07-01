@@ -4,7 +4,15 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
->**Jetpack Compose** is supported by our track events only solution. We plan to add codeless support in the future.
+>**Jetpack Compose (Beta)**, is available starting from SDK 3.3.0. Support includes:
+>- Retroactive Page view analytics and Page view activated guides. 
+>- Code-based tooltips
+>
+> Please see integration instructions [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md).
+>
+> Additional codeless support is expected in future releases. At the moment, click analytics and click triggers for guides are not available, please use track events in such scenarios.
+>
+
 
 >[!IMPORTANT]
 >Requirements:
@@ -31,7 +39,7 @@
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.1.+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.3.+', changing:true
     }
     ```
 
@@ -127,7 +135,11 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
         </intent-filter>
     </activity>
 
-## Step 4. Verify installation
+## Step 4. (Optional - for Jetpack Compose Beta integration only)
+
+ Continue to the beta integration instructions and complete the additional steps [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md#step-2-add-the-jetpackcomposebeta-flag)
+
+## Step 5. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
@@ -148,5 +160,4 @@ Review the Android Studio logcat and look for the following message:
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For Dex issues with Android applications refer to this [resource](https://developer.android.com/studio/build/multidex).
 - For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
