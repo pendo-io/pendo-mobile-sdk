@@ -4,7 +4,7 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
->**Jetpack Compose** is supported by our track events only solution. We plan to add codeless support in the future.
+>**Jetpack Compose** starting 3.3, support by Pendo for Jetpack Compose includes the following - code-based tooltips, retroactive Page View analytics and page view activated guides. Please see integration instructions [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/android/pnddocs/jetpackCompose_instructions.md).
 
 >[!IMPORTANT]
 >Requirements:
@@ -31,7 +31,7 @@
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.1.+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.3.+', changing:true
     }
     ```
 
