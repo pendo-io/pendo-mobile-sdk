@@ -64,7 +64,7 @@ Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/
 ## Troubleshooting
 
 - For technical issues, [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- For Dex issues with Android applications, refer to this [resource](https://developer.android.com/studio/build/multidex).
+- For Dev issues with Android applications, refer to this [resource](https://developer.android.com/studio/build/multidex).
 
 ## Performance benchmarks
 
