@@ -11,8 +11,9 @@
 >- [RNN sample app](https://github.com/pendo-io/RN-demo-app-React-Native-Navigation)
 
 ### Pendo React Components
-[WithPendoReactNavigation](#withpendoreactnavigation) <br>
-[WithPendoModal](#withpendomodal) <br>
+[WithPendoReactNavigation](#withpendoreactnavigation) <br/>
+[WithPendoExpoRouter](#withpendoexporouter) <br/>
+[WithPendoModal](#withpendomodal) <br/>
 
 ### PendoSDK APIs
 
@@ -72,6 +73,54 @@ const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);
 <PendoNavigationContainer>
 {/* Rest of your app code */}
 </PendoNavigationContainer>
+```
+</details>
+
+### `WithPendoExpoRouter`
+
+```typescript 
+WithPendoExpoRouter(RootLayout)
+```
+
+>Only for apps that use Expo Router library. This function wraps the root layout container to track the navigation state.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: React.FunctionComponent<P>
+
+|   Param    | Type | Description                                                 |
+|:----------:| :---: |:------------------------------------------------------------|
+| RootLayout | ReactNode | The app's root layout containing the expo router components |
+
+<b>Example</b>:
+
+In the file where your **Root Layout** is created
+import `WithPendoExpoRouter`, `usePathname` and `useGlobalSearchParams`:
+
+```typescript
+import {WithPendoExpoRouter} from 'rn-pendo-sdk'
+import {useGlobalSearchParams, usePathname} from 'expo-router';
+```
+
+Add the following code to the method building your **Root Layout** component. Make sure to pass **props** to your Root Layout method.
+
+```typescript
+function RootLayout(props: any): ReactNode {
+    ...
+    let pathname = usePathname();
+    const params = useGlobalSearchParams();
+    
+    useEffect(() => {
+        props.onExpoRouterStateChange(pathname, params);
+    }, [pathname, params, props]);
+    ...
+}
+```
+Wrap your **Root Layout** component with **WithPendoExpoRouter**:
+```typescript
+export default WithPendoExpoRouter(RootLayout);
 ```
 </details>
 
