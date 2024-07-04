@@ -2,7 +2,7 @@
 
 >[!IMPORTANT]
 >Starting from **SDK 3.3.0**, Pendo supports Jetpack Compose in the following areas:
->- Code-based tooltips. [Additional info](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md#step-2-add-the-pendotag)
+>- Code-based tooltips. [Additional info](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md#step-3-add-the-pendotag)
 >
 
 
