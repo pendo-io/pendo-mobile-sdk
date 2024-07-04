@@ -135,7 +135,7 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 
 ## Step 4. (Optional - for Jetpack Compose Beta integration only)
 
- Continue to the beta integration instructions and complete the additional steps [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md#step-2-add-the-jetpackcomposebeta-flag)
+ Continue to the beta integration instructions and complete the additional steps [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md)
 
 ## Step 5. Verify installation
 
