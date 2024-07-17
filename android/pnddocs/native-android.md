@@ -64,7 +64,7 @@
 
 1. Set up Pendo in the **Application class**.
 
-    Add the following code in the **onCreate** method:
+    The following code is required in the **onCreate** method:
 
     ```java
     import sdk.pendo.io.*;
