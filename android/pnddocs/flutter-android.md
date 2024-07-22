@@ -1,12 +1,12 @@
 # Flutter Android
 
 >[!IMPORTANT]
->Flutter is supported by our track events only solution. The codeless solution is still in progress.
+>Flutter codeless solution is currently in OPEN BETA
 
 >[!IMPORTANT]
 >Requirements:
->- Flutter 3.3 and above
->- Dart 2.18 and above 
+>- Flutter: ">=3.3.0"
+>- SDK: ">=2.18.0 < 4.0.0" 
 
 ## Step 1. Install Pendo SDK
 
@@ -61,15 +61,10 @@ The optimizations line should look like this:
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
-In the application **main file (lib/main.dart)**, add the following code:  
-
-```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-```
-
 1. Add the following code in the `initState` method:
 
     ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
     var pendoKey = 'YOUR_API_KEY_HERE';
     await PendoSDK.setup(pendoKey);
     ```
@@ -77,6 +72,7 @@ import 'package:pendo_sdk/pendo_sdk.dart';
 2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
 
     ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
     final String visitorId = 'VISITOR-UNIQUE-ID';
     final String accountId = 'ACCOUNT-UNIQUE-ID';
     final Map<String, dynamic> visitorData = {'Age': '25', 'Country': 'USA'};
@@ -92,22 +88,61 @@ import 'package:pendo_sdk/pendo_sdk.dart';
     **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
+    >[!TIP]
+    >To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+
+
+3. Add Navigation Observers <br>
+Add PendoNavigationObserver for each app Navigator
+    ```dart
+    // For main Navigator in MaterialApp/CupertinoApp 
+    return MaterialApp(
+        ...
+        navigatorObservers: [
+            PendoNavigationObserver()
+        ],); 
+
+    // For Navigator widget
+    return Navigator(
+        ...
+        observers: [
+            PendoNavigationObserver()
+        ],);
+        
+    // For Routes API with GoRouter 3d party
+    final router = GoRouter(
+        observers: [PendoNavigationObserver()],
+        routes: [
+        ...
+    ]
+    )
+
+    ```
+4. Add clicks listener<br>
+At the root of the project, wrap the main widget with PendoActionListener:
+    ```dart
+    Widget build(BuildContext context) {
+    return PendoActionListener( // Use PendoActionListener to track action clicks 
+      child: MaterialApp(
+        title: 'Title',
+        home: Provider(
+        create: (context) => MyHomePageStore()..initList(),
+          child: MyHomePage(title: Strings.appName),
+        ),
+        navigatorObservers: [PendoNavigationObserver()], // Use Pendo Observer to track the Navigator stack transitions
+        );
+    )
+    }
+
+    ```
+
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
-
-3. Track events
-
-    Configure Pendo Track Events to capture analytics to notify Pendo of analytics events.
-
-    In the application files where you want to track an event, add the following code:
-
-    ```dart
-    import 'package:pendo_sdk/pendo_sdk.dart';
-    ```
-
-    ```dart
-    await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
-    ```
+>In some cases you may find Track Events useful to capture specific analytics events.
+ In the application files where you want to track an event, add the following code:
+ ```dart
+ import 'package:pendo_sdk/pendo_sdk.dart';
+ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+ ```
 
 ## Step 3. Mobile device connectivity for testing
 
@@ -141,7 +176,7 @@ Review the Android Studio logcat and look for the following message:
 5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations
-- Flutter is currently only supported by our [Track Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Pendo-for-Mobile-Track-Events-Solution).
+- [Notes, Known Issues & Limitations](/other/flutter-notes-known-issues-limitations.md).
 - To support hybrid mode in Flutter, please open a ticket.
 
 ## Developer documentation
