@@ -1,16 +1,16 @@
 
 
 ## Navigation Libraries
-Currently, the page recognition solution supports the standard Flutter Navigator and GoRouter libraries. Integration with additional navigation frameworks is planned for future releases.
+The page recognition solution supports the standard Flutter Navigator and GoRouter libraries. Integration with additional navigation frameworks is planned for future releases.
 When using GoRouter with nested routes, ensure each branch includes a PendoNavigationObserver() to accurately track route changes and enable proper element detection.
 
-## Clickable Elemnts
-The current implementation supports basic touch interactions (down and up) on a range of standard Flutter widgets, including:
+## Clickable Elements
+The current implementation supports basic touch interactions (touchDown and touchUp) on a range of standard Flutter widgets, including:
 InkResponse, InkWell, GestureDetector
 ButtonStyleButton, FloatingActionButton, IconButton, MaterialButton
 PopupMenuButton, DropdownButton, Checkbox, Chip, ChoiceChip, FilterChip, InputChip, Switch, Radio, ListTile
 TabBar, BottomNavigationBar, SelectableText, TextField
-Support for more complex interaction types (e.g. drag, swiped) is planned for future releases.
+Support for more complex interaction types (e.g. Drag and Swipe gestures) is planned for future releases.
 
 ## Dynamic Elements
 Currently, the solution primarily focuses on statically defined UI elements. Dynamic elements, such as those created after the initial page render or located outside the visible viewport, may not be detected reliably.

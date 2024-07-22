@@ -1,7 +1,7 @@
 # Flutter Android
 
 >[!IMPORTANT]
->Flutter codeless solution is currently in OPEN BETA
+>Flutter low-code solution is currently in OPEN BETA
 
 >[!IMPORTANT]
 >Requirements:
