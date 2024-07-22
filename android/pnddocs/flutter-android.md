@@ -88,8 +88,8 @@ The optimizations line should look like this:
     **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
     **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
 
-    >[!TIP]
-    >To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>[!TIP]
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 3. Add Navigation Observers <br>
