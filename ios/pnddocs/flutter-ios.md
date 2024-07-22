@@ -81,12 +81,13 @@ At the root of the project, wrap the main widget with PendoActionListener:
 
     ```
 
-In some cases you may find Track Events to capture specific analytics events.
-In the application files where you want to track an event, add the following code:
-```dart
-import 'package:pendo_sdk/pendo_sdk.dart';
-await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
-```
+>[!TIP]
+>In some cases you may find Track Events to capture specific analytics events.
+ In the application files where you want to track an event, add the following code:
+ ```dart
+ import 'package:pendo_sdk/pendo_sdk.dart';
+ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+ ```
 
 ## Step 3. Mobile device connectivity and testing
 
