@@ -1,12 +1,9 @@
 # Native application with Flutter components
 
 >[!IMPORTANT]
->Flutter is supported by our track events only solution. The codeless solution is still in progress.
-
->[!IMPORTANT]
 >Requirements:
->- Flutter 3.3 and above
->- Dart 2.18 and above 
+>- Flutter: ">=3.3.0"
+>- SDK: ">=2.18.0 < 4.0.0" 
 
 >[!NOTE]
 >These instructions assume prior knowledge of [Flutter integrated into your existing native app as a library or module](https://docs.flutter.dev/add-to-app).
@@ -396,8 +393,6 @@ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondPro
 ```
 <br>
 
-## Limitations
-- Flutter is currently only supported by our [Track Events solution](https://support.pendo.io/hc/en-us/articles/360061487572-Codeless-tracking-vs-Track-Events).
 
 ## Developer documentation
 
