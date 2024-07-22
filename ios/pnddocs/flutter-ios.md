@@ -82,7 +82,7 @@ At the root of the project, wrap the main widget with PendoActionListener:
     ```
 
 >[!TIP]
->In some cases you may find Track Events to capture specific analytics events.
+>In some cases you may find Track Events useful to capture specific analytics events.
  In the application files where you want to track an event, add the following code:
  ```dart
  import 'package:pendo_sdk/pendo_sdk.dart';
