@@ -1,6 +1,6 @@
 
 
-The following exmaple demonstrates Pendo integartion with nested branches 
+The following exmaple demonstrates Go_router integartion with nested branches 
 ```dart 
 import 'package:pendo_sdk/pendo_sdk.dart';
 class NestedTabNavigationWidget extends StatelessWidget {
