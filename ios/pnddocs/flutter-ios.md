@@ -16,7 +16,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
 >[!NOTE]
 >The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
-1. Add the following code as soon as the app starts:
+1. For optimal integration place the following code at the beginning of your app's execution:
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
     var pendoKey = 'YOUR_API_KEY_HERE';
@@ -40,21 +40,22 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
 3. Add Navigation Observers <br>
 Add PendoNavigationObserver for each app Navigator
     ```dart
-    // For main Navigator in MaterialApp/CupertinoApp 
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    // Observes the MaterialApp/CupertinoApp main Navigator
     return MaterialApp(
         ...
         navigatorObservers: [
             PendoNavigationObserver()
         ],); 
 
-    // For Navigator widget
+    // Observes the widget Navigator
     return Navigator(
         ...
         observers: [
             PendoNavigationObserver()
         ],);
         
-    // For Routes API with GoRouter 3d party
+    // Observes the GoRouter 3rd party routing
     final router = GoRouter(
         observers: [PendoNavigationObserver()],
         routes: [
@@ -63,11 +64,12 @@ Add PendoNavigationObserver for each app Navigator
     )
 
     ```
-4. Add clicks listener<br>
-At the root of the project, wrap the main widget with PendoActionListener:
+4. Add click listener<br>
+Wrap the main widget with a PendoActionListener in the root of the project:
     ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
     Widget build(BuildContext context) {
-    return PendoActionListener( // Use PendoActionListener to track action clicks 
+    return PendoActionListener( // Use the PendoActionListener to track action clicks 
       child: MaterialApp(
         title: 'Title',
         home: Provider(
@@ -82,7 +84,7 @@ At the root of the project, wrap the main widget with PendoActionListener:
     ```
 
 >[!TIP]
->In some cases you may find Track Events useful to capture specific analytics events.
+>In some cases you may find [Track Events]( https://support.pendo.io/hc/en-us/articles/360032294151-Track-Events) useful to capture specific analytics events.
  In the application files where you want to track an event, add the following code:
  ```dart
  import 'package:pendo_sdk/pendo_sdk.dart';
