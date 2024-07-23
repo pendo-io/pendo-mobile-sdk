@@ -28,8 +28,8 @@
     }
     ```
 
-- Minimum and compile SDK Version:  
-If applicable, set your app to be compiled with **compileSdkVersion 33** or higher and **minSdkVersion 21** or higher:
+- Minimum SDK Version:  
+If applicable, set your app to be **minSdkVersion 21** or higher:
 
     ```java
     android {
