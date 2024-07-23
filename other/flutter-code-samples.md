@@ -42,6 +42,12 @@ class NestedTabNavigationWidget extends StatelessWidget {
         routerConfig: _router,
         );
     }
+
+    @override
+    void dispose() {
+        pendoNestedBranchesObserver.removeListener(_router); // removing listener
+        super.dispose();
+    }
 }
 ```
 
