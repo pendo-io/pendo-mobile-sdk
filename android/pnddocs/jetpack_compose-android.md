@@ -48,7 +48,7 @@ val navHostController = rememberNavController()
 .... 
 Pendo.setComposeNavigationController(navHostController.navController)
 
-LifecycleResumeEffect {
+LifecycleResumeEffect(null) {
     Pendo.setComposeNavigationController(navHostController.navController)
 
     onPauseOrDispose {
