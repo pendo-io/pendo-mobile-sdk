@@ -20,15 +20,16 @@
     ```
 
 2. In the application **android/build.gradle** file:  
-- Add the Pendo Repository to the repositories section:
+- **Add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
-    repositories {
-        maven {
-            url "https://software.mobile.pendo.io/artifactory/androidx-release"
+    allprojects { 
+        repositories {
+            maven {
+                url "https://software.mobile.pendo.io/artifactory/androidx-release"
+            }
+            mavenCentral()
         }
-        mavenCentral()
-    }
     ```
 
 - Minimum SDK Version:  
