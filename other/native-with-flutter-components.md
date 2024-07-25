@@ -54,14 +54,17 @@ In the terminal, run: `flutter pub get`
 >The `API Key` can be found in your Pendo Subscription Settings in App Details.
 
 
-1. Add Pendo Repository to build.gradle:
+1. Add the Pendo repository to **android/build.gradle**:
+- **Add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
-    repositories {
-        maven {
-            url "https://software.mobile.pendo.io/artifactory/androidx-release"
+    allprojects { 
+        repositories {
+            maven {
+                url "https://software.mobile.pendo.io/artifactory/androidx-release"
+            }
+            mavenCentral()
         }
-        mavenCentral()
     }
     ```
 
