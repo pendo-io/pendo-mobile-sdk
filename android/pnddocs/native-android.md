@@ -22,15 +22,18 @@
 
 ## Step 1. Install Pendo SDK
 
-1. #### Add the Pendo repository to **android/build.gradle**:
+1. #### Add the Pendo repository to the app's build.gradle:
+- **Add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
-    repositories {
-      maven {
-        url "https://software.mobile.pendo.io/artifactory/androidx-release"
-      }
-      mavenCentral()
-    } 
+    allprojects { 
+        repositories {
+            maven {
+                url "https://software.mobile.pendo.io/artifactory/androidx-release"
+            }
+            mavenCentral()
+        }
+    }
     ```
 
 2. #### Add Pendo as a dependency to **android/build.gradle** file:
