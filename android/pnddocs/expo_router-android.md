@@ -77,11 +77,13 @@ In the application main file (App.js/.ts/.tsx), add the following code:
 import {PendoSDK, NavigationLibraryType} from "rn-pendo-sdk";
 
 function initPendo() {
-    const navigationOptions = { 'library': NavigationLibraryType.ExpoRouter };
+    const navigationOptions = {'library': NavigationLibraryType.ExpoRouter};
     const key = 'YOUR_API_KEY_HERE';
     //note the following API will only setup initial configuration, to start collect analytics use start session
     PendoSDK.setup(key, navigationOptions);
 }
+
+initPendo();
 ```
 
 In the file where your Root Layout is created
