@@ -83,6 +83,8 @@ function initPendo() {
     //note the following API will only setup initial configuration, to start collect analytics use start session
     PendoSDK.setup(pendoKey, navigationOptions);
 }
+
+initPendo();
 ```
 Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
 ```typescript

@@ -26,7 +26,7 @@
     yarn add rn-pendo-sdk
     ```
 
-2. In the application **android/build.gradle** file.  
+2. In the application **android/build.gradle** file:  
 - **Add the Pendo Repository to the repositories section under the allprojects section**
 
     ```java
