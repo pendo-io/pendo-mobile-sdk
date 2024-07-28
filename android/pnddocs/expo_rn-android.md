@@ -82,6 +82,8 @@ function initPendo() {
     //note the following API will only setup initial configuration, to start collect analytics use start session
     PendoSDK.setup(key, navigationOptions);
 }
+
+initPendo();
 ```
 
 In the file where the `NavigationContainer` is created:
