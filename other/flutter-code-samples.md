@@ -18,14 +18,14 @@ class NestedTabNavigationWidget extends StatelessWidget {
             },
             branches: <StatefulShellBranch>[
                 StatefulShellBranch(
-                observers: [PendoNavigationObserver(),], // add PendoNavigationObserver() to observers
+                observers: [], 
                 navigatorKey: _sectionANavigatorKey,
                 routes: <RouteBase>[
                 //Your routes 
                 ],
             ),
             StatefulShellBranch(
-                observers: [PendoNavigationObserver(),], // add PendoNavigationObserver() to observers
+                observers: [], 
                 routes: <RouteBase>[
                 //Your routes
                 ],
@@ -33,7 +33,7 @@ class NestedTabNavigationWidget extends StatelessWidget {
             ],
         ),
         ],
-        observers: [PendoNavigationObserver(),], // add PendoNavigationObserver() to observers
+        observers: [], 
     );
 
     @override

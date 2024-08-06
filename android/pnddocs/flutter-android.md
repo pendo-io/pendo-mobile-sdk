@@ -112,20 +112,10 @@ Add PendoNavigationObserver for each app Navigator
         observers: [
             PendoNavigationObserver()
         ],);
-        
-    // Observes the GoRouter 3rd party routing
-    final router = GoRouter(
-        observers: [PendoNavigationObserver()],
-        routes: [
-        ...
-    ]
-    )
-
     ```
 
-    When using GoRouter with nested routes, few additional steps are required to ensure accurate route tracking and proper element detection.
-
-        - Each branch should include `PendoNavigationObserver()` in `observers` list
+    When using `GoRouter` with nested routes, few additional steps are required to ensure accurate route tracking and proper element detection.
+    
         - A static `NestedBranchesObserver()` should be created 
         - `GoRouter` object should be added as listener to `NestedBranchesObserver()`, and removed on dispose 
 
