@@ -1,56 +1,33 @@
 
 
-The following example demonstrates Go_router integration with nested branches 
+The following example demonstrates GoRouter integration 
 ```dart 
 import 'package:pendo_sdk/pendo_sdk.dart';
-class NestedTabNavigationWidget extends StatelessWidget { 
-    NestedTabNavigationExampleApp({super.key});
+    
+    class _AppState extends State<App> {
+        final GoRouter _router = generateRouter(); // Your GoRouter instance 
+        static final NestedBranchesObserver _pendoGoRouterObserver = NestedBranchesObserver(); // Pendo observer for the GoRouter
 
-    static NestedBranchesObserver nestedBranchesObserver = NestedBranchesObserver(); // create NestedBranchesObserver()
+        addRouterToPendoObserver() {
+            _pendoGoRouterObserver.removeListener(_router); 
+            _pendoGoRouterObserver.addListener(_router);
+        }
 
-    final GoRouter _router = GoRouter(
-        navigatorKey: _rootNavigatorKey,
-        initialLocation: '/a',
-        routes: <RouteBase>[
-        StatefulShellRoute.indexedStack(
-            builder: (BuildContext context, GoRouterState state, StatefulNavigationShell navigationShell) {
-            return ScaffoldWithNavBar(navigationShell: navigationShell);
-            },
-            branches: <StatefulShellBranch>[
-                StatefulShellBranch(
-                observers: [], 
-                navigatorKey: _sectionANavigatorKey,
-                routes: <RouteBase>[
-                //Your routes 
-                ],
-            ),
-            StatefulShellBranch(
-                observers: [], 
-                routes: <RouteBase>[
-                //Your routes
-                ],
-            ),
-            ],
-        ),
-        ],
-        observers: [], 
-    );
+        @override
+        Future<void> dispose() async {
+            _pendoGoRouterObserver.removeListener(_router);
+            super.dispose();
+        }
 
-    @override
-    Widget build(BuildContext context) {
-        nestedBranchesObserver.addListener(_router); // listen to router changes
-        return MaterialApp.router(
-        title: 'Flutter Demo',
-        routerConfig: _router,
-        );
+        @override
+        Widget build(BuildContext context) {
+            addRouterToPendoObserver(); // Add your GoRouter instance to the Pendo observer 
+            return PendoActionListener(
+                child: MaterialApp.router(
+                routerConfig: _router,
+                ),
+            );
+        }
     }
-
-    // In case your class extends a StatefulWidget add this @override dispose() method
-    @override
-    void dispose() {
-        pendoNestedBranchesObserver.removeListener(_router); // removing listener
-        super.dispose();
-    }
-}
 ```
 
