@@ -96,7 +96,7 @@ The optimizations line should look like this:
 
 
 3. Add Navigation Observers <br>
-Add PendoNavigationObserver for each app Navigator
+    When using `Flutter Navigator API` add PendoNavigationObserver for each app Navigator:
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
     // Observes the MaterialApp/CupertinoApp main Navigator
@@ -106,30 +106,46 @@ Add PendoNavigationObserver for each app Navigator
             PendoNavigationObserver()
         ],); 
 
-    // Observes the widget Navigator
+    // Observes the nested widget Navigator
     return Navigator(
         ...
         observers: [
             PendoNavigationObserver()
         ],);
-        
-    // Observes the GoRouter 3rd party routing
-    final router = GoRouter(
-        observers: [PendoNavigationObserver()],
-        routes: [
-        ...
-    ]
-    )
-
     ```
 
-    When using GoRouter with nested routes, few additional steps are required to ensure accurate route tracking and proper element detection.
+    When using `GoRouter`, add a GoRouter instance to the NestedBranchesObserver at the very beginning of your app:
+    
+    ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
+    
+    class _AppState extends State<App> {
+        final GoRouter _router = generateRouter(); // Your GoRouter instance 
+        static final NestedBranchesObserver _pendoGoRouterObserver = NestedBranchesObserver(); // Pendo observer for the GoRouter
 
-        - Each branch should include `PendoNavigationObserver()` in `observers` list
-        - A static `NestedBranchesObserver()` should be created 
-        - `GoRouter` object should be added as listener to `NestedBranchesObserver()`, and removed on dispose 
+        addRouterToPendoObserver() {
+            _pendoGoRouterObserver.removeListener(_router); 
+            _pendoGoRouterObserver.addListener(_router);
+        }
 
-    Please look at the [following sample code ](/other/flutter-code-samples.md).
+        @override
+        Future<void> dispose() async {
+            _pendoGoRouterObserver.removeListener(_router);
+            super.dispose();
+        }
+
+        @override
+        Widget build(BuildContext context) {
+            addRouterToPendoObserver(); // Add your GoRouter instance to the Pendo observer 
+            return PendoActionListener(
+                child: MaterialApp.router(
+                routerConfig: _router,
+                ),
+            );
+        }
+    }
+
+    ```
 
 4. Add a click listener<br>
 Wrap the main widget with a PendoActionListener in the root of the project:
