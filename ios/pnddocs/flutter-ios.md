@@ -9,7 +9,7 @@
 >[!IMPORTANT]
 >Requirements:
 >- Flutter: ">=3.16.0"
->- SDK: ">=2.2.0 < 4.0.0" 
+>- SDK: ">=3.2.0 < 4.0.0" 
 
 ## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`.
