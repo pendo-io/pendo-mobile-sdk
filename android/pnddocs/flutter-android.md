@@ -8,8 +8,13 @@
 
 >[!IMPORTANT]
 >Requirements:
->- Flutter: ">=3.3.0"
->- SDK: ">=2.18.0 < 4.0.0" 
+>- Flutter: ">=3.16.0"
+>- SDK: ">=3.2.0 < 4.0.0" 
+>- Android Gradle Plugin `7.2` or higher
+>- Kotlin version `1.9.0` or higher
+>- JAVA version `11` or higher
+>- minSdkVersion `21` or higher
+>- compileSDKVersion `33` or higher
 
 ## Step 1. Install Pendo SDK
 
