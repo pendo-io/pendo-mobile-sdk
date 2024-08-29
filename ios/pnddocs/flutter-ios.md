@@ -58,27 +58,14 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
             PendoNavigationObserver()
         ],);
     ```
-
-    When using `GoRouter`, add a GoRouter instance to the NestedBranchesObserver at the very beginning of your app:
     
+    When using `GoRouter`, add the `PendoListeners` to your `GoRouter` instance. <br>
+    *NOTE*: make sure to add it once (e.g adding it in the build method will be less desired)<br>
+    `GoRouter` is supported from version 13.0 <br>
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
-    
+    final GoRouter _router = GoRouter()..addPendoListenerToDelegate()
     class _AppState extends State<App> {
-        final GoRouter _router = generateRouter(); // Your GoRouter instance 
-        static final NestedBranchesObserver _pendoGoRouterObserver = NestedBranchesObserver(); // Pendo observer for the GoRouter
-
-        addRouterToPendoObserver() {
-            _pendoGoRouterObserver.removeListener(_router); 
-            _pendoGoRouterObserver.addListener(_router);
-        }
-
-        @override
-        Future<void> dispose() async {
-            _pendoGoRouterObserver.removeListener(_router);
-            super.dispose();
-        }
-
         @override
         Widget build(BuildContext context) {
             addRouterToPendoObserver(); // Add your GoRouter instance to the Pendo observer 
@@ -89,7 +76,33 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
             );
         }
     }
+    ```
 
+    When using `AutoRoute`, add the `PendoListeners` to your `AutoRoute.config()` instance. <br>
+    *NOTE* make sure to add it once (e.g adding it in the build method will be less desired)
+    `AutoRoute` is supported from version 7.0 <br>
+    ```dart
+    import 'package:pendo_sdk/pendo_sdk.dart';
+
+    @AutoRouterConfig()
+    class AppRouter extends RootStackRouter {
+        @override
+        List<AutoRoute> get routes => [];
+    }
+
+    final AppRouter _router = AppRouter()..config().addPendoListenerToDelegate();
+    
+    class _AppState extends State<App> {
+        @override
+        Widget build(BuildContext context) {
+            addRouterToPendoObserver(); // Add your GoRouter instance to the Pendo observer 
+            return PendoActionListener(
+                child: MaterialApp.router(
+                routerConfig: _router.config(),
+                ),
+            );
+        }
+    }
     ```
 
 4. Add a click listener<br>
