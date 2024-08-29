@@ -131,7 +131,7 @@ For instance:
 ```
 and change your integration to the following:
 ```typescript
-const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer,{nativeIDs:["myProp"]});
+export default WithPendoExpoRouter(RootLayout, {nativeIDs:["myProp"]});
 ```
 ## Step 5. Running the project
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
