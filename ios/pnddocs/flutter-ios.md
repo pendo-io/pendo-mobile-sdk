@@ -59,12 +59,14 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
         ],);
     ```
     
-    When using `GoRouter`, add the `PendoListeners` to your `GoRouter` instance. <br>
+    When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
     *NOTE*: make sure to add it once (e.g adding it in the build method will be less desired)<br>
     `GoRouter` is supported from version 13.0 <br>
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
+
     final GoRouter _router = GoRouter()..addPendoListenerToDelegate()
+
     class _AppState extends State<App> {
         @override
         Widget build(BuildContext context) {
@@ -78,8 +80,8 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     }
     ```
 
-    When using `AutoRoute`, add the `PendoListeners` to your `AutoRoute.config()` instance. <br>
-    *NOTE* make sure to add it once (e.g adding it in the build method will be less desired)
+    When using `AutoRoute`, apply the `addPendoListenerToDelegate` to your `AutoRoute.config()` instance. <br>
+    *NOTE* make sure to add it once (e.g adding it in the build method will be less desired)<br>
     `AutoRoute` is supported from version 7.0 <br>
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
@@ -91,7 +93,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     }
 
     final AppRouter _router = AppRouter()..config().addPendoListenerToDelegate();
-    
+
     class _AppState extends State<App> {
         @override
         Widget build(BuildContext context) {
