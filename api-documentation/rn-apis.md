@@ -24,7 +24,7 @@
 [endSession](#endsession) ⇒ `void` <br>
 [track](#track) ⇒ `void` <br>
 [screenContentChanged](#screencontentchanged) ⇒ `void` <br>
-[sendClickAnalytics](#sendclickanalytics) ⇒ `void` <br>
+[sendClickAnalytic](#sendclickanalytic) ⇒ `void` <br>
 [pauseGuides](#pauseguides) ⇒ `void`<br>
 [resumeGuides](#resumeguides) ⇒ `void` <br>
 [dismissVisibleGuides](#dismissvisibleguides) ⇒ `void` <br>
@@ -397,7 +397,7 @@ PendoSDK.screenContentChanged();
 </details>
 
 
-### `sendClickAnalytics`
+### `sendClickAnalytic`
 
 ```java
 static sendClickAnalytic(nativeID: string): void
@@ -412,7 +412,7 @@ static sendClickAnalytic(nativeID: string): void
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
 <b>Kind</b>: static method<br>
-<b>Returns</b>: boolean<br>
+<b>Returns</b>: void<br>
 <br>
 
 | Param  | Type | Description |
@@ -422,7 +422,7 @@ static sendClickAnalytic(nativeID: string): void
 <b>Example:</b>
 
 ```java
-PendoSDK.sendClickAnalytics(myButton.nativeID);
+PendoSDK.sendClickAnalytic(myButton.nativeID);
 ```
 </details>
 

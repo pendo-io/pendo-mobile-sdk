@@ -13,7 +13,7 @@
 [endSession](#endsession) ⇒ `void` <br>
 [track](#track) ⇒ `void` <br>
 [screenContentChanged](#screencontentchanged) ⇒ `void` <br>
-[sendClickAnalytics](#sendclickanalytics) ⇒ `void` <br>
+[sendClickAnalytic](#sendclickanalytic) ⇒ `void` <br>
 [pauseGuides](#pauseguides) ⇒ `void` <br>
 [resumeGuides](#resumeguides) ⇒ `void` <br>
 [dismissVisibleGuides](#dismissvisibleguides) ⇒ `void` <br>
@@ -282,10 +282,10 @@ Pendo.screenContentChanged();
 </details>
 
 
-### `sendClickAnalytics`
+### `sendClickAnalytic`
 
 ```java
-static boolean sendClickAnalytics(View view)
+static boolean sendClickAnalytic(View view)
 ```
 
 >Manually sends an RAClick analytic event for the view during the ongoing session. Use the API only when Pendo does not automatically recognize the view as a clickable feature or to resolve issues of displaying a guide that is activated by tapping this view.
@@ -306,7 +306,7 @@ static boolean sendClickAnalytics(View view)
 <b>Example:</b>
 
 ```java
-Pendo.sendClickAnalytics(myButton);
+Pendo.sendClickAnalytic(myButton);
 ```
 </details>
 
