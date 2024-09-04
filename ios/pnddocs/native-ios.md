@@ -286,14 +286,15 @@ Review the Xcode console and look for the following message:
 
 ## SwiftUI limitations 
 
-- SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will no be tracked by our SDK.
+SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will not be tracked by our SDK.
 
-- When encountering tagging issues of clickable elements try calling the `pendoRecognizeClickAnalytics()` API on the `View` of clickable element.
+**Specific Limitations**
 
-- The `Menu` Control is not supported at the moment.
+1. **List Elements**: SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
 
-## Accessibility support
-The OS assigns default accessibility values to UI elements in the app if you do not set accessibility values yourself. The accessibility identifiers, accessibility labels, and accessibility hints are all collected by Pendo and can be utilized for unique identification of features and pages.<br/>
+2. **Padding in Stacks**: When using padding in `VStack` or `HStack` without a background, the analytics tracking may not function correctly. This is because the padding alone doesn't generate trackable events. To work around this, you can explicitly call the `pendoRecognizeClickAnalytics()` API on the view to ensure that interactions are recorded.
+
+3. **UIContextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
 
 ## Developer documentation
 
@@ -306,7 +307,33 @@ The OS assigns default accessibility values to UI elements in the app if you do 
     - [ACHNBrowserUI](https://github.com/pendo-io/ACHNBrowserUI)
     - [TeslaApp](https://github.com/pendo-io/Tesla_Clone_Swiftui)
 
-## Troubleshooting
+## SwiftUI Troubleshooting
+_Why aren't some elements being tagged correctly in SwiftUI?_
+
+* **Missing Accessibility Traits** - Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g., .button). Adding these traits helps our SDK recognize and tag them correctly.
+
+* **Embedding SwiftUI in UIKit** - If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
+
+* **Using Our API** - `pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.
+
+_Why do some of my SwiftUI screens have generic or irrelevant keywords in their screenId, and how can this be improved?_
+
+* While we continue to refine screen identification for SwiftUI, make sure that your SwiftUI views are properly structured and identifiable. For now, this may require some manual adjustments to ensure each screen is tracked correctly.
+
+_I have noticed performance issues in my app after integrating Pendo SDK. What should I do?_
+  
+* **Disable Unnecessary Information Collection** - To improve performance, particularly on iPads, consider disabling some of the things Pendo collects while scanning your page:
+    *  **Texts Collection** - Set enableTextCollectionSwiftUI to false in pendoOptions:
+    ```
+    let options = PendoOptions()
+    options.configs = ["enableTextCollectionSwiftUI": false]
+    PendoManager.shared().setup(prodAppKey, with: options)
+    ```
+    * **Pruning** - To save time during scanning, set pendoOptions.enablePruning = false. This may help reduce the overhead.
+
+* **Optimizing Scanning Depth** - If performance issues persist, adjust the scan depth settings. Consult our support team to configure this setting for optimal performance.
+  
+## General Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
 - Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
