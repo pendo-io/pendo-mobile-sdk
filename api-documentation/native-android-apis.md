@@ -510,7 +510,7 @@ Pendo.setup(appContext, "your.app.key", null, null);
 void onInitComplete()
 ```
 
->This callback is triggered once per session, as soon as the analytics recording for the session has begun and the session guides are ready to be displayed.
+> This callback is triggered once per session after each successful call to the StartSession API. The callback is triggered as soon as the analytics recording for the session has begun and the session guides are ready to be displayed.
 
 > Guides that are not triggered on app launch may take a few additional moments after this callback to be ready for display.
 
