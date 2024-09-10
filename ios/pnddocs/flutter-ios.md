@@ -58,8 +58,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
             PendoNavigationObserver()
         ],);
     ```
-
-    > [!NOTE]\
+    
     > The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`.
 
 
