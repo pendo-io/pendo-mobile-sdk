@@ -119,10 +119,8 @@ The optimizations line should look like this:
         ],);
     ```
 
->[!NOTE]
->The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`.
-
-    <br>
+    >[!NOTE]
+    >The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`.<br>
 
     When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
