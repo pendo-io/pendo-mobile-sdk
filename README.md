@@ -106,3 +106,7 @@ The analytics captured by the SDK include starting a session, the application st
 A session with a single guide including four steps, 6 session analytics, 42 page transitions, 65 feature clicks, 13 guide events
 and 3 track events, recorded ~120KB of data received and ~320KB of data transmitted.
 
+**Offline support**
+
+Additional information about offline support can be found in [Mobile offline support for analytics article](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
+
