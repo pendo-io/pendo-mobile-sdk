@@ -61,7 +61,8 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     >[!NOTE] Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure 
     to provide each route with unique name in the `RouteSettings`
 
-    
+    <br>
+
     When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
     `GoRouter` is supported from version 13.0 <br>
@@ -82,6 +83,8 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     }
     ```
 
+    <br>    
+
     When using `AutoRoute`, apply the `addPendoListenerToDelegate` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
     `AutoRoute` is supported from version 7.0 <br>
@@ -99,7 +102,6 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     class _AppState extends State<App> {
         @override
         Widget build(BuildContext context) {
-            addRouterToPendoObserver(); // Add your GoRouter instance to the Pendo observer 
             return PendoActionListener(
                 child: MaterialApp.router(
                 routerConfig: _router.config(),
