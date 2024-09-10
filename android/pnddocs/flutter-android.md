@@ -118,8 +118,10 @@ The optimizations line should look like this:
             PendoNavigationObserver()
         ],);
     ```
-    >[!NOTE] Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure 
-    to provide each route with unique name in the `RouteSettings`
+
+>[!NOTE]
+>Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure 
+to provide each route with unique name in the `RouteSettings`
 
     <br>
 

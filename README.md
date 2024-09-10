@@ -61,6 +61,8 @@ For integration using signed metadata see: [JWT integration instructions](https:
 - [Using Pendo with hybrid apps](https://support.pendo.io/hc/en-us/articles/23804736263195-Use-Pendo-with-hybrid-apps)
 - [Configuring CNAME Hostnames](https://support.pendo.io/hc/en-us/articles/360047607631-Configure-CNAME-for-Pendo-Mobile)
 - [Work with dynamic content in your mobile app](https://support.pendo.io/hc/en-us/articles/24836902488219-Work-with-dynamic-content-in-your-mobile-app)
+- [Mobile offline support analytics](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
+
 
 Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation) For additional documentation.
 
@@ -108,5 +110,5 @@ and 3 track events, recorded ~120KB of data received and ~320KB of data transmit
 
 **Offline support**
 
-Additional information about offline support can be found in [Mobile offline support for analytics article](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
+Additional information about offline support can be found in [Mobile offline support analytics article](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics).
 
