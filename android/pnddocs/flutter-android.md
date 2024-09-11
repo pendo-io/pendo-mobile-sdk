@@ -15,6 +15,9 @@
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
 >- compileSDKVersion `33` or higher
+>Supported Navigation Libraries:
+>- GoRouter 13.0 or higher
+>- AutoRoute 7.0 or higher
 
 ## Step 1. Install Pendo SDK
 
@@ -123,7 +126,7 @@ The optimizations line should look like this:
 
     When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
-    `GoRouter` is supported from version 13.0 <br>
+    
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
 
@@ -145,7 +148,7 @@ The optimizations line should look like this:
 
     When using `AutoRoute`, apply the `addPendoListenerToDelegate()` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
-    `AutoRoute` is supported from version 7.0 <br>
+    
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
 

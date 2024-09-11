@@ -9,7 +9,10 @@
 >[!IMPORTANT]
 >Requirements:
 >- Flutter: ">=3.16.0"
->- SDK: ">=3.2.0 < 4.0.0" 
+>- SDK: ">=3.2.0 < 4.0.0"\
+>Supported Navigation Libraries:
+>- GoRouter 13.0 or higher
+>- AutoRoute 7.0 or higher
 
 ## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`.
@@ -58,13 +61,13 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
             PendoNavigationObserver()
         ],);
     ```
-    
+
     > The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`.
 
 
     When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
-    `GoRouter` is supported from version 13.0 <br>
+    
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
 
@@ -86,7 +89,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
 
     When using `AutoRoute`, apply the `addPendoListenerToDelegate` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
-    `AutoRoute` is supported from version 7.0 <br>
+   
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
 
