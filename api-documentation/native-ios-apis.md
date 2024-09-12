@@ -643,7 +643,7 @@ someView.pendoRecognizeClickAnalytics();
 ```swift
 NotificationCenter.default.addObserver(self, 
     selector: #selector(self.methodOfReceivedNotification(notification:)), 
-    name: Notification.Name("kPNDDidSuccessfullyInitializeSDKNotification"), 
+    name: NSNotification.Name.pndDidSuccessfullyInitializeSDK, 
     object: nil)
 
 @objc func methodOfReceivedNotification(notification: Notification) {
@@ -654,7 +654,7 @@ NotificationCenter.default.addObserver(self,
 
 deinit {
 NotificationCenter.default.removeObserver(self, 
-    name: Notification.Name("kPNDDidSuccessfullyInitializeSDKNotification"), 
+    name: NSNotification.Name.pndDidSuccessfullyInitializeSDK, 
     object: nil)
 }
 ```
@@ -673,7 +673,7 @@ NotificationCenter.default.removeObserver(self,
 ```swift
 NotificationCenter.default.addObserver(self, 
     selector: #selector(self.methodOfReceivedNotification(notification:)), 
-    name: Notification.Name("kPNDErrorInitializeSDKNotification"), 
+    name: NSNotification.Name.pndErrorInitializeSDK, 
     object: nil)
 
 @objc func methodOfReceivedNotification(notification: Notification) {
@@ -684,7 +684,7 @@ NotificationCenter.default.addObserver(self,
 
 deinit {
 NotificationCenter.default.removeObserver(self, 
-    name: Notification.Name("kPNDErrorInitializeSDKNotification"), 
+    name: NSNotification.Name.pndErrorInitializeSDK, 
     object: nil)
 }
 ```
