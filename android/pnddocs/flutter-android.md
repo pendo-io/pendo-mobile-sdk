@@ -146,8 +146,6 @@ The optimizations line should look like this:
 
     > Pendo SDK uses routerDelegate listener to track route change analytics, make sure your route is included in the GoRouter routes 
 
-    <br>
-
     When using `AutoRoute`, apply the `addPendoListenerToDelegate()` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
     
@@ -174,7 +172,7 @@ The optimizations line should look like this:
     }
     ```
 
-    > Pendo SDK uses routerDelegate listener to track route change analytics, make sure your route is included in the GoRouter routes.
+    > Pendo SDK uses routerDelegate listener to track route change analytics, make sure your route is included in the AutoRoute routes.
      
 4. Add a click listener<br>
 Wrap the main widget with a PendoActionListener in the root of the project:
