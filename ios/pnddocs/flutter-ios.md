@@ -65,7 +65,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     > The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`. That should also be applied to the `showModalBottomSheet` api.
 
 
-    When using `GoRouter`, apply the `addPendoListenerToDelegate` to your `GoRouter` instance. <br>
+    When using `GoRouter`, apply the `addPendoListenerToDelegate()` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
     
     ```dart
@@ -86,7 +86,7 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
     ```
     > Pendo SDK uses routerDelegate listener to track route change analytics, make sure your route is included in the GoRouter routes     
 
-    When using `AutoRoute`, apply the `addPendoListenerToDelegate` to your `AutoRoute.config()` instance. <br>
+    When using `AutoRoute`, apply the `addPendoListenerToDelegate()` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
    
     ```dart
