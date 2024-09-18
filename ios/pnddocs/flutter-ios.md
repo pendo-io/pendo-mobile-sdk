@@ -9,8 +9,10 @@
 >[!IMPORTANT]
 >Requirements:
 >- Flutter: ">=3.16.0"
->- SDK: ">=3.2.0 < 4.0.0"\
+>- SDK: ">=3.2.0 < 4.0.0"git 
+>
 >Supported Navigation Libraries:
+>
 >- GoRouter 13.0 or higher
 >- AutoRoute 7.0 or higher
 
