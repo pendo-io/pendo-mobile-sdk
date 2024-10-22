@@ -1,7 +1,7 @@
 # Flutter iOS
 
 >[!IMPORTANT]
->Flutter low-code solution is currently in Beta.<br><br>
+>[Flutter Obfuscation issue](https://github.com/pendo-io/pendo-mobile-sdk/issues/196#issue-2605284796)<br><br>
 >Migration from the track-event solution to the low-code solution:
 > 1. Refer to [Step 2](#step-2-pendo-sdk-integration) in the installation guide, and verify the addition of the navigationObserver and clickListener.
 > 2. The migration process will take up to 24 hours to complete and be reflected in Pendo, during the processing time, you will not be able to tag Pages and Features.
