@@ -27,13 +27,13 @@
     ```
 
 2. In the application **android/build.gradle** file:  
-- **add the Pendo Repository to the repositories section under the allprojects section**:
+- **Add the Pendo Repository to the repositories section under the allprojects section or to the settings.gradle if using dependencyResolutionManagement:**:
 
     ```java
     allprojects { 
         repositories {
             maven {
-                url "https://software.mobile.pendo.io/artifactory/androidx-release"
+                url = uri("https://software.mobile.pendo.io/artifactory/androidx-release")
             }
             mavenCentral()
         }
