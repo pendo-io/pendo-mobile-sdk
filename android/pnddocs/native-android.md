@@ -22,7 +22,7 @@
 
 ## Step 1. Install Pendo SDK
 
-1. #### Add the Pendo repository to the app's build.gradle:
+1. #### Add the Pendo repository to the app's build.gradle or the settings.gradle if using dependencyResolutionManagement:
 
     ```java
     repositories {
