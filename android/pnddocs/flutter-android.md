@@ -126,6 +126,15 @@ The optimizations line should look like this:
 > [!TIP]
 >The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`. That should also be applied to the `showModalBottomSheet` api.<br>
 
+<ins>**Navigation Types:**<ins><br>
+
+* **_GoRouter_**
+
+    When using `GoRouter`, change the `setup` API call to include the correct navigation library, like so:
+    ```dart
+    PendoSDK.setup(pendoKey, navigationLibrary: NavigationLibrary.GoRouter);
+    ```
+
     When using `GoRouter`, apply the `addPendoListenerToDelegate()` to your `GoRouter` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
     
@@ -148,6 +157,13 @@ The optimizations line should look like this:
 
 > [!TIP]
 > Pendo SDK uses routerDelegate listener to track route change analytics, make sure your route is included in the GoRouter routes 
+
+* **_AutoRoute_**
+
+    When using `AutoRoute`, change the `setup` API call to include the correct navigation library, like so:
+    ```dart
+    PendoSDK.setup(pendoKey, navigationLibrary: NavigationLibrary.AutoRoute);
+    ```
 
     When using `AutoRoute`, apply the `addPendoListenerToDelegate()` to your `AutoRoute.config()` instance. <br>
     Make sure to add it once (e.g adding it in the build method will be less desired)<br>
