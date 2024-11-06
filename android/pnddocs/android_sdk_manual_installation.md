@@ -6,13 +6,13 @@ If you are having problems installing the SDK, please follow these steps:
 
 2. Unzip the downloaded file.
 
-3. Add the local directory to the gradle file.
+3. Add the local directory to the gradle file or to the settings.gradle if using dependencyResolutionManagement:
 
     ```java
     repositories {
-      maven {
-          url "/path/to/local/file"
-      }
+        maven {
+            url = Uri("/path/to/local/file")
+        }
     } 
     ```
 
