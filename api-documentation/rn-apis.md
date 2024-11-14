@@ -138,16 +138,16 @@ WithPendoModal(ModalComponent)
 
 <b>Class</b>: React.FunctionComponent<P>
 
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| modalComponent | ModalComponent | The ModalComponent required by Pendo to track the modal |
+| Param  |    Type     | Description |
+| :---: |:-----------:| :--- |
+| modalComponent | React.Modal | The ModalComponent required by Pendo to track the modal |
 
 <b>Example</b>:
     
 ```typescript
 // In the file where the Modal is created
 
-import {WithPendoModal} from 'rn-pendo-sdk'    
+import {WithPendoModal} from 'rn-pendo-sdk';    
 
 const PendoModal = WithPendoModal(Modal);    
 
