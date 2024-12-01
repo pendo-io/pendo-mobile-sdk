@@ -42,7 +42,9 @@
 static synchronized void setup(Context context, String appKey, PendoOptions options, PendoPhasesCallbackInterface pendoPhasesCallback)
 ```
 
->Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
+> Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
+
+> If the setup API is called while the device is offline, the SDK begins observing the network state, so that after it's back online, it continues with the setup network calls process. If the setup network call fails, PendoPhasesCallbackInterface "onInitFailed" callback is called. 
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -76,11 +78,13 @@ Pendo.setup(appContext, "your.app.key", null, null)
 static void startSession(final String visitorId, final String accountId, final Map<String, Object> visitorData, final Map<String, Object> accountData)
 ```
 
->Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
+> Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
->To generate an anonymous visitor, pass `null` as the visitorId. Visitor data and Account data are optional.
+> To generate an anonymous visitor, pass `null` as the visitorId. Visitor data and Account data are optional.
 
-> No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
+> No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session.
+
+> If the startSession API is called while the device is offline, the SDK begins observing the network state, so that after it's back online, it continues with the start session network calls process. After the startSession network calls succeed, the PendoPhasesCallbackInterface "onInitComplete" callback is called. If the startSession network call fails, "onInitFailed" callback is called.
  
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
