@@ -80,9 +80,9 @@ func setup(_ appKey: String, with options: PendoOptions?)
 
 > Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
 
-> If setup was called while the device is offline, setup will fail and will not be recovered (if all 3 attempts failed) until the app is restarted.
+> If setup was called while the device is offline, the setup call will fail. Please ensure calling the setup API when network connection is available.
 
-> You can only call setup only once. 
+> Setup API can only be called once during the application lifecycle. 
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
