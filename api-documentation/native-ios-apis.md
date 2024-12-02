@@ -78,7 +78,11 @@ PendoManager.shared()
 func setup(_ appKey: String, with options: PendoOptions?)
 ```
 
->Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
+> Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
+
+> If setup was called while the device is offline, setup will fail and will not be recovered (if all 3 attempts failed) until the app is restarted.
+
+> You can only call setup only once. 
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -158,11 +162,15 @@ func application(_ app: UIApplication,open url: URL, options: [UIApplication.Ope
 func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHashable : Any]?, accountData: [AnyHashable : Any]?)
 ```
 
->Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
+> Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
->To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
+> To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
 
-> No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
+> No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session.
+
+> If startSession was successful, the SDK will post a notification named "kPNDDidSuccessfullyInitializeSDKNotification".
+
+> If startSession failed, the SDK will post a notification named "kPNDErrorInitializeSDKNotification".
  
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
