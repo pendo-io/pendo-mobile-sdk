@@ -171,7 +171,7 @@ func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHas
 
 > No action is taken if the visitor and account IDs don’t change when calling the startSession API during an ongoing session.
 
-> If setup API failed, startSession API will also fail, and the SDK will not start. Also, make sure to call startSession API when internet is available, because after 3 failed attempts the SDK will stop trying to connect to the server.
+> If the setup API fails, the startSession API will also fail, and the SDK will not initialize. To ensure proper functionality, always call the startSession API when an active internet connection is available. After three failed connection attempts, the SDK will stop trying to connect to the server.
 
 > If startSession API is successful, the SDK posts a notification called "kPNDDidSuccessfullyInitializeSDKNotification".
 
