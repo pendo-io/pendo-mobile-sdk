@@ -78,13 +78,13 @@ PendoManager.shared()
 func setup(_ appKey: String, with options: PendoOptions?)
 ```
 
-> Establishes a connection with Pendo's server. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
+> Establishes a connection with Pendo's server. The setup API method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
 
-> If setup is called while the device is offline, the setup call fails. Make sure you call the setup API when network connection is available.
+> If setup API is called while the device is offline, the setup API call fails. Make sure you call the setup API when network connection is available.
 
-> Setup API can only be called once during the application lifecycle.
+> setup API can only be called once during the application lifecycle.
 
-> setup will attempt 3 retries before failing and will not send a notification regardless of whether it succeeds or fails.
+> setup API will attempt 3 retries before failing and will not send a notification regardless of whether it succeeds or fails.
 
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
@@ -171,11 +171,11 @@ func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHas
 
 > No action is taken if the visitor and account IDs don’t change when calling the startSession API during an ongoing session.
 
-> If setup failed, startSession will also fail, and the SDK will not start. Also, make sure to call startSession when internet is available, because after 3 failed attempts the SDK will stop trying to connect to the server.
+> If setup API failed, startSession API will also fail, and the SDK will not start. Also, make sure to call startSession API when internet is available, because after 3 failed attempts the SDK will stop trying to connect to the server.
 
-> If startSession is successful, the SDK posts a notification called "kPNDDidSuccessfullyInitializeSDKNotification".
+> If startSession API is successful, the SDK posts a notification called "kPNDDidSuccessfullyInitializeSDKNotification".
 
-> If startSession fails, the SDK posts a notification called "kPNDErrorInitializeSDKNotification".
+> If startSession API fails, the SDK posts a notification called "kPNDErrorInitializeSDKNotification".
  
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
