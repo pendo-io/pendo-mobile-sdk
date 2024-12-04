@@ -124,7 +124,7 @@ The optimizations line should look like this:
         ],);
     ```
 > [!TIP]
->The Pendo SDK uses the `Route` name to uniquely identify each `Route`. For the best practice please make sure to provide each route with unique name in the `RouteSettings`. That should also be applied to the `showModalBottomSheet` api.<br>
+> The Pendo SDK uses the `Route` name to uniquely identify each `Route`. Pendo highly recommends that you give a unique name to each route in the `RouteSettings`. The unique names must also be applied to the `showModalBottomSheet` api.
 
 <ins>**Navigation Types:**<ins><br>
 
