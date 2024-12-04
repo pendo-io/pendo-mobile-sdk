@@ -84,6 +84,9 @@ func setup(_ appKey: String, with options: PendoOptions?)
 
 > Setup API can only be called once during the application lifecycle.
 
+> setup will attempt 3 retries before failing and will not send a notification regardless of whether it succeeds or fails.
+
+
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
@@ -167,6 +170,8 @@ func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHas
 > To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
 
 > No action is taken if the visitor and account IDs don’t change when calling the startSession API during an ongoing session.
+
+> If setup failed, startSession will also fail, and the SDK will not start. Also, make sure to call startSession when internet is available, because after 3 failed attempts the SDK will stop trying to connect to the server.
 
 > If startSession is successful, the SDK posts a notification called "kPNDDidSuccessfullyInitializeSDKNotification".
 
