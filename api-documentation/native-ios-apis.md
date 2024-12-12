@@ -78,11 +78,14 @@ PendoManager.shared()
 func setup(_ appKey: String, with options: PendoOptions?)
 ```
 
-> Establishes a connection with Pendo’s server. Call this API in your application’s onCreate() method. The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
+> Establishes a connection with Pendo's server. The setup API method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs.
 
-> If setup was called while the device is offline, the setup call will fail. Please ensure calling the setup API when network connection is available.
+> If setup API is called while the device is offline, the setup API call fails. Make sure you call the setup API when network connection is available.
 
-> Setup API can only be called once during the application lifecycle. 
+> setup API can only be called once during the application lifecycle.
+
+> setup API will attempt 3 retries before failing and will not send a notification regardless of whether it succeeds or fails.
+
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -162,15 +165,17 @@ func application(_ app: UIApplication,open url: URL, options: [UIApplication.Ope
 func startSession(_ visitorId: String?, accountId: String?, visitorData: [AnyHashable : Any]?, accountData: [AnyHashable : Any]?)
 ```
 
-> Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
+> Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session terminates and a new session begins. The termination of the app also terminates the session.
 
 > To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
 
-> No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session.
+> No action is taken if the visitor and account IDs don’t change when calling the startSession API during an ongoing session.
 
-> If startSession was successful, the SDK will post a notification named "kPNDDidSuccessfullyInitializeSDKNotification".
+> If the setup API fails, the startSession API will also fail, and the SDK will not initialize. To ensure proper functionality, always call the startSession API when an active internet connection is available. After three failed connection attempts, the SDK will stop trying to connect to the server.
 
-> If startSession failed, the SDK will post a notification named "kPNDErrorInitializeSDKNotification".
+> If startSession API is successful, the SDK posts a notification called "kPNDDidSuccessfullyInitializeSDKNotification".
+
+> If startSession API fails, the SDK posts a notification called "kPNDErrorInitializeSDKNotification".
  
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
