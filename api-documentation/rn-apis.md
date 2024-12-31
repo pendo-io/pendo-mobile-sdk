@@ -132,15 +132,16 @@ WithPendoModal(ModalComponent)
 
 >Only for apps that use React Navigation library. This function wraps the modal component so the SDK can track the modal.
 
+>Note: gorhom/bottomSheetModal v4 and v5 is supported
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
-<b>Class</b>: React.FunctionComponent<P>
+<b>Class</b>: React.FunctionComponent or gorhom/BottomSheetModal<P>
 
 | Param  |    Type     | Description |
 | :---: |:-----------:| :--- |
-| modalComponent | React.Modal | The ModalComponent required by Pendo to track the modal |
+| modalComponent | React.Modal or gorhom/BottomSheetModal | The ModalComponent required by Pendo to track the modal |
 
 <b>Example</b>:
     
@@ -149,7 +150,11 @@ WithPendoModal(ModalComponent)
 
 import {WithPendoModal} from 'rn-pendo-sdk';    
 
-const PendoModal = WithPendoModal(Modal);    
+//In case of React.Modal
+const PendoModal = WithPendoModal(Modal); 
+
+//Or in case of gorhom/BottomSheetModal
+const PendoModal = WithPendoModal(BottomSheetModal);
 
 // replace the Modal tag with PendoModal tag
 
