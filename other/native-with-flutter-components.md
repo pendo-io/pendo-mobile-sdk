@@ -27,7 +27,7 @@ For native applications using Flutter components, use this guide to track your e
 In the `pubspec.yaml` file, add the Pendo plugin under the dependencies section:
 ```shell
 # make sure you are using the latest version. This is just an example:
-pendo_sdk: ^3.4.0 
+pendo_sdk: ^3.6.0 
 ```
 
 In the terminal, run: `flutter pub get`
@@ -51,7 +51,7 @@ In the terminal, run: `flutter pub get`
 ### Step 1. Install the Pendo SDK
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 
 1. Add the Pendo repository to **android/build.gradle**:
@@ -72,7 +72,7 @@ In the terminal, run: `flutter pub get`
 
     ```java
     dependencies {
-        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.4.+', changing:true
+        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.6.+', changing:true
     }
     ```
 
@@ -92,7 +92,7 @@ Add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
 The optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
-### Step 2. Pendo SDK integration 
+### Step 2. Integrate with the Pendo SDK 
 
 Init the SDK from the native and register the plugin:
 
@@ -162,14 +162,14 @@ class App : Application() {
 ```
 
 >[!TIP]
->To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 
 ### Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
@@ -192,10 +192,10 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 Run the app while attached to the Android Studio.  
 Review the Android Studio logcat and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
-2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Select the **Applications** tab and then your application.
-4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
-5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+2. In the Pendo UI, go to `Settings` > `Subscription Settings`.
+3. Select your application from the list.
+4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
 
@@ -219,10 +219,10 @@ Review the Android Studio logcat and look for the following message:
 
 In your native app folder, run: `pod install`
 
-### Step 2. Pendo SDK Integration
+### Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 
 <details open>
@@ -314,12 +314,12 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
 </details>
 
 >[!TIP]
->To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ### Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
@@ -378,10 +378,10 @@ These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/36003348
 Run the app while attached to Xcode.  
 Review the Xcode console and look for the following message:  
 `Pendo Mobile SDK was successfully integrated and connected to the server.`
-2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Select the **Applications** tab and then your application.
-4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
-5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+2. In the Pendo UI, go to `Settings` > `Subscription Settings`.
+3. Select your application from the list.
+4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 <br>
 
@@ -407,6 +407,6 @@ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondPro
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
 
