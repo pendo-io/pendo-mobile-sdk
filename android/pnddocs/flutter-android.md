@@ -69,10 +69,10 @@ Add the following `<uses-permission>` to the manifest in the `<manifest>` tag:
 The optimizations line should look like this:  
 `-optimizations *other optimizations*,!code/allocation/variable`
 
-## Step 2. Pendo SDK integration
+## Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 1. For optimal integration place the following code at the beginning of your app's execution:
 
@@ -82,7 +82,7 @@ The optimizations line should look like this:
     await PendoSDK.setup(pendoKey);
     ```
 
-2. Initialize Pendo where your visitor is being identified (e.g. login, register, etc.).
+2. Initialize Pendo where your visitor is being identified (e.g., login, register, etc.).
 
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
@@ -96,13 +96,13 @@ The optimizations line should look like this:
 
     **Notes:**
 
-    **visitorId**: a user identifier (e.g. John Smith)  
-    **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-    **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-    **accountData**: the account metadata (e.g. tier, level, ARR, etc.)  
+    **visitorId**: a user identifier (e.g., John Smith)  
+    **visitorData**: the user metadata (e.g., email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g., Acme inc.)  
+    **accountData**: the account metadata (e.g., tier, level, ARR, etc.)  
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 3. Add Navigation Observers <br>
@@ -136,7 +136,7 @@ The optimizations line should look like this:
     ```
 
     When using `GoRouter`, apply the `addPendoListenerToDelegate()` to your `GoRouter` instance. <br>
-    Make sure to add it once (e.g adding it in the build method will be less desired)<br>
+    Make sure to add it once (e.g., adding it in the build method will be less desired)<br>
     
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
@@ -166,7 +166,7 @@ The optimizations line should look like this:
     ```
 
     When using `AutoRoute`, apply the `addPendoListenerToDelegate()` to your `AutoRoute.config()` instance. <br>
-    Make sure to add it once (e.g adding it in the build method will be less desired)<br>
+    Make sure to add it once (e.g., adding it in the build method will be less desired)<br>
     
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
@@ -221,7 +221,7 @@ Wrap the main widget with a PendoActionListener in the root of the project:
 ## Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
@@ -244,10 +244,10 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 Run the app while attached to the Android Studio.  
 Review the Android Studio logcat and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
-2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Select the **Applications** tab and then your application.
-4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
-5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+2. In the Pendo UI, go to `Settings` > `Subscription Settings`.
+3. Select your application from the list.
+4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations
 - [Notes, Known Issues & Limitations](/other/flutter-notes-known-issues-limitations.md).
@@ -256,11 +256,11 @@ Review the Android Studio logcat and look for the following message:
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/flutter-apis.md).
-- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
+- See [Native application with Flutter components](/other/native-with-flutter-components.md) integration instructions.
 
 
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).

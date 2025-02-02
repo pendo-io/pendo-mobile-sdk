@@ -16,19 +16,19 @@ If you are having problems installing the SDK, please follow these steps:
     } 
     ```
 
-4. Specify the version number for the Pendo dependency in the gradle file. <br>For example, for version 3.4.0.x it should look like this: 
+4. Specify the version number for the Pendo dependency in the gradle file. <br>For example, for version 3.6.0.x it should look like this: 
 
     ```java
-    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.4.0.x', changing:true)
+    implementation (group:'sdk.pendo.io' , name:'pendoIO', version:'3.6.0.x', changing:true)
     ```
 
 ## Developer documentation
 
-- API documentation available [here](/api-documentation/native-android-apis.md).
+- View our [API documentation](/api-documentation/native-android-apis.md).
 
 
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
