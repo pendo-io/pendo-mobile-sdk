@@ -29,7 +29,7 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
@@ -67,7 +67,7 @@ module.exports = {
 ## Step 4. Integration
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 In the application main file (App.js/.ts/.tsx), add the following code:
 ```typescript
@@ -83,7 +83,7 @@ function initPendo() {
 
 initPendo();
 ```
-Initialize Pendo Session where your visitor is being identified (e.g. login, register, etc.).
+Initialize Pendo Session where your visitor is being identified (e.g,. login, register, etc.).
 ```typescript
 const visitorId = 'John Smith';
 const accountId = 'Acme Inc.';
@@ -94,7 +94,7 @@ PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
 ```
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ## Step 5. Running the project
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
@@ -121,5 +121,5 @@ which means that codeless tracking analytics is available for screen components 
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).

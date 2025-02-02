@@ -24,10 +24,10 @@ The optimizations line should look like this:
 `-optimizations *other optimizations*,!code/allocation/variable`
 
 
-## Step 2. Pendo SDK integration
+## Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 1. #### Open the shared project **App.xaml.cs**
 
@@ -40,7 +40,7 @@ The optimizations line should look like this:
     {
         public partial class App : Application
         {
-            private static IPendoInterface pendo = DependencyService.Get<IPendoInterface>();
+            private static IPendoInterface pendo = DependencyService.g,et<IPendoInterface>();
             
             ...
 
@@ -60,7 +60,7 @@ The optimizations line should look like this:
     }
     ```
 
-2. #### Start the visitor's session in the page where your visitor is being identified (e.g. login, register, etc.).
+2. #### Start the visitor's session in the page where your visitor is being identified (e.g,. login, register, etc.).
 
     ```c#
     using PendoSDKXamarin;
@@ -70,7 +70,7 @@ The optimizations line should look like this:
         class ExampleLoginClass
         {
         ...
-        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
+        private static IPendoInterface Pendo = DependencyService.g,et<IPendoInterface>();
 
         public void MethodExample()
         {
@@ -102,20 +102,20 @@ The optimizations line should look like this:
     }
     ```
 
-   **visitorId**: a user identifier (e.g. John Smith)  
-   **visitorData**: the user metadata (e.g. email, phone, country, etc.)  
-   **accountId**: an affiliation of the user to a specific company or group (e.g. Acme inc.)  
-   **accountData** : the account metadata (e.g. tier, level, ARR, etc.)
+   **visitorId**: a user identifier (e.g,. John Smith)  
+   **visitorData**: the user metadata (e.g,. email, phone, country, etc.)  
+   **accountId**: an affiliation of the user to a specific company or group (e.g,. Acme inc.)  
+   **accountData** : the account metadata (e.g,. tier, level, ARR, etc.)
 
-   This code ends the previous mobile session (if applicable), starts a new mobile session and retrieves all guides based on the provided information.
+   This code ends the previous mobile session (if applicable), starts a new mobile session, and retrieves all guides based on the provided information.
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
-## Step 3. Mobile device connectivity for tagging and testing
+## Step 3. Connect mobile device for tagging and testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 This step enables page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
@@ -139,10 +139,10 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 Run the app.  
 Review the Android Studio logcat and look for the following message:  
 `Pendo SDK was successfully integrated and connected to the server.`
-2. In the Pendo UI, go to Settings>Subscription Settings.
-3. Select the **Applications** tab and then your application.
-4. Select the Install Settings tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
-5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+2. In the Pendo UI, go to `Settings` > `Subscription Settings`.
+3. Select your application from the list.
+4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
+5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 -------------
 
@@ -153,5 +153,5 @@ Review the Android Studio logcat and look for the following message:
 ## Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).

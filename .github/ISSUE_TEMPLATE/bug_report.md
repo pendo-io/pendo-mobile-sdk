@@ -8,12 +8,12 @@ assignees: ''
 ---
 
 **Platform + Version**
-e.g IOS 16, Android
+e.g, IOS 16, Android
 
 **SDK Version**
 
 **Framework**
-e.g Native, SwiftUI,<br>
+e.g, Native, SwiftUI,<br>
  React Native using React Navigation,
  React Native using React Native Navigation,
  Expo using React Navigation, 

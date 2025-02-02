@@ -38,7 +38,7 @@
 ## Step 2. Establish a connection to Pendo's server on app launch
 
 >[!NOTE]
->The `API Key` can be found in your Pendo Subscription Settings in App Details.
+>Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app, you will need to create one of them.  
 
@@ -137,7 +137,7 @@ PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:v
 </details>
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```nil``` or an empty string ```""``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```nil``` or an empty string ```""``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ### Supporting SwiftUI with older SDK (below 3.1) additional step 
 
@@ -154,7 +154,7 @@ struct YourView: View {
 ## Step 4. Configure Pairing Mode for tagging and testing
 
 >[!NOTE]
->The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
+>Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 For additional information, see <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a>.
@@ -279,9 +279,9 @@ Run the app while attached to Xcode.
 Review the Xcode console and look for the following message:  
 `Pendo Mobile SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to Settings > Subscription Settings.
-3. Select the **Applications** tab and then your application.
+3. Select your application from the list.
 4. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
-5. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
 ## SwiftUI limitations 
@@ -299,7 +299,7 @@ SwiftUI tracking of page changes is based on the application events emitted by t
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/native-ios-apis.md).
-- Integration of native with Flutter components available [here](/other/native-with-flutter-components.md).
+- See [Native application with Flutter components](/other/native-with-flutter-components.md) integration instructions.
 
 
 - Sample apps with examples of feature tagging and how Pendo analytics work.<br/>
@@ -310,7 +310,7 @@ SwiftUI tracking of page changes is based on the application events emitted by t
 ## SwiftUI Troubleshooting
 _Why aren't some elements being tagged correctly in SwiftUI?_
 
-* **Missing Accessibility Traits** - Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g., .button). Adding these traits helps our SDK recognize and tag them correctly.
+* **Missing Accessibility Traits** - Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g,., .button). Adding these traits helps our SDK recognize and tag them correctly.
 
 * **Embedding SwiftUI in UIKit** - If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
 
@@ -336,5 +336,5 @@ _I have noticed performance issues in my app after integrating Pendo SDK. What s
 ## General Troubleshooting
 
 - For technical issues, please [review open issues](https://github.com/pendo-io/pendo-mobile-sdk/issues) or [submit a new issue](https://github.com/pendo-io/pendo-mobile-sdk/issues).
-- Release notes can be found [here](https://developers.pendo.io/category/mobile-sdk/).
-- For additional documentation, visit our [Help Center Mobile Section](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).
+- See our [release notes](https://developers.pendo.io/category/mobile-sdk/).
+- For additional documentation, visit our [Help Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation).

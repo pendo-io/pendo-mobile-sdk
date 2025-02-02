@@ -23,6 +23,9 @@
 [jwt](#jwt) ⇒ `JWT`<br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
+## Pendo Compose APIs
+[setComposeNavigationController](#setComposeNavigationController) ⇒ `void` <br>
+
 
 ### PendoPhasesCallbackInterface Callbacks
 [onInitComplete](#oninitcomplete) ⇒ `void` <br>
@@ -262,7 +265,7 @@ Pendo.track("App Opened", trackEventProperties);
 static void screenContentChanged()
 ```
 
->Manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions where the delayed appearance of some elements on the screen is not recognized by the SDK (e.g., changes to a View’s 'visibility' or 'alpha' properties after the initial loading of a screen).
+>Manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions where the delayed appearance of some elements on the screen is not recognized by the SDK (e.g,., changes to a View’s 'visibility' or 'alpha' properties after the initial loading of a screen).
 
 >The following cases are handled by our SDK and do not require the usage of the `screenContentChanged` API:
 >- The View’s 'visibility' attribute was updated from 'gone' to 'visible'.
@@ -294,7 +297,7 @@ static boolean sendClickAnalytic(View view)
 
 >Manually sends an RAClick analytic event for the view during the ongoing session. Use the API only when Pendo does not automatically recognize the view as a clickable feature or to resolve issues of displaying a guide that is activated by tapping this view.
 
->The View's clickable attribute must be set as `true` in the xml / activity. Call the API in your code as part of the action implementation (e.g., onTouchListener, onClickListener, etc).
+>The View's clickable attribute must be set as `true` in the xml / activity. Call the API in your code as part of the action implementation (e.g,., onTouchListener, onClickListener, etc).
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
@@ -500,6 +503,55 @@ static synchronized void setDebugMode(boolean enableDebugMode)
 ```java
 Pendo.setDebugMode(true);
 Pendo.setup(appContext, "your.app.key", null, null);
+```
+</details>
+
+<br>
+
+
+## Pendo Compose APIs
+### `setComposeNavigationController`
+
+```java 
+static synchronized void setComposeNavigationController(NavHostController navHostController)
+```
+>This API allows the SDK to recognize Compose pages in your app.
+
+>If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+
+>Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
+
+>We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Pendo
+<br><b>Kind</b>: static method
+<br>
+<b>Returns</b>: void
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| navHostController | NavHostController | The Compose Navigation used in your app |
+
+
+<b>Example</b>:
+
+
+```kotlin
+val navHostController = rememberNavController()
+.... 
+
+LifecycleResumeEffect(null) {
+    Pendo.setComposeNavigationController(navHostController.navController)
+
+    onPauseOrDispose {
+        Pendo.setComposeNavigationController(null)
+    }
+}
 ```
 </details>
 
