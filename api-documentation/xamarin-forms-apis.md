@@ -45,7 +45,7 @@ namespace ExampleApp
 {
     public partial class App : Application
     {
-        private static IPendoInterface Pendo = DependencyService.Get<IPendoInterface>();
+        private static IPendoInterface Pendo = DependencyService.g.,et<IPendoInterface>();
         
         // the rest of your code
 
