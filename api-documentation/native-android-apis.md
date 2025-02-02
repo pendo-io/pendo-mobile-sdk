@@ -23,6 +23,9 @@
 [jwt](#jwt) ⇒ `JWT`<br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
+## Pendo Compose APIs
+[setComposeNavigationController](#setComposeNavigationController) ⇒ `void` <br>
+
 
 ### PendoPhasesCallbackInterface Callbacks
 [onInitComplete](#oninitcomplete) ⇒ `void` <br>
@@ -500,6 +503,55 @@ static synchronized void setDebugMode(boolean enableDebugMode)
 ```java
 Pendo.setDebugMode(true);
 Pendo.setup(appContext, "your.app.key", null, null);
+```
+</details>
+
+<br>
+
+
+## Pendo Compose APIs
+### `setComposeNavigationController`
+
+```java 
+static synchronized void setComposeNavigationController(NavHostController navHostController)
+```
+>This API allows the SDK to recognize Compose pages in your app.
+
+>If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+
+>Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
+
+>We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Pendo
+<br><b>Kind</b>: static method
+<br>
+<b>Returns</b>: void
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| navHostController | NavHostController | The Compose Navigation used in your app |
+
+
+<b>Example</b>:
+
+
+```kotlin
+val navHostController = rememberNavController()
+.... 
+
+LifecycleResumeEffect(null) {
+    Pendo.setComposeNavigationController(navHostController.navController)
+
+    onPauseOrDispose {
+        Pendo.setComposeNavigationController(null)
+    }
+}
 ```
 </details>
 
