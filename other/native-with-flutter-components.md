@@ -27,7 +27,7 @@ For native applications using Flutter components, use this guide to track your e
 In the `pubspec.yaml` file, add the Pendo plugin under the dependencies section:
 ```shell
 # make sure you are using the latest version. This is just an example:
-pendo_sdk: ^3.4.0 
+pendo_sdk: ^3.6.0 
 ```
 
 In the terminal, run: `flutter pub get`
@@ -72,7 +72,7 @@ In the terminal, run: `flutter pub get`
 
     ```java
     dependencies {
-        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.4.+', changing:true
+        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.6.+', changing:true
     }
     ```
 
