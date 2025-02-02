@@ -4,10 +4,12 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
->**Jetpack Compose (Beta)**, is available starting from SDK 3.3.0. Support includes:
->- Code-based tooltips
+>**Jetpack Compose (Beta)**, is available starting from SDK 3.6.0. Support includes:
+>- Retroactive analytics
+>- Self-serve tagging
+>- Full guides support
 >
-> Please see integration instructions [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md).
+> Please see integration instructions below.
 >
 >
 
@@ -37,7 +39,7 @@
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.4+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.6+', changing:true
     }
     ```
 
@@ -79,7 +81,48 @@
     );
     ```
 
-2. Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
+    **When using Jetpack Compose** - Add the JetpackComposeBeta flag
+        
+    Add the following PendoOptions object to the Pendo Setup API call:
+
+    ```kotlin
+    Pendo.PendoOptions options =
+        Pendo.PendoOptions.Builder().setJetpackComposeBeta(true).build();
+
+    Pendo.setup(
+        this,
+        pendoApiKey,
+        options,
+        null  // PendoPhasesCallbackInterface (Optional)
+    ); 
+    ```
+
+ 2.  **When using Jetpack Compose** - Add Compose Navigation Support
+
+        If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+
+
+        - This step is required for the SDK to recognize Compose pages in your app.
+        - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
+
+
+        ```kotlin
+        val navHostController = rememberNavController()
+        .... 
+
+        LifecycleResumeEffect(null) {
+            Pendo.setComposeNavigationController(navHostController.navController)
+
+            onPauseOrDispose {
+                Pendo.setComposeNavigationController(null)
+            }
+        }
+        ```
+
+    >[!Tip]
+    >We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
+
+3. Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
 
     ```java
     String visitorId = "VISITOR-UNIQUE-ID";
@@ -114,7 +157,41 @@
 >[!TIP]
 >To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the visitor id. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
-## Step 3. Mobile device connectivity for tagging and testing
+## Step 3. When using Jetpack Compose - Add Drawer / ModalBottomSheetLayout support - optional
+
+If you’re using either Compose Drawer/ModalBottomSheetLayout in your app, please add the following for automatic detection - including page analytics, feature detection & guides.
+
+Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's and or ModalBottomSheetLayout's modifier where componentState is the drawerState / sheetState.
+
+**Please note !** When using this modifier, you must **specifically update the state** (bottomSheetState / drawerState) when you don’t want Pendo to detect the page anymore.
+```kotlin
+    ModalBottomSheetLayout(
+        sheetState = sheetState,
+        sheetContent = {
+            // Content of the bottom sheet
+            modifier = Modifier.pendoStateModifier(sheetState),
+        }
+    ) 
+    ...
+```
+
+
+## Step 4. When using Jetpack Compose - Add the pendoTag - optional
+
+In your application code, for each non-clickable Composable component that you want to present a tooltip on, add the following snippet:
+
+```kotlin
+    someComposableObject(
+        modifier = Modifier
+            .pendoTag("UNIQUE_IDENTIFIER")
+    )
+```
+
+>[!NOTE]
+>pendoTags are case-sensitive. You may add the pendoTag to clickable Composable components as well, as it will strengthen Pendo’s feature identification logic.
+
+
+## Step 5. Mobile device connectivity for tagging and testing
 
 >[!NOTE]
 >The `Scheme ID` can be found in your Pendo Subscription Settings in App Details.
@@ -133,11 +210,7 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
         </intent-filter>
     </activity>
 
-## Step 4. (Optional - for Jetpack Compose Beta integration only)
-
- Continue to the beta integration instructions and complete the additional steps [here](https://github.com/pendo-io/pendo-mobile-sdk/blob/master/android/pnddocs/jetpack_compose-android.md)
-
-## Step 5. Verify installation
+## Step 6. Verify installation
 
 1. Test using Android Studio:  
 Run the app while attached to the Android Studio.  
