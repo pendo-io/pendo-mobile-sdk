@@ -314,6 +314,8 @@ _Why aren't some elements being tagged correctly in SwiftUI?_
 
 * **Embedding SwiftUI in UIKit** - If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
 
+* **Allow deeply nested SwiftUI layouts** - Enable `pendoOptions.scanFromRootViewController` flag to allow the SDK to scan elements starting from the main window root view controller, rather than limiting the scan to the top-most controller. This feature is designed to enhance element detection in SwiftUI-based layouts, particularly for complex view hierarchies where traditional scanning methods might fail. This scanning approach performs a deeper traversal of the entire view hierarchy, which may affect performance in large or deeply nested layouts. Use this flag only when necessary, as it introduces a heavier processing load compared to the default scanning method.
+
 * **Using Our API** - `pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.
 
 _Why do some of my SwiftUI screens have generic or irrelevant keywords in their screenId, and how can this be improved?_
