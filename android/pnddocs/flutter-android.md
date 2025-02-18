@@ -8,7 +8,7 @@
 
 >[!IMPORTANT]
 >Requirements:
->- Flutter: ">=3.16.0"
+>- Flutter: ">=3.16.0" (There is currently known issue with a Flutter SDK 3.29.0 with an Android compilation faliled. The fix will come in the 3.6.1 plugin HF)
 >- SDK: ">=3.2.0 < 4.0.0" 
 >- Android Gradle Plugin `7.2` or higher
 >- Kotlin version `1.9.0` or higher
