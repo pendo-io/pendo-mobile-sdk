@@ -137,11 +137,11 @@ WithPendoModal(ModalComponent)
 
 <br>
 
-<b>Class</b>: React.FunctionComponent or gorhom/BottomSheetModal<P>
+<b>Class</b>: React.Modal or gorhom/BottomSheetModal<P>
 
-| Param  |    Type     | Description |
-| :---: |:-----------:| :--- |
-| modalComponent | React.Modal or gorhom/BottomSheetModal | The ModalComponent required by Pendo to track the modal |
+| Param  |    Type     | Description              |
+| :---: |:-----------:|:-------------------------|
+| modalComponent | React.Modal or gorhom/BottomSheetModal | Modal Component to track |
 
 <b>Example</b>:
     
@@ -151,16 +151,21 @@ WithPendoModal(ModalComponent)
 import {WithPendoModal} from 'rn-pendo-sdk';    
 
 //In case of React.Modal
-const PendoModal = WithPendoModal(Modal); 
+import Modal from 'react-native';
+const PendoModal = WithPendoModal(Modal);
+// replace the <Modal> tag with <PendoModal> tag
+<PendoModal>
+    {/* Rest of your app code */}
+</PendoModal>
 
 //Or in case of gorhom/BottomSheetModal
-const PendoModal = WithPendoModal(BottomSheetModal);
+import BottomSheetModal from '@gorhom/bottom-sheet';
+const PendoBottomSheetModal = WithPendoModal(BottomSheetModal);
+// replace the <BottomSheetModal> tag with <PendoBottomSheetModal> tag
+<PendoBottomSheetModal>
+    {/* Rest of your app code */}
+</PendoBottomSheetModal>
 
-// replace the Modal tag with PendoModal tag
-
-<PendoModal>
-{/* Rest of your app code */}
-</PendoModal>
 ```
 </details>
 
