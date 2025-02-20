@@ -134,11 +134,11 @@
 
 1. **Add Compose Navigation Support**
 
-        If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+    If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
 
 
-        - This step is required for the SDK to recognize Compose pages in your app.
-        - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
+    - This step is required for the SDK to recognize Compose pages in your app.
+    - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
 
 
         ```kotlin
