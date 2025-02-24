@@ -1,7 +1,7 @@
 # React Native Android using React Native Navigation
 
 >[!NOTE]
->**Expo SDK** 41-49 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rnn-android.md).
+>**Expo SDK** 41-52 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rnn-android.md).
 
 >[!IMPORTANT]
 >We support a codeless solution for React Native 0.6-0.77 using react-native-navigation 6+.
