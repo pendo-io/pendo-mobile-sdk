@@ -1,9 +1,10 @@
 # Expo iOS using Expo Router (**Beta**)
 
 >[!IMPORTANT]
->- **Expo SDK** 41-52 using React Navigation 5+ is supported by our codeless solution.<br>
+>- **Expo SDK** 41-52 using React Navigation 5+ is supported by our codeless solution.
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
+>- We support React New Architecture/Fabric with rn-pendo-sdk version 3.6.1
 
 >[!IMPORTANT]
 >Requirements:

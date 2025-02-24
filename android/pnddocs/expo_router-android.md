@@ -1,9 +1,10 @@
 # Expo Android using Expo Router (**Beta**)
 
 >[!IMPORTANT]
->- **Expo SDK** 41-52 using React Navigation 5+ is supported by our codeless solution.<br>
+>- **Expo SDK** 41-52 using React Navigation 5+ is supported by our codeless solution.
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
+>- We support React New Architecture/Fabric with rn-pendo-sdk version 3.6.1
 
 >[!IMPORTANT]
 >Requirements:
@@ -11,7 +12,7 @@ Pendo can *only* be used in development builds. For more about development build
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `33` or higher
+>- compileSDKVersion `34` or higher
 
 ## Step 1. Add Pendo dependency
 
