@@ -5,7 +5,7 @@
 
 >[!IMPORTANT]
 >- We support a codeless solution for React Native 0.6-0.77 using react-native-navigation 6+.
->- We support React New Architecture/Fabric with rn-pendo-sdk version 3.6.1
+>- Beta support for React Native's New Architecture (Fabric) is available starting from version 3.6.1.
 
 >[!IMPORTANT]
 >Requirements:
