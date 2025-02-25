@@ -1,10 +1,11 @@
 # React Native Android using React Navigation
 
 >[!NOTE]
->**Expo SDK** 41-49 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
+>**Expo SDK** 41-52 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
 
 >[!IMPORTANT]
->We support a codeless solution for React Native 0.6-0.77 using react-navigation 5+.
+>- We support a codeless solution for React Native 0.6-0.77 using react-navigation 5+.
+>- Beta support for React Native's New Architecture (Fabric) is available starting from version 3.6.1.
 
 >[!IMPORTANT]
 >Requirements:
@@ -12,7 +13,7 @@
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `33` or higher
+>- compileSDKVersion `34` or higher
 
 ## Step 1. Install the Pendo SDK
 
