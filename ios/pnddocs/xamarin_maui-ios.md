@@ -6,12 +6,12 @@
 
 >[!IMPORTANT]
 >Requirements:
->- .NET 7 or .NET 8
+>- .NET 8 or .NET 9
 
 ## Step 1. Install the Pendo SDK
 
 1. In **Visual Studio** Solution Explorer, right-click on your shared project, then select "Add" - > "Add NuGet Packages…".
-2. Search for: **PendoMAUIPlugin** with latest version.<br/>
+2. Search for: **pendo-maui** with latest version.<br/>
 3. Press **Add Package**.
 
 
