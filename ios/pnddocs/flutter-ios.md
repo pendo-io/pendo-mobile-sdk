@@ -135,31 +135,33 @@ In the root folder of your flutter app add the Pendo package: `flutter pub add p
 Wrap the main widget with a PendoActionListener in the root of the project:
     ```dart
     import 'package:pendo_sdk/pendo_sdk.dart';
-    Widget build(BuildContext context) {
-    return PendoActionListener( // Use the PendoActionListener to track action clicks 
-      child: MaterialApp(
-        title: 'Title',
-        home: Provider(
-        create: (context) => MyHomePageStore()..initList(),
-          child: MyHomePage(title: Strings.appName),
-        ),
-        navigatorObservers: [PendoNavigationObserver()], // Use Pendo Observer to track the Navigator stack transitions
-        );
-    )
-    }
 
+    Widget build(BuildContext context) {
+        return PendoActionListener( // Use the PendoActionListener to track action clicks 
+            child: MaterialApp(
+                title: 'Title',
+                home: Provider(
+                create: (context) => MyHomePageStore()..initList(),
+                    child: MyHomePage(title: Strings.appName),
+                ),
+                navigatorObservers: [PendoNavigationObserver()], // Use Pendo Observer to track the Navigator stack transitions
+            );
+        )
+    }
     ```
->[!TIP]
->You can use track events to programmatically notify Pendo of custom events of interest:
-> ```dart
-> import 'package:pendo_sdk/pendo_sdk.dart';
-> await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
-> ```
+
+> [!TIP]
+> You can use track events to programmatically notify Pendo of custom events of interest:<br>
+
+```dart
+ import 'package:pendo_sdk/pendo_sdk.dart';
+ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
+```
 
 ## Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
->Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
@@ -222,6 +224,56 @@ Review the Xcode console and look for the following message:
 3. Select your application from the list.
 4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
+
+
+## Using constom navigation widgets
+`With the release of version 3.6.2 custom navigation widget support was added.`
+
+To integrate custom navigation widgets (e.g., TabBar, BottomNavigationBar, PageView), follow these steps:
+
+1. Implement `PendoCustomNavigationWidget` in your `StatefulWidget` class.
+
+2. Implement `PendoNavigationState` in the corresponding state class.
+
+3. Override `getPendoCustomNavigationInfo()` to provide details about the current navigation state.
+
+Example:
+
+```dart
+class CUSTOM_STATEFULL_WIDGET extends StatefulWidget implements PendoCustomNavigationWidget { // Add a for Pendo Support
+...
+}
+
+class _CUSTOM_STATEFULL_WIDGET_STATE extends State<CUSTOM_STATEFULL_WIDGET> implements PendoNavigationState { // Added for Pendo Support
+
+// Override this method to let Pendo get the info about the current selected state
+@override
+  List<PendoCustomNavigationInfo> getPendoCustomNavigationInfo() {
+    List<PendoCustomNavigationInfo> info = [];
+
+    info.add(PendoCustomNavigationInfo(
+      navigationWidgetType: PendoNavigationWidgetType.Top, // specifies widget location on the screen. this must be provided
+      currentSelectedIndex: 1, // current selected index, optional
+      numberOfIndexes: 5, // total number of indexes, optional
+      currentSelectedTitle: 'first item', // unique title, optional
+      selectedIconCode: 1234)); // uniwue number representing the image on the selected item, optional
+    info.add(PendoCustomNavigationInfo(
+      navigationWidgetType: PendoNavigationWidgetType.Middle,
+      currentSelectedIndex: 2, 
+      numberOfIndexes: 3,
+      currentSelectedTitle: 'second item', 
+      selectedIconCode: 2468));
+    info.add(PendoCustomNavigationInfo(
+      navigationWidgetType: PendoNavigationWidgetType.Bottom,
+      currentSelectedIndex: 3, 
+      numberOfIndexes: 6,
+      currentSelectedTitle: 'third item', 
+      selectedIconCode: 1357));
+
+    return info;
+  }
+}
+```
 
 ## Limitations
 - [Notes, Known Issues & Limitations](/other/flutter-notes-known-issues-limitations.md).
