@@ -226,7 +226,7 @@ Review the Xcode console and look for the following message:
 5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 
-## Using constom navigation widgets
+## Using custom navigation widgets
 `With the release of version 3.6.2 custom navigation widget support was added.`
 
 To integrate custom navigation widgets (e.g., TabBar, BottomNavigationBar, PageView), follow these steps:
