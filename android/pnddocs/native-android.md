@@ -185,6 +185,11 @@
         )
     ```
 
+   **Starting 3.6.3:**
+   1. Adding pendoTag to an element will send click analytic when clicked.
+   2. If relevant, set the second parameter (mergeDescendants) as true (default is false).
+     By setting mergeDescendants to true, additional attributes may be available to uniquely identify the element
+
 >[!NOTE]
 >pendoTags are case-sensitive. 
 >You may add the pendoTag to clickable Composable components as well, as it will strengthen Pendo’s feature identification logic.

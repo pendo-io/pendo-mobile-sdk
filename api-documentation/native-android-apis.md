@@ -23,7 +23,7 @@
 [jwt](#jwt) ⇒ `JWT`<br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
-## Pendo Compose APIs
+### Pendo Compose APIs
 [setComposeNavigationController](#setComposeNavigationController) ⇒ `void` <br>
 
 
