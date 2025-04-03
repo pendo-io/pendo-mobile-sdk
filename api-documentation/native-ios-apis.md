@@ -35,6 +35,7 @@
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
 [View.pendoRecognizeClickAnalytics](#viewpendorecognizeclickanalytics) ⇒ `void` <br>
+[trackPage](#trackPage) ⇒ `some View`<br>
 
 ### NSNotifications
 [kPNDDidSuccessfullyInitializeSDKNotification](#kpnddidsuccessfullyinitializesdknotification) <br>
@@ -535,8 +536,6 @@ PendoManager.shared().setup("your.app.key", with: nil);
 ```
 </details>
 
-<br>
-
 ## UIView
 
 ### `UIView.pendoRecognizeClickAnalytics`
@@ -632,7 +631,37 @@ someView.pendoRecognizeClickAnalytics();
 ```
 </details>
 
+### `trackPage`
+
+```swift 
+func trackPage(pageId: String) -> some View;
+```
+
+>Tracks page appearance/disappearance with Pendo analytics.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| pageId | String | A unique identifier for the page (max 50 chars).  It must be alphanumeric and can include underscores  and dashes. |
+
 <br>
+
+<b>Class</b>: View
+<br><b>Kind</b>: extension class method
+<br>
+<b>Returns</b>: some View
+<br>
+
+<b>Example</b>:
+
+```swift
+someView.trackPageId(pageId:"pageId");
+```
+</details>
+
+<br>
+
 
 ## NSNotifications
 
