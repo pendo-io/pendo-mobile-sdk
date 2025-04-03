@@ -181,7 +181,7 @@
     ```kotlin
         someComposableObject(
             modifier = Modifier
-                .pendoTag("UNIQUE_IDENTIFIER")
+                .pendoTag(UNIQUE_IDENTIFIER)
         )
     ```
 
