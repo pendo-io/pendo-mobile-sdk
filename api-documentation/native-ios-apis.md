@@ -656,7 +656,7 @@ func trackPage(pageId: String) -> some View;
 <b>Example</b>:
 
 ```swift
-someView.trackPageId(pageId:"pageId");
+someView.trackPage(pageId:"pageId");
 ```
 </details>
 
