@@ -21,6 +21,9 @@
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
 >- compileSDKVersion `34` or higher
+>
+> If using Jetpack Compose:
+>- androidx.compose.ui:ui `1.5.0` or higher
 
 ## Step 1. Install Pendo SDK
 
