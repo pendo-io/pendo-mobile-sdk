@@ -631,13 +631,13 @@ someView.pendoRecognizeClickAnalytics();
 ```
 </details>
 
-### `trackPage`
+### `View.trackPage`
 
 ```swift 
 func trackPage(pageId: String) -> some View;
 ```
 
->Tracks page appearance/disappearance with Pendo analytics.
+>Manually designates a SwiftUI View as a "Page" within Pendo. Apply this modifier to a View you want Pendo to track for page-level analytics, e.g Views that Pendo might not automatically recognize as distinct pages or when you want finer control over page definition in your SwiftUI application.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 

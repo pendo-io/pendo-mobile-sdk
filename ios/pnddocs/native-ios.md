@@ -286,15 +286,17 @@ Review the Xcode console and look for the following message:
 
 ## SwiftUI limitations 
 
-SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will not be tracked by our SDK.
+SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those pages with unique identifier we extract from the declarative definition of the page. Rendering new views on the page will not be tracked by our SDK automatically .
 
 **Specific Limitations**
 
-1. **List Elements**: SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
+1. **Page Changes**: If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as a page) without using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "your_page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view.
 
-2. **Padding in Stacks**: When using padding in `VStack` or `HStack` without a background, the analytics tracking may not function correctly. This is because the padding alone doesn't generate trackable events. To work around this, you can explicitly call the `pendoRecognizeClickAnalytics()` API on the view to ensure that interactions are recorded.
+2. **List Elements**: SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
 
-3. **UIContextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
+3. **Padding in Stacks**: When using padding in `VStack`, `HStack` and elements that don't comprise an actual UIView under the hood Pendo might not collect click analytics on those elements. Please note adding background modifier to SwiftUI generates the desired UIView so in most cases that limitation won't affect your app. In case of having this limitation, you can explicitly call the `pendoRecognizeClickAnalytics()` API on the view to ensure that interactions are recorded.
+
+4. **UIContextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
 
 ## Developer documentation
 
