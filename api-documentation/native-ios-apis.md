@@ -35,7 +35,7 @@
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
 [View.pendoRecognizeClickAnalytics](#viewpendorecognizeclickanalytics) ⇒ `void` <br>
-[trackPage](#trackPage) ⇒ `some View`<br>
+[View.trackPage](#viewtrackpage) ⇒ `some View`<br>
 
 ### NSNotifications
 [kPNDDidSuccessfullyInitializeSDKNotification](#kpnddidsuccessfullyinitializesdknotification) <br>
@@ -609,7 +609,7 @@ struct YourView: View {
 ### `View.pendoRecognizeClickAnalytics`
 
 ```swift 
-func pendoRecognizeClickAnalytics() 
+func pendoRecognizeClickAnalytics()-> some View; 
 ```
 
 >Call this method on the View to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable feature.
@@ -627,7 +627,7 @@ func pendoRecognizeClickAnalytics()
 <b>Example</b>:
 
 ```swift
-someView.pendoRecognizeClickAnalytics();
+someView.pendoRecognizeClickAnalytics() -> some View;
 ```
 </details>
 
