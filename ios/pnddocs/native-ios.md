@@ -286,7 +286,7 @@ Review the Xcode console and look for the following message:
 
 ## SwiftUI limitations 
 
-SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those pages with unique identifier we extract from the declarative definition of the page. Rendering new views on the page will not be tracked by our SDK automatically .
+SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those pages with unique identifier we extract from the declarative definition of the page. Rendering new views on the page will not be tracked by our SDK automatically.
 
 **Specific Limitations**
 
