@@ -24,8 +24,9 @@
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
 ### Pendo Compose APIs
-[setComposeNavigationController](#setComposeNavigationController) ⇒ `void` <br>
-
+[setComposeNavigationController](#setcomposenavigationcontroller) ⇒ `void` <br>
+[pendoStateModifier](#pendostatemodifier) ⇒ `Modifier` <br>
+[pendoTag](#pendotag) ⇒ `Modifier` <br>
 
 ### PendoPhasesCallbackInterface Callbacks
 [onInitComplete](#oninitcomplete) ⇒ `void` <br>
@@ -552,6 +553,82 @@ LifecycleResumeEffect(null) {
         Pendo.setComposeNavigationController(null)
     }
 }
+```
+</details>
+
+### `pendoStateModifier`
+
+```kotlin 
+fun Modifier.pendoStateModifier(state: Any? = null): Modifier
+```
+>This modifier allows the SDK to automatically detect the Compose Drawer or ModalBottomSheetLayout in your app.
+
+>Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
+
+>To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the page anymore.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Pendo
+<br><b>Kind</b>: Jetpack Compose Modifier
+<br>
+<b>Returns</b>: Modifier
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| state | Any? | The Composable's state you'd want Pendo to listen to |
+
+
+<b>Example</b>:
+
+
+```kotlin
+ModalBottomSheetLayout(
+    sheetState = sheetState,
+    sheetContent = {
+        // Content of the bottom sheet
+        modifier = Modifier.pendoStateModifier(sheetState),
+    }
+) 
+```
+</details>
+
+### `pendoTag`
+
+```kotlin 
+fun Modifier.pendoTag(pendoTagKey: String, mergeDescendants: Boolean  = false): Modifier
+```
+>PendoTags serve multiple purposes in identifying and tracking Jetpack Compose elements:
+> - **Unique feature identification:** It provides a unique identifier for features during the tagging process.
+> - **Manual click tracking:** For non-clickable Composables that should be tracked as clickable, adding pendoTag enables click analytics.
+> - **Tooltip support:** Apply pendoTag to non-clickable Composable components to enable the presentation of tooltips.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Pendo
+<br><b>Kind</b>: Jetpack Compose Modifier
+<br>
+<b>Returns</b>: Modifier
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| pendoTagKey | String | A unique identifier for the specific composable |
+| mergeDescendants | Boolean | By setting mergeDescendants to true, additional attributes may be available to uniquely tag the element (default is false) |
+
+<b>Example</b>:
+
+
+```kotlin
+someComposableObject(
+    modifier = Modifier
+        .pendoTag(UNIQUE_IDENTIFIER)
+)
 ```
 </details>
 

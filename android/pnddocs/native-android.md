@@ -4,15 +4,12 @@
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instructions](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
 >[!IMPORTANT]
->**Jetpack Compose (Beta)** is available starting from SDK 3.6.0. Support includes:
+>**Jetpack Compose GA** is now available (SDK 3.7.0+), offering:
 >- Retroactive analytics
 >- Self-serve tagging
 >- Full guides support
 >
-> Please see integration instructions below. Opting in is optional.
->
->
-
+> If your application already uses Pendo, please review and implement the additional steps outlined in [Step 3](#step-3-tracking-jetpack-compose) to enable Jetpack Compose support within your existing integration.
 
 >[!IMPORTANT]
 >Requirements:
@@ -71,48 +68,26 @@
 
     The following code is required in the **onCreate** method:
 
-    ```java
+    ```kotlin
     import sdk.pendo.io.*;
 
-    String pendoApiKey = "YOUR_API_KEY_HERE";
+    val pendoApiKey = "YOUR_API_KEY_HERE"
     
     Pendo.setup(
        this,
        pendoApiKey,
        null, // PendoOptions (use only if instructed by Pendo support)
        null  // PendoPhasesCallbackInterface (Optional)
-    );
-    ```
-
-    **When using Jetpack Compose** - Add the JetpackComposeBeta flag by adding the following PendoOptions object to the Pendo Setup API call:
-
-    ```kotlin
-    Pendo.PendoOptions options =
-        Pendo.PendoOptions.Builder().setJetpackComposeBeta(true).build();
-
-    Pendo.setup(
-        this,
-        pendoApiKey,
-        options,
-        null  // PendoPhasesCallbackInterface (Optional)
-    ); 
+    )
     ```
 
 2. Initialize Pendo in the **Activity/fragment** where your visitor is being identified.
 
-    ```java
-    String visitorId = "VISITOR-UNIQUE-ID";
-    String accountId = "ACCOUNT-UNIQUE-ID";
-
-    // send Visitor Level Data
-    HashMap<String, Object> visitorData = new HashMap<>();
-    visitorData.put("age", 27);
-    visitorData.put("country", "USA");
-
-    // send Account Level Data
-    HashMap<String, Object> accountData = new HashMap<>();
-    accountData.put("Tier", 1);
-    accountData.put("Size", "Enterprise");
+    ```kotlin
+    val visitorId = "VISITOR-UNIQUE-ID"
+    val accountId = "ACCOUNT-UNIQUE-ID"
+    val visitorData = mapOf("age" to 27, "country" to "USA")
+    val accountData = mapOf("Tier" to 1, "Size" to "Enterprise")
 
     Pendo.startSession(
         visitorId,
@@ -133,7 +108,7 @@
 >[!TIP]
 >To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
-## Step 3. If opting into Jetpack Compose Beta
+## Step 3. Tracking Jetpack Compose
 
 1. **Add Compose Navigation Support**
 
@@ -159,13 +134,15 @@
 
 >[!TIP]
 >We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
-2. **(If applicable) When using Jetpack Compose, add Drawer or ModalBottomSheetLayout support**
+
+2. **Drawer or ModalBottomSheetLayout Support (Add if applicable)**
 
     Automatic detection of Compose Drawer or ModalBottomSheetLayout in your app requires these steps:
 
     Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
 
     **Important:** To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the page anymore.
+
     ```kotlin
         ModalBottomSheetLayout(
             sheetState = sheetState,
@@ -177,9 +154,15 @@
         ...
     ```
 
-3. **(Optional) When using Jetpack Compose, add the pendoTag**
+3. **(Optional) Implement pendoTag in Jetpack Compose**
 
-    In your application code, for each non-clickable Composable component that you want to present a tooltip on, add the following snippet:
+    PendoTags serve multiple purposes in identifying and tracking UI elements:
+
+    - **Unique feature identification:** It provides a unique identifier for features during the tagging process.
+    - **Manual click tracking:** For non-clickable Composables that should be tracked as clickable, adding pendoTag enables click analytics. You can optionally set the mergeDescendants parameter to true (default is false) to potentially provide additional attributes for more precise identification.
+    - **Tooltip support:** Apply pendoTag to non-clickable Composable components to enable the presentation of tooltips.
+
+    To implement pendoTag, add the following modifier to your relevant Composable components:
 
     ```kotlin
         someComposableObject(
@@ -188,15 +171,8 @@
         )
     ```
 
-   **Starting 3.6.3:**
-   1. Adding pendoTag to an element will send click analytic when clicked.
-   2. If relevant, set the second parameter (mergeDescendants) as true (default is false).
-     By setting mergeDescendants to true, additional attributes may be available to uniquely identify the element
-
 >[!NOTE]
 >pendoTags are case-sensitive. 
->You may add the pendoTag to clickable Composable components as well, as it will strengthen Pendo’s feature identification logic.
-
 
 ## Step 4. Connect mobile device for tagging and testing
 
