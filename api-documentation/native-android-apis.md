@@ -603,7 +603,7 @@ fun Modifier.pendoTag(pendoTagKey: String, mergeDescendants: Boolean  = false): 
 ```
 >PendoTags serve multiple purposes in identifying and tracking Jetpack Compose elements:
 > - **Unique feature identification:** It provides a unique identifier for features during the tagging process.
-> - **Manual click tracking:** For non-clickable Composables that should be tracked as clickable, adding pendoTag enables click analytics.
+> - **Manually enable click tracking:** For Composables you want to track as clicks that Pendo doesn't automatically detect, add pendoTag.
 > - **Tooltip support:** Apply pendoTag to non-clickable Composable components to enable the presentation of tooltips.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
