@@ -286,15 +286,17 @@ Review the Xcode console and look for the following message:
 
 ## SwiftUI limitations 
 
-SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`. Rendering new views on the page will not be tracked by our SDK.
+SwiftUI tracking of page changes is based on the application events emitted by the following navigation components: `NavigationView`, `TabView`, `NavigationLink`, `ActionSheet`, `Sheets` or `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those pages with unique identifier we extract from the declarative definition of the page. Rendering new views on the page will not be tracked by our SDK automatically.
 
 **Specific Limitations**
 
-1. **List Elements**: SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
+1. **Page Changes**: If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as distinct pages) *without* using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "your_page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view. Ensure the `pageId` provided is unique across your application.
 
-2. **Padding in Stacks**: When using padding in `VStack` or `HStack` without a background, the analytics tracking may not function correctly. This is because the padding alone doesn't generate trackable events. To work around this, you can explicitly call the `pendoRecognizeClickAnalytics()` API on the view to ensure that interactions are recorded.
+2. **List Elements**: SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
 
-3. **UIContextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
+3. **Padding in Stacks**: When using padding in `VStack`, `HStack` and elements that don't comprise an actual UIView under the hood Pendo might not collect click analytics on those elements. Please note adding background modifier to SwiftUI generates the desired UIView so in most cases that limitation won't affect your app. In case of having this limitation, you can explicitly call the `pendoRecognizeClickAnalytics()` API on the view to ensure that interactions are recorded.
+
+4. **UIContextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
 
 ## Developer documentation
 
@@ -310,13 +312,16 @@ SwiftUI tracking of page changes is based on the application events emitted by t
 ## SwiftUI Troubleshooting
 _Why aren't some elements being tagged correctly in SwiftUI?_
 
-* **Missing Accessibility Traits** - Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g.,, .button). Adding these traits helps our SDK recognize and tag them correctly.
+* **Missing Accessibility Traits**: Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g.,, .button). Adding these traits helps our SDK recognize and tag them correctly.
 
-* **Embedding SwiftUI in UIKit** - If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
+* **Embedding SwiftUI in UIKit**: If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
 
-* **Allow deeply nested SwiftUI layouts** - Enable `pendoOptions.scanFromRootViewController` flag to allow the SDK to scan elements starting from the main window root view controller, rather than limiting the scan to the top-most controller. This feature is designed to enhance element detection in SwiftUI-based layouts, particularly for complex view hierarchies where traditional scanning methods might fail. This scanning approach performs a deeper traversal of the entire view hierarchy, which may affect performance in large or deeply nested layouts. Use this flag only when necessary, as it introduces a heavier processing load compared to the default scanning method.
+* **Allow deeply nested SwiftUI layouts**: Enable `pendoOptions.scanFromRootViewController` flag to allow the SDK to scan elements starting from the main window root view controller, rather than limiting the scan to the top-most controller. This feature is designed to enhance element detection in SwiftUI-based layouts, particularly for complex view hierarchies (like `Overlays` that are triggered from deeper views)  where traditional scanning methods might fail. This scanning approach performs a deeper traversal of the entire view hierarchy, which may affect performance in large or deeply nested layouts. Use this flag only when necessary, as it introduces a heavier processing load compared to the default scanning method.
 
-* **Using Our API** - `pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.
+* **Using Our API** : <br>
+`pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.<br>
+`trackPage(pageId: "your_page_name")` - If the Pendo SDK fails to uniquely identify your page, use this API to manually designate the view as a page with a unique page name.
+
 
 _Why do some of my SwiftUI screens have generic or irrelevant keywords in their screenId, and how can this be improved?_
 

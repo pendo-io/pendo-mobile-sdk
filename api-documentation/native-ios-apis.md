@@ -35,6 +35,7 @@
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
 [View.pendoRecognizeClickAnalytics](#viewpendorecognizeclickanalytics) ⇒ `void` <br>
+[View.trackPage](#viewtrackpage) ⇒ `some View`<br>
 
 ### NSNotifications
 [kPNDDidSuccessfullyInitializeSDKNotification](#kpnddidsuccessfullyinitializesdknotification) <br>
@@ -535,8 +536,6 @@ PendoManager.shared().setup("your.app.key", with: nil);
 ```
 </details>
 
-<br>
-
 ## UIView
 
 ### `UIView.pendoRecognizeClickAnalytics`
@@ -610,7 +609,7 @@ struct YourView: View {
 ### `View.pendoRecognizeClickAnalytics`
 
 ```swift 
-func pendoRecognizeClickAnalytics() 
+func pendoRecognizeClickAnalytics()-> some View; 
 ```
 
 >Call this method on the View to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable feature.
@@ -628,11 +627,41 @@ func pendoRecognizeClickAnalytics()
 <b>Example</b>:
 
 ```swift
-someView.pendoRecognizeClickAnalytics();
+someView.pendoRecognizeClickAnalytics() -> some View;
+```
+</details>
+
+### `View.trackPage`
+
+```swift 
+func trackPage(pageId: String) -> some View;
+```
+
+>Manually designates a SwiftUI View as a "Page" within Pendo. Apply this modifier to a View you want Pendo to track for page-level analytics, e.g Views that Pendo might not automatically recognize as distinct pages or when you want finer control over page definition in your SwiftUI application.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| pageId | String | A unique identifier for the page (max 50 chars).  It must be alphanumeric and may include underscores and dashes. |
+
+<br>
+
+<b>Class</b>: View
+<br><b>Kind</b>: extension class method
+<br>
+<b>Returns</b>: some View
+<br>
+
+<b>Example</b>:
+
+```swift
+someView.trackPage(pageId:"pageId");
 ```
 </details>
 
 <br>
+
 
 ## NSNotifications
 
