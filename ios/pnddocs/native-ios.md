@@ -69,7 +69,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
 
     ```objectivec
     #import "AppDelegate.h"
-    #import "Pendo.h";    
+    #import @Pendo;    
     
     @implementation AppDelegate
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -101,7 +101,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
     ```objectivec
-    #import "Pendo.h";    
+    #import @Pendo;    
 
     - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {}
         [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
@@ -292,18 +292,21 @@ SwiftUI tracking of page changes is based on the application events emitted by t
 **Specific Limitations**
 
 1. **Page Changes**:<br>
- a. If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as distinct pages) *without* using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view. Ensure the `pageId` provided is unique across your application.<br>
-b. If the tagged page identifier such as `retroactiveScreenId` or `swiftUIIdentifier` are not unique enough you can enhance it by selecting unique Page Identifier in Pendo Web designer OR apply your own page id via [`.trackPage(pageId: "page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage)
+ a. If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as distinct pages) *without* using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "page_id")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view. Ensure the `pageId` provided is unique across your application.<br>
+b. If the tagged page identifier such as `retroactiveScreenId` or `swiftUIIdentifier` are not unique enough you can enhance it by selecting unique Page Identifier in Pendo Web designer OR apply your own page id via [`.trackPage(pageId: "page_id")`](/api-documentation/native-ios-apis.md#viewtrackpage)
 
-2. **List Elements**:<br> 
+2. **Tagging**:<br>
+ Pendo's feature tagging relies heavily on iOS accessibility services to gather information like accessibilityHint, accessibilityIdentifier, accessibilityLabel, and user interactions. While iOS typically provides these accessibility elements by default, there might be instances where UI elements are not automatically tagged as expected by the Pendo SDK. In such cases, you can use the pendoRecognizeClickAnalytics() modifier. This API helps by creating an accessibility element, combining its children, and marking it as userInteractionEnabled. This allows Pendo to correctly identify the element as taggable and record click analytics for it.
+
+3. **List Elements**:<br> 
 SwiftUI offers List and ForEach for creating dynamic lists. Because List is built upon UICollectionView internally, the Pendo SDK utilizes its existing support for UICollectionView. Consequently, individual elements within a List will appear as taggable in Pendo. However, analytics (such as click events) will only be recorded if these elements are clickable.
 
-3. **Container Views**: <br>
+4. **Container Views**: <br>
 Container views that do not generate underlying UIKit elements may cause the Pendo SDK to fail in tagging and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
-Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, and `LazyHGrid`. In most cases, applying a modifier (e.g., a background modifier) will create an underlying `UIView`, enabling the Pendo SDK to tag and collect analytics seamlessly. However, if tagging issues persist, we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded.
- 
+Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, and `LazyHGrid`. In most cases, applying a modifier (e.g., a background modifier) will create an underlying `UIView`, enabling the Pendo SDK to tag and collect analytics seamlessly. However, if tagging issues persist, we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
 
-4. **UIContextMenu,Menu,.contextMenu**: The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
+5. **UIContextMenu,Menu,.contextMenu**: <br>
+ The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
 
 ## Developer documentation
 
