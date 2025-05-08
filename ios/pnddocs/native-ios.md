@@ -330,7 +330,7 @@ _Why aren't some elements being tagged correctly in SwiftUI?_
 
 * **Using Our API** : <br>
 `pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.<br>
-`trackPage(pageId: "your_page_name")` - If the Pendo SDK fails to uniquely identify your page, use this API to manually designate the view as a page with a unique page name.
+`trackPage(pageId: "page_id")` - If the Pendo SDK fails to uniquely identify your page, use this API to manually designate the view as a page with a unique page name.
 
 
 _Why do some of my SwiftUI screens have generic or irrelevant keywords in their screenId, and how can this be improved?_
