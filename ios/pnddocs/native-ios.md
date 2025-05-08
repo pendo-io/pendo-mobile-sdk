@@ -292,11 +292,11 @@ SwiftUI tracking of page changes is based on the application events emitted by t
 **Specific Limitations**
 
 1. **Page Changes**:<br>
-    a. If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as distinct pages) *without* using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "your_page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view. Ensure the `pageId` provided is unique across your application.<br>
-    b. If the tagged page identifier such as `retroactiveScreenId` or `swiftUIIdentifier` are not unique enough you can enhance it by selecting unique Page Identifier in Pendo Web designer OR apply your own page id via [`.trackPage(pageId: "your_page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage)
+ a. If your application renders new views conditionally or dynamically (e.g `ZStack` views that you treat as distinct pages) *without* using standard navigation containers mentioned above, Pendo might not automatically recognize this as a distinct page change. To ensure these views are tracked as separate pages in Pendo analytics, you can manually designate them using the [`.trackPage(pageId: "page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage) modifier on the relevant view. Ensure the `pageId` provided is unique across your application.<br>
+b. If the tagged page identifier such as `retroactiveScreenId` or `swiftUIIdentifier` are not unique enough you can enhance it by selecting unique Page Identifier in Pendo Web designer OR apply your own page id via [`.trackPage(pageId: "page_name")`](/api-documentation/native-ios-apis.md#viewtrackpage)
 
 2. **List Elements**:<br> 
-SwiftUI's handling of list elements can present limitations, particularly related to accessibility. If a list element has accessibility traits, it will be tracked by the SDK. However, if it does not, tracking might be incomplete or not occur at all. To ensure that list elements are properly tracked, make sure they have appropriate accessibility traits assigned.
+SwiftUI offers List and ForEach for creating dynamic lists. Because List is built upon UICollectionView internally, the Pendo SDK utilizes its existing support for UICollectionView. Consequently, individual elements within a List will appear as taggable in Pendo. However, analytics (such as click events) will only be recorded if these elements are clickable.
 
 3. **Container Views**: <br>
 Container views that do not generate underlying UIKit elements may cause the Pendo SDK to fail in tagging and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
