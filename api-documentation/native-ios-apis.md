@@ -643,7 +643,7 @@ func trackPage(pageId: String) -> some View;
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| pageId | String | A unique identifier for the page (max 50 chars).  It must be alphanumeric and may include underscores and dashes. |
+| pageId | String | A unique identifier for the page (max 50 chars).  It must be alphanumeric and may include underscores, dashes, and empty spaces. |
 
 <br>
 
