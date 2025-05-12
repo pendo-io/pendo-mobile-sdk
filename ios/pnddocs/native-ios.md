@@ -69,7 +69,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
 
     ```objectivec
     #import "AppDelegate.h"
-    #import @Pendo;    
+    @import Pendo;    
     
     @implementation AppDelegate
     - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
