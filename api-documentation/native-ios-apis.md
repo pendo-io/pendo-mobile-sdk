@@ -330,7 +330,7 @@ PendoManager.shared().track("App Opened", trackEventProperties);
 func screenContentChanged()
 ```
 
->Manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions when the SDK fails to collect analytics of an element on the page or when a tooltip guide connected to an element on the page fails to appear. Examples of such scenarios may include: views updated or added to the page after the initial loading of page, as well as changes to a view’s isHidden or alpha properties.
+>Manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions when the SDK fails to collect analytics of an element on the Page or when a tooltip guide connected to an element on the Page fails to appear. Examples of such scenarios may include: views updated or added to the Page after the initial loading of Page, as well as changes to a view’s isHidden or alpha properties.
 
 >The logic applied by this API is automatically invoked when scrolling the screen content of the app. Elements below the fold created dynamically while scrolling will be identified automatically by the SDK and there is no need to call the screenContentChanged API.
 
@@ -488,7 +488,7 @@ private(set) var jwt: PendoJWT
 
 >Returns the JWT instance for handling secure metadata sessions. 
 
->To use secure metadata sessions, contact Pendo support to enable this feature.
+>To use secure metadata sessions, contact Pendo support to enable this Feature.
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
@@ -544,7 +544,7 @@ PendoManager.shared().setup("your.app.key", with: nil);
 func pendoRecognizeClickAnalytics() 
 ```
 
->Call this method on the UIView to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable feature.
+>Call this method on the UIView to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable Feature.
 
 >This API will only work on UIViews that inherit from UIResponder.
 
@@ -612,7 +612,7 @@ struct YourView: View {
 func pendoRecognizeClickAnalytics()-> some View; 
 ```
 
->Call this method on the View to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable feature.
+>Call this method on the View to manually enable analytics collection and the display of tooltip guides on the view. Use the API only on the rare occasion when the Pendo SDK does not automatically recognize the clickable Feature.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -637,7 +637,7 @@ someView.pendoRecognizeClickAnalytics() -> some View;
 func trackPage(pageId: String) -> some View;
 ```
 
->Manually designates a SwiftUI View as a "Page" within Pendo. Apply this modifier to a View you want Pendo to track for page-level analytics, e.g Views that Pendo might not automatically recognize as distinct pages or when you want finer control over page definition in your SwiftUI application.
+>Manually designates a SwiftUI View as a "Page" within Pendo. Apply this modifier to a View you want Pendo to track for Page-level analytics, e.g Views that Pendo might not automatically recognize as distinct Pages or when you want finer control over Page definition in your SwiftUI application.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -732,7 +732,7 @@ NotificationCenter.default.removeObserver(self,
 ## JWT APIs
 
 > [!IMPORTANT]
-> To use secure metadata sessions, contact Pendo support to enable this feature. <br> For full details on how to use secure metadata sessions and what information needs to be included in the JWTs see the [mobile installation using signed metadata with JWT](https://support.pendo.io/hc/en-us/articles/360039616892-Send-signed-metadata-with-JWT) article.
+> To use secure metadata sessions, contact Pendo support to enable this Feature. <br> For full details on how to use secure metadata sessions and what information needs to be included in the JWTs see the [mobile installation using signed metadata with JWT](https://support.pendo.io/hc/en-us/articles/360039616892-Send-signed-metadata-with-JWT) article.
 
 > [!NOTE]
 >To generate or find your JWT signing-key name and corresponding secret value go to your app’s Install Settings section in your Pendo Subscription Settings.

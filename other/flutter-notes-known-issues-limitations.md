@@ -1,7 +1,7 @@
 
 
 ## Navigation Libraries
-The page recognition solution supports the standard Flutter Navigator, GoRouter and AutoRoute libraries. Integration with additional navigation frameworks is planned for future releases.
+The Page recognition solution supports the standard Flutter Navigator, GoRouter and AutoRoute libraries. Integration with additional navigation frameworks is planned for future releases.
 
 ## Clickable Widgets
 Our implementation supports basic touch interactions (touchDown and touchUp) on a range of standard Flutter widgets, including:<br>

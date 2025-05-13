@@ -60,7 +60,7 @@ The optimizations line should look like this:
     }
     ```
 
-2. #### Start the visitor's session in the page where your visitor is being identified (e.g., login, register, etc.).
+2. #### Start the visitor's session in the Page where your visitor is being identified (e.g., login, register, etc.).
 
     ```c#
     using PendoSDKXamarin;
@@ -117,7 +117,7 @@ The optimizations line should look like this:
 >[!NOTE]
 >Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
-This step enables page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
+This step enables Page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 Add the following **activity** to the application **AndroidManifest.xml** in the `<Application>` tag:

@@ -115,7 +115,7 @@
     If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
 
 
-    - This step is required for the SDK to recognize Compose pages in your app.
+    - This step is required for the SDK to recognize Compose Pages in your app.
     - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
 
 
@@ -141,7 +141,7 @@
 
     Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
 
-    **Important:** To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the page anymore.
+    **Important:** To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the Page anymore.
 
     ```kotlin
         ModalBottomSheetLayout(
@@ -179,7 +179,7 @@
 >[!NOTE]
 >Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
-This step enables page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
+This step enables Page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 Add the following **activity** to the application **AndroidManifest.xml** in the `<Application>` tag:
