@@ -33,6 +33,6 @@ The analytics captured by the SDK include starting a session, the application st
 
 **Network usage example**
 
-A session with a single guide including four steps, 6 session analytics, 42 page transitions, 65 feature clicks, 13 guide events
+A session with a single guide including four steps, 6 session analytics, 42 page transitions, 65 Feature clicks, 13 guide events
 and 3 track events, recorded ~120KB of data received and ~320KB of data transmitted.
 

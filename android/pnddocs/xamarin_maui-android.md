@@ -56,7 +56,7 @@ The optimizations line should look like this:
     }
     ```
 
-2. Start the visitor's session in the page where your visitor is being identified (e.g., login, register, etc.).
+2. Start the visitor's session in the Page where your visitor is being identified (e.g., login, register, etc.).
 
     ```c#
     ...

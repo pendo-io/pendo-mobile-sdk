@@ -48,7 +48,7 @@
     }
     ```
 
-2. Start the visitor's Session in the page where your visitor is being identified (e.g., login, register, etc.).
+2. Start the visitor's Session in the Page where your visitor is being identified (e.g., login, register, etc.).
 
     ```c#
     using PendoMAUIPlugin;
@@ -131,7 +131,7 @@
 >[!NOTE]
 >Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
-These steps enable page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
+These steps enable Page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
 
 1. Add a Pendo URL scheme to the **info.plist** file:

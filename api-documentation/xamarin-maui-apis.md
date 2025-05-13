@@ -465,11 +465,11 @@ Pendo.Setup("your.app.key");
 void ScreenContentChanged()
 ```
 
->Rescans the page enabling the Pendo SDK to identify changes that have occurred since the page loaded.
+>Rescans the Page enabling the Pendo SDK to identify changes that have occurred since the Page loaded.
 
->Using this API is required to display tooltip guides and fix inaccurate analytics on elements that weren't present, or have been modified since the initial page load.
+>Using this API is required to display tooltip guides and fix inaccurate analytics on elements that weren't present, or have been modified since the initial Page load.
 
->The API does not generate an additional page load event.
+>The API does not generate an additional Page load event.
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>

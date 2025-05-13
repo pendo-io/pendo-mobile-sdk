@@ -273,7 +273,7 @@ static void screenContentChanged()
 >- The View was added dynamically to the View Hierarchy.
 >- The screen content was scrolled.
 
->If multiple page captures were used to tag all features on the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
+>If multiple Page captures were used to tag all Features on the Page (where some Features exist only in some state of the Page), verify that all of the Page captures of the screen are configured with identical Page rules and Page identifiers for correct analytics and guide behavior.
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
@@ -516,7 +516,7 @@ Pendo.setup(appContext, "your.app.key", null, null);
 ```java 
 static synchronized void setComposeNavigationController(NavHostController navHostController)
 ```
->This API allows the SDK to recognize Compose pages in your app.
+>This API allows the SDK to recognize Compose Pages in your app.
 
 >If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
 
@@ -565,7 +565,7 @@ fun Modifier.pendoStateModifier(state: Any? = null): Modifier
 
 >Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
 
->To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the page anymore.
+>To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the Page anymore.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 

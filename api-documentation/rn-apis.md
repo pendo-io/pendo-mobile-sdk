@@ -389,7 +389,7 @@ static screenContentChanged(): void
 
 >This method manually triggers a rescan of the current screen layout hierarchy by the SDK. This API should be called on rare occasions where the delayed appearance of some elements on the screen is not recognized by the SDK.
 
->If multiple page captures were used to tag all features in the page (where some features exist only in some state of the page), verify that all of the page captures of the screen are configured with identical page rules and page identifiers for correct analytics and guide behavior.
+>If multiple Page captures were used to tag all Features in the Page (where some Features exist only in some state of the Page), verify that all of the Page captures of the screen are configured with identical Page rules and Page identifiers for correct analytics and guide behavior.
 
 
 <details>
@@ -413,7 +413,7 @@ PendoSDK.screenContentChanged();
 static sendClickAnalytic(nativeID: string): void
 ```
 
->The API manually sends an RAClick analytic for the view during the ongoing session. Use the API only when Pendo does not automatically recognize a clickable feature by passing in the nativeID of the view. Call the API in your code as part of the action implementation (ex. onTouchListener, onClickListener, etc).
+>The API manually sends an RAClick analytic for the view during the ongoing session. Use the API only when Pendo does not automatically recognize a clickable Feature by passing in the nativeID of the view. Call the API in your code as part of the action implementation (ex. onTouchListener, onClickListener, etc).
 
 >This API’s logic is only relevant for handling issues encountered in your Android app (similar edge cases are not known to us in iOS). Calling this API will not resolve issues in your iOS app. 
 
