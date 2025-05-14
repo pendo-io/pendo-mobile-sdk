@@ -49,7 +49,7 @@ In the `app.config.js` or `app.json`, add the following:
     ]
 }
 ```
-This configuration enables pendo to enter pair mode to tag pages and features. 
+This configuration enables pendo to enter pair mode to tag Pages and Features. 
 
 ## Step 3. Production bundle - modify Javascript minification
 
