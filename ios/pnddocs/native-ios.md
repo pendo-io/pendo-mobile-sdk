@@ -286,8 +286,7 @@ Review the Xcode console and look for the following message:
 
 ## SwiftUI limitations 
 
-SwiftUI tracking of Page changes is based on the application events emitted by the following navigation components: `NavigationView`,`NavigationStack`,
-`NavigationSplitView`,`TabView`,`NavigationLink`,`ActionSheet`,`Sheets`,`.alert`,`.confirmationDialog` and `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those Pages with unique identifier we extract from the declarative definition of the Page or from the underline structure of your app. Rendering new views on the Page will not be tracked by our SDK automatically.
+SwiftUI tracking of Page changes is based on the application events emitted by the following navigation components: `NavigationView`,`NavigationStack`,`NavigationSplitView`,`TabView`,`NavigationLink`,`ActionSheet`,`Sheets`,`.alert`,`.confirmationDialog` and `PopOvers`, under the hood SwiftUI still uses UIKit navigation and as such Pendo will track those changes automatically by identifying those Pages with unique identifier we extract from the declarative definition of the Page or from the underline structure of your app. Rendering new views on the Page will not be tracked by our SDK automatically.
 
 **Specific Limitations**
 
@@ -302,8 +301,8 @@ b. If the tagged Page identifier such as `retroactiveScreenId` or `swiftUIIdenti
 SwiftUI offers List and ForEach for creating dynamic lists. Because List is built upon UICollectionView internally, the Pendo SDK utilizes its existing support for UICollectionView. Consequently, individual elements within a List will appear as taggable in Pendo. However, analytics (such as click events) will only be recorded if these elements are clickable.
 
 4. **Container Views**: <br>
-Container views that do not generate underlying UIKit elements may cause the Pendo SDK to fail in tagging and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
-Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, and `LazyHGrid`. In most cases, applying a modifier (e.g., a background modifier) will create an underlying `UIView`, enabling the Pendo SDK to tag and collect analytics seamlessly. However, if tagging issues persist, we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
+Container views with `TapGestures` modifiers don't always generate underlying accessibility elements and may cause Pendo SDK to fail tagging them as clickable elements and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
+Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, `sizeThatFits` and `LazyHGrid`. In that case we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
 
 5. **UIContextMenu,Menu,.contextMenu**: <br>
  The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
