@@ -158,7 +158,7 @@
 
     PendoTags serve multiple purposes in identifying and tracking UI elements:
 
-    - **Unique feature identification:** It provides a unique identifier for features during the tagging process.
+    - **Unique Feature identification:** It provides a unique identifier for Features during the tagging process.
     - **Manually enable click tracking:** For Composables you want to track as clicks that Pendo doesn't automatically detect, add pendoTag. You can also set mergeDescendants to true (default is false) to provide more attributes for better identification.
     - **Tooltip support:** Apply pendoTag to non-clickable Composable components to enable the presentation of tooltips.
 
