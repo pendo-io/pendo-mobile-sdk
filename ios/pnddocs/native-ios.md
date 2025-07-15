@@ -103,7 +103,7 @@ Identify if your app project contains an `AppDelegate` file or a `SceneDelegate`
     ```objectivec
     @import Pendo;    
 
-    - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {}
+    - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
         [[PendoManager sharedManager] setup:@"YOUR_API_KEY_HERE"];
         //  your code here ...
     }
@@ -298,11 +298,20 @@ b. If the tagged Page identifier such as `retroactiveScreenId` or `swiftUIIdenti
  Pendo's Feature tagging relies heavily on iOS accessibility services to gather information like accessibilityHint, accessibilityIdentifier, accessibilityLabel, and user interactions. While iOS typically provides these accessibility elements by default, there might be instances where UI elements are not automatically tagged as expected by the Pendo SDK. In such cases, you can use the pendoRecognizeClickAnalytics() modifier. This API helps by creating an accessibility element, combining its children, and marking it as userInteractionEnabled. This allows Pendo to correctly identify the element as taggable and record click analytics for it.
 
 3. **List Elements**:<br> 
-SwiftUI offers List and ForEach for creating dynamic lists. Because List is built upon UICollectionView internally, the Pendo SDK utilizes its existing support for UICollectionView. Consequently, individual elements within a List will appear as taggable in Pendo. However, analytics (such as click events) will only be recorded if these elements are clickable.
+SwiftUI's `List` and `ForEach` are used to create dynamic lists. Under the hood, SwiftUI's `List` uses a `UICollectionView`, allowing the Pendo SDK to tag individual list elements.
+Click analytics are recorded only for elements that are clickable.
+
+- **Automatic tracking**: When list rows are wrapped in a `Button` or `NavigationLink`, Pendo tracks clicks automatically. Clicks are also tracked when using the `.onChange` modifier with a `List` to handle selection changes. In these cases, we detect clicks via `collectionView:didSelectItemAtIndexPath:`.
+- **Manual intervention**: If you use gestures like `.onTapGesture`, the Pendo SDK might not record clicks. In such cases, you need to help Pendo recognize the interaction. You can use the `pendoRecognizeClickAnalytics()` API, or Apple's native accessibility modifiers:
+  ```swift
+  .accessibilityElement(children: .combine)
+  .accessibilityAddTraits([.isButton])
+  ```
+This ensures that Pendo can record click analytics for the element.
 
 4. **Container Views**: <br>
 Container views with `TapGestures` modifiers don't always generate underlying accessibility elements and may cause Pendo SDK to fail tagging them as clickable elements and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
-Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, `sizeThatFits` and `LazyHGrid`. In that case we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
+Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, and `LazyHGrid`. In that case we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
 
 5. **UIContextMenu,Menu,.contextMenu**: <br>
  The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
@@ -321,14 +330,21 @@ Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `Laz
 ## SwiftUI Troubleshooting
 _Why aren't some elements being tagged correctly in SwiftUI?_
 
-* **Missing Accessibility Traits**: Ensure that interactive elements, like buttons, have appropriate accessibility traits (e.g.,, .button). Adding these traits helps our SDK recognize and tag them correctly.
+* **Missing Accessibility Traits**: Container views with an `.onTapGesture` modifier might not be automatically tagged. To ensure they are, you can add accessibility traits to help our SDK identify the view as an interactive element. For example:
+  ```swift
+  .accessibilityElement(children: .combine)
+  .accessibilityAddTraits([.isButton])
+  ```
 
-* **Embedding SwiftUI in UIKit**: If you are using SwiftUI elements inside UIKit, enable `pendoOptions.enableSwiftUIInsideUIKitScan`. This option will help our SDK to recognize SwiftUI components within UIKit containers.
-
-* **Allow deeply nested SwiftUI layouts**: Enable `pendoOptions.scanFromRootViewController` flag to allow the SDK to scan elements starting from the main window root view controller, rather than limiting the scan to the top-most controller. This Feature is designed to enhance element detection in SwiftUI-based layouts, particularly for complex view hierarchies (like `Overlays` that are triggered from deeper views)  where traditional scanning methods might fail. This scanning approach performs a deeper traversal of the entire view hierarchy, which may affect performance in large or deeply nested layouts. Use this flag only when necessary, as it introduces a heavier processing load compared to the default scanning method.
+* **Tagging elements inside Overlays**: The Pendo SDK automatically detects and tags elements within most SwiftUI `Overlays`. However, if you find that elements inside an overlay are not taggable, it may be because the overlay is not part of the top-most view controller's hierarchy. In these rare cases, you can enable the `pendoOptions.scanFromRootViewController` flag. This allows the SDK to scan from the root view controller, making overlay content accessible. Be aware that this performs a deeper scan of the view hierarchy and may impact performance, so use it only when necessary.
 
 * **Using Our API** : <br>
-`pendoRecognizeClickAnalytics()` - Even with codeless solutions, sometimes it’s necessary to use our tagging API to manually recognize clickable views. Applying this API to the specific view can resolve tagging issues effectively.<br>
+`pendoRecognizeClickAnalytics()` - A Pendo-specific modifier to help recognize clickable views that are not automatically tagged. It applies Apple's native accessibility APIs under the hood to combine child elements and mark them as buttons. If you prefer not to use a Pendo API, or for better code clarity, you can apply these native modifiers yourself:
+  ```swift
+  .accessibilityElement(children: .combine)
+  .accessibilityAddTraits([.isButton])
+  ```
+<br>
 `trackPage(pageId: "page_id")` - If the Pendo SDK fails to uniquely identify your Page, use this API to manually designate the view as a Page with a unique Page name.
 
 
