@@ -9,7 +9,7 @@ Pendo can *only* be used in development builds. For more about development build
 
 >[!IMPORTANT]
 >Requirements:
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher

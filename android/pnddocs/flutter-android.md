@@ -10,7 +10,7 @@
 >Requirements:
 >- Flutter: ">=3.16.0"
 >- SDK: ">=3.2.0 < 4.0.0" 
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
