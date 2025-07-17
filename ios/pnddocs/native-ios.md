@@ -338,14 +338,15 @@ _Why aren't some elements being tagged correctly in SwiftUI?_
 
 * **Tagging elements inside Overlays**: The Pendo SDK automatically detects and tags elements within most SwiftUI `Overlays`. However, if you find that elements inside an overlay are not taggable, it may be because the overlay is not part of the top-most view controller's hierarchy. In these rare cases, you can enable the `pendoOptions.scanFromRootViewController` flag. This allows the SDK to scan from the root view controller, making overlay content accessible. Be aware that this performs a deeper scan of the view hierarchy and may impact performance, so use it only when necessary.
 
-* **Using Our API** : <br>
-`pendoRecognizeClickAnalytics()` - A Pendo-specific modifier to help recognize clickable views that are not automatically tagged. It applies Apple's native accessibility APIs under the hood to combine child elements and mark them as buttons. If you prefer not to use a Pendo API, or for better code clarity, you can apply these native modifiers yourself:
+**Using Our API** : <br>
+- `pendoRecognizeClickAnalytics()` - A Pendo-specific modifier to help recognize clickable views that are not automatically tagged. It applies Apple's native accessibility APIs under the hood to combine child elements and mark them as buttons. If you prefer not to use a Pendo API, or for better code clarity, you can apply these native modifiers yourself:
   ```swift
   .accessibilityElement(children: .combine)
   .accessibilityAddTraits([.isButton])
   ```
 <br>
-`trackPage(pageId: "page_id")` - If the Pendo SDK fails to uniquely identify your Page, use this API to manually designate the view as a Page with a unique Page name.
+
+- `trackPage(pageId: "page_id")` - If the Pendo SDK fails to uniquely identify your Page, use this API to manually designate the view as a Page with a unique Page name.
 
 
 _Why do some of my SwiftUI screens have generic or irrelevant keywords in their screenId, and how can this be improved?_
@@ -354,14 +355,14 @@ _Why do some of my SwiftUI screens have generic or irrelevant keywords in their 
 
 _I have noticed performance issues in my app after integrating Pendo SDK. What should I do?_
   
-* **Disable Unnecessary Information Collection** - To improve performance, particularly on iPads, consider disabling some of the things Pendo collects while scanning your Page:
-    *  **Texts Collection** - Set enableTextCollectionSwiftUI to false in pendoOptions:
+* **Disable Some Information Collection** - To improve performance, particularly on iPads, consider disabling some of the things Pendo collects while scanning your Page:
+    *  **Hashed Texts Collection** - Set enableTextCollectionSwiftUI to false in pendoOptions:
     ```
     let options = PendoOptions()
     options.configs = ["enableTextCollectionSwiftUI": false]
     PendoManager.shared().setup(prodAppKey, with: options)
     ```
-    * **Pruning** - To save time during scanning, set pendoOptions.enablePruning = false. This may help reduce the overhead.
+    _Please note that in that case feature analytics will be based only on accessibility data._
 
 * **Optimizing Scanning Depth** - If performance issues persist, adjust the scan depth settings. Consult our support team to configure this setting for optimal performance.
   
