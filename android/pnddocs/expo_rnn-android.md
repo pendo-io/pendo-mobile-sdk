@@ -1,15 +1,15 @@
 # Expo Android using React Native Navigation
 
 >[!IMPORTANT]
->- **Expo SDK** 41-52 using React Native Navigation 6+ is supported by our codeless solution.
+>- **Expo SDK** 41-53 using React Native Navigation 6+ is supported by our codeless solution.
 >- **Expo Go** is not supported. Pendo SDK has a native plugin that is not part of the Expo Go app.
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
->- Beta support for React Native's New Architecture (Fabric) is available starting from version 3.6.1.
+>- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 
 >[!IMPORTANT]
 >Requirements:
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher

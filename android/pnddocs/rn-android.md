@@ -1,15 +1,15 @@
 # React Native Android using React Navigation
 
 >[!NOTE]
->**Expo SDK** 41-52 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
+>**Expo SDK** 41-53 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.6-0.78 using react-navigation 5+.
->- Beta support for React Native's New Architecture (Fabric) is available starting from version 3.6.1.
+>- We support a codeless solution for React Native 0.6-0.80 using react-navigation 5+.
+>- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]
 >Requirements:
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
