@@ -518,7 +518,7 @@ static synchronized void setComposeNavigationController(NavHostController navHos
 ```
 >This API allows the SDK to recognize Compose Pages in your app.
 
->If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+>If you are using **Compose Navigation** add the following as soon as possible, immediately after `rememberNavController` in your app.
 
 >Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
 
@@ -561,7 +561,7 @@ LifecycleResumeEffect(null) {
 ```kotlin 
 fun Modifier.pendoStateModifier(state: Any? = null): Modifier
 ```
->This modifier allows the SDK to automatically detect the Compose Drawer or ModalBottomSheetLayout in your app.
+>This modifier allows the SDK to automatically detect the Compose Drawer or ModalBottomSheetLayout in your app if using **Compose Navigation**.
 
 >Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
 
