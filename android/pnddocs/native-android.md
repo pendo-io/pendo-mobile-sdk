@@ -139,7 +139,7 @@
 
     Automatic detection of Compose Drawer or ModalBottomSheetLayout in your app requires these steps:
 
-    Add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
+    If you are using **Compose Navigation** add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
 
     **Important:** To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the Page anymore.
 
