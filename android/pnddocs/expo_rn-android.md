@@ -13,7 +13,7 @@ Pendo can *only* be used in development builds. For more about development build
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `34` or higher
+>- compileSDKVersion `35` or higher
 
 ## Step 1. Add Pendo dependency
 
