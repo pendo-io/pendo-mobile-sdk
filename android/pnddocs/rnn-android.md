@@ -13,7 +13,7 @@
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `34` or higher
+>- compileSDKVersion `35` or higher
 
 ## Step 1. Install the Pendo SDK
 
@@ -47,7 +47,7 @@ If applicable, set your app to be compiled with **compileSdkVersion 34** or high
     ```java
     android {
         minSdkVersion 21
-        compileSdkVersion 34
+        compileSdkVersion 35
     }
     ```
  

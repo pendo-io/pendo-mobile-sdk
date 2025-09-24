@@ -14,7 +14,7 @@
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `34` or higher
+>- compileSDKVersion `35` or higher
 >
 >Supported Navigation Libraries:
 >

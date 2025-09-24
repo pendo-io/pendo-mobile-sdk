@@ -46,7 +46,7 @@ In the terminal, run: `flutter pub get`
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `34` or higher
+>- compileSDKVersion `35` or higher
 
 ### Step 1. Install the Pendo SDK
 
