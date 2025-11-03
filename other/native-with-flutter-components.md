@@ -72,7 +72,7 @@ In the terminal, run: `flutter pub get`
 
     ```java
     dependencies {
-        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.7.+', changing:true
+        implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.9.+', changing:true
     }
     ```
 
