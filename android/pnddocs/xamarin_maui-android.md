@@ -5,9 +5,8 @@
 
 >[!IMPORTANT]
 >Requirements:
->- .NET 8 or .NET 9
+>- .NET 8 - .NET 10
 >- Kotlin version 1.9.0 or higher
->- Target Android Version 13.0 or higher
 
 ## Step 1. Install the Pendo SDK
 
