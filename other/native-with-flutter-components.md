@@ -27,7 +27,7 @@ For native applications using Flutter components, use this guide to track your e
 In the `pubspec.yaml` file, add the Pendo plugin under the dependencies section:
 ```shell
 # make sure you are using the latest version. This is just an example:
-pendo_sdk: ^3.7.0 
+pendo_sdk: ^3.9.0 
 ```
 
 In the terminal, run: `flutter pub get`
@@ -42,7 +42,7 @@ In the terminal, run: `flutter pub get`
 
 >[!IMPORTANT]
 >Requirements:
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
