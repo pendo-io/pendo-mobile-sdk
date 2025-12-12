@@ -24,11 +24,7 @@ For native applications using Flutter components, use this guide to track your e
 
 ## Add the Pendo dependency
 
-In the `pubspec.yaml` file, add the Pendo plugin under the dependencies section:
-```shell
-# make sure you are using the latest version. This is just an example:
-pendo_sdk: ^3.7.0 
-```
+In the `pubspec.yaml` file, add the latest version of the Pendo plugin package named `pendo_sdk` under the dependencies section.
 
 In the terminal, run: `flutter pub get`
 
@@ -37,12 +33,8 @@ In the terminal, run: `flutter pub get`
 ## Android integration
 
 >[!IMPORTANT]
->**Jetpack Compose** is supported by our track events only solution. We plan to add codeless support in the future.
-
-
->[!IMPORTANT]
 >Requirements:
->- Android Gradle Plugin `7.2` or higher
+>- Android Gradle Plugin `8.0` or higher
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
