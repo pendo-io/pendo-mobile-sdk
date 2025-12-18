@@ -8,7 +8,6 @@
 >- .NET 4
 >- Xamarin.Forms version 5.0.0.2612 or higher
 >- Kotlin version 1.9.0 or higher
->- Target Android Version 13.0 or higher
 
 ## Step 1. Install Pendo SDK
 

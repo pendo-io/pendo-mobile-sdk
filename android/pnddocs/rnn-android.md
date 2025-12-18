@@ -4,7 +4,7 @@
 >**Expo SDK** 41-53 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rnn-android.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.6-0.80 using react-native-navigation 6+.
+>- We support a codeless solution for React Native 0.6-0.83 using react-native-navigation 6+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]
@@ -13,7 +13,7 @@
 >- Kotlin version `1.9.0` or higher
 >- JAVA version `11` or higher
 >- minSdkVersion `21` or higher
->- compileSDKVersion `34` or higher
+>- compileSDKVersion `35` or higher
 
 ## Step 1. Install the Pendo SDK
 
@@ -42,12 +42,12 @@
     ```
 
 - **Minimum and compile Sdk versions**:  
-If applicable, set your app to be compiled with **compileSdkVersion 34** or higher and **minSdkVersion 21** or higher:
+If applicable, set your app to be compiled with **compileSdkVersion 35** or higher and **minSdkVersion 21** or higher:
 
     ```java
     android {
         minSdkVersion 21
-        compileSdkVersion 34
+        compileSdkVersion 35
     }
     ```
  
