@@ -46,6 +46,9 @@
 [jwt.setVisitorData](#jwtsetvisitordata) ⇒ `void` <br>
 [jwt.setAccountData](#jwtsetaccountdata) ⇒ `void` <br>
 
+### PendoOptions
+[PendoOptions properties](#pendooptions-properties) <br>
+
 ## PendoManager APIs
 
 ### `shared`
@@ -905,6 +908,537 @@ String jwt = Server.getSignedJWT();
 String sKeyName = Server.getJWTSigningKeyName();
 
 PendoManager.shared().jwt.setAccountData(jwt, signingKeyName:sKeyName);  
+```
+
+</details>
+
+## PendoOptions Properties
+
+PendoOptions is a configuration class that allows you to customize the behavior of the Pendo SDK. These options should be set when calling the `setup` API unless instructed otherwise by Pendo Support.
+
+### `pluginVersion`
+
+```swift
+@property (nonatomic, nullable) NSString *pluginVersion;
+```
+
+>The version of the Pendo plugin that is used.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: String?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `platformVersion`
+
+```swift
+@property (nonatomic, nullable) NSString *platformVersion;
+```
+
+>Version that is used by hosting app.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: String?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `reactPlugin`
+
+```swift
+@property (nonatomic) NSUInteger reactPlugin;
+```
+
+>React plugin number that is used by hosting app.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSUInteger<br>
+<b>Default</b>: 0<br>
+
+</details>
+
+### `flutterIntegrationType`
+
+```swift
+@property (nonatomic, nullable) NSString *flutterIntegrationType;
+```
+
+>Flutter integration type, e.g., Observable/TrackEvents.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: String?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `isXamarinForms`
+
+```swift
+@property (nonatomic) BOOL isXamarinForms;
+```
+
+>Indicates communication with Xamarin Forms plugin.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `isFlutter`
+
+```swift
+@property (nonatomic) BOOL isFlutter;
+```
+
+>Indicates communication with Flutter plugin.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `isMAUI`
+
+```swift
+@property (nonatomic) BOOL isMAUI;
+```
+
+>Indicates communication with MAUI plugin.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `disableAnalytics`
+
+```swift
+@property (nonatomic) BOOL disableAnalytics;
+```
+
+>Disable analytics collection.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `configs`
+
+```swift
+@property (nonatomic, nullable) NSMutableDictionary *configs;
+```
+
+>Internal configuration dictionary.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSMutableDictionary?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `environmentName`
+
+```swift
+@property (nonatomic, nullable) NSString *environmentName;
+```
+
+>Environment type.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: String?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `withGuideContent`
+
+```swift
+@property (nonatomic) BOOL withGuideContent;
+```
+
+>Return all guides content in initModel.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `isComparingScreenIdsOnly`
+
+```swift
+@property (nonatomic) BOOL isComparingScreenIdsOnly;
+```
+
+>When comparing two screen scans, decides whether to compare the full screen data or only the screen ids.
+
+> [!WARNING]
+> May affect the ability to use text page identifiers in dynamically loaded pages.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `shouldIgnoreEmptyScanData`
+
+```swift
+@property (nonatomic) BOOL shouldIgnoreEmptyScanData;
+```
+
+>When evaluating screen scan, if a scan is missing info and child controllers, do not evaluate.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `screenScanDebouncerDelay`
+
+```swift
+@property (nonatomic) NSNumber * _Nullable screenScanDebouncerDelay;
+```
+
+>Time interval in milliseconds for debouncer used to scan the page upon page changed events.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSNumber?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `isIgnoringViewControllersInScrollView`
+
+```swift
+@property (nonatomic) BOOL isIgnoringViewControllersInScrollView;
+```
+
+>Page events and screen ids will ignore view controllers embedded inside scrollViews, collectionViews, and tableViews.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `listOfUIViewControllersToIgnorePageScan`
+
+```swift
+@property (nonatomic) NSArray<NSString *> * _Nullable listOfUIViewControllersToIgnorePageScan;
+```
+
+>A list of class names inheriting from UIViewController that should not trigger a page changed event.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Array<String>?<br>
+<b>Default</b>: nil<br>
+
+<b>Example</b>:
+
+```swift
+let options = PendoOptions()
+options.listOfUIViewControllersToIgnorePageScan = ["MyCustomViewController", "AnotherViewController"]
+PendoManager.shared().setup("your.app.key", with: options)
+```
+
+</details>
+
+### `shouldIgnoreDynamicContentRN`
+
+```swift
+@property (nonatomic) BOOL shouldIgnoreDynamicContentRN;
+```
+
+>When new content is loaded on the screen, a screen scan will not be triggered.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `dynamicScreenScanDebouncerDelayRN`
+
+```swift
+@property (nonatomic) NSNumber * _Nullable dynamicScreenScanDebouncerDelayRN;
+```
+
+>Time interval in milliseconds for debouncer used to scan the page upon content changed event.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSNumber?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `isScanVisibleViewControllersDisabled`
+
+```swift
+@property (nonatomic) BOOL isScanVisibleViewControllersDisabled;
+```
+
+>If enabled, the isHidden by another view controllers will be disabled.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `scanDepth`
+
+```swift
+@property (nonatomic) NSUInteger scanDepth;
+```
+
+>Controls the depth of the reflection tree, for SwiftUI only.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSUInteger<br>
+<b>Default</b>: 0<br>
+
+</details>
+
+### `enablePruning`
+
+```swift
+@property (nonatomic) BOOL enablePruning;
+```
+
+>Pruning enabling for SwiftUI.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: true<br>
+
+</details>
+
+### `enableSwiftUIInsideUIKitScan`
+
+```swift
+@property (nonatomic) BOOL enableSwiftUIInsideUIKitScan;
+```
+
+>Enable processing UIKit controller that embed SwiftUI content.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `collectOnlyAccessibilityIdentifier`
+
+```swift
+@property (nonatomic) BOOL collectOnlyAccessibilityIdentifier;
+```
+
+>Enable only accessibility identifier as custom identifier.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `enableSwiftUIIdentifierBasedOnNavigation`
+
+```swift
+@property (nonatomic) BOOL enableSwiftUIIdentifierBasedOnNavigation;
+```
+
+>Enable SwiftUI identifier to be based on parameter that passed to StackNavigation.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `scanFromRootViewController`
+
+```swift
+@property (nonatomic) BOOL scanFromRootViewController;
+```
+
+>Forces SwiftUI scan from the root view controller instead of top most view controller.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `sessionReplayScanDebouncerDelay`
+
+```swift
+@property (nonatomic, nullable) NSNumber *sessionReplayScanDebouncerDelay;
+```
+
+>Time interval in milliseconds for debouncer used to decide when to record the screen after UI renders.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: NSNumber?<br>
+<b>Default</b>: nil<br>
+
+</details>
+
+### `enableTextCollectionSwiftUI`
+
+```swift
+@property (nonatomic) BOOL enableTextCollectionSwiftUI;
+```
+
+>Activate text collection for SwiftUI pages.
+
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: Bool<br>
+<b>Default</b>: false<br>
+
+</details>
+
+### `swiftUISessionReplayMode`
+
+```swift
+@property (nonatomic) PNDSRSwiftUIMode swiftUISessionReplayMode;
+```
+
+>Capture mode for SwiftUI Session Replay. Determines how text and UI elements are captured during session replay recording.
+
+>Available modes:
+>- **PNDSRTextMode** (default): Captures text; does not use snapshots for text layers. 
+>- **PNDSRTextAndImagesMode**: Captures text with a fallback to snapshots for elements where text extraction fails. Balanced approach between accuracy and performance.
+>- **PNDSRImageMode**: Uses snapshots exclusively for all text capture.
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: PNDSRSwiftUIMode<br>
+<b>Default</b>: PNDSRTextMode<br>
+
+<b>Example</b>:
+
+```swift
+let options = PendoOptions()
+options.swiftUISessionReplayMode = PNDSRTextAndImagesMode
+PendoManager.shared().setup("your.app.key", with: options)
 ```
 
 </details>
