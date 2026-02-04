@@ -46,6 +46,9 @@
 [jwt.setVisitorData](#jwtsetvisitordata) ⇒ `void` <br>
 [jwt.setAccountData](#jwtsetaccountdata) ⇒ `void` <br>
 
+### PendoOptions
+[PendoOptions properties](#pendooptions-properties) <br>
+
 ## PendoManager APIs
 
 ### `shared`
@@ -926,6 +929,42 @@ String jwt = Server.getSignedJWT();
 String sKeyName = Server.getJWTSigningKeyName();
 
 PendoManager.shared().jwt.setAccountData(jwt, signingKeyName:sKeyName);  
+```
+
+</details>
+
+<br>
+
+## PendoOptions Properties
+
+PendoOptions is a configuration class that allows you to customize the behavior of the Pendo SDK. These options should be set when calling the `setup` API unless instructed otherwise by Pendo Support.
+
+### `swiftUISessionReplayMode`
+
+```swift
+@property (nonatomic) PNDSRSwiftUIMode swiftUISessionReplayMode;
+```
+
+>Capture mode for SwiftUI Session Replay. Determines how text and UI elements are captured during session replay recording.
+
+>Available modes:
+>- **PNDSRTextMode** (default): Captures text; does not use snapshots for text layers. 
+>- **PNDSRTextAndImagesMode**: Captures text with a fallback to snapshots for elements where text extraction fails. Balanced approach between accuracy and performance.
+>- **PNDSRImageMode**: Uses snapshots exclusively for all text capture.
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: PNDSRSwiftUIMode<br>
+<b>Default</b>: PNDSRTextMode<br>
+
+<b>Example</b>:
+
+```swift
+let options = PendoOptions()
+options.swiftUISessionReplayMode = PNDSRTextAndImagesMode
+PendoManager.shared().setup("your.app.key", with: options)
 ```
 
 </details>
