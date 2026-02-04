@@ -198,6 +198,9 @@ var accountData = ["Tier": 1, "size": "Enterprise"]
 PendoManager.shared().startSession("John Doe", accountId: "ACME", visitorData: visitorData, accountData: accountData)  
 ```
 
+> [!NOTE]
+> **Clearing metadata values:** To clear/remove a metadata field, use `NSNull()` as the value. Using Swift's `nil` will not clear the field — `nil` cannot be stored in dictionaries, so the key will be ignored and the existing value will persist.
+
 </details>
 
 ### `setVisitorData`
@@ -231,6 +234,15 @@ var visitorData = ["age": 27, "country": "UK", "birthday" : "01-01-1990"]
 PendoManager.shared().setVisitorData(visitorData) 
 ```
 
+> [!NOTE]
+> **Clearing metadata values:** To clear/remove a metadata field, use `NSNull()` as the value. Using Swift's `nil` will not clear the field — `nil` cannot be stored in dictionaries, so the key will be ignored and the existing value will persist.
+>
+> ```swift
+> // Clear the "country" field using NSNull()
+> var visitorData: [AnyHashable: Any] = ["country": NSNull()]
+> PendoManager.shared().setVisitorData(visitorData)
+> ```
+
 </details>
 
 ### `setAccountData`
@@ -263,6 +275,15 @@ func setAccountData(_ accountData: [AnyHashable : Any])
 var accountData = ["Tier": 2, "Size": "Mid-Market", "Signing-date" : "01-01-2020"]
 PendoManager.shared().setAccountData(accountData) 
 ```
+
+> [!NOTE]
+> **Clearing metadata values:** To clear/remove a metadata field, use `NSNull()` as the value. Using Swift's `nil` will not clear the field — `nil` cannot be stored in dictionaries, so the key will be ignored and the existing value will persist.
+>
+> ```swift
+> // Clear the "Size" field using NSNull()
+> var accountData: [AnyHashable: Any] = ["Size": NSNull()]
+> PendoManager.shared().setAccountData(accountData)
+> ```
 
 </details>
 
