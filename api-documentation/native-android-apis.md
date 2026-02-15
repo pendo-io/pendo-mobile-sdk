@@ -24,9 +24,10 @@
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
 ### Pendo Compose APIs
-[setComposeNavigationController](#setcomposenavigationcontroller) ⇒ `void` <br>
+[setComposeNavigationController](#setcomposenavigationcontroller) ⇒ `void` (deprecated) <br>
 [pendoStateModifier](#pendostatemodifier) ⇒ `Modifier` <br>
 [pendoTag](#pendotag) ⇒ `Modifier` <br>
+[pendoScreenId](#pendoscreenid) ⇒ `Modifier` <br>
 
 ### PendoPhasesCallbackInterface Callbacks
 [onInitComplete](#oninitcomplete) ⇒ `void` <br>
@@ -513,6 +514,9 @@ Pendo.setup(appContext, "your.app.key", null, null);
 ## Pendo Compose APIs
 ### `setComposeNavigationController`
 
+> [!NOTE]
+>Deprecated from SDK 3.12.+ The SDK automatically performs the logic, removing the need to use this API. Calling it will be ignored.
+
 ```java 
 static synchronized void setComposeNavigationController(NavHostController navHostController)
 ```
@@ -629,6 +633,48 @@ someComposableObject(
     modifier = Modifier
         .pendoTag(UNIQUE_IDENTIFIER)
 )
+```
+</details>
+
+<br>
+
+### `pendoScreenId`
+
+```kotlin
+fun Modifier.pendoScreenId(screenId: String): Modifier
+```
+
+> Extension to Jetpack Compose's Modifier class that marks a composable as a screen for analytics.
+>
+> Use this modifier when you want to track a composable (such as tab content) as a separate screen in Pendo analytics, instead of relying solely on Compose navigation routes or XML Fragment names.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Pendo
+<br><b>Kind</b>: Jetpack Compose Modifier
+<br>
+<b>Returns</b>: Modifier
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| screenId | String | Unique identifier for this screen in Pendo analytics. Must not be blank. |
+
+<b>Example</b>:
+
+```kotlin
+TabRow(selectedTabIndex = selectedTab) {
+    tabs.forEachIndexed { index, tab ->
+        Tab(selected = selectedTab == index, onClick = { selectedTab = index })
+    }
+}
+when (selectedTab) {
+    0 -> HomeContent(Modifier.pendoScreenId("HomeTab"))
+    1 -> ProfileContent(Modifier.pendoScreenId("ProfileTab"))
+    2 -> SettingsContent(Modifier.pendoScreenId("SettingsTab"))
+}
 ```
 </details>
 
