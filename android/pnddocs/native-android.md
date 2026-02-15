@@ -1,30 +1,32 @@
 # Native Android
 
->[!NOTE]
->The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instructions](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
+> [!NOTE]
+> The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instructions](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 
->[!IMPORTANT]
->**Jetpack Compose GA** is now available (SDK 3.7.0+), offering:
->- Retroactive analytics
->- Self-serve tagging
->- Full guides support
+> [!IMPORTANT]
+> **Jetpack Compose GA** is now available (Pendo SDK 3.7.0+), offering:
+> - Retroactive analytics
+> - Self-serve tagging
+> - Full guides support
+>
+> If your app uses **Navigation 3**, you need **Pendo SDK 3.12.0+**.
 >
 > If your application already uses Pendo, please review and implement the additional steps outlined in [Step 3](#step-3-tracking-jetpack-compose) to enable Jetpack Compose support within your existing integration.
 
->[!IMPORTANT]
->Requirements:
->- Android Gradle Plugin `8.0` or higher
->- Kotlin version `1.9.0` or higher
->- JAVA version `11` or higher
->- minSdkVersion `21` or higher
->- compileSDKVersion `35` or higher
+> [!IMPORTANT]
+> Requirements:
+> - Android Gradle Plugin `8.0` or higher
+> - Kotlin version `1.9.0` or higher
+> - JAVA version `11` or higher
+> - minSdkVersion `21` or higher
+> - compileSDKVersion `35` or higher
 >
 > If using Jetpack Compose:
->- androidx.compose.ui:ui `1.5.0` or higher
+> - androidx.compose.ui:ui `1.5.0` or higher
 
 ## Step 1. Install Pendo SDK
 
-1. #### Add the Pendo repository to the app's build.gradle or to the settings.gradle if using dependencyResolutionManagement:
+1.  Add the Pendo repository to the app's build.gradle or to the settings.gradle if using dependencyResolutionManagement:
 
     ```java
     repositories {
@@ -35,11 +37,11 @@
     }
     ```
 
-2. #### Add Pendo as a dependency to **android/build.gradle** file:
+2.  Add Pendo as a dependency to **android/build.gradle** file:
 
     ```shell
     dependencies {
-       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.11.+', changing:true
+       implementation group:'sdk.pendo.io' , name:'pendoIO', version:'3.12.+', changing:true
     }
     ```
 
@@ -53,16 +55,16 @@
         compileSdkVersion 35
     }
     ```
- 
-4. #### Using ProGuard
+
+4.  Using ProGuard
 
     If you are using **ProGuard(D8/DX only)** to perform compile-time code optimization, and have `{Android SDK Location}/tools/proguard/proguard-android-optimize.txt`, add `!code/allocation/variable` to the `-optimizations` line in your `app/proguard-rules.pro` file. The optimizations line should look like this:  
     `-optimizations *other optimizations*,!code/allocation/variable`
 
 ## Step 2. Integrate with the Pendo SDK
 
->[!NOTE]
->Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> [!NOTE]
+> Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 1. Set up Pendo in the **Application class**.
 
@@ -72,7 +74,7 @@
     import sdk.pendo.io.*;
 
     val pendoApiKey = "YOUR_API_KEY_HERE"
-    
+
     Pendo.setup(
        this,
        pendoApiKey,
@@ -100,46 +102,21 @@
     **visitorId**: a user identifier (e.g., John Smith)  
     **visitorData**: the user metadata (e.g., email, phone, country, etc.)  
     **accountId**: an affiliation of the user to a specific company or group (e.g., Acme inc.)  
-    **accountData** : the account metadata (e.g., tier, level, ARR, etc.)  
+    **accountData**: the account metadata (e.g., tier, level, ARR, etc.)  
 &nbsp;  
     This code ends the previous mobile session (if applicable), starts a new mobile session, and retrieves all guides based on the provided information.  
 &nbsp;  
 
->[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```""``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+> [!TIP]
+> To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` or an empty string `""` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions).
 
 ## Step 3. Tracking Jetpack Compose
 
-1. **Add Compose Navigation Support**
-
-    If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
-
-
-    - This step is required for the SDK to recognize Compose Pages in your app.
-    - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
-
-
-        ```kotlin
-        val navHostController = rememberNavController()
-        .... 
-
-        LifecycleResumeEffect(null) {
-            Pendo.setComposeNavigationController(navHostController.navController)
-
-            onPauseOrDispose {
-                Pendo.setComposeNavigationController(null)
-            }
-        }
-        ```
-
->[!TIP]
->We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
-
-2. **Drawer or ModalBottomSheetLayout Support (Add if applicable)**
+1. **Drawer or ModalBottomSheetLayout Support (Add if applicable)**
 
     Automatic detection of Compose Drawer or ModalBottomSheetLayout in your app requires these steps:
 
-    If you are using **Compose Navigation** add ``Modifier.pendoStateModifier(componentState)`` to your Drawer's or ModalBottomSheetLayout's modifier where componentState is the drawerState or sheetState.
+    If you are using **Compose Navigation**, add `Modifier.pendoStateModifier(componentState)` to your Drawer's or ModalBottomSheetLayout's modifier where `componentState` is the `drawerState` or `sheetState`.
 
     **Important:** To detect the dismissal of these components using this modifier, you must **specifically update the state** (bottomSheetState or drawerState) when you don’t want Pendo to detect the Page anymore.
 
@@ -150,11 +127,11 @@
                 // Content of the bottom sheet
                 modifier = Modifier.pendoStateModifier(sheetState),
             }
-        ) 
+        )
         ...
     ```
 
-3. **(Optional) Implement pendoTag in Jetpack Compose**
+2. **(Optional) Implement pendoTag in Jetpack Compose**
 
     PendoTags serve multiple purposes in identifying and tracking UI elements:
 
@@ -171,13 +148,35 @@
         )
     ```
 
->[!NOTE]
->pendoTags are case-sensitive. 
+> [!NOTE]
+> pendoTags are case-sensitive.
+
+3. **Legacy(Pendo SDK < 3.12): Compose Navigation setup**
+
+    This is only required when using Pendo SDK **below 3.12** with `androidx.navigation:navigation-compose`.
+
+    Add the following immediately after `rememberNavController()` (and repeat this setup for each controller if your app uses multiple `NavController`s):
+
+    ```kotlin
+    val navHostController = rememberNavController()
+    ....
+
+    LifecycleResumeEffect(null) {
+        Pendo.setComposeNavigationController(navHostController.navController)
+
+        onPauseOrDispose {
+            Pendo.setComposeNavigationController(null)
+        }
+    }
+    ```
+
+> [!TIP]
+> We recommend setting up navigation before calling `startSession` to ensure the SDK uses the correct screen ID.
 
 ## Step 4. Connect mobile device for tagging and testing
 
->[!NOTE]
->Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> [!NOTE]
+> Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
 This step enables Page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.
@@ -196,9 +195,9 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 ## Step 5. Verify installation
 
 1. Test using Android Studio:  
-Run the app while attached to the Android Studio.  
-Review the Android Studio logcat and look for the following message:  
-`Pendo SDK was successfully integrated and connected to the server.`
+   Run the app while attached to the Android Studio.  
+   Review the Android Studio logcat and look for the following message:  
+   `Pendo SDK was successfully integrated and connected to the server.`
 2. In the Pendo UI, go to `Settings` > `Subscription Settings`.
 3. Select your application from the list.
 4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
