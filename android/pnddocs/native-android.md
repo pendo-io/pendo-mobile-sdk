@@ -112,28 +112,34 @@
 
 1. **Add Compose Navigation Support**
 
-    If you are using a **Compose Navigation**, add the following as soon as possible, immediately after `rememberNavController` in your app.
+    This step enables the SDK to recognize Compose Pages in your app by connecting your navigation controller to Pendo.
 
+    >[!NOTE]
+    >**SDK 3.12+:** Compose Navigation is automatically detected. Skip this step if using SDK 3.12 or higher.
 
-    - This step is required for the SDK to recognize Compose Pages in your app.
-    - Navigation is limited to `androidx.navigation:navigation-compose` navigation. 
+    >[!IMPORTANT]
+    >**Navigation3** requires SDK version 3.12 or higher.
 
+    If you are using **Compose Navigation** with SDK version **below 3.12**, add the following immediately after `rememberNavController` in your app:
 
-        ```kotlin
-        val navHostController = rememberNavController()
-        .... 
+    ```kotlin
+    val navHostController = rememberNavController()
+    .... 
 
-        LifecycleResumeEffect(null) {
-            Pendo.setComposeNavigationController(navHostController.navController)
+    LifecycleResumeEffect(null) {
+        Pendo.setComposeNavigationController(navHostController.navController)
 
-            onPauseOrDispose {
-                Pendo.setComposeNavigationController(null)
-            }
+        onPauseOrDispose {
+            Pendo.setComposeNavigationController(null)
         }
-        ```
+    }
+    ```
 
->[!TIP]
->We strongly recommend calling the navigation with your navigation component before calling startSession to ensure the SDK uses the correct screen ID.
+    - Navigation support is limited to `androidx.navigation:navigation-compose`.
+    - If your app uses nested navigation controllers, repeat this step for each controller.
+
+    >[!TIP]
+    >We recommend setting up navigation before calling `startSession` to ensure the SDK uses the correct screen ID.
 
 2. **Drawer or ModalBottomSheetLayout Support (Add if applicable)**
 
