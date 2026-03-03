@@ -27,28 +27,28 @@
 
 2. In the **iOS folder**, run the following command:
 
-    ```shell script 
+    ```shell
     pod install
     ```
 
 3. **Modify Javascript minification**
 
-    When bundling for production, React Native minifies class and function names to reduce the size of the bundle.  This means there is no access to the original component names that are used for the codeless solution.
+    When bundling for production, React Native minifies class and function names to reduce the size of the bundle. This means there is no access to the original component names that are used for the codeless solution.
 
     In the application **metro.config.js**, add the following statements in the transformer:  
 
     ```javascript
     module.exports = {
         transformer: {
-        // ...
-        minifierConfig: {
-            keep_classnames: true, // Preserve class names
-            keep_fnames: true, // Preserve function names
-            mangle: {
+            // ...
+            minifierConfig: {
                 keep_classnames: true, // Preserve class names
                 keep_fnames: true, // Preserve function names
+                mangle: {
+                    keep_classnames: true, // Preserve class names
+                    keep_fnames: true, // Preserve function names
+                }
             }
-        }
         }
     }
     ```
@@ -57,6 +57,7 @@
 
 >[!NOTE]
 >Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+
 1. In the application **main file (App.js/.ts/.tsx)**, add the following code:  
 
     ```typescript
@@ -65,11 +66,12 @@
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
         const pendoKey = 'YOUR_API_KEY_HERE';
-        //note the following API will only setup initial configuration, to start collect analytics use startSession
+        //note the following API will only setup initial configuration, to start collecting analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
     }   
     initPendo();
     ```
+
 2. Initialize Pendo where your visitor is being identified (e.g., login, register, etc.).
 
     ```typescript
@@ -81,7 +83,7 @@
     PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
     ```
 
-3. In the file where the `NavigationContainer` is created.
+3. In the file where the `NavigationContainer` is created:
 
    Import `WithPendoReactNavigation`:
 
@@ -89,13 +91,13 @@
     import {WithPendoReactNavigation} from 'rn-pendo-sdk'    
     ```
 
-   Wrap `NavigationContainer` with  `WithPendoReactNavigation` HOC
+   Wrap `NavigationContainer` with `WithPendoReactNavigation` HOC:
 
     ```typescript
     const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer);    
     ```
 
-   replace `NavigationContainer` tag with `PendoNavigationContainer` tag
+   Replace `NavigationContainer` tag with `PendoNavigationContainer` tag:
 
     ```typescript
     <PendoNavigationContainer>
@@ -110,7 +112,7 @@
     **accountData**: the account metadata (e.g., tier, level, ARR, etc.)  
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` or an empty string `''` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 ## Step 3. Connect mobile device for tagging and testing
@@ -156,7 +158,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
     ```objective-c
-    #import <Pendo/Pendo.h>
+    @import Pendo;
 
     - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
             if ([[url scheme] containsString:@"pendo"]) {
@@ -192,7 +194,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     <details>
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
-    ```objectivec
+    ```objective-c
     - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
         NSURL *url = [[URLContexts allObjects] firstObject].URL;
         if ([[url scheme] containsString:@"pendo"]) {

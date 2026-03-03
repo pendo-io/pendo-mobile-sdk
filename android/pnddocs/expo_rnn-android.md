@@ -6,7 +6,6 @@
 Pendo can *only* be used in development builds. For more about development builds read [adding custom native code with development builds](https://docs.expo.dev/workflow/customizing/).
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
-
 >[!IMPORTANT]
 >Requirements:
 >- Android Gradle Plugin `8.0` or higher
@@ -38,82 +37,93 @@ yarn add rn-pendo-sdk
 In the `app.config.js` or `app.json`, add the following:
 ```json
 {
-"plugins": [
-      [
-        "rn-pendo-sdk",
-        {
-          "ios-scheme": "YOUR_IOS_SCHEME_ID",
-          "android-scheme": "YOUR_ANDROID_SCHEME_ID"
-        }
-      ]
+  "plugins": [
+    [
+      "rn-pendo-sdk",
+      {
+        "ios-scheme": "YOUR_IOS_SCHEME_ID",
+        "android-scheme": "YOUR_ANDROID_SCHEME_ID"
+      }
     ]
+  ]
 }
 ```
-This configuration enables pendo to enter pair mode to tag Pages and Features. 
+This configuration enables Pendo to enter pair mode to tag Pages and Features.
 
 ## Step 3. Production bundle - modify Javascript minification
 
 In the `metro.config.js` file, add the following:
-```typescript
+```javascript
 module.exports = {
-  transformer: {
-    // ...
-    minifierConfig: {
-        keep_classnames: true, // Preserve class names
-        keep_fnames: true, // Preserve function names
-        mangle: {
-          keep_classnames: true, // Preserve class names
-          keep_fnames: true, // Preserve function names
+    transformer: {
+        // ...
+        minifierConfig: {
+            keep_classnames: true, // Preserve class names
+            keep_fnames: true, // Preserve function names
+            mangle: {
+                keep_classnames: true, // Preserve class names
+                keep_fnames: true, // Preserve function names
+            }
         }
     }
-  }
 }
 ```
+
 ## Step 4. Integration
 
 >[!NOTE]
 >Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
 
-In the application main file (App.js/.ts/.tsx), add the following code:
-```typescript
-import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
-import { Navigation } from "react-native-navigation";
+1. In the application main file (App.js/.ts/.tsx), add the following code:
 
-function initPendo() {
-    const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
-    const pendoKey = 'YOUR_API_KEY_HERE';
-    //note the following API will only setup initial configuration, to start collect analytics use start session
-    PendoSDK.setup(pendoKey, navigationOptions);
-}
+    ```typescript
+    import { PendoSDK, NavigationLibraryType } from 'rn-pendo-sdk';
+    import { Navigation } from "react-native-navigation";
 
-initPendo();
-```
-Initialize Pendo Session where your visitor is being identified (e.g., login, register, etc.).
-```typescript
-const visitorId = 'John Smith';
-const accountId = 'Acme Inc.';
-const visitorData = {'Age': 25, 'Country': 'USA'};
-const accountData = {'Tier': 1, 'Size': 'Enterprise'};
+    function initPendo() {
+        const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
+        const pendoKey = 'YOUR_API_KEY_HERE';
+        //note the following API will only setup initial configuration, to start collecting analytics use startSession
+        PendoSDK.setup(pendoKey, navigationOptions);
+    }
 
-PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
-```
+    initPendo();
+    ```
+
+2. Initialize Pendo Session where your visitor is being identified (e.g., login, register, etc.).
+
+    ```typescript
+    const visitorId = 'VISITOR-UNIQUE-ID';
+    const accountId = 'ACCOUNT-UNIQUE-ID';
+    const visitorData = {'Age': '25', 'Country': 'USA'};
+    const accountData = {'Tier': '1', 'Size': 'Enterprise'};
+
+    PendoSDK.startSession(visitorId, accountId, visitorData, accountData);
+    ```
+
+    **Notes:**  
+    **visitorId**: a user identifier (e.g., John Smith)  
+    **visitorData**: the user metadata (e.g., email, phone, country, etc.)  
+    **accountId**: an affiliation of the user to a specific company or group (e.g., Acme inc.)  
+    **accountData**: the account metadata (e.g., tier, level, ARR, etc.)  
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` or an empty string `''` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 ## Step 5. Running the project
 
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.
-You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at a later time (additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild)).
+You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|android]` (which will run prebuild automatically). You can also use development builds in this context - the easiest way to do this is to run `npx expo install expo-dev-client` prior to prebuild or run, and it's also possible to add the library at any later time (additional information can be found here: [Adding custom native code](https://docs.expo.dev/workflow/customizing/#generate-native-projects-with-prebuild)).
 
 ## Step 6. Verify installation
 
-1. In the Pendo UI, go to Settings>Subscription Settings.
+1. In the Pendo UI, go to Settings > Subscription Settings.
 2. Select the **Applications** tab and then your application.
 3. Select the **Install Settings** tab and follow the instructions under Verify Your Installation to ensure you have successfully integrated the Pendo SDK.
 4. Confirm that you can see your app as Integrated under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
 ## Limitations
+
 - For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
 As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
 which means that codeless tracking analytics is available for screen components only.
