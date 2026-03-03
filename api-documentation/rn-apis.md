@@ -1,7 +1,7 @@
 # React Native public developer API documentation
 
 > [!IMPORTANT]
->The `setup` API must be called before the `startSession`, `WithPendoReactNavigation` and `WithPendoModal` APIs. <br> 
+>The `setup` API must be called before the `startSession`, `WithPendoReactNavigation`, `WithPendoExpoRouter`, `WithPendoPaper` and `WithPendoModal` APIs. <br> 
 > All other APIs must be called after both the `setup` and `startSession` APIs, otherwise they will be ignored. <br>
 >The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.
 
@@ -13,6 +13,7 @@
 ### Pendo React Components
 [WithPendoReactNavigation](#withpendoreactnavigation) <br/>
 [WithPendoExpoRouter](#withpendoexporouter) <br/>
+[WithPendoPaper](#withpendopaper) <br/>
 [WithPendoModal](#withpendomodal) <br/>
 
 ### PendoSDK APIs
@@ -28,15 +29,16 @@
 [pauseGuides](#pauseguides) ⇒ `void`<br>
 [resumeGuides](#resumeguides) ⇒ `void` <br>
 [dismissVisibleGuides](#dismissvisibleguides) ⇒ `void` <br>
-[getDeviceId](#getdeviceid) ⇒ `String` <br>
-[getVisitorId](#getvisitorid) ⇒ `String` <br>
-[getAccountId](#getaccountid) ⇒ `String` <br>
+[getDeviceId](#getdeviceid) ⇒ `Promise<string | null>` <br>
+[getVisitorId](#getvisitorid) ⇒ `Promise<string | null>` <br>
+[getAccountId](#getaccountid) ⇒ `Promise<string | null>` <br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 
-### Navigation
+### Navigation & Types
 
 [NavigationOptions](#navigationoptions) <br>
-[NavigationLibraryType](#setdebugmode) <br>
+[NavigationLibraryType](#navigationlibrarytype) <br>
+[PendoOptions](#pendooptions) <br>
 
 
 ## Pendo React Components
@@ -124,48 +126,100 @@ export default WithPendoExpoRouter(RootLayout);
 ```
 </details>
 
+### `WithPendoPaper`
+
+```typescript 
+WithPendoPaper(BottomNavigation)
+```
+
+>Only for apps that use React Native Paper library. This function wraps the BottomNavigation component to track tab navigation state.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: React.FunctionComponent<P>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| bottomNavigation | BottomNavigation | The React Native Paper BottomNavigation component to track |
+
+<b>Example</b>:
+
+```typescript
+// In the file where the BottomNavigation is created
+
+import {WithPendoPaper} from 'rn-pendo-sdk'
+import {BottomNavigation} from 'react-native-paper';
+
+const PendoBottomNavigation = WithPendoPaper(BottomNavigation);
+
+// replace the <BottomNavigation> tag with <PendoBottomNavigation> tag
+
+<PendoBottomNavigation
+    navigationState={{index, routes}}
+    onIndexChange={setIndex}
+    renderScene={renderScene}
+/>
+```
+</details>
+
 ### `WithPendoModal`
 
 ```typescript 
 WithPendoModal(ModalComponent)
 ```
 
->Only for apps that use React Navigation library. This function wraps the modal component so the SDK can track the modal.
+>This function wraps a modal component so the SDK can detect its visibility changes and track the modal content. It works with any navigation library.
 
->Note: gorhom/bottomSheetModal v4 and v5 are supported
+>Supported modal types:
+>- React Native built-in `<Modal>`
+>- `@gorhom/bottom-sheet` BottomSheetModal (v4 and v5)
+>- `react-native-modalize` Modalize
+>- `react-native-modal` ReactNativeModal
+>- `react-native-modals` Modal / BottomModal
+
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
-<b>Class</b>: React.Modal or gorhom/BottomSheetModal<P>
+<b>Class</b>: React.ComponentType<P>
 
 | Param  |    Type     | Description              |
 | :---: |:-----------:|:-------------------------|
-| modalComponent | React.Modal or gorhom/BottomSheetModal | Modal Component to track |
+| modalComponent | ModalComponent | Modal component to track |
 
-<b>Example</b>:
+<b>Examples</b>:
     
 ```typescript
 // In the file where the Modal is created
 
 import {WithPendoModal} from 'rn-pendo-sdk';    
 
-//In case of React.Modal
-import Modal from 'react-native';
+// React Native built-in Modal
+import {Modal} from 'react-native';
 const PendoModal = WithPendoModal(Modal);
-// replace the <Modal> tag with <PendoModal> tag
-<PendoModal>
-    {/* Rest of your app code */}
-</PendoModal>
 
-//Or in case of gorhom/BottomSheetModal
-import BottomSheetModal from '@gorhom/bottom-sheet';
+// @gorhom/bottom-sheet BottomSheetModal
+import {BottomSheetModal} from '@gorhom/bottom-sheet';
 const PendoBottomSheetModal = WithPendoModal(BottomSheetModal);
-// replace the <BottomSheetModal> tag with <PendoBottomSheetModal> tag
-<PendoBottomSheetModal>
-    {/* Rest of your app code */}
-</PendoBottomSheetModal>
 
+// react-native-modalize
+import {Modalize} from 'react-native-modalize';
+const PendoModalize = WithPendoModal(Modalize);
+
+// react-native-modal
+import ReactNativeModal from 'react-native-modal';
+const PendoReactNativeModal = WithPendoModal(ReactNativeModal);
+
+// react-native-modals
+import {Modal as RNModal} from 'react-native-modals';
+const PendoRNModal = WithPendoModal(RNModal);
+
+// Replace the original modal tag with the Pendo-wrapped version
+<PendoModal>
+    {/* Rest of your modal content */}
+</PendoModal>
 ```
 </details>
 
@@ -179,7 +233,7 @@ const PendoBottomSheetModal = WithPendoModal(BottomSheetModal);
 static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?: PendoOptions): void
 ```
 
->Establishes a connection with Pendo’s server. Call this API in your application’s main file (App.js/.ts/.tsx). The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
+>Establishes a connection with Pendo's server. Call this API in your application's main file (App.js/.ts/.tsx). The setup method can only be called once during the application lifecycle. Calling this API is required before tracking sessions or invoking session-related APIs. 
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -195,7 +249,7 @@ static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?
 | :---: | :---: | :--- |
 | appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
 | navigationOptions | NavigationOptions | Convey the navigation library used by your app |
-| pendoOptions | PendoOptions | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
+| pendoOptions | PendoOptions | Optional configuration including debug mode and initialization callbacks. See [PendoOptions](#pendooptions) |
 
 
 <b>Example</b>:
@@ -205,6 +259,21 @@ static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?
 const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
 
 PendoSDK.setup('your.app.key', navigationOptions);  
+```
+
+<b>Example with initialization callbacks</b> (SDK 3.12.0+):
+
+```typescript
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation}; 
+
+PendoSDK.setup('your.app.key', navigationOptions, {
+    onInitComplete: () => {
+        console.log('Pendo SDK initialized successfully');
+    },
+    onInitFailed: () => {
+        console.error('Pendo SDK initialization failed. Check your app key.');
+    },
+});
 ```
 </details>
 
@@ -217,7 +286,7 @@ static startSession(visitorId?: string, accountId?: string, visitorData?: object
 
 >Starts a mobile session with the provided visitor and account information. If a session is already in progress, the current session will terminate and a new session will begin. The termination of the app will also terminate the session.
 
->To generate an anonymous visitor, pass 'nil' as the visitorId. Visitor data and Account data are optional.
+>To generate an anonymous visitor, pass `null` as the visitorId. Visitor data and Account data are optional.
 
 > No action will be taken if the visitor and account IDs do not change when calling the startSession API during an ongoing session. 
  
@@ -383,7 +452,7 @@ PendoSDK.track('App Opened', additionalProperties);
 
 ### `screenContentChanged`
 
-```java
+```typescript
 static screenContentChanged(): void
 ```
 
@@ -394,14 +463,14 @@ static screenContentChanged(): void
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class</b>: Pendo<br>
+<b>Class</b>: PendoSDK<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: void<br>
 
 <br>
 Example:
 
-```java
+```typescript
 PendoSDK.screenContentChanged();
 ```
 </details>
@@ -409,18 +478,18 @@ PendoSDK.screenContentChanged();
 
 ### `sendClickAnalytic`
 
-```java
+```typescript
 static sendClickAnalytic(nativeID: string): void
 ```
 
->The API manually sends an RAClick analytic for the view during the ongoing session. Use the API only when Pendo does not automatically recognize a clickable Feature by passing in the nativeID of the view. Call the API in your code as part of the action implementation (ex. onTouchListener, onClickListener, etc).
+>The API manually sends an RAClick analytic for the view during the ongoing session. Use the API only when Pendo does not automatically recognize a clickable Feature by passing in the nativeID of the view. Call the API in your code as part of the action implementation (ex. onPress, onTouchEnd, etc).
 
->This API’s logic is only relevant for handling issues encountered in your Android app (similar edge cases are not known to us in iOS). Calling this API will not resolve issues in your iOS app. 
+>This API's logic is only relevant for handling issues encountered in your Android app (similar edge cases are not known to us in iOS). Calling this API will not resolve issues in your iOS app. 
 
 
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
-<b>Class</b>: Pendo<br>
+<b>Class</b>: PendoSDK<br>
 <b>Kind</b>: static method<br>
 <b>Returns</b>: void<br>
 <br>
@@ -431,7 +500,7 @@ static sendClickAnalytic(nativeID: string): void
 
 <b>Example:</b>
 
-```java
+```typescript
 PendoSDK.sendClickAnalytic(myButton.nativeID);
 ```
 </details>
@@ -518,18 +587,12 @@ static async getDeviceId(): Promise<string | null>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
-<b>Returns:</b> Promise &lt string | null &gt <br>
+<b>Returns:</b> Promise &lt;string | null&gt; <br>
 <br>
 <b>Example:</b>
 
 ```typescript
-const deviceId = PendoSDK.getDeviceId();
-
-deviceId.then((val) => {
-    // success code
-}).catch((err) => {
-    // error code
-});
+const deviceId = await PendoSDK.getDeviceId();
 ```
 </details>
 
@@ -545,18 +608,12 @@ static async getVisitorId(): Promise<string | null>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
-<b>Returns:</b> Promise &lt string | null &gt <br>
+<b>Returns:</b> Promise &lt;string | null&gt; <br>
 <br>
 <b>Example:</b>
 
 ```typescript
-const visitorId = PendoSDK.getVisitorId();
-
-visitorId.then((val) => {
-    // success code
-}).catch((err) => {
-    // error code
-});
+const visitorId = await PendoSDK.getVisitorId();
 ```
 </details>
 
@@ -573,18 +630,12 @@ static async getAccountId(): Promise<string | null>
 <br>
 <b>Class:</b> PendoSDK<br>
 <b>Kind:</b> static method<br>
-<b>Returns:</b> Promise &lt string | null &gt<br>
+<b>Returns:</b> Promise &lt;string | null&gt;<br>
 <br>
 <b>Example:</b>
 
 ```typescript
-const accountId = PendoSDK.getAccountId();
-
-accountId.then((val) => {
-    // success code
-}).catch((err) => {
-    // error code
-});
+const accountId = await PendoSDK.getAccountId();
 ```
 </details>
 
@@ -627,7 +678,7 @@ PendoSDK.setup('your.app.key', navigationOptions);
 
 <br>
 
-## Navigation
+## Navigation & Types
 
 ### `NavigationOptions`
 
@@ -635,7 +686,7 @@ PendoSDK.setup('your.app.key', navigationOptions);
 NavigationOptions(library: NavigationLibraryType, navigation?: any)
 ```
 
->A NavigationOptions instance is required to call the setup API and establish a connection to Pendo’s server.
+>A NavigationOptions instance is required to call the setup API and establish a connection to Pendo's server.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -662,6 +713,13 @@ import { Navigation } from "react-native-navigation";
 const navigationOptions = { library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation };
 PendoSDK.setup('your.app.key', navigationOptions);  
 ```
+
+<b>Example using Expo Router</b>:
+
+```typescript
+const navigationOptions = {library: NavigationLibraryType.ExpoRouter};
+PendoSDK.setup('your.app.key', navigationOptions);
+```
 </details>
 
 ### `NavigationLibraryType`
@@ -670,7 +728,51 @@ PendoSDK.setup('your.app.key', navigationOptions);
 enum NavigationLibraryType
 ```
 
->The navigation library used in you app. The available enum options include:
-> - ReactNativeNavigation
-> - ReactNavigation
-> - Other
+>The navigation library used in your app. The available enum options include:
+> - `ReactNativeNavigation` — For apps using React Native Navigation (Wix)
+> - `ReactNavigation` — For apps using React Navigation
+> - `ExpoRouter` — For apps using Expo Router
+> - `Paper` — For apps using React Native Paper BottomNavigation
+> - `Other` — For track events only mode (no automatic screen tracking)
+
+### `PendoOptions`
+
+```typescript 
+interface PendoOptions {
+    debugMode?: boolean;
+    onInitComplete?: () => void;
+    onInitFailed?: () => void;
+}
+```
+
+> [!NOTE]
+> The `onInitComplete` and `onInitFailed` callbacks are available starting from SDK version **3.12.0**.
+
+>Optional configuration passed to the `setup` API.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| debugMode | boolean | Set to `true` to enable debug logs. Equivalent to calling `setDebugMode(true)` before `setup` |
+| onInitComplete | () => void | Callback invoked when the SDK successfully initializes and validates the app key |
+| onInitFailed | () => void | Callback invoked when SDK initialization fails (e.g., invalid app key, network error). On Android, the SDK auto-retries when network connectivity is restored |
+
+
+<b>Example</b>:
+
+```typescript
+const navigationOptions = {library: NavigationLibraryType.ReactNavigation};
+
+PendoSDK.setup('your.app.key', navigationOptions, {
+    onInitComplete: () => {
+        console.log('Pendo SDK initialized successfully');
+    },
+    onInitFailed: () => {
+        console.error('Pendo SDK initialization failed');
+    },
+});
+```
+</details>
