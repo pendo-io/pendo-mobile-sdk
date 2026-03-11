@@ -4,7 +4,7 @@
 >**Expo SDK** 41-54 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rn-ios.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.6-0.83 using react-navigation 5+.
+>- We support a codeless solution for React Native 0.66-0.84 using react-navigation 5+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]

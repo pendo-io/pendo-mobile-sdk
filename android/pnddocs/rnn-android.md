@@ -4,7 +4,7 @@
 >**Expo SDK** 41-54 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rnn-android.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.6-0.83 using react-native-navigation 6+.
+>- We support a codeless solution for React Native 0.66-0.84 using react-native-navigation 6+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]
@@ -31,10 +31,15 @@
 - **Add the Pendo Repository to the repositories section under the allprojects section or to the settings.gradle if using dependencyResolutionManagement:**
 
     ```java
-    allprojects { 
+    allprojects {
         repositories {
-            maven {
-                url = uri("https://software.mobile.pendo.io/artifactory/androidx-release")
+            exclusiveContent {
+                forRepository {
+                    maven { url = uri("https://software.mobile.pendo.io/artifactory/androidx-release") }
+                }
+                filter {
+                    includeGroup "sdk.pendo.io"
+                }
             }
             mavenCentral()
         }

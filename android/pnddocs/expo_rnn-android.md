@@ -125,7 +125,7 @@ You can generate them by running `npx expo prebuild`, or `npx expo run:[ios|andr
 ## Limitations
 
 - For the codeless solution to work, all the elements *MUST be wrapped in react-native ui components*.<br>
-As with other analytics tools, we are dependent on react-navigation [screen change callbacks](https://reactnavigation.org/docs/screen-tracking/)
+As with other analytics tools, we are dependent on react-native-navigation screen change callbacks
 which means that codeless tracking analytics is available for screen components only.
 - To support hybrid mode with React Native Navigation, please open a ticket.
 
