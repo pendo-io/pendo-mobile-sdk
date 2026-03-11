@@ -4,7 +4,7 @@
 >**Expo SDK** 41-54 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rnn-ios.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.6-0.83 using react-native-navigation 6+.
+>- We support a codeless solution for React Native 0.66-0.84 using react-native-navigation 6+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]
@@ -14,7 +14,6 @@
 >- Xcode `14` or higher
 
 ## Step 1. Install the Pendo SDK
-
 
 1. In the **root folder of your project**, add Pendo using one of your package managers: 
 
@@ -28,28 +27,28 @@
 
 2. In the **iOS folder**, run the following command:
 
-    ```shell script 
+    ```shell
     pod install
     ```
     
 3. **Modify Javascript minification**
 
-    When bundling for production, React Native minifies class and function names to reduce the size of the bundle. This means that there is no access to the original component names that are used for the codeless solution.
+    When bundling for production, React Native minifies class and function names to reduce the size of the bundle. This means there is no access to the original component names that are used for the codeless solution.
 
     In the application **metro.config.js**, add the following statements in the transformer:  
 
     ```javascript
     module.exports = {
         transformer: {
-        // ...
-        minifierConfig: {
-            keep_classnames: true, // Preserve class names
-            keep_fnames: true, // Preserve function names
-            mangle: {
+            // ...
+            minifierConfig: {
                 keep_classnames: true, // Preserve class names
                 keep_fnames: true, // Preserve function names
+                mangle: {
+                    keep_classnames: true, // Preserve class names
+                    keep_fnames: true, // Preserve function names
+                }
             }
-        }
         }
     }
     ```
@@ -68,12 +67,11 @@
     function initPendo() {
         const navigationOptions = {library: NavigationLibraryType.ReactNativeNavigation, navigation: Navigation};
         const pendoKey = 'YOUR_API_KEY_HERE';
-        //note the following API will only setup initial configuration, to start collect analytics use startSession
+        //note the following API will only setup initial configuration, to start collecting analytics use startSession
         PendoSDK.setup(pendoKey, navigationOptions);
     }
     initPendo();
     ```
-
 
 2. Initialize Pendo where your visitor is being identified (e.g., login, register, etc.).
 
@@ -93,7 +91,7 @@
     **accountData**: the account metadata (e.g., tier, level, ARR, etc.)  
 
 >[!TIP]
->To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+>To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` or an empty string `''` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
 
 ## Step 3. Connect mobile device for tagging and testing
@@ -175,7 +173,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     <details>
     <summary> <b>Objective-C Instructions</b><i> - Click to expand or collapse</i></summary>
 
-    ```objectivec
+    ```objective-c
     - (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts {
         NSURL *url = [[URLContexts allObjects] firstObject].URL;
         if ([[url scheme] containsString:@"pendo"]) {
@@ -200,7 +198,7 @@ Review the Xcode console and look for the following message:
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/rn-apis.md).
-- Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here.</a>.
+- Sample app with Pendo SDK integrated available <a href="https://github.com/pendo-io/RN-demo-app-React-Native-Navigation" target="_blank">here</a>.
 
 ## Troubleshooting
 
