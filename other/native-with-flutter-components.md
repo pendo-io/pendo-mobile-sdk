@@ -50,10 +50,15 @@ In the terminal, run: `flutter pub get`
 - **Add the Pendo Repository to the repositories section under the allprojects section or to the settings.gradle if using dependencyResolutionManagement:**
 
     ```java
-    allprojects { 
+    allprojects {
         repositories {
-            maven {
-                url = uri("https://software.mobile.pendo.io/artifactory/androidx-release")
+            exclusiveContent {
+                forRepository {
+                    maven { url = uri("https://software.mobile.pendo.io/artifactory/androidx-release") }
+                }
+                filter {
+                    includeGroup "sdk.pendo.io"
+                }
             }
             mavenCentral()
         }

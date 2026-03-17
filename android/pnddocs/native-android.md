@@ -33,8 +33,13 @@
 
     ```java
     repositories {
-        maven {
-            url = uri("https://software.mobile.pendo.io/artifactory/androidx-release")
+        exclusiveContent {
+            forRepository {
+                maven { url = uri("https://software.mobile.pendo.io/artifactory/androidx-release") }
+            }
+            filter {
+                includeGroup "sdk.pendo.io"
+            }
         }
         mavenCentral()
     }
@@ -186,6 +191,7 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
 
 Add the following **activity** to the application **AndroidManifest.xml** in the `<Application>` tag:
 
+    ```xml
     <activity android:name="sdk.pendo.io.activities.PendoGateActivity" android:launchMode="singleInstance" android:exported="true">
         <intent-filter>
             <action android:name="android.intent.action.VIEW"/>
@@ -194,6 +200,7 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
             <data android:scheme="YOUR_SCHEME_ID_HERE"/>
         </intent-filter>
     </activity>
+    ```
 
 ## Step 5. Verify installation
 
