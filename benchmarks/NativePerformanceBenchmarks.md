@@ -20,7 +20,7 @@ When Session Replay is enabled, additional resources are used to capture, compre
 |                | Memory Impact | Battery Impact | CPU Impact | Network (outgoing)\* |
 |     :---:      |     :---:     |     :---:      |   :---:    |        :---:         |
 |    Android     |  (~) +14MB    |    Moderate    |  Moderate  |    (~) +2.5MB        |
-|      iOS       |  Negligible   |   Negligible   |    Low     |    (~) +5.1MB        |
+|      iOS       |   (~) +2MB    |   Negligible   |    Low     |    (~) +6.4MB        |
 
 <b>\*</b> Additional outgoing traffic compared to SDK without Session Replay, measured over ~8-minute sessions on a physical device. Actual usage scales with session length and screen complexity.
 
