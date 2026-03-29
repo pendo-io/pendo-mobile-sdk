@@ -13,6 +13,17 @@ These measurements of the SDK are captured using Pendo’s testing applications 
 <br>
 <b>\*\*</b> Slight CPU impact may occur during app launch or UI-intensive operations.
 
+### Session Replay performance
+
+When Session Replay is enabled, additional resources are used to capture, compress, and upload session recordings. Frame rendering performance (frame times and jank rate) is unaffected across all tested configurations.
+
+|                | Memory Impact | Battery Impact | CPU Impact | Network (outgoing)\* |
+|     :---:      |     :---:     |     :---:      |   :---:    |        :---:         |
+|    Android     |  (~) +14MB    |    Moderate    |  Moderate  |    (~) +2.5MB        |
+|      iOS       |   (~) +2MB    |   Negligible   |    Low     |    (~) +6.4MB        |
+
+<b>\*</b> Additional outgoing traffic compared to SDK without Session Replay, measured over ~8-minute sessions on a physical device. Actual usage scales with session length and screen complexity.
+
 ### SDK network usage
 
 The Pendo SDK network traffic consists of two parts:
