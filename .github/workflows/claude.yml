@@ -26,33 +26,12 @@ jobs:
       actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
         with:
           fetch-depth: 1
 
       - name: Run Claude Code
         id: claude
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@8a953dedac4f533f912f13656070914693ed0575  # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-
-          # Optional: Customize the trigger phrase (default: @claude)
-          # trigger_phrase: "/claude"
-
-          # Optional: Trigger when specific user is assigned to an issue
-          # assignee_trigger: "claude-bot"
-
-          # Optional: Configure Claude's behavior with CLI arguments
-          # claude_args: |
-          #   --model claude-opus-4-1-20250805
-          #   --max-turns 10
-          #   --allowedTools "Bash(npm install),Bash(npm run build),Bash(npm run test:*),Bash(npm run lint:*)"
-          #   --system-prompt "Follow our coding standards. Ensure all new code has tests. Use TypeScript for new files."
-
-          # Optional: Advanced settings configuration
-          # settings: |
-          #   {
-          #     "env": {
-          #       "NODE_ENV": "test"
-          #     }
-          #   }

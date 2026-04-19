@@ -26,7 +26,7 @@ jobs:
       DRY_RUN: ${{ vars.ISSUE_RESPONDER_DRY_RUN || '1' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
         with:
           fetch-depth: 1
 
@@ -71,8 +71,10 @@ jobs:
           else
             number="$INPUT_ISSUE_NUMBER"
           fi
-          if [ -z "$number" ]; then
-            echo "::error::could not resolve issue number"
+          # Strict digit-only validation: defends against injection via $GITHUB_OUTPUT
+          # (newlines or `=` in the value could otherwise forge additional outputs).
+          if ! printf '%s' "$number" | grep -qE '^[0-9]+$'; then
+            echo "::error::issue number must match ^[0-9]+$; got: $(printf '%q' "$number")"
             exit 1
           fi
           echo "number=$number" >> "$GITHUB_OUTPUT"
@@ -92,7 +94,7 @@ jobs:
 
       - name: Run Claude Code auto-triage
         id: claude
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@8a953dedac4f533f912f13656070914693ed0575  # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
@@ -104,7 +106,7 @@ jobs:
             --model claude-opus-4-7
             --max-turns 15
             --mcp-config /tmp/issue-responder/mcp-config.json
-            --allowedTools "Read,Write,Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
+            --allowedTools "Read,Write(/tmp/issue-responder/verdict.json),Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
             --disallowedTools "Bash(gh:*),Bash(curl:*),Bash(git:*),Bash(rm:*),WebFetch,WebSearch"
 
       - name: Post public comment from verdict
