@@ -1,0 +1,138 @@
+name: Issue Responder (Auto-triage)
+
+on:
+  issues:
+    types: [opened]
+
+concurrency:
+  group: issue-responder-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+      id-token: write
+    env:
+      DRY_RUN: ${{ vars.ISSUE_RESPONDER_DRY_RUN || '1' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Prepare working directory
+        run: mkdir -p /tmp/issue-responder
+
+      - name: Build MCP config from template
+        env:
+          GH_PAT_SDK_READ: ${{ secrets.GH_PAT_SDK_READ }}
+          JIRA_URL: ${{ secrets.JIRA_URL }}
+          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          : "${GH_PAT_SDK_READ:?missing secret GH_PAT_SDK_READ}"
+          : "${JIRA_URL:?missing secret JIRA_URL}"
+          : "${JIRA_USERNAME:?missing secret JIRA_USERNAME}"
+          : "${JIRA_API_TOKEN:?missing secret JIRA_API_TOKEN}"
+
+          jq \
+            --arg pat "$GH_PAT_SDK_READ" \
+            --arg jurl "$JIRA_URL" \
+            --arg juser "$JIRA_USERNAME" \
+            --arg jtok "$JIRA_API_TOKEN" \
+            '.mcpServers.github.env.GITHUB_PERSONAL_ACCESS_TOKEN = $pat
+             | .mcpServers.atlassian.env.JIRA_URL = $jurl
+             | .mcpServers.atlassian.env.JIRA_USERNAME = $juser
+             | .mcpServers.atlassian.env.JIRA_API_TOKEN = $jtok' \
+            .github/issue-responder/mcp-config.template.json \
+            > /tmp/issue-responder/mcp-config.json
+
+      - name: Write issue context
+        env:
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+        run: |
+          set -euo pipefail
+          jq -n \
+            --arg url "$ISSUE_URL" \
+            --argjson number "$ISSUE_NUMBER" \
+            --arg title "$ISSUE_TITLE" \
+            --arg body "${ISSUE_BODY:-}" \
+            --argjson labels "${ISSUE_LABELS:-[]}" \
+            --argjson dry_run "$([ "$DRY_RUN" = "1" ] && echo true || echo false)" \
+            '{url:$url, number:$number, title:$title, body:$body, labels:$labels, dry_run:$dry_run}' \
+            > /tmp/issue-responder/issue.json
+
+      - name: Run Claude Code auto-triage
+        id: claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Read `.github/issue-responder/prompt.md` for the full role, flow, safety rules, and output schema.
+            Read `/tmp/issue-responder/issue.json` for the GitHub issue to triage.
+            Execute the instructions in `prompt.md` using the issue data.
+            Produce exactly one file at `/tmp/issue-responder/verdict.json` matching the schema in `prompt.md`.
+          claude_args: |
+            --model claude-opus-4-7
+            --max-turns 15
+            --mcp-config /tmp/issue-responder/mcp-config.json
+            --allowedTools "Read,Write,Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
+            --disallowedTools "Bash(gh:*),Bash(curl:*),Bash(git:*),Bash(rm:*),WebFetch,WebSearch"
+
+      - name: Post public comment from verdict
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          VERDICT_FILE=/tmp/issue-responder/verdict.json
+          MARKER='<!-- pendo-issue-responder -->'
+
+          if [ ! -f "$VERDICT_FILE" ]; then
+            echo "::warning::verdict.json not produced; skipping public comment (fail-closed)"
+            exit 0
+          fi
+
+          verdict=$(jq -r '.verdict // empty' "$VERDICT_FILE")
+          case "$verdict" in
+            found_solution)
+              BODY="${MARKER}
+Thanks for reporting — our automation matched this to a known area in our SDK code. A team member will follow up with details."
+              ;;
+            not_found)
+              BODY="${MARKER}
+Thanks for reporting — our automation couldn't auto-match this to known SDK code. A team member will review."
+              ;;
+            *)
+              echo "::warning::unknown or missing verdict='$verdict'; skipping public comment (fail-closed)"
+              exit 0
+              ;;
+          esac
+
+          existing=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json comments \
+            --jq '[.comments[] | select(.body | startswith("<!-- pendo-issue-responder -->"))] | length')
+          if [ "${existing:-0}" != "0" ]; then
+            echo "Existing bot comment found; skipping (idempotent)"
+            exit 0
+          fi
+
+          if [ "$DRY_RUN" = "1" ]; then
+            echo "DRY_RUN=1 — would post the following comment:"
+            echo "----"
+            printf '%s\n' "$BODY"
+            echo "----"
+            exit 0
+          fi
+
+          gh issue comment "$ISSUE_NUMBER" --repo "$REPO" --body "$BODY"
