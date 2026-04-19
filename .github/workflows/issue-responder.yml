@@ -3,9 +3,15 @@ name: Issue Responder (Auto-triage)
 on:
   issues:
     types: [opened]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to triage (manual dry-run testing)"
+        required: true
+        type: string
 
 concurrency:
-  group: issue-responder-${{ github.event.issue.number }}
+  group: issue-responder-${{ github.event.issue.number || inputs.issue_number }}
   cancel-in-progress: false
 
 jobs:
@@ -32,19 +38,19 @@ jobs:
           GH_PAT_SDK_READ: ${{ secrets.GH_PAT_SDK_READ }}
           JIRA_URL: ${{ secrets.JIRA_URL }}
           JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          API_JIRA_KEY: ${{ secrets.API_JIRA_KEY }}
         run: |
           set -euo pipefail
           : "${GH_PAT_SDK_READ:?missing secret GH_PAT_SDK_READ}"
           : "${JIRA_URL:?missing secret JIRA_URL}"
           : "${JIRA_USERNAME:?missing secret JIRA_USERNAME}"
-          : "${JIRA_API_TOKEN:?missing secret JIRA_API_TOKEN}"
+          : "${API_JIRA_KEY:?missing secret API_JIRA_KEY}"
 
           jq \
             --arg pat "$GH_PAT_SDK_READ" \
             --arg jurl "$JIRA_URL" \
             --arg juser "$JIRA_USERNAME" \
-            --arg jtok "$JIRA_API_TOKEN" \
+            --arg jtok "$API_JIRA_KEY" \
             '.mcpServers.github.env.GITHUB_PERSONAL_ACCESS_TOKEN = $pat
              | .mcpServers.atlassian.env.JIRA_URL = $jurl
              | .mcpServers.atlassian.env.JIRA_USERNAME = $juser
@@ -52,30 +58,43 @@ jobs:
             .github/issue-responder/mcp-config.template.json \
             > /tmp/issue-responder/mcp-config.json
 
-      - name: Write issue context
+      - name: Resolve issue number
+        id: issue
         env:
-          ISSUE_URL: ${{ github.event.issue.html_url }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
-          ISSUE_TITLE: ${{ github.event.issue.title }}
-          ISSUE_BODY: ${{ github.event.issue.body }}
-          ISSUE_LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_ISSUE_NUMBER: ${{ github.event.issue.number }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
         run: |
           set -euo pipefail
-          jq -n \
-            --arg url "$ISSUE_URL" \
-            --argjson number "$ISSUE_NUMBER" \
-            --arg title "$ISSUE_TITLE" \
-            --arg body "${ISSUE_BODY:-}" \
-            --argjson labels "${ISSUE_LABELS:-[]}" \
-            --argjson dry_run "$([ "$DRY_RUN" = "1" ] && echo true || echo false)" \
-            '{url:$url, number:$number, title:$title, body:$body, labels:$labels, dry_run:$dry_run}' \
+          if [ "$EVENT_NAME" = "issues" ]; then
+            number="$EVENT_ISSUE_NUMBER"
+          else
+            number="$INPUT_ISSUE_NUMBER"
+          fi
+          if [ -z "$number" ]; then
+            echo "::error::could not resolve issue number"
+            exit 1
+          fi
+          echo "number=$number" >> "$GITHUB_OUTPUT"
+          echo "Resolved issue #$number"
+
+      - name: Write issue context
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
+        run: |
+          set -euo pipefail
+          gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json url,number,title,body,labels \
+            | jq --argjson dry_run "$([ "$DRY_RUN" = "1" ] && echo true || echo false)" \
+                '{url, number, title, body, labels: [.labels[].name], dry_run: $dry_run}' \
             > /tmp/issue-responder/issue.json
 
       - name: Run Claude Code auto-triage
         id: claude
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             Read `.github/issue-responder/prompt.md` for the full role, flow, safety rules, and output schema.
             Read `/tmp/issue-responder/issue.json` for the GitHub issue to triage.
@@ -91,8 +110,8 @@ jobs:
       - name: Post public comment from verdict
         if: always()
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
