@@ -107,12 +107,10 @@ jobs:
           verdict=$(jq -r '.verdict // empty' "$VERDICT_FILE")
           case "$verdict" in
             found_solution)
-              BODY="${MARKER}
-Thanks for reporting — our automation matched this to a known area in our SDK code. A team member will follow up with details."
+              BODY="${MARKER}"$'\n'"Thanks for reporting — our automation matched this to a known area in our SDK code. A team member will follow up with details."
               ;;
             not_found)
-              BODY="${MARKER}
-Thanks for reporting — our automation couldn't auto-match this to known SDK code. A team member will review."
+              BODY="${MARKER}"$'\n'"Thanks for reporting — our automation couldn't auto-match this to known SDK code. A team member will review."
               ;;
             *)
               echo "::warning::unknown or missing verdict='$verdict'; skipping public comment (fail-closed)"
