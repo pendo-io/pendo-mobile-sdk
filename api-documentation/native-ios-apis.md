@@ -35,6 +35,7 @@
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
 [View.pendoRecognizeClickAnalytics](#viewpendorecognizeclickanalytics) ⇒ `void` <br>
+[View.pendoTag](#viewpendotag) ⇒ `some View`<br>
 [View.trackPage](#viewtrackpage) ⇒ `some View`<br>
 
 ### NSNotifications
@@ -652,6 +653,70 @@ func pendoRecognizeClickAnalytics()-> some View;
 
 ```swift
 someView.pendoRecognizeClickAnalytics() -> some View;
+```
+</details>
+
+### `View.pendoTag`
+
+> [!NOTE]
+> Available from SDK 3.13 on iOS 13 and above.
+
+```swift
+func pendoTag(_ pendoTag: String) -> some View
+```
+
+>Attaches a unique identifier to a SwiftUI View so Pendo records clicks and guide interactions for it with the supplied tag. The modifier installs a transparent overlay over the modified view; any tap that lands inside the overlay's bounds is reported as a click on the tagged element, regardless of whether the underlying clickable control is SwiftUI- or UIKit-backed (`Button`, `Menu`, `.contextMenu`, `UIContextMenuInteraction`, `UIViewRepresentable`-wrapped `UIControl`, etc.).
+>
+>Use this API when Pendo's automatic feature-tagging does not uniquely identify the element you want to track, when you want a stable tag that is independent of localized text, or when you need to tag a container view (`VStack`, `HStack`, `ZStack`, `LazyVGrid`, …) that has a tap gesture.
+>
+>**Nesting:** when multiple `.pendoTag` modifiers overlap, the most specific (smallest-area / front-most) tag wins.
+>
+>**Empty strings** are ignored — passing `""` is treated the same as not applying the modifier.
+>
+>The overlay is fully transparent and does not block user interaction with the underlying view.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| pendoTag | String | A unique identifier for the tagged element. This value is reported in the `pendoTag` field of click analytics payloads and can be targeted from the Pendo web designer. Should be descriptive and unique within the screen context. |
+
+<br>
+
+<b>Class</b>: View
+<br><b>Kind</b>: extension class method
+<br><b>Returns</b>: some View
+<br>
+
+<b>Example</b>:
+
+```swift
+Button("Submit Order") {
+    // Handle submission
+}
+.pendoTag("checkout-submit-button")
+
+VStack {
+    Text("Featured")
+    Image("hero")
+}
+.onTapGesture { openFeatured() }
+.pendoTag("home-featured-card")
+
+Menu("Options") {
+    Button("Share") { share() }
+    Button("Delete", role: .destructive) { delete() }
+}
+.pendoTag("course-card-options")
+```
+
+Resulting analytics payload:
+
+```json
+{
+  "pendoTag": "checkout-submit-button",
+  "clickable": true
+}
 ```
 </details>
 
