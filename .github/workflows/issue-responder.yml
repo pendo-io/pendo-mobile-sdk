@@ -107,6 +107,7 @@ jobs:
             --model claude-opus-4-7
             --max-turns 15
             --mcp-config /tmp/issue-responder/mcp-config.json
+            --add-dir /tmp/issue-responder
             --allowedTools "Read,Write(/tmp/issue-responder/**),Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
             --disallowedTools "Bash(gh:*),Bash(curl:*),Bash(git:*),Bash(rm:*),WebFetch,WebSearch"
 
