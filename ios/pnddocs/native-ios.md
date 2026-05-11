@@ -299,10 +299,10 @@ b. If the tagged Page identifier such as `retroactiveScreenId` or `swiftUIIdenti
 
 3. **Container Views**: <br>
 Container views with `TapGestures` modifiers don't always generate underlying accessibility elements and may cause Pendo SDK to fail tagging them as clickable elements and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
-Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, and `LazyHGrid`. In that case we recommend using the `pendoRecognizeClickAnalytics()` API on the specific element to ensure interactions are properly recorded. 
+Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, and `LazyHGrid`. In that case we recommend applying the [`.pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) modifier on the specific element to guarantee a stable, uniquely-identified click event. The legacy [`.pendoRecognizeClickAnalytics()`](/api-documentation/native-ios-apis.md#viewpendorecognizeclickanalytics) modifier is still supported when you only need to make the container discoverable to Pendo's automatic tagging. 
 
-4. **UIContextMenu,Menu,.contextMenu**: <br>
- The UIContextMenu control is not supported in both Swift and SwiftUI. As a result, any interactions with context menus created using this control will not be tracked by the SDK.<br/>
+4. **UIContextMenu, Menu, .contextMenu**: <br>
+ SwiftUI's `Menu` and `.contextMenu` (and the UIKit `UIContextMenuInteraction` they're backed by) are not auto-tagged by the SDK — their items live in a system-owned presentation and are not part of the app view hierarchy. To track these interactions, wrap the trigger view with the [`.pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) modifier; clicks on the menu trigger will then be reported under the supplied tag.<br/>
 
 ## Developer documentation
 
@@ -327,6 +327,13 @@ _Why aren't some elements being tagged correctly in SwiftUI?_
 * **Tagging elements inside Overlays**: The Pendo SDK automatically detects and tags elements within most SwiftUI `Overlays`. However, if you find that elements inside an overlay are not taggable, it may be because the overlay is not part of the top-most view controller's hierarchy. In these rare cases, you can enable the `pendoOptions.scanFromRootViewController` flag. This allows the SDK to scan from the root view controller, making overlay content accessible. Be aware that this performs a deeper scan of the view hierarchy and may impact performance, so use it only when necessary.
 
 **Using Our API** : <br>
+- [`pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) - Attaches a unique, stable identifier to a View so Pendo reports clicks on it under the supplied tag. Example:
+  ```swift
+  Button("Submit") { submit() }
+      .pendoTag("checkout-submit-button")
+  ```
+<br>
+
 - `pendoRecognizeClickAnalytics()` - A Pendo-specific modifier to help recognize clickable views that are not automatically tagged. It applies Apple's native accessibility APIs under the hood to combine child elements and mark them as buttons. If you prefer not to use a Pendo API, or for better code clarity, you can apply these native modifiers yourself:
   ```swift
   .accessibilityElement(children: .combine)
