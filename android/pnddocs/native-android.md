@@ -26,6 +26,9 @@
 >
 > If using Jetpack Compose:
 > - androidx.compose.ui:ui `1.5.0` or higher
+>
+> If using Room (Pendo SDK 3.13.0+):
+> - androidx.room `2.6.0` or higher
 
 ## Step 1. Install Pendo SDK
 
