@@ -297,23 +297,11 @@ b. If the tagged Page identifier such as `retroactiveScreenId` or `swiftUIIdenti
 2. **Tagging**:<br>
  Pendo's Feature tagging relies heavily on iOS accessibility services to gather information like accessibilityHint, accessibilityIdentifier, accessibilityLabel, and user interactions. While iOS typically provides these accessibility elements by default, there might be instances where UI elements are not automatically tagged as expected by the Pendo SDK. In such cases, you can use the pendoRecognizeClickAnalytics() modifier. This API helps by creating an accessibility element, combining its children, and marking it as userInteractionEnabled. This allows Pendo to correctly identify the element as taggable and record click analytics for it.
 
-3. **List Elements**:<br> 
-SwiftUI's `List` and `ForEach` are used to create dynamic lists. Under the hood, SwiftUI's `List` uses a `UICollectionView`, allowing the Pendo SDK to tag individual list elements.
-Click analytics are recorded only for elements that are clickable.
-
-- **Automatic tracking**: When list rows are wrapped in a `Button` or `NavigationLink`, Pendo tracks clicks automatically. Clicks are also tracked when using the `.onChange` modifier with a `List` to handle selection changes. In these cases, we detect clicks via `collectionView:didSelectItemAtIndexPath:`.
-- **Manual intervention**: If you use gestures like `.onTapGesture`, the Pendo SDK might not record clicks. In such cases, you need to help Pendo recognize the interaction. You can use the `pendoRecognizeClickAnalytics()` API, or Apple's native accessibility modifiers:
-  ```swift
-  .accessibilityElement(children: .combine)
-  .accessibilityAddTraits([.isButton])
-  ```
-This ensures that Pendo can record click analytics for the element.
-
-4. **Container Views**: <br>
+3. **Container Views**: <br>
 Container views with `TapGestures` modifiers don't always generate underlying accessibility elements and may cause Pendo SDK to fail tagging them as clickable elements and collecting analytics. This is because such views are purely declarative and serve as instructions for their child elements.<br> 
 Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `LazyVStack`, `LazyVGrid`, `GeometryReader`, and `LazyHGrid`. In that case we recommend applying the [`.pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) modifier on the specific element to guarantee a stable, uniquely-identified click event. The legacy [`.pendoRecognizeClickAnalytics()`](/api-documentation/native-ios-apis.md#viewpendorecognizeclickanalytics) modifier is still supported when you only need to make the container discoverable to Pendo's automatic tagging. 
 
-5. **UIContextMenu, Menu, .contextMenu**: <br>
+4. **UIContextMenu, Menu, .contextMenu**: <br>
  SwiftUI's `Menu` and `.contextMenu` (and the UIKit `UIContextMenuInteraction` they're backed by) are not auto-tagged by the SDK — their items live in a system-owned presentation and are not part of the app view hierarchy. To track these interactions, wrap the trigger view with the [`.pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) modifier; clicks on the menu trigger will then be reported under the supplied tag.<br/>
 
 ## Developer documentation

@@ -97,6 +97,7 @@ jobs:
         uses: anthropics/claude-code-action@8a953dedac4f533f912f13656070914693ed0575  # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          show_full_output: "true"
           prompt: |
             Read `.github/issue-responder/prompt.md` for the full role, flow, safety rules, and output schema.
             Read `/tmp/issue-responder/issue.json` for the GitHub issue to triage.
@@ -106,7 +107,9 @@ jobs:
             --model claude-opus-4-7
             --max-turns 15
             --mcp-config /tmp/issue-responder/mcp-config.json
-            --allowedTools "Read,Write(/tmp/issue-responder/verdict.json),Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
+            --add-dir /tmp/issue-responder
+            --permission-mode acceptEdits
+            --allowedTools "Read,Write(/tmp/issue-responder/**),Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue"
             --disallowedTools "Bash(gh:*),Bash(curl:*),Bash(git:*),Bash(rm:*),WebFetch,WebSearch"
 
       - name: Post public comment from verdict
