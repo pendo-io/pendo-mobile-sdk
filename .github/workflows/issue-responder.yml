@@ -112,22 +112,38 @@ jobs:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           set -euo pipefail
+          # SECURITY: this workflow runs in a PUBLIC repository — Actions logs
+          # are world-readable. Claude has read access (via the github MCP +
+          # GH_PAT_SDK_READ) to seven private SDK repos, and its tool-call
+          # transcript would include private-repo code snippets and file paths.
+          # We therefore:
+          #   - DO NOT pass --verbose (would dump the full tool-call transcript
+          #     including mcp__github__search_code results to stdout).
+          #   - Redirect Claude's stdout+stderr to an ephemeral file on the
+          #     runner (gone when the runner terminates; never enters the
+          #     public Actions log).
+          #   - Omit Bash(echo:*) from --allowedTools — echo writes to stdout
+          #     and would survive in the public log even with the redirect
+          #     above. Closing this also removes a direct exfiltration channel
+          #     under prompt injection.
+          # The Actions log only sees a single status line plus the exit code.
+          echo "Running Claude triage (output redirected to ephemeral file)"
           claude \
             --model claude-opus-4-7 \
             --max-turns 15 \
             --mcp-config /tmp/issue-responder/mcp-config.json \
             --add-dir /tmp/issue-responder \
             --permission-mode acceptEdits \
-            --allowedTools "Read,Write(/tmp/issue-responder/**),Bash(echo:*),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue" \
-            --disallowedTools "Bash(gh:*),Bash(curl:*),Bash(git:*),Bash(rm:*),WebFetch,WebSearch" \
-            --verbose \
+            --allowedTools "Read,Write(/tmp/issue-responder/**),mcp__github__search_code,mcp__github__get_file_contents,mcp__github__list_issues,mcp__github__get_issue,mcp__github__search_issues,mcp__atlassian__jira_create_issue,mcp__atlassian__jira_search,mcp__atlassian__jira_get_issue" \
+            --disallowedTools "Bash,WebFetch,WebSearch" \
             -p "$(cat <<'PROMPT'
           Read .github/issue-responder/prompt.md for the full role, flow, safety rules, and output schema.
           Read /tmp/issue-responder/issue.json for the GitHub issue to triage.
           Execute the instructions in prompt.md using the issue data.
           Produce exactly one file at /tmp/issue-responder/verdict.json matching the schema in prompt.md.
           PROMPT
-          )"
+          )" \
+            > /tmp/issue-responder/claude.log 2>&1
 
       - name: Post public comment from verdict
         if: always()
