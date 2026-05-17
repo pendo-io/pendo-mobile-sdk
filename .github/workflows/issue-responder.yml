@@ -24,6 +24,23 @@ jobs:
       id-token: write
     env:
       DRY_RUN: ${{ vars.ISSUE_RESPONDER_DRY_RUN || '1' }}
+      # Opt out of claude-code-action's subprocess sandbox (bubblewrap +
+      # PID namespace + env scrub). The sandbox activates whenever
+      # allowed_non_write_users is set and breaks two things in this workflow:
+      #   1. The Atlassian MCP docker container does not receive its JIRA_*
+      #      env vars (env-scrub strips them), so the MCP fails to connect
+      #      and Claude reports "Atlassian MCP tools aren't available".
+      #   2. /tmp/issue-responder is remapped by bubblewrap so the
+      #      --permission-mode acceptEdits + --add-dir /tmp/issue-responder
+      #      + --allowedTools "Write(/tmp/issue-responder/**)" combo no
+      #      longer auto-approves the verdict.json write — every Write call
+      #      returns "Claude requested permissions ... but you haven't
+      #      granted it yet", verdict.json is never produced, and the
+      #      downstream comment step fails-closed with no public comment.
+      # Defense-in-depth is preserved by the existing --disallowedTools
+      # (Bash(gh|curl|git|rm:*), WebFetch, WebSearch) and the canned
+      # comment text in the downstream step.
+      CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "0"
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6
