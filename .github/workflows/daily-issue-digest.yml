@@ -1,0 +1,134 @@
+name: Daily Issue Digest (Slack)
+
+# Daily summary of open mobile-sdk issues posted to #team-apex with one
+# "🤖 Triage pending issues" button. The button opens the issue-responder
+# workflow's Actions UI where a Pendo team member clicks "Run workflow" to
+# kick off the AI batch triage manually. The AI never runs unattended.
+#
+# Required secret on this repo: SLACK_TEAM_APEX_WEBHOOK_URL — a Slack
+# Incoming Webhook URL bound to the #team-apex channel.
+on:
+  schedule:
+    # 07:00 UTC daily.
+    # = 10:00 IDT (Israel summer, Apr–late Oct) → matches the target.
+    # = 09:00 IST (Israel winter, late Oct–Mar) → user accepted this drift
+    #   over either a two-cron split (imprecise at the DST switchover days)
+    #   or a fixed UTC time that misses 10:00 IL year-round.
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: daily-issue-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: read
+    steps:
+      - name: Fetch open issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh issue list --repo "$REPO" --state open --limit 50 \
+            --json number,url,title,author,createdAt,labels,comments \
+            > issues.json
+
+      - name: Build Slack Block Kit payload
+        env:
+          WORKFLOW_URL: "https://github.com/${{ github.repository }}/actions/workflows/issue-responder.yml"
+        run: |
+          set -euo pipefail
+          MARKER='<!-- pendo-issue-responder -->'
+
+          jq -n \
+            --slurpfile issues issues.json \
+            --arg workflow_url "$WORKFLOW_URL" \
+            --arg marker "$MARKER" '
+            ($issues[0]) as $all
+            | ($all | length) as $total
+            | ($all
+                | map(select(([.comments[].body | startswith($marker)] | any) | not))
+              ) as $pending
+            | ($pending | length) as $pending_count
+            | ($total - $pending_count) as $triaged_count
+            | (if $pending_count > 0
+                then "🤖 Triage \($pending_count) pending issue\(if $pending_count == 1 then "" else "s" end)"
+                else "🤖 Re-run triage (all already answered)"
+              end) as $btn_text
+            | (if $total > 0
+                then ($all | map(
+                    (([.comments[].body | startswith($marker)] | any)) as $triaged
+                    | (.title | if length > 120 then .[:117] + "…" else . end) as $short_title
+                    | (if (.labels | length) > 0
+                        then (.labels | map(.name) | join(", "))
+                        else "_none_"
+                       end) as $label_str
+                    | {
+                        type: "section",
+                        text: {
+                          type: "mrkdwn",
+                          text: ("\(if $triaged then "✅" else "⏳" end) *<\(.url)|#\(.number)>* — \($short_title)\n_by `\(.author.login)` · opened \(.createdAt | sub("T.*"; "")) · labels: \($label_str)_")
+                        }
+                      }
+                  ))
+                else [
+                  { type: "section", text: { type: "mrkdwn", text: "_No open issues. Nothing to do today._" } }
+                ]
+              end) as $issue_blocks
+            | {
+                text: "📋 Mobile SDK — \($total) open · \($pending_count) pending",
+                blocks: (
+                  [
+                    { type: "header", text: { type: "plain_text", text: "📋 Mobile SDK Issues — \($total) open" } },
+                    {
+                      type: "context",
+                      elements: [{
+                        type: "mrkdwn",
+                        text: "✅ \($triaged_count) already triaged · ⏳ \($pending_count) pending · click the button to run AI triage on the pending ones (idempotent)."
+                      }]
+                    },
+                    { type: "divider" }
+                  ]
+                  + $issue_blocks
+                  + [
+                      { type: "divider" },
+                      {
+                        type: "actions",
+                        elements: [{
+                          type: "button",
+                          text: { type: "plain_text", text: $btn_text },
+                          style: "primary",
+                          url: $workflow_url
+                        }]
+                      },
+                      {
+                        type: "context",
+                        elements: [{
+                          type: "mrkdwn",
+                          text: "Button opens the workflow page on GitHub — click *Run workflow* there to start the AI triage. Already-answered issues are skipped automatically."
+                        }]
+                      }
+                  ]
+                )
+              }' > slack-payload.json
+
+      - name: Post to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_TEAM_APEX_WEBHOOK_URL }}
+        run: |
+          set -euo pipefail
+          : "${SLACK_WEBHOOK_URL:?missing secret SLACK_TEAM_APEX_WEBHOOK_URL (Slack Incoming Webhook bound to #team-apex)}"
+
+          # Slack incoming webhooks return "ok" (200) on success, a non-2xx
+          # with body on failure. -f makes curl fail the step on non-2xx.
+          curl -sSf -X POST -H 'Content-type: application/json' \
+            --data @slack-payload.json \
+            "$SLACK_WEBHOOK_URL"
+          echo
+          echo "Slack digest posted."
