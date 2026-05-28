@@ -666,13 +666,13 @@ someView.pendoRecognizeClickAnalytics() -> some View;
 func pendoSkipAccessibilityScan() -> some View
 ```
 
->Instructs the Pendo SDK to skip the Phase 1 (accessibility-to-view-rect map) scan for the hosting view controller of this view.
+>Instructs the Pendo SDK to skip the accessibility scan for the hosting view controller of this view.
 >
->Use this API to prevent main-thread UI hangs when rendering complex, nested lazy containers (such as `LazyVStack` or `LazyHStack` inside another lazy view) that dynamically load/mutate their state during `.onAppear` on iOS 16+.
+>Use this API to prevent main-thread UI hangs when rendering complex, nested lazy containers (such as `LazyVStack` or `LazyHStack` inside another lazy view) that dynamically load/mutate their state during `.onAppear` on iOS 16.
 >
->**The Apple Bug:** Under the hood, SwiftUI's accessibility tree traversal (triggered on iOS 16+ when VoiceOver, Accessibility Inspector, or the Pendo scanner queries the page) can run into an infinite layout-invalidation loop if child elements are continuously materializing and updating state on appear.
+>**The Apple Bug:** Under the hood, SwiftUI's accessibility tree traversal (triggered only on iOS 16 when VoiceOver, Accessibility Inspector, or the Pendo scanner queries the page) can run into an infinite layout-invalidation loop if child elements are continuously materializing and updating state on appear.
 >
->**What Pendo does:** By applying `.pendoSkipAccessibilityScan()`, you disable Pendo's accessibility scan for that specific screen. This stops Pendo from triggering the hang, while still running Pendo's Phase 2 reflection-based scan (meaning the page is still correctly identified in Page analytics and Page capture).
+>**What Pendo does:** By applying `.pendoSkipAccessibilityScan()`, you disable Pendo's accessibility scan for that specific screen. This stops Pendo from triggering the hang, while still running Pendo's reflection-based scan (meaning the page is still correctly identified in Page analytics and Page capture).
 >
 >**Limitations:** This modifier only stops **Pendo** from triggering the Apple SwiftUI bug. If a user turns on VoiceOver or a developer attaches Xcode's Accessibility Inspector to this screen, the app will still hang due to Apple's underlying layout engine defect.
 

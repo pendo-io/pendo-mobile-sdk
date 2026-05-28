@@ -334,7 +334,7 @@ _Why aren't some elements being tagged correctly in SwiftUI?_
   ```
 <br>
 
-- [`pendoSkipAccessibilityScan()`](/api-documentation/native-ios-apis.md#viewpendoskipaccessibilityscan) - Bypasses Pendo's Phase 1 accessibility scan for the view's hosting controller. This prevents main-thread layout-invalidation hangs on iOS 16+ when rendering complex, nested lazy containers (`LazyVStack`, `LazyHStack`) that load or mutate state on appear. Example:
+- [`pendoSkipAccessibilityScan()`](/api-documentation/native-ios-apis.md#viewpendoskipaccessibilityscan) - Bypasses Pendo's accessibility scan for the view's hosting controller. This prevents main-thread layout-invalidation hangs on iOS 16 when rendering complex, nested lazy containers (`LazyVStack`, `LazyHStack`) that load or mutate state on appear. Example:
   ```swift
   ScrollView {
       LazyVStack {
@@ -375,14 +375,14 @@ _I have noticed performance issues in my app after integrating Pendo SDK. What s
 
 * **Optimizing Scanning Depth** - If performance issues persist, adjust the scan depth settings. Consult our support team to configure this setting for optimal performance.
 
-* **Main-Thread Hangs on Lazy Containers (Apple Bug FB21851974)** - If you experience UI hangs on iOS 16+ when rendering screens containing nested `LazyVStack` or `LazyHStack` that load or mutate state on `.onAppear`, this is due to an Apple bug in SwiftUI's accessibility layout invalidation when scanned by any accessibility client (such as VoiceOver, Accessibility Inspector, or the Pendo scanner). 
+* **Main-Thread Hangs on Lazy Containers (Apple Bug FB21851974)** - If you experience UI hangs on iOS 16 when rendering screens containing nested `LazyVStack` or `LazyHStack` that load or mutate state on `.onAppear`, this is due to an Apple bug in SwiftUI's accessibility layout invalidation when scanned by any accessibility client (such as VoiceOver, Accessibility Inspector, or the Pendo scanner). 
 
   To resolve this trigger, apply the [`.pendoSkipAccessibilityScan()`](/api-documentation/native-ios-apis.md#viewpendoskipaccessibilityscan) modifier on the view:
   ```swift
   MyComplexScrollView()
       .pendoSkipAccessibilityScan()
   ```
-  This will completely bypass the accessibility scan phase for that view controller, avoiding the infinite invalidation loop, while still executing reflection-based Page identification so the screen remains normally discoverable and trackable.
+  This will completely bypass the accessibility scan for that view controller, avoiding the infinite invalidation loop, while still executing reflection-based Page identification so the screen remains normally discoverable and trackable.
   
 ## General Troubleshooting
 
