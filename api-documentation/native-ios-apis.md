@@ -35,6 +35,7 @@
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
 [View.pendoRecognizeClickAnalytics](#viewpendorecognizeclickanalytics) ⇒ `void` <br>
+[View.pendoSkipAccessibilityScan](#viewpendoskipaccessibilityscan) ⇒ `some View`<br>
 [View.pendoTag](#viewpendotag) ⇒ `some View`<br>
 [View.trackPage](#viewtrackpage) ⇒ `some View`<br>
 
@@ -653,6 +654,55 @@ func pendoRecognizeClickAnalytics()-> some View;
 
 ```swift
 someView.pendoRecognizeClickAnalytics() -> some View;
+```
+</details>
+
+### `View.pendoSkipAccessibilityScan`
+
+> [!NOTE]
+> Available from SDK 3.13.2 on iOS 13 and above.
+
+```swift
+func pendoSkipAccessibilityScan() -> some View
+```
+
+>Instructs the Pendo SDK to skip the Phase 1 (accessibility-to-view-rect map) scan for the hosting view controller of this view.
+>
+>Use this API to prevent main-thread UI hangs when rendering complex, nested lazy containers (such as `LazyVStack` or `LazyHStack` inside another lazy view) that dynamically load/mutate their state during `.onAppear` on iOS 16+.
+>
+>**The Apple Bug:** Under the hood, SwiftUI's accessibility tree traversal (triggered on iOS 16+ when VoiceOver, Accessibility Inspector, or the Pendo scanner queries the page) can run into an infinite layout-invalidation loop if child elements are continuously materializing and updating state on appear.
+>
+>**What Pendo does:** By applying `.pendoSkipAccessibilityScan()`, you disable Pendo's accessibility scan for that specific screen. This stops Pendo from triggering the hang, while still running Pendo's Phase 2 reflection-based scan (meaning the page is still correctly identified in Page analytics and Page capture).
+>
+>**Limitations:** This modifier only stops **Pendo** from triggering the Apple SwiftUI bug. If a user turns on VoiceOver or a developer attaches Xcode's Accessibility Inspector to this screen, the app will still hang due to Apple's underlying layout engine defect.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<b>Class</b>: View
+<br><b>Kind</b>: extension class method
+<br><b>Returns</b>: some View
+<br>
+
+<b>Example</b>:
+
+```swift
+struct PortfolioView: View {
+    @State private var items: [Item] = []
+
+    var body: some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(items) { item in
+                    ItemRow(item: item)
+                        .onAppear {
+                            loadMoreIfNeeded(item)
+                        }
+                }
+            }
+        }
+        .pendoSkipAccessibilityScan() // Prevents main-thread layout-invalidation loops/hangs on iOS 16+
+    }
+}
 ```
 </details>
 
