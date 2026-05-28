@@ -668,9 +668,9 @@ func pendoSkipAccessibilityScan() -> some View
 
 >Instructs the Pendo SDK to skip the accessibility scan for the hosting view controller of this view.
 >
->Use this API to prevent main-thread UI hangs when rendering complex, nested lazy containers (such as `LazyVStack` or `LazyHStack` inside another lazy view) that dynamically load/mutate their state during `.onAppear` on iOS 16.
+>Use this API to prevent main-thread UI hangs when rendering complex, nested lazy containers (such as `LazyVStack` or `LazyHStack` inside another lazy view) that dynamically load/mutate their state during `.onAppear` on iOS 26.
 >
->**The Apple Bug:** Under the hood, SwiftUI's accessibility tree traversal (triggered only on iOS 16 when VoiceOver, Accessibility Inspector, or the Pendo scanner queries the page) can run into an infinite layout-invalidation loop if child elements are continuously materializing and updating state on appear.
+>**The Apple Bug:** Under the hood, SwiftUI's accessibility tree traversal (triggered only on iOS 26 when VoiceOver, Accessibility Inspector, or the Pendo scanner queries the page) can run into an infinite layout-invalidation loop if child elements are continuously materializing and updating state on appear.
 >
 >**What Pendo does:** By applying `.pendoSkipAccessibilityScan()`, you disable Pendo's accessibility scan for that specific screen. This stops Pendo from triggering the hang, while still running Pendo's reflection-based scan (meaning the page is still correctly identified in Page analytics and Page capture).
 >
@@ -700,7 +700,7 @@ struct PortfolioView: View {
                 }
             }
         }
-        .pendoSkipAccessibilityScan() // Prevents main-thread layout-invalidation loops/hangs on iOS 16
+        .pendoSkipAccessibilityScan() // Prevents main-thread layout-invalidation loops/hangs on iOS 26
     }
 }
 ```
