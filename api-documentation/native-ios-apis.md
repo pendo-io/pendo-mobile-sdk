@@ -700,7 +700,7 @@ struct PortfolioView: View {
                 }
             }
         }
-        .pendoSkipAccessibilityScan() // Prevents main-thread layout-invalidation loops/hangs on iOS 16+
+        .pendoSkipAccessibilityScan() // Prevents main-thread layout-invalidation loops/hangs on iOS 16
     }
 }
 ```
