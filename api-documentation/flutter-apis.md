@@ -19,6 +19,7 @@
 [getVisitorId](#getvisitorid) ⇒ `String` <br>
 [getAccountId](#getaccountid) ⇒ `String` <br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
+[setSnapshotableWidgetTypes](#setsnapshotablewidgettypes) ⇒ `void` <br>
 
 ## PendoSDK APIs
 
@@ -389,5 +390,36 @@ static Future<void> setDebugMode(bool isDebugEnabled) async
 ```c#
 await PendoSDK.setDebugMode(true);
 await PendoSDK.setup("your.app.key", null);
+```
+</details>
+
+### `setSnapshotableWidgetTypes`
+
+```c#
+static void setSnapshotableWidgetTypes(Set<Type> types)
+```
+
+>Registers widget types that have no dedicated Session Replay extractor so they are captured as `<img>` render snapshots. Use this for **static** visual widgets such as `flutter_svg`'s `SvgPicture`. The snapshot is cached and reused across scans. For animated widgets, use [setAnimatedSnapshotableWidgetTypes](#setanimatedsnapshotablewidgettypes) instead.
+
+>Registered types are treated as images for privacy purposes: the `img` selector in your privacy configuration blocks/masks them just like any other image, so vector or custom content cannot bypass your privacy rules. Call this API before the widgets are scanned (typically right after `setup`).
+
+<details>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+
+<b>Class</b>: PendoSDK<br>
+<b>Kind</b>: static method<br>
+<b>Returns</b>: void<br>
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| types | Set\<Type\> | The set of widget types to capture as static `<img>` render snapshots |
+
+<b>Example:</b>
+
+```c#
+import 'package:flutter_svg/flutter_svg.dart';
+
+PendoSDK.setSnapshotableWidgetTypes({SvgPicture});
 ```
 </details>
