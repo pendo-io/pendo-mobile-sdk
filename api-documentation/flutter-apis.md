@@ -20,6 +20,7 @@
 [getAccountId](#getaccountid) ⇒ `String` <br>
 [setDebugMode](#setdebugmode) ⇒ `void`<br>
 [setSnapshotableWidgetTypes](#setsnapshotablewidgettypes) ⇒ `void` <br>
+[setAnimatedSnapshotableWidgetTypes](#setanimatedsnapshotablewidgettypes) ⇒ `void` <br>
 
 ## PendoSDK APIs
 
@@ -421,5 +422,37 @@ static void setSnapshotableWidgetTypes(Set<Type> types)
 import 'package:flutter_svg/flutter_svg.dart';
 
 PendoSDK.setSnapshotableWidgetTypes({SvgPicture});
+```
+</details>
+
+### `setAnimatedSnapshotableWidgetTypes`
+
+```c#
+static void setAnimatedSnapshotableWidgetTypes(Set<Type> types)
+```
+
+>Like [setSnapshotableWidgetTypes](#setsnapshotablewidgettypes), but for **animated** widgets such as the `gif` package's `Gif` or Lottie. Registered types bypass the snapshot image cache, so each Session Replay scan re-captures the current frame and the widget animates (at the scan cadence) instead of freezing on its first captured frame. Use [setSnapshotableWidgetTypes](#setsnapshotablewidgettypes) for static widgets so they stay cached.
+
+>Registered types are treated as images for privacy purposes: the `img` selector in your privacy configuration blocks/masks them just like any other image. Call this API before the widgets are scanned (typically right after `setup`).
+
+<details>
+    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+
+<b>Class</b>: PendoSDK<br>
+<b>Kind</b>: static method<br>
+<b>Returns</b>: void<br>
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| types | Set\<Type\> | The set of animated widget types to re-capture as `<img>` render snapshots on every scan |
+
+<b>Example:</b>
+
+```c#
+import 'package:gif/gif.dart';
+import 'package:lottie/lottie.dart';
+
+PendoSDK.setAnimatedSnapshotableWidgetTypes({Gif, LottieBuilder});
 ```
 </details>
