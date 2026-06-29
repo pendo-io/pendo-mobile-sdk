@@ -87,7 +87,7 @@ await PendoFlutterPlugin.startSession('someAppKey', pendoParams);
 
 ```dart
 // establish connection to server
-await PendoFlutterPlugin.setup('someAppKey'
+await PendoFlutterPlugin.setup('someAppKey',
                                 null // pendo app params
 );
 
@@ -113,7 +113,7 @@ Call `setup` instead of `initSDKWithoutVisitor`.
 
 ```dart
 // establish connection to server
-await PendoFlutterPlugin.initSDKWithoutVisitor('someAppKey'
+await PendoFlutterPlugin.initSDKWithoutVisitor('someAppKey',
                 null // pendo app params
 );
 ```
@@ -123,7 +123,7 @@ await PendoFlutterPlugin.initSDKWithoutVisitor('someAppKey'
 
 ```dart
 // establish connection to server
-await PendoFlutterPlugin.setup('someAppKey'
+await PendoFlutterPlugin.setup('someAppKey',
             null // pendo app params
 );
 ```
