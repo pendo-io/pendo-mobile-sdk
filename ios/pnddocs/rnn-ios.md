@@ -3,6 +3,9 @@
 >[!NOTE]
 >**Expo SDK** 41-56 using React Native Navigation 6+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rnn-ios.md).
 
+>[!WARNING]
+>**CocoaPods Deprecation Notice:** CocoaPods has announced that their registry will become read-only in December 2026. Pendo will stop publishing new SDK versions to CocoaPods. While existing versions will remain functional, we recommend migrating your iOS project to Swift Package Manager (SPM) to continue receiving updates. See our [CocoaPods to SPM Migration Guide](/migration-docs/cocoapods-to-spm-migration.md) for details.
+
 >[!IMPORTANT]
 >- We support a codeless solution for React Native 0.66-0.84 using react-native-navigation 6+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
