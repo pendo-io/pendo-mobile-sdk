@@ -26,7 +26,7 @@
 
 ### `setup`
 
-```c# 
+```dart
 static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) async
 ```
 
@@ -50,7 +50,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 
 <b>Example</b>:
     
-```c#
+```dart
 await PendoSDK.setup('your.app.key', null);  
 ```
 </details>
@@ -58,7 +58,7 @@ await PendoSDK.setup('your.app.key', null);
 
 ### `startSession`
 
-```c# 
+```dart
 static Future<void> startSession(String? visitorId, String? accountId, Map<String, dynamic>? visitorData, Map<String, dynamic>? accountData) async
 ```
 
@@ -89,7 +89,7 @@ static Future<void> startSession(String? visitorId, String? accountId, Map<Strin
 
 <b>Example</b>:
     
-```c#
+```dart
 Map<String, dynamic> visitorData = {'age': 21, 'country': 'USA'};
 Map<String, dynamic> accountData = {'Tier': 1, 'Size': 'Enterprise'};
 
@@ -100,7 +100,7 @@ await PendoSDK.startSession('John Doe', 'ACME', visitorData, accountData)
 
 ### `setVisitorData`
 
-```c# 
+```dart
 static Future<void> setVisitorData(Map<String, dynamic> visitorData) async
 ```
 
@@ -124,7 +124,7 @@ static Future<void> setVisitorData(Map<String, dynamic> visitorData) async
 
 <b>Example</b>:
     
-```c#
+```dart
 Map<String, dynamic> visitorData = {'age': 25, 'country': 'UK', 'birthday': '01-01-1990'};
 
 await PendoSDK.setVisitorData(visitorData)
@@ -134,7 +134,7 @@ await PendoSDK.setVisitorData(visitorData)
 
 ### `setAccountData`
 
-```c# 
+```dart
 static Future<void> setAccountData(Map<String, dynamic> accountData) async
 ```
 
@@ -158,7 +158,7 @@ static Future<void> setAccountData(Map<String, dynamic> accountData) async
 
 <b>Example</b>:
     
-```c#
+```dart
 Map<String, dynamic> accountData = {'Tier': 2, 'size': 'Mid-Market', 'signing-date': '01-01-2020'};
 
 await PendoSDK.setAccountData(accountData)
@@ -169,7 +169,7 @@ await PendoSDK.setAccountData(accountData)
 
 ### `endSession`
 
-```c# 
+```dart
 static Future<void> endSession() async
 ```
 
@@ -192,7 +192,7 @@ static Future<void> endSession() async
 
 <b>Example</b>:
     
-```c#
+```dart
 await PendoSDK.endSession(); 
 ```
 
@@ -200,7 +200,7 @@ await PendoSDK.endSession();
 
 ### `track`
 
-```c#
+```dart
 static Future<void> track(String event, Map<String, dynamic>? properties) async
 ```
 
@@ -221,14 +221,14 @@ static Future<void> track(String event, Map<String, dynamic>? properties) async
 
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.track('App Opened', {'Theme': 'Dark Mode'});
 ```
 </details>
 
 ### `pauseGuides`
 
-```c# 
+```dart
 static Future<void> pauseGuides(bool dismissGuides) async
 ```
 
@@ -247,7 +247,7 @@ static Future<void> pauseGuides(bool dismissGuides) async
 
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.pauseGuides(false);
 ```
 </details>
@@ -255,7 +255,7 @@ await PendoSDK.pauseGuides(false);
 
 ### `resumeGuides`
 
-```c# 
+```dart
 static Future<void> resumeGuides() async
 ```
 
@@ -270,14 +270,14 @@ static Future<void> resumeGuides() async
 <br>
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.resumeGuides();
 ```
 </details>
 
 ### `dismissVisibleGuides`
 
-```c# 
+```dart
 static Future<void> dismissVisibleGuides() async
 ```
 
@@ -291,14 +291,14 @@ static Future<void> dismissVisibleGuides() async
 <br>
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.dismissVisibleGuides();
 ```
 </details>
 
 ### `getDeviceId`
 
-```c# 
+```dart
 static Future<String?> getDeviceId() async
 ```
 
@@ -313,14 +313,14 @@ static Future<String?> getDeviceId() async
 <br>
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.getDeviceId();
 ```
 </details>
 
 ### `getVisitorId`
 
-```c# 
+```dart
 static Future<String?> getVisitorId() async
 ```
 
@@ -335,14 +335,14 @@ static Future<String?> getVisitorId() async
 <br>
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.getVisitorId();
 ```
 </details>
 
 ### `getAccountId`
 
-```c# 
+```dart
 static Future<String?> getAccountId() async
 ```
 
@@ -356,14 +356,14 @@ static Future<String?> getAccountId() async
 <br>
 <b>Example:</b>
 
-```c#
+```dart
 await PendoSDK.getAccountId();
 ```
 </details>
 
 ### `setDebugMode`
 
-```c# 
+```dart
 static Future<void> setDebugMode(bool isDebugEnabled) async
 ```
 
@@ -388,7 +388,7 @@ static Future<void> setDebugMode(bool isDebugEnabled) async
 
 <b>Example</b>:
 
-```c#
+```dart
 await PendoSDK.setDebugMode(true);
 await PendoSDK.setup("your.app.key", null);
 ```
@@ -396,7 +396,7 @@ await PendoSDK.setup("your.app.key", null);
 
 ### `setSnapshotableWidgetTypes`
 
-```c#
+```dart
 static void setSnapshotableWidgetTypes(Set<Type> types)
 ```
 
@@ -418,7 +418,7 @@ static void setSnapshotableWidgetTypes(Set<Type> types)
 
 <b>Example:</b>
 
-```c#
+```dart
 import 'package:flutter_svg/flutter_svg.dart';
 
 PendoSDK.setSnapshotableWidgetTypes({SvgPicture});
@@ -427,7 +427,7 @@ PendoSDK.setSnapshotableWidgetTypes({SvgPicture});
 
 ### `setAnimatedSnapshotableWidgetTypes`
 
-```c#
+```dart
 static void setAnimatedSnapshotableWidgetTypes(Set<Type> types)
 ```
 
@@ -449,7 +449,7 @@ static void setAnimatedSnapshotableWidgetTypes(Set<Type> types)
 
 <b>Example:</b>
 
-```c#
+```dart
 import 'package:gif/gif.dart';
 import 'package:lottie/lottie.dart';
 
