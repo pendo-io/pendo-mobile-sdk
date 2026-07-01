@@ -336,7 +336,7 @@ static Future<String?> getVisitorId() async
 <b>Example:</b>
 
 ```c#
-await PendoSDk.getVisitorId();
+await PendoSDK.getVisitorId();
 ```
 </details>
 

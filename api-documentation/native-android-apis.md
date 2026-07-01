@@ -892,8 +892,6 @@ Pendo.jwt.setVisitorData(jwt, sKeyName);
 
 </details>
 
-</details>
-
 ### `jwt.setAccountData`
 
 ```java 

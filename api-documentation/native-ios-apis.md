@@ -345,7 +345,7 @@ func track(_ event: String, properties: [AnyHashable : Any]?)
 
 ```swift
 var trackEventProperties = ["theme": "Dark Mode"]
-PendoManager.shared().track("App Opened", trackEventProperties);
+PendoManager.shared().track("App Opened", properties: trackEventProperties);
 ```
 </details>
 
@@ -525,7 +525,7 @@ private(set) var jwt: PendoJWT
 <b>Example:</b>
 
 ```swift
-PendoManger.shared().jwt;
+PendoManager.shared().jwt;
 ```
 </details>
 
