@@ -5,6 +5,9 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 
 ## Integration instructions 
 
+>[!WARNING]
+>**CocoaPods Deprecation Notice:** CocoaPods registry will become read-only in December 2026. Pendo will stop publishing new SDK versions to CocoaPods. We highly recommend migrating your iOS projects to Swift Package Manager (SPM) as soon as possible. See our [CocoaPods to SPM Migration Guide](/migration-docs/cocoapods-to-spm-migration.md) for step-by-step instructions.
+
 >[!NOTE]
 >The following integration instructions are relevant for SDK 3.0 or higher. <br> Follow our migration instructions to [upgrade from SDK 2.x to 3.0](/migration-docs/README.md) or refer to our [2.x integration instruction](https://github.com/pendo-io/pendo-mobile-sdk/blob/2.22.5/README.md).
 

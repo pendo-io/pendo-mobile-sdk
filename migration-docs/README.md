@@ -12,3 +12,8 @@ Follow our migration instructions to resolve breaking changes when upgrading fro
 - [MAUI](/migration-docs/maui-2.x-to-3.x-migration.md)
 - [Flutter](/migration-docs/flutter-2.x-to-3.x-migration.md)
 
+## Dependency Manager Migration
+
+- [Migrating from CocoaPods to Swift Package Manager](/migration-docs/cocoapods-to-spm-migration.md)
+
+
