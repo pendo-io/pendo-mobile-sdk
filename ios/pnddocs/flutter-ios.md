@@ -13,6 +13,7 @@
 >Requirements:
 >- Flutter: ">=3.16.0"
 >- SDK: ">=3.2.0 < 4.0.0"
+>- iOS dependency manager: CocoaPods (default) or Swift Package Manager (requires Flutter 3.24 or later)
 >
 >Supported Navigation Libraries:
 >
@@ -21,6 +22,60 @@
 
 ## Step 1. Add Pendo dependency 
 In the root folder of your flutter app add the Pendo package: `flutter pub add pendo_sdk`.
+
+### iOS dependency manager
+
+The Pendo Flutter plugin supports both **CocoaPods** and **Swift Package Manager (SPM)** for iOS. Flutter automatically uses whichever your host app is configured for — the plugin is fully compatible with either, and you do not need to change anything in the plugin itself.
+
+<details open>
+<summary><b>CocoaPods (default)</b></summary>
+
+No additional steps. Flutter runs `pod install` automatically the first time you build for iOS, and the Pendo native SDK is pulled from CocoaPods.
+
+If you want to install pods manually before your first build:
+
+```sh
+cd ios
+pod install
+```
+</details>
+
+<details>
+<summary><b>Swift Package Manager</b></summary>
+
+> [!IMPORTANT]
+> Swift Package Manager support in the Pendo Flutter plugin requires **Flutter 3.24 or later** on the host application.
+
+**1. Enable SPM** (one-time, per machine):
+
+```sh
+flutter config --enable-swift-package-manager
+```
+
+**2. Build the app:**
+
+```sh
+flutter build ios
+```
+
+Flutter generates the SPM scaffolding automatically under `ios/Flutter/ephemeral/Packages/` and resolves the plugin and its native Pendo dependency from the [Pendo iOS Swift Package](https://github.com/pendo-io/pendo-mobile-sdk). The native Pendo `XCFramework` is downloaded from Pendo's artifactory on first resolution. No `Podfile` is needed.
+
+**3. Migrating an existing project from CocoaPods to SPM:**
+
+If your iOS project previously used CocoaPods, remove the CocoaPods artifacts before the first SPM build:
+
+```sh
+cd ios
+rm -rf Podfile Podfile.lock Pods
+cd ..
+flutter clean
+flutter build ios
+```
+
+> [!TIP]
+> To verify SPM is in use after building, look for `ios/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/` — this is Flutter's generated SPM project. If you see `ios/Pods/` and no `Packages/` directory, the build is still using CocoaPods.
+
+</details>
 
 ## Step 2. Integrate with the Pendo SDK
 
