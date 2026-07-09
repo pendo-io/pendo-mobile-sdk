@@ -30,7 +30,36 @@
     ```shell
     pod install
     ```
-    
+
+    #### Swift Package Manager (SPM) Support (React Native >= 0.75)
+
+    By default, `rn-pendo-sdk` uses CocoaPods to resolve the Pendo iOS SDK. If you are using React Native >= 0.75 and want to resolve the Pendo iOS SDK via Swift Package Manager (SPM), you can explicitly opt-in:
+
+    a. At the top of your `ios/Podfile` (before any `target` block), add the SPM enablement flag and require our SPM helper script:
+
+    ```ruby
+    $RNPendoEnableSPM = true
+    require_relative '../node_modules/rn-pendo-sdk/scripts/pendo_spm_fix'
+    ```
+
+    b. Inside your `Podfile`'s `post_install` block, call `pendo_fix_spm_signing(installer)` to automate dynamic framework embedding and signing:
+
+    ```ruby
+    post_install do |installer|
+      # ... other post install hooks (e.g. react_native_post_install) ...
+      pendo_fix_spm_signing(installer)
+    end
+    ```
+
+    c. Run `pod install` in your `ios/` folder:
+
+    ```shell
+    cd ios && pod install
+    ```
+
+>[!NOTE]
+>Because `Pendo.framework` is a pre-compiled dynamic binary framework, Xcode does not automatically embed and sign it when resolved via SPM inside a subproject (`Pods.xcodeproj`). The `pendo_fix_spm_signing(installer)` helper script automates adding the necessary "Embed & Sign" build phase to your main application target to prevent `dyld: Library not loaded` runtime crashes.
+
 3. **Modify Javascript minification**
 
     When bundling for production, React Native minifies class and function names to reduce the size of the bundle. This means there is no access to the original component names that are used for the codeless solution.
