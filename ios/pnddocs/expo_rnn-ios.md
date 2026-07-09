@@ -48,6 +48,28 @@ In the `app.config.js` or `app.json`, add the following:
 ```
 This configuration enables Pendo to enter pair mode to tag Pages and Features.
 
+#### Swift Package Manager (SPM) Support (React Native >= 0.75)
+
+By default, `rn-pendo-sdk` uses CocoaPods to resolve the Pendo iOS SDK. If you are using React Native >= 0.75 and want to resolve the Pendo iOS SDK via Swift Package Manager (SPM), you can explicitly opt-in:
+
+Add `"ios-use-spm": true` to your plugin properties:
+```json
+{
+  "plugins": [
+    [
+      "rn-pendo-sdk",
+      {
+        "ios-scheme": "YOUR_IOS_SCHEME_ID",
+        "android-scheme": "YOUR_ANDROID_SCHEME_ID",
+        "ios-use-spm": true
+      }
+    ]
+  ]
+}
+```
+
+This configuration automatically injects the SPM enablement flag and dynamic framework signing helper into the generated `Podfile` during `npx expo prebuild` (or EAS Build), preventing `dyld: Library not loaded` runtime crashes.
+
 ## Step 3. Production bundle - modify Javascript minification
 
 In the `metro.config.js` file, add the following:
