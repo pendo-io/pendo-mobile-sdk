@@ -15,6 +15,9 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 - Native: 
 [Android](/android/pnddocs/native-android.md) | 
 [iOS](/ios/pnddocs/native-ios.md)
+- Kotlin Multiplatform (KMP): 
+[Android](/android/pnddocs/kmp-android.md) | 
+[iOS](/ios/pnddocs/kmp-ios.md)
 - React Native:
     - Using React Navigation:
     [Android](/android/pnddocs/rn-android.md) | 
