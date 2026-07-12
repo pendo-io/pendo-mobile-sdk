@@ -27,7 +27,6 @@
 [PendoReplayMask](#pendoreplaymask) ⇒ `Widget` <br>
 [PendoReplayUnmask](#pendoreplayunmask) ⇒ `Widget` <br>
 [PendoReplayBlock](#pendoreplayblock) ⇒ `Widget` <br>
-[PendoReplayUnblock](#pendoreplayunblock) ⇒ `Widget` <br>
 [Widget extension sugar](#widget-extension-sugar) <br>
 [Resolution priority](#resolution-priority) <br>
 [Safety rail](#safety-rail) <br>
@@ -536,7 +535,7 @@ PendoReplayUnmask(child: Text('Public marketing copy — safe to show'))
 const PendoReplayBlock({required Widget child, Key? key})
 ```
 
->Marks `child` and its whole subtree to be excluded from Session Replay. Every element in the subtree is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this wrapper.
+>Marks `child` and its whole subtree to be excluded from Session Replay. Every element in the subtree is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing can cancel a block on a nested subtree. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this wrapper.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -564,42 +563,6 @@ PendoReplayBlock(
 ```
 </details>
 
-### `PendoReplayUnblock`
-
-```dart
-const PendoReplayUnblock({required Widget child, Key? key})
-```
-
->Cancels an enclosing [PendoReplayBlock](#pendoreplayblock) for `child`'s subtree, so it renders normally again (text still honors the active preset / a closer mask-unmask wrapper). Cannot cancel Pendo's own always-blocked media — see [Block behavior](#block-behavior).
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class</b>: Widget (StatelessWidget)
-<br><b>Kind</b>: wrapper widget
-<br>
-<b>Returns</b>: Widget
-<br>
-
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| child | Widget | The subtree to exempt from an enclosing block |
-
-<b>Example</b>:
-
-```dart
-PendoReplayBlock(
-  child: Column(
-    children: [
-      const Text('Payment form (blocked)'),
-      PendoReplayUnblock(child: Text('Continue as guest')), // stays visible
-    ],
-  ),
-)
-```
-</details>
-
 ### Widget extension sugar
 
 >`PendoReplayWidgetExtension` adds fluent methods on `Widget` that are equivalent to wrapping — pick whichever call site reads better.
@@ -609,7 +572,6 @@ PendoReplayBlock(
 | `widget.pendoReplayMask()` | `PendoReplayMask(child: widget)` |
 | `widget.pendoReplayUnmask()` | `PendoReplayUnmask(child: widget)` |
 | `widget.pendoReplayBlock()` | `PendoReplayBlock(child: widget)` |
-| `widget.pendoReplayUnblock()` | `PendoReplayUnblock(child: widget)` |
 
 <b>Example</b>:
 
@@ -622,18 +584,22 @@ Text('Card #: 4242 4242 4242 4242').pendoReplayMask()
 >Each widget's Session Replay treatment is resolved in this order, highest priority first:
 >
 >1. **Safety rail** — see [Safety rail](#safety-rail) below. Always wins except a stricter block.
->2. **Nearest wrapper** — the closest enclosing `PendoReplayMask`/`Unmask`/`Block`/`Unblock` ancestor. A closer wrapper overrides a farther one, **except** `PendoReplayBlock` is terminal: a nested `PendoReplayMask`/`PendoReplayUnmask` cannot downgrade an enclosing, still-active block — only a `PendoReplayUnblock` closer than the block can cancel it.
+>2. **Nearest wrapper** — the closest enclosing `PendoReplayMask`/`Unmask`/`Block` ancestor. A closer wrapper overrides a farther one, **except** `PendoReplayBlock` is unconditionally terminal: a nested `PendoReplayMask`/`PendoReplayUnmask` cannot downgrade an enclosing, still-active block — nothing can cancel it.
 >3. **Preset** — falls through to the active `maxPrivacy` / `onlyInput` behavior when no wrapper applies.
 
-For example, `PendoReplayBlock(child: PendoReplayMask(child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. To reveal part of a blocked subtree, wrap it in `PendoReplayUnblock` instead.
+For example, `PendoReplayBlock(child: PendoReplayMask(child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. There is no wrapper that reveals part of a blocked subtree.
 
 ### Safety rail
 
->Password fields (`obscureText: true`) and inputs with a `visiblePassword`, `emailAddress`, or `phone` keyboard type are **always masked** in Session Replay, regardless of preset or any `PendoReplayUnmask` wrapper — they cannot be revealed. A `PendoReplayBlock` around such a field still blocks it (block is stricter than mask, so it wins), but no wrapper can unmask a safety rail field.
+>Always masked in Session Replay, regardless of preset or any `PendoReplayUnmask` wrapper — they cannot be revealed:
+>- Password fields (`obscureText: true`).
+>- Inputs with a `visiblePassword`, `emailAddress`, `phone`, or any numeric (`TextInputType.number`/`numberWithOptions`) keyboard type — covers PINs, card numbers, CVV codes, OTPs, and SSNs.
+>- Inputs carrying a `password`, `newPassword`, `email`, `creditCardNumber`, `creditCardSecurityCode`, or `oneTimeCode` autofill hint, even with a default keyboard type (e.g. a password field shown via a "show password" toggle).
+>
+>A `PendoReplayBlock` around such a field still blocks it (block is stricter than mask, so it wins), but no wrapper can unmask a safety rail field.
 
 ### Block behavior
 
->- A blocked subtree ([PendoReplayBlock](#pendoreplayblock)) renders every descendant as its own gray placeholder — the layout is preserved, but content is never read and taps are never captured.
->- [PendoReplayUnblock](#pendoreplayunblock) un-does a developer block on a nested subtree, restoring normal capture there (still subject to preset / a closer mask-unmask wrapper).
->- Embedded media that Session Replay cannot safely capture — `WebView` and `VideoPlayer` widgets — is **always** rendered as a placeholder, the same as an explicit block. This system-level block cannot be cancelled by `PendoReplayUnblock`.
+>- A blocked subtree ([PendoReplayBlock](#pendoreplayblock)) renders every descendant as its own gray placeholder — the layout is preserved, but content is never read and taps are never captured. Unconditionally terminal — no wrapper cancels a block on a nested subtree.
+>- Embedded media that Session Replay cannot safely capture — `WebView` and `VideoPlayer` widgets — is **always** rendered as a placeholder, the same as an explicit block. This system-level block cannot be cancelled either.
 >- Masking is text-only. To hide an image, video, or other non-text region, use `PendoReplayBlock` (or the existing block-images privacy configuration) instead of `PendoReplayMask`.
