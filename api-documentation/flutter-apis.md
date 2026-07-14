@@ -22,6 +22,14 @@
 [setSnapshotableWidgetTypes](#setsnapshotablewidgettypes) ⇒ `void` <br>
 [setAnimatedSnapshotableWidgetTypes](#setanimatedsnapshotablewidgettypes) ⇒ `void` <br>
 
+**Session Replay — Privacy Configuration**
+<br>
+[PendoSRPrivacy](#pendosrprivacy) ⇒ `Widget` <br>
+[Widget extension sugar](#widget-extension-sugar) <br>
+[Resolution priority](#resolution-priority) <br>
+[Safety rail](#safety-rail) <br>
+[Block behavior](#block-behavior) <br>
+
 ## PendoSDK APIs
 
 ### `setup`
@@ -456,3 +464,94 @@ import 'package:lottie/lottie.dart';
 PendoSDK.setAnimatedSnapshotableWidgetTypes({Gif, LottieBuilder});
 ```
 </details>
+
+## Session Replay — Privacy Configuration
+
+> Session Replay privacy presets are configured server-side: `maxPrivacy` masks all captured text, and `onlyInput` masks input fields only. Under **both** presets, input fields (`TextField`, `TextFormField`) are masked by default. The APIs below let you override that default on a per-widget basis, in a subtree, or app-wide.
+
+### `PendoSRPrivacy`
+
+```dart
+const PendoSRPrivacy(PNDSRPrivacyAction action, {required Widget child, Key? key})
+```
+
+>Marks `child` (and its descendants, unless overridden by a closer wrapper) with `action` for Session Replay. One wrapper widget, one action parameter — matching the equivalent single-entry-point shape on the other Pendo SDKs (`view.applyPendoSRPrivacy(PrivacyAction.MASK)` on Android, `Modifier.applyPendoSRPrivacy(PrivacyAction.MASK)` on Compose) rather than a separate type per action.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: Widget (InheritedWidget)
+<br><b>Kind</b>: wrapper widget
+<br>
+<b>Returns</b>: Widget
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| action | `PNDSRPrivacyAction` | `mask`, `unmask`, or `block` — see below |
+| child | Widget | The subtree to apply `action` to in Session Replay |
+
+`PNDSRPrivacyAction` values:
+
+| Value | Effect |
+| :--- | :--- |
+| `mask` | Masks text only; layout and interactions are preserved. Use `block` instead to hide images or other non-text content. |
+| `unmask` | Captures the subtree as-is, overriding the active preset. Cannot reveal a [safety rail](#safety-rail) field. |
+| `block` | Excludes the whole subtree. Every element in it is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing can cancel a block on a nested subtree. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this action. |
+
+<b>Example</b>:
+
+```dart
+PendoSRPrivacy(PNDSRPrivacyAction.mask, child: Text('Balance: \$42,850.00'))
+
+PendoSRPrivacy(PNDSRPrivacyAction.unmask, child: Text('Public marketing copy — safe to show'))
+
+PendoSRPrivacy(
+  PNDSRPrivacyAction.block,
+  child: Container(
+    padding: const EdgeInsets.all(12),
+    child: const Text('Payment form (blocked)'),
+  ),
+)
+```
+</details>
+
+### Widget extension sugar
+
+>`PendoSRPrivacyWidgetExtension` adds a fluent method on `Widget` that's equivalent to wrapping — pick whichever call site reads better. Named to match the other Pendo SDKs' equivalent (`applyPendoSRPrivacy(PrivacyAction.MASK)` on Android, `Modifier.applyPendoSRPrivacy(...)` on Compose).
+
+| Extension method | Equivalent to |
+| :--- | :--- |
+| `widget.applyPendoSRPrivacy(PNDSRPrivacyAction.mask)` | `PendoSRPrivacy(PNDSRPrivacyAction.mask, child: widget)` |
+
+<b>Example</b>:
+
+```dart
+Text('Card #: 4242 4242 4242 4242').applyPendoSRPrivacy(PNDSRPrivacyAction.mask)
+```
+
+### Resolution priority
+
+>Each widget's Session Replay treatment is resolved in this order, highest priority first:
+>
+>1. **Safety rail** — see [Safety rail](#safety-rail) below. Always wins except a stricter block.
+>2. **Nearest wrapper** — the closest enclosing `PendoSRPrivacy` ancestor's action. A closer wrapper overrides a farther one, **except** `block` is unconditionally terminal: a nested `mask`/`unmask` cannot downgrade an enclosing, still-active block — nothing can cancel it.
+>3. **Preset** — falls through to the active `maxPrivacy` / `onlyInput` behavior when no wrapper applies.
+
+For example, `PendoSRPrivacy(PNDSRPrivacyAction.block, child: PendoSRPrivacy(PNDSRPrivacyAction.mask, child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. There is no wrapper that reveals part of a blocked subtree.
+
+### Safety rail
+
+>Always masked in Session Replay, regardless of preset or an enclosing `unmask` — they cannot be revealed:
+>- Password fields (`obscureText: true`).
+>- Inputs with a `visiblePassword`, `emailAddress`, `phone`, or any numeric (`TextInputType.number`/`numberWithOptions`) keyboard type — covers PINs, card numbers, CVV codes, OTPs, and SSNs.
+>- Inputs carrying a `password`, `newPassword`, `email`, `creditCardNumber`, `creditCardSecurityCode`, or `oneTimeCode` autofill hint, even with a default keyboard type (e.g. a password field shown via a "show password" toggle).
+>
+>A `block` around such a field still blocks it (block is stricter than mask, so it wins), but no wrapper can unmask a safety rail field.
+
+### Block behavior
+
+>- A blocked subtree (`PendoSRPrivacy(PNDSRPrivacyAction.block, ...)`) renders every descendant as its own gray placeholder — the layout is preserved, but content is never read and taps are never captured. Unconditionally terminal — no wrapper cancels a block on a nested subtree.
+>- Embedded media that Session Replay cannot safely capture — `WebView` and `VideoPlayer` widgets — is **always** rendered as a placeholder, the same as an explicit block. This system-level block cannot be cancelled either.
+>- Masking is text-only. To hide an image, video, or other non-text region, use `PendoSRPrivacy(PNDSRPrivacyAction.block, ...)` (or the existing block-images privacy configuration) instead of `mask`.
