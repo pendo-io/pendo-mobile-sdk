@@ -24,9 +24,7 @@
 
 **Session Replay — Privacy Configuration**
 <br>
-[PendoReplayMask](#pendoreplaymask) ⇒ `Widget` <br>
-[PendoReplayUnmask](#pendoreplayunmask) ⇒ `Widget` <br>
-[PendoReplayBlock](#pendoreplayblock) ⇒ `Widget` <br>
+[PendoSRPrivacy](#pendosrprivacy) ⇒ `Widget` <br>
 [Widget extension sugar](#widget-extension-sugar) <br>
 [Resolution priority](#resolution-priority) <br>
 [Safety rail](#safety-rail) <br>
@@ -471,19 +469,19 @@ PendoSDK.setAnimatedSnapshotableWidgetTypes({Gif, LottieBuilder});
 
 > Session Replay privacy presets are configured server-side: `maxPrivacy` masks all captured text, and `onlyInput` masks input fields only. Under **both** presets, input fields (`TextField`, `TextFormField`) are masked by default. The APIs below let you override that default on a per-widget basis, in a subtree, or app-wide.
 
-### `PendoReplayMask`
+### `PendoSRPrivacy`
 
 ```dart
-const PendoReplayMask({required Widget child, Key? key})
+const PendoSRPrivacy(PNDSRPrivacyAction action, {required Widget child, Key? key})
 ```
 
->Marks `child` (and its descendants, unless overridden by a closer wrapper) so its text is masked in Session Replay, overriding the active preset. Masking is **text-only** — use [PendoReplayBlock](#pendoreplayblock) to hide images or other non-text content.
+>Marks `child` (and its descendants, unless overridden by a closer wrapper) with `action` for Session Replay. One wrapper widget, one action parameter — matching the equivalent single-entry-point shape on the other Pendo SDKs (`view.applyPendoSRPrivacy(PrivacyAction.MASK)` on Android, `Modifier.applyPendoSRPrivacy(PrivacyAction.MASK)` on Compose) rather than a separate type per action.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
 <br>
 
-<b>Class</b>: Widget (StatelessWidget)
+<b>Class</b>: Widget (InheritedWidget)
 <br><b>Kind</b>: wrapper widget
 <br>
 <b>Returns</b>: Widget
@@ -491,70 +489,26 @@ const PendoReplayMask({required Widget child, Key? key})
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| child | Widget | The subtree to mask in Session Replay |
+| action | `PNDSRPrivacyAction` | `mask`, `unmask`, or `block` — see below |
+| child | Widget | The subtree to apply `action` to in Session Replay |
+
+`PNDSRPrivacyAction` values:
+
+| Value | Effect |
+| :--- | :--- |
+| `mask` | Masks text only; layout and interactions are preserved. Use `block` instead to hide images or other non-text content. |
+| `unmask` | Captures the subtree as-is, overriding the active preset. Cannot reveal a [safety rail](#safety-rail) field. |
+| `block` | Excludes the whole subtree. Every element in it is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing can cancel a block on a nested subtree. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this action. |
 
 <b>Example</b>:
 
 ```dart
-PendoReplayMask(child: Text('Balance: \$42,850.00'))
-```
-</details>
+PendoSRPrivacy(PNDSRPrivacyAction.mask, child: Text('Balance: \$42,850.00'))
 
-### `PendoReplayUnmask`
+PendoSRPrivacy(PNDSRPrivacyAction.unmask, child: Text('Public marketing copy — safe to show'))
 
-```dart
-const PendoReplayUnmask({required Widget child, Key? key})
-```
-
->Marks `child` (and its descendants, unless overridden by a closer wrapper) to be captured as-is in Session Replay, overriding the active preset. Cannot reveal a [safety rail](#safety-rail) field.
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class</b>: Widget (StatelessWidget)
-<br><b>Kind</b>: wrapper widget
-<br>
-<b>Returns</b>: Widget
-<br>
-
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| child | Widget | The subtree to capture unmasked in Session Replay |
-
-<b>Example</b>:
-
-```dart
-PendoReplayUnmask(child: Text('Public marketing copy — safe to show'))
-```
-</details>
-
-### `PendoReplayBlock`
-
-```dart
-const PendoReplayBlock({required Widget child, Key? key})
-```
-
->Marks `child` and its whole subtree to be excluded from Session Replay. Every element in the subtree is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing can cancel a block on a nested subtree. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this wrapper.
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class</b>: Widget (StatelessWidget)
-<br><b>Kind</b>: wrapper widget
-<br>
-<b>Returns</b>: Widget
-<br>
-
-| Param  | Type | Description |
-| :---: | :---: | :--- |
-| child | Widget | The subtree to exclude from Session Replay |
-
-<b>Example</b>:
-
-```dart
-PendoReplayBlock(
+PendoSRPrivacy(
+  PNDSRPrivacyAction.block,
   child: Container(
     padding: const EdgeInsets.all(12),
     child: const Text('Payment form (blocked)'),
@@ -565,18 +519,16 @@ PendoReplayBlock(
 
 ### Widget extension sugar
 
->`PendoReplayWidgetExtension` adds fluent methods on `Widget` that are equivalent to wrapping — pick whichever call site reads better.
+>`PendoSRPrivacyWidgetExtension` adds a fluent method on `Widget` that's equivalent to wrapping — pick whichever call site reads better. Named to match the other Pendo SDKs' equivalent (`applyPendoSRPrivacy(PrivacyAction.MASK)` on Android, `Modifier.applyPendoSRPrivacy(...)` on Compose).
 
 | Extension method | Equivalent to |
 | :--- | :--- |
-| `widget.pendoReplayMask()` | `PendoReplayMask(child: widget)` |
-| `widget.pendoReplayUnmask()` | `PendoReplayUnmask(child: widget)` |
-| `widget.pendoReplayBlock()` | `PendoReplayBlock(child: widget)` |
+| `widget.applyPendoSRPrivacy(PNDSRPrivacyAction.mask)` | `PendoSRPrivacy(PNDSRPrivacyAction.mask, child: widget)` |
 
 <b>Example</b>:
 
 ```dart
-Text('Card #: 4242 4242 4242 4242').pendoReplayMask()
+Text('Card #: 4242 4242 4242 4242').applyPendoSRPrivacy(PNDSRPrivacyAction.mask)
 ```
 
 ### Resolution priority
@@ -584,22 +536,22 @@ Text('Card #: 4242 4242 4242 4242').pendoReplayMask()
 >Each widget's Session Replay treatment is resolved in this order, highest priority first:
 >
 >1. **Safety rail** — see [Safety rail](#safety-rail) below. Always wins except a stricter block.
->2. **Nearest wrapper** — the closest enclosing `PendoReplayMask`/`Unmask`/`Block` ancestor. A closer wrapper overrides a farther one, **except** `PendoReplayBlock` is unconditionally terminal: a nested `PendoReplayMask`/`PendoReplayUnmask` cannot downgrade an enclosing, still-active block — nothing can cancel it.
+>2. **Nearest wrapper** — the closest enclosing `PendoSRPrivacy` ancestor's action. A closer wrapper overrides a farther one, **except** `block` is unconditionally terminal: a nested `mask`/`unmask` cannot downgrade an enclosing, still-active block — nothing can cancel it.
 >3. **Preset** — falls through to the active `maxPrivacy` / `onlyInput` behavior when no wrapper applies.
 
-For example, `PendoReplayBlock(child: PendoReplayMask(child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. There is no wrapper that reveals part of a blocked subtree.
+For example, `PendoSRPrivacy(PNDSRPrivacyAction.block, child: PendoSRPrivacy(PNDSRPrivacyAction.mask, child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. There is no wrapper that reveals part of a blocked subtree.
 
 ### Safety rail
 
->Always masked in Session Replay, regardless of preset or any `PendoReplayUnmask` wrapper — they cannot be revealed:
+>Always masked in Session Replay, regardless of preset or an enclosing `unmask` — they cannot be revealed:
 >- Password fields (`obscureText: true`).
 >- Inputs with a `visiblePassword`, `emailAddress`, `phone`, or any numeric (`TextInputType.number`/`numberWithOptions`) keyboard type — covers PINs, card numbers, CVV codes, OTPs, and SSNs.
 >- Inputs carrying a `password`, `newPassword`, `email`, `creditCardNumber`, `creditCardSecurityCode`, or `oneTimeCode` autofill hint, even with a default keyboard type (e.g. a password field shown via a "show password" toggle).
 >
->A `PendoReplayBlock` around such a field still blocks it (block is stricter than mask, so it wins), but no wrapper can unmask a safety rail field.
+>A `block` around such a field still blocks it (block is stricter than mask, so it wins), but no wrapper can unmask a safety rail field.
 
 ### Block behavior
 
->- A blocked subtree ([PendoReplayBlock](#pendoreplayblock)) renders every descendant as its own gray placeholder — the layout is preserved, but content is never read and taps are never captured. Unconditionally terminal — no wrapper cancels a block on a nested subtree.
+>- A blocked subtree (`PendoSRPrivacy(PNDSRPrivacyAction.block, ...)`) renders every descendant as its own gray placeholder — the layout is preserved, but content is never read and taps are never captured. Unconditionally terminal — no wrapper cancels a block on a nested subtree.
 >- Embedded media that Session Replay cannot safely capture — `WebView` and `VideoPlayer` widgets — is **always** rendered as a placeholder, the same as an explicit block. This system-level block cannot be cancelled either.
->- Masking is text-only. To hide an image, video, or other non-text region, use `PendoReplayBlock` (or the existing block-images privacy configuration) instead of `PendoReplayMask`.
+>- Masking is text-only. To hide an image, video, or other non-text region, use `PendoSRPrivacy(PNDSRPrivacyAction.block, ...)` (or the existing block-images privacy configuration) instead of `mask`.

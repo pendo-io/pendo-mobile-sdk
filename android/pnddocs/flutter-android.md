@@ -305,7 +305,7 @@ class _CUSTOM_STATEFULL_WIDGET_STATE extends State<CUSTOM_STATEFULL_WIDGET> impl
 ```
 
 ## Session Replay privacy configuration
-Use the `PendoReplayMask`/`PendoReplayUnmask`/`PendoReplayBlock` wrapper widgets (or their `.pendoReplayMask()`-style extension methods) to control how individual widgets and subtrees are captured in Session Replay, on top of the `maxPrivacy`/`onlyInput` presets. See [Session Replay — Privacy Configuration](/api-documentation/flutter-apis.md#session-replay--privacy-configuration) in the API documentation for the full reference and examples.
+Use the `PendoSRPrivacy` wrapper widget (or its `.applyPendoSRPrivacy()` extension method) to control how individual widgets and subtrees are captured in Session Replay, on top of the `maxPrivacy`/`onlyInput` presets. See [Session Replay — Privacy Configuration](/api-documentation/flutter-apis.md#session-replay--privacy-configuration) in the API documentation for the full reference and examples.
 
 ## Limitations
 - [Notes, Known Issues & Limitations](/other/flutter-notes-known-issues-limitations.md).
