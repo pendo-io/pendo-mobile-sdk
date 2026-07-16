@@ -165,6 +165,24 @@ Review the Android Studio logcat and look for the following message:
 4. Select the `Install Settings tab` and follow the instructions under `Verify Your Installation` to ensure you have successfully integrated the Pendo SDK.
 5. Confirm that you can see your app as `Integrated` under <a href="https://app.pendo.io/admin" target="_blank">subscription settings</a>.
 
+## Session Replay privacy
+
+Session Replay privacy is configured server-side through a preset (for example, masking all text or masking input fields only). You can override that preset on individual elements from your app code — declaratively in XAML or imperatively in C# — using the `PendoPrivacyAction` enum (`Mask`, `Unmask`, `Block`):
+
+```c#
+using PendoMAUIPlugin;
+
+// Mask the account balance label
+balanceLabel.ApplyPendoSRPrivacy(PendoPrivacyAction.Mask);
+```
+
+```xml
+<!-- Declare the Pendo namespace on your page's root element:
+     xmlns:pendo="clr-namespace:PendoMAUIPlugin;assembly=PendoMAUIPlugin" -->
+<Label Text="Balance: $42,850.00" pendo:PendoSR.ReplayPrivacy="Mask" />
+```
+
+`Mask`/`Unmask` affect text only; use `Block` to hide images, media, or whole regions. Actions cascade to descendants, `Block` is terminal, and sensitive inputs are always masked. This element-level configuration applies to individual element instances and is currently available on Android. For the full reference, cascade rules, and safety rails, see [Session Replay — Privacy Configuration](/api-documentation/xamarin-maui-apis.md#session-replay--privacy-configuration) in the API documentation.
 
 ## Developer documentation
 
