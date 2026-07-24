@@ -10,10 +10,11 @@ pipeline first, then call out what specifically happens while offline.
 We start with **analytics**, then cover **Session Replay**.
 
 > ### ⚠️ Version scope
-> **This document is accurate up to and including SDK 3.14.** The on-device
-> data-handling model is scheduled to change after 3.14 — a later revision of this
-> document will describe the new behavior. If you are on a version newer than 3.14,
-> verify against the release notes for that version.
+> The **analytics** data-handling described here is accurate **up to SDK 3.14**. The
+> analytics on-device data-handling model is being **rewritten in 3.14**, so on 3.14 and
+> later the analytics buffering/persistence behavior differs — verify against the release
+> notes for that version. The **Session Replay** behavior in this document is not affected
+> by that rewrite.
 
 > ### Notes
 > - iOS-specific. Storage and transport policy are enforced in the native layer, so
