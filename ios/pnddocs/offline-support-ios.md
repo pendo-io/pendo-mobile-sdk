@@ -5,8 +5,8 @@ streams — **analytics** and **Session Replay** — and how each behaves when t
 offline.
 
 > ### ⚠️ Version scope
-> The **analytics** behavior described here is accurate up to SDK 3.14; it is being
-> rewritten in 3.14.
+> The **analytics** behavior described here is accurate up to SDK 3.14; the analytics
+> pipeline is being rewritten after 3.14.
 
 > ### Notes
 > - iOS-specific. Storage and transport rules run in the native layer, so React Native,
@@ -187,7 +187,7 @@ The 300 MB low-device-storage pause does **not** emit `AppOfflineLimitReached`.
 | Analytics | Urgent events (`immediateEvents`) | Yes | `AppSessionEnd`, `AppInBackground`, `GuideDismissed`, `GuideSnoozed` | Uploaded immediately |
 | Analytics | Overflow behavior | Fixed | Drop oldest, trim to 80% of cap | Offline / retry only |
 | Analytics | Retry backoff | Fixed | 1 s → doubles → 60 s max | Resets on success/reconnect |
-| Analytics | Session timeout | Fixed | 30 min | Back-dates session end |
+| Analytics | Session timeout | Yes | 30 min | Back-dates session end |
 | Session Replay | Storage cap (`offlineStorageLimit`) | Yes | 250 MB | Backend value sent in bytes |
 | Session Replay | Resume threshold | Fixed | 80% of cap | Recording pauses at 100% |
 | Session Replay | Low-device-storage pause | Fixed | 300 MB free | Pauses recording |
