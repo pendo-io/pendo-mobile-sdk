@@ -65,6 +65,7 @@ For integration using signed metadata see: [JWT integration instructions](https:
 - [Configuring CNAME Hostnames](https://support.pendo.io/hc/en-us/articles/360047607631-Configure-CNAME-for-Pendo-Mobile)
 - [Work with dynamic content in your mobile app](https://support.pendo.io/hc/en-us/articles/24836902488219-Work-with-dynamic-content-in-your-mobile-app)
 - [Mobile offline support analytics](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
+- [Analytics & Session Replay data handling and offline support (iOS)](/ios/pnddocs/offline-support-ios.md)
 
 
 Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation) For additional documentation.
