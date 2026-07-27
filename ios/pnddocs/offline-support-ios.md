@@ -42,8 +42,8 @@ event  →  in-memory queue  →  on-device storage  →  upload to backend
 ```
 
 1. Each new event goes into a small in-memory queue.
-2. From the queue, events are moved into the persistent on-device buffer. The buffer is
-   the part saved to storage, so nothing is lost if the app closes.
+2. From the queue, events are moved into the persistent on-device buffer. Once in the buffer,
+   events are saved to storage and survive the app closing.
 3. When a **flush trigger** fires (see below) and the device has a connection, the buffered
    events are uploaded. They are deleted from the buffer only after the backend confirms it
    received them; if the upload fails, they stay in the buffer and are retried later.
@@ -56,12 +56,14 @@ event  →  in-memory queue  →  on-device storage  →  upload to backend
 | Time since last upload | 30 s | `bufferDuration` | 300 s |
 | An "urgent" event occurs | immediate | `immediateEvents` | — |
 
-The **Default** values can be changed by Pendo backend configuration per subscription,
-but only up to the **Hard limit** — the backend cannot go beyond those ceilings (they are
-fixed in the SDK). In practice, backend configuration commonly sets the event count to 10.
+The **Default** column is the value built into the SDK. Pendo backend configuration can
+override it per subscription, but only up to the **Hard limit** — the backend cannot go
+beyond those ceilings (they are fixed in the SDK). For example, the SDK's built-in event
+count is 20, while the backend commonly overrides it to 10.
 
-**Urgent events** are uploaded immediately, skipping the count and time triggers. Default:
-`AppSessionEnd`, `AppInBackground`, `GuideDismissed`, `GuideSnoozed`.
+**Urgent events** trigger an immediate upload, skipping the count and time triggers. This
+flushes **everything currently buffered**, not just the urgent event itself. Default urgent
+events: `AppSessionEnd`, `AppInBackground`, `GuideDismissed`, `GuideSnoozed`.
 
 **Rough event size** — varies a lot by app and screen complexity, so treat these as
 estimates, not fixed values. In memory (uncompressed), click and screen-change events are
