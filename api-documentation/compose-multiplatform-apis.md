@@ -1,7 +1,7 @@
-# Compose Multiplatform public developer API documentation (Open Beta)
+# Compose Multiplatform public developer API documentation (Beta)
 
 > [!NOTE]
-> Pendo Compose Multiplatform support is currently available as an open beta.
+> Pendo Compose Multiplatform support is currently available as a beta.
 
 > [!IMPORTANT]
 > Call `Pendo.setup()` before `Pendo.startSession()`. Except for `setDebugMode()` and `endSession()`, call the remaining APIs after both `setup()` and `startSession()`. Calls that require an active session are ignored when Pendo is inactive. `Pendo.setDebugMode()` may be called before setup.
