@@ -1,10 +1,10 @@
-# Compose Multiplatform
+# Compose Multiplatform (Open Beta)
 
 > [!IMPORTANT]
 > Use this guide when your Android and iOS applications share UI with Compose Multiplatform. If your KMP project uses platform-native UI, follow the [Kotlin Multiplatform with native UI guide](/other/kotlin-multiplatform-native-ui.md).
 
 > [!NOTE]
-> The following integration instructions are relevant for Pendo CMP SDK `3.14.x`.
+> Pendo Compose Multiplatform support is currently available as an open beta. The following integration instructions are relevant for Pendo CMP SDK `3.14.x`.
 
 > [!IMPORTANT]
 > Requirements:
