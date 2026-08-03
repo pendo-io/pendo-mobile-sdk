@@ -183,6 +183,9 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 </activity>
 ```
 
+> [!NOTE]
+> This activity is used only by Pendo's pairing mode for page tagging and on-device guide testing. It is not required by your production app. To exclude it from release builds, declare it in the debug-only manifest (`src/debug/AndroidManifest.xml`) instead of the main manifest. In this configuration, Pendo users—such as product managers—must use a debug build to tag pages or test guides on a device; pairing will not be available in the production app.
+
 ### Step 4. Verify installation
 
 1. Test using Android Studio:  
