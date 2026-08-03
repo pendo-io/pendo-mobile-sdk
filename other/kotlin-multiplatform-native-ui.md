@@ -208,6 +208,9 @@ Add this activity inside the `<application>` element in the Android application 
 </activity>
 ```
 
+> [!NOTE]
+> This activity is only used by Pendo's pairing mode (page tagging and on-device guide testing) and isn't required by your production app. If you prefer not to expose it in release builds, add it to a debug-only manifest (`src/debug/AndroidManifest.xml`) instead of the main manifest. Pairing will then be available only in debug builds.
+
 ### Verify the Android integration
 
 1. Run the app from Android Studio with Logcat open.

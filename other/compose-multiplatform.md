@@ -276,6 +276,9 @@ Add the Pendo pairing activity to `AndroidManifest.xml`:
 </activity>
 ```
 
+> [!NOTE]
+> This activity is only used by Pendo's pairing mode (page tagging and on-device guide testing) and isn't required by your production app. If you prefer not to expose it in release builds, add it to a debug-only manifest (`src/debug/AndroidManifest.xml`) instead of the main manifest. Pairing will then be available only in debug builds.
+
 ## Step 5. Add drawer and bottom sheet support
 
 To track a Compose drawer or bottom sheet, add [`Modifier.pendoStateModifier()`](/api-documentation/compose-multiplatform-apis.md#pendostatemodifier) with the component's state.
