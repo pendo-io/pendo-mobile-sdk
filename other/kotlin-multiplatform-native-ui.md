@@ -41,7 +41,7 @@ Add Pendo to the Android application module, such as `androidApp`. Do not add it
 - `minSdk 21` or higher
 - `compileSdk 35` or higher
 - For Jetpack Compose, `androidx.compose.ui:ui` `1.5.0` or higher
-- If using Room with Pendo SDK `3.13.0` or higher, `androidx.room` `2.6.0` or higher
+- If your app uses Room, `androidx.room` `2.6.0` or higher
 
 ### Install the Android SDK
 
