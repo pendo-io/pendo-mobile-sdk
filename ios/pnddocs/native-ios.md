@@ -170,6 +170,9 @@ Navigate to your **App Target > Info > URL Types** and create a new URL by click
 Set the **Identifier** to `pendo-pairing` or an identifiable name of your choosing.  
 Set **URL Scheme** to `YOUR_SCHEME_ID_HERE`.
 
+>[!IMPORTANT]
+>Use the complete scheme ID exactly as it appears in Subscription settings, including the `pendo-` prefix (for example, `pendo-a1b2c3d4`). From SDK `3.14`, pairing links whose scheme does not start with `pendo-`, or does not match a scheme registered here, are rejected.
+
 <img src="https://user-images.githubusercontent.com/56674958/144723345-15c54098-28db-414c-90da-ef4a5256ae6a.png" width="500" height="300" alt="Mobile Tagging">
 
 ### Configure the app to connect to Pairing Mode
