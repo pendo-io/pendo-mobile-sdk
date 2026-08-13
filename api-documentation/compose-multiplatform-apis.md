@@ -39,7 +39,6 @@ Core APIs and modifiers are available from `com.pendo.cmp`. Navigation adapters 
 - [`pendoScreenId`](#pendoscreenid)
 - [`pendoStateModifier`](#pendostatemodifier)
 - [`applyPendoSRPrivacy`](#applypendosrprivacy)
-- [`clearPendoSRPrivacy`](#clearpendosrprivacy)
 - [`PrivacyAction`](#privacyaction)
 
 ## Pendo APIs
@@ -478,19 +477,11 @@ TextField(
 )
 ```
 
-### `clearPendoSRPrivacy`
-
-```kotlin
-fun Modifier.clearPendoSRPrivacy(): Modifier
-```
-
-Clears the privacy action on an element so it uses inherited or configured Session Replay behavior.
-
-Use this modifier by itself. Do not chain it after `applyPendoSRPrivacy()` on the same element.
+To clear a previously applied privacy action so the element uses inherited or configured Session Replay behavior, apply `PrivacyAction.NONE`. Use it by itself. Do not chain it after another `applyPendoSRPrivacy()` on the same element.
 
 ```kotlin
 Text(
-    modifier = Modifier.clearPendoSRPrivacy(),
+    modifier = Modifier.applyPendoSRPrivacy(PrivacyAction.NONE),
     text = "Public content",
 )
 ```
@@ -502,6 +493,7 @@ enum class PrivacyAction {
     MASK,
     UNMASK,
     BLOCK,
+    NONE,
 }
 ```
 
@@ -510,5 +502,6 @@ enum class PrivacyAction {
 | `MASK` | Redacts text. It does not affect images or other non-text content. |
 | `UNMASK` | Reveals non-sensitive text that would otherwise be masked. Password fields remain masked. |
 | `BLOCK` | Replaces the element and its descendants with a placeholder and excludes interactions within its bounds. |
+| `NONE` | Removes the element's own privacy action so it uses inherited or configured Session Replay behavior. It is not the same as `UNMASK`. |
 
 Compose cannot automatically identify email and phone fields as sensitive. Avoid `UNMASK` on those fields, or protect them with password semantics.
