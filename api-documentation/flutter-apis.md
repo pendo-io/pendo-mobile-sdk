@@ -489,7 +489,7 @@ const PendoSRPrivacy(PNDSRPrivacyAction action, {required Widget child, Key? key
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| action | `PNDSRPrivacyAction` | `mask`, `unmask`, or `block` — see below |
+| action | `PNDSRPrivacyAction` | `mask`, `unmask`, `block`, or `none` — see below |
 | child | Widget | The subtree to apply `action` to in Session Replay |
 
 `PNDSRPrivacyAction` values:
@@ -499,6 +499,7 @@ const PendoSRPrivacy(PNDSRPrivacyAction action, {required Widget child, Key? key
 | `mask` | Masks text only; layout and interactions are preserved. Use `block` instead to hide images or other non-text content. |
 | `unmask` | Captures the subtree as-is, overriding the active preset. Cannot reveal a [safety rail](#safety-rail) field. |
 | `block` | Excludes the whole subtree. Every element in it is captured as its own gray placeholder, so the layout is preserved but no content is read — including taps: interactions inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing can cancel a block on a nested subtree. See [Block behavior](#block-behavior) for how nesting and always-blocked media interact with this action. |
+| `none` | Explicit "no decision here". Defers to whichever `PendoSRPrivacy` wrapper is next enclosing it, or the preset if there is none — never straight to the preset when an enclosing decision exists. Use it in place of `mask`/`unmask` at a given position when that spot should defer to its surrounding context instead of forcing its own decision. |
 
 <b>Example</b>:
 
@@ -512,6 +513,19 @@ PendoSRPrivacy(
   child: Container(
     padding: const EdgeInsets.all(12),
     child: const Text('Payment form (blocked)'),
+  ),
+)
+
+// Outer MASK covers the row; UNMASK would reveal the second line, but it
+// applies NONE instead, so it defers past its own position to the outer
+// MASK — same result as if that inner wrapper weren't there at all.
+PendoSRPrivacy(
+  PNDSRPrivacyAction.mask,
+  child: Column(
+    children: [
+      Text('Masked by the outer wrapper'),
+      PendoSRPrivacy(PNDSRPrivacyAction.none, child: Text('Also masked — defers to the outer wrapper')),
+    ],
   ),
 )
 ```
@@ -536,10 +550,12 @@ Text('Card #: 4242 4242 4242 4242').applyPendoSRPrivacy(PNDSRPrivacyAction.mask)
 >Each widget's Session Replay treatment is resolved in this order, highest priority first:
 >
 >1. **Safety rail** — see [Safety rail](#safety-rail) below. Always wins except a stricter block.
->2. **Nearest wrapper** — the closest enclosing `PendoSRPrivacy` ancestor's action. A closer wrapper overrides a farther one, **except** `block` is unconditionally terminal: a nested `mask`/`unmask` cannot downgrade an enclosing, still-active block — nothing can cancel it.
->3. **Preset** — falls through to the active `maxPrivacy` / `onlyInput` behavior when no wrapper applies.
+>2. **Nearest wrapper** — the closest enclosing `PendoSRPrivacy` ancestor's action. A closer wrapper overrides a farther one, **except** `block` is unconditionally terminal: a nested `mask`/`unmask`/`none` cannot downgrade an enclosing, still-active block — nothing can cancel it. A nearest wrapper whose action is `none` instead defers to whichever wrapper is next enclosing it (skipping past any further `none`s along the way), applying the priority rules above again from there.
+>3. **Preset** — falls through to the active `maxPrivacy` / `onlyInput` behavior when no wrapper applies, or when the walk in 2. reaches the root without finding a real decision.
 
 For example, `PendoSRPrivacy(PNDSRPrivacyAction.block, child: PendoSRPrivacy(PNDSRPrivacyAction.mask, child: Text(...)))` still renders as a blocked placeholder, not masked text — the inner mask cannot escape the outer block. There is no wrapper that reveals part of a blocked subtree.
+
+`none` never reaches past an enclosing block either — `PendoSRPrivacy(PNDSRPrivacyAction.block, child: PendoSRPrivacy(PNDSRPrivacyAction.none, child: Text(...)))` still renders as a blocked placeholder.
 
 ### Safety rail
 
