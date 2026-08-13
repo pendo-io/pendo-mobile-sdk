@@ -25,7 +25,6 @@
 ### Session Replay — Privacy Configuration
 [PendoSRPrivacyAction](#pendosrprivacyaction) ⇒ `enum` <br>
 [VisualElement.ApplyPendoSRPrivacy](#applypendosrprivacy) ⇒ `void` <br>
-[VisualElement.ClearPendoSRPrivacy](#clearpendosrprivacy) ⇒ `void` <br>
 [PendoSR.ReplayPrivacy](#pendosrreplayprivacy) (XAML attached property) <br>
 [Actions & behavior](#actions--behavior) <br>
 [Cascade & inheritance](#cascade--inheritance) <br>
@@ -501,7 +500,7 @@ Pendo.ScreenContentChanged();
 > [!IMPORTANT]
 > Session Replay privacy is first configured server-side through a **preset** (for example, masking all text, or masking input fields only). The APIs below let you override that preset on individual elements from your app code — imperatively with C# `VisualElement` extension methods, or declaratively with the `PendoSR.ReplayPrivacy` XAML attached property. All APIs live in the `PendoMAUIPlugin` namespace.
 
-> An element's privacy is expressed with the `PendoSRPrivacyAction` enum: `Mask`, `Unmask`, or `Block`. An action applies to the element it is set on and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
+> An element's privacy is expressed with the `PendoSRPrivacyAction` enum: `Mask`, `Unmask`, `Block`, or `None`. An action applies to the element it is set on and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
 
 > [!NOTE]
 > This element-level API applies privacy rules to individual element **instances** and is currently available on **Android**.
@@ -509,7 +508,7 @@ Pendo.ScreenContentChanged();
 ### `PendoSRPrivacyAction`
 
 ```c#
-public enum PendoSRPrivacyAction { Mask, Unmask, Block }
+public enum PendoSRPrivacyAction { Mask, Unmask, Block, None }
 ```
 
 > The value passed to every element-level privacy API.
@@ -527,6 +526,7 @@ public enum PendoSRPrivacyAction { Mask, Unmask, Block }
 | Mask | Redacts the element's **text**, which is rendered as asterisks in the replay. Text-only — does not affect images or media. |
 | Unmask | Reveals **text** that the active preset would otherwise mask. Text-only — does not reveal a blocked image or media. |
 | Block | Replaces the element (text, image, container, or media) with a layout-preserving gray placeholder, so its content is never captured. Also suppresses the replay of touch interactions over the element's bounds. |
+| None | Removes any privacy action previously set on the element, so it falls back to its inherited action (from an ancestor) or the active preset. Not a force-reveal — use `Unmask` to reveal text under a masked ancestor. |
 
 > [!NOTE]
 > `Mask` and `Unmask` affect **text only**. Images and other media are controlled by `Block` together with the backend preset. To hide an image or a region, use `Block`.
@@ -555,7 +555,7 @@ public static void ApplyPendoSRPrivacy(this VisualElement element, PendoSRPrivac
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| action | PendoSRPrivacyAction | The privacy action to apply (`Mask`, `Unmask`, or `Block`) |
+| action | PendoSRPrivacyAction | The privacy action to apply (`Mask`, `Unmask`, `Block`, or `None`) |
 
 <b>Example:</b>
 
@@ -570,34 +570,9 @@ promoLabel.ApplyPendoSRPrivacy(PendoSRPrivacyAction.Unmask);
 
 // Hide an entire payment section (text, images, and media)
 paymentLayout.ApplyPendoSRPrivacy(PendoSRPrivacyAction.Block);
-```
-</details>
-
-### `ClearPendoSRPrivacy`
-
-```c#
-public static void ClearPendoSRPrivacy(this VisualElement element)
-```
-
-> C# extension on `Microsoft.Maui.Controls.VisualElement` that removes any privacy action previously set on the element instance. After clearing, the element falls back to its inherited action (from an ancestor) or to the active preset.
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class:</b> PendoSRPrivacyExtensions
-<br><b>Namespace:</b> PendoMAUIPlugin
-<br><b>Kind:</b> extension method on VisualElement
-<br><b>Returns:</b> void
-<br>
-
-<b>Example:</b>
-
-```c#
-using PendoMAUIPlugin;
 
 // Remove a previously applied rule; the element reverts to inherited/preset behavior
-balanceLabel.ClearPendoSRPrivacy();
+balanceLabel.ApplyPendoSRPrivacy(PendoSRPrivacyAction.None);
 ```
 </details>
 
@@ -626,7 +601,7 @@ xmlns:pendo="clr-namespace:PendoMAUIPlugin;assembly=PendoMAUIPlugin"
 
 | Attribute | Value | Description |
 | :---: | :---: | :--- |
-| pendo:PendoSR.ReplayPrivacy | Mask \| Unmask \| Block | The privacy action to apply to the element |
+| pendo:PendoSR.ReplayPrivacy | Mask \| Unmask \| Block \| None | The privacy action to apply to the element |
 
 <b>Example:</b>
 
@@ -658,6 +633,7 @@ xmlns:pendo="clr-namespace:PendoMAUIPlugin;assembly=PendoMAUIPlugin"
 > - **Mask** — redacts the element's text, rendered as asterisks. Text-only.
 > - **Unmask** — reveals text that the preset would otherwise mask. Text-only.
 > - **Block** — replaces the element with a layout-preserving gray placeholder and suppresses the replay of touch interactions over its bounds. Works for any element type: text, image, container, or media.
+> - **None** — removes any rule previously set on the element, so it falls back to its inherited action or the active preset. Not a force-reveal.
 >
 > `Mask` and `Unmask` **never** affect images or media. Image and media capture is governed by `Block` and the backend preset. To hide an image or region, use `Block`. `Mask` does not gray out an image, and `Unmask` does not lift an image block.
 

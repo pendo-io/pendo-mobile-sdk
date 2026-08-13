@@ -167,7 +167,7 @@ Review the Android Studio logcat and look for the following message:
 
 ## Session Replay privacy
 
-Session Replay privacy is configured server-side through a preset (for example, masking all text or masking input fields only). You can override that preset on individual elements from your app code — declaratively in XAML or imperatively in C# — using the `PendoSRPrivacyAction` enum (`Mask`, `Unmask`, `Block`):
+Session Replay privacy is configured server-side through a preset (for example, masking all text or masking input fields only). You can override that preset on individual elements from your app code — declaratively in XAML or imperatively in C# — using the `PendoSRPrivacyAction` enum (`Mask`, `Unmask`, `Block`, `None`):
 
 ```c#
 using PendoMAUIPlugin;
@@ -182,7 +182,7 @@ balanceLabel.ApplyPendoSRPrivacy(PendoSRPrivacyAction.Mask);
 <Label Text="Balance: $42,850.00" pendo:PendoSR.ReplayPrivacy="Mask" />
 ```
 
-`Mask`/`Unmask` affect text only; use `Block` to hide images, media, or whole regions. Actions cascade to descendants, `Block` is terminal, and sensitive inputs are always masked. This element-level configuration applies to individual element instances and is currently available on Android. For the full reference, cascade rules, and safety rails, see [Session Replay — Privacy Configuration](/api-documentation/xamarin-maui-apis.md#session-replay--privacy-configuration) in the API documentation.
+`Mask`/`Unmask` affect text only; use `Block` to hide images, media, or whole regions; apply `None` to remove a rule so the element falls back to its inherited action or the preset. Actions cascade to descendants, `Block` is terminal, and sensitive inputs are always masked. This element-level configuration applies to individual element instances and is currently available on Android. For the full reference, cascade rules, and safety rails, see [Session Replay — Privacy Configuration](/api-documentation/xamarin-maui-apis.md#session-replay--privacy-configuration) in the API documentation.
 
 ## Developer documentation
 
