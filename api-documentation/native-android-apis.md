@@ -42,14 +42,12 @@
 ### Session Replay — Privacy Configuration
 [PrivacyAction](#privacyaction) ⇒ `enum` <br>
 [View.applyPendoSRPrivacy](#applypendosrprivacy) ⇒ `void` <br>
-[View.clearPendoSRPrivacy](#clearpendosrprivacy) ⇒ `void` <br>
 [XML privacy tag](#xml-privacy-tag) <br>
 [Modifier.applyPendoSRPrivacy](#modifierapplypendosrprivacy) ⇒ `Modifier` <br>
-[Modifier.clearPendoSRPrivacy](#modifierclearpendosrprivacy) ⇒ `Modifier` <br>
 [Actions & behavior](#actions--behavior) <br>
 [Cascade & inheritance](#cascade--inheritance) <br>
 [Safety rails](#safety-rails) <br>
-[RecyclerView clear-in-bind](#recyclerview-clear-in-bind) <br>
+[RecyclerView reset-in-bind](#recyclerview-reset-in-bind) <br>
 
 ## Pendo APIs
 
@@ -967,12 +965,12 @@ Pendo.jwt.setAccountData(jwt, sKeyName);
 > [!IMPORTANT]
 > Session Replay privacy is first configured server-side through a **preset** (for example, masking all text, or masking input fields only). The APIs below let you override that preset on individual elements from your app code — in XML, with Kotlin/Java `View` extensions, or with a Jetpack Compose `Modifier`. All APIs live in the `sdk.pendo.io` package.
 
-> An element's privacy is expressed with the `PrivacyAction` enum: `MASK`, `UNMASK`, or `BLOCK`. An action applies to the element it is set on and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
+> An element's privacy is expressed with the `PrivacyAction` enum: `MASK`, `UNMASK`, `BLOCK`, or `NONE`. An action applies to the element it is set on and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
 
 ### `PrivacyAction`
 
 ```kotlin
-enum class PrivacyAction { MASK, UNMASK, BLOCK }
+enum class PrivacyAction { MASK, UNMASK, BLOCK, NONE }
 ```
 
 > The value passed to every element-level privacy API.
@@ -990,6 +988,7 @@ enum class PrivacyAction { MASK, UNMASK, BLOCK }
 | MASK | Redacts the element's **text**, which is rendered as asterisks in the replay. Text-only — does not affect images or media. |
 | UNMASK | Reveals **text** that the active preset would otherwise mask. Text-only — does not reveal a blocked image or media. |
 | BLOCK | Replaces the element (text, image, container, or media) with a layout-preserving gray placeholder, so its content is never captured. |
+| NONE | Removes any privacy action previously set on the element, so it falls back to its inherited action (from an ancestor) or the active preset. Not a force-reveal — use `UNMASK` to reveal text under a masked ancestor. |
 
 > [!NOTE]
 > `MASK` and `UNMASK` affect **text only**. Images and other media are controlled by `BLOCK` together with the backend preset (a `blockedSelectors` `"img"` entry). To hide an image or a region, use `BLOCK`.
@@ -1018,7 +1017,7 @@ fun View.applyPendoSRPrivacy(action: PrivacyAction)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| action | PrivacyAction | The privacy action to apply (`MASK`, `UNMASK`, or `BLOCK`) |
+| action | PrivacyAction | The privacy action to apply (`MASK`, `UNMASK`, `BLOCK`, or `NONE`) |
 
 <b>Example (Kotlin)</b>:
 
@@ -1034,6 +1033,9 @@ promoTextView.applyPendoSRPrivacy(PrivacyAction.UNMASK)
 
 // Hide an entire payment section (text, images, and media)
 paymentContainer.applyPendoSRPrivacy(PrivacyAction.BLOCK)
+
+// Remove a previously applied rule; the view reverts to inherited/preset behavior
+balanceTextView.applyPendoSRPrivacy(PrivacyAction.NONE)
 ```
 
 <b>Example (Java)</b>:
@@ -1046,52 +1048,19 @@ import sdk.pendo.io.ReplayPrivacyExtensionsKt;
 
 ReplayPrivacyExtensionsKt.applyPendoSRPrivacy(balanceTextView, PrivacyAction.MASK);
 ReplayPrivacyExtensionsKt.applyPendoSRPrivacy(paymentContainer, PrivacyAction.BLOCK);
-```
-</details>
-
-### `clearPendoSRPrivacy`
-
-```kotlin
-fun View.clearPendoSRPrivacy()
-```
-
-> Kotlin extension on `android.view.View` that removes any privacy action previously set on the view instance. After clearing, the element falls back to its inherited action (from an ancestor) or to the active preset.
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class</b>: ReplayPrivacyExtensionsKt
-<br><b>Kind</b>: Kotlin extension function on View
-<br>
-<b>Returns</b>: void
-<br>
-
-<b>Example (Kotlin)</b>:
-
-```kotlin
-import sdk.pendo.io.clearPendoSRPrivacy
 
 // Remove a previously applied rule; the view reverts to inherited/preset behavior
-balanceTextView.clearPendoSRPrivacy()
-```
-
-<b>Example (Java)</b>:
-
-```java
-import sdk.pendo.io.ReplayPrivacyExtensionsKt;
-
-ReplayPrivacyExtensionsKt.clearPendoSRPrivacy(balanceTextView);
+ReplayPrivacyExtensionsKt.applyPendoSRPrivacy(balanceTextView, PrivacyAction.NONE);
 ```
 </details>
 
 ### XML privacy tag
 
 ```xml
-<tag android:id="@id/pnd_replay_privacy" android:value="mask|unmask|block" />
+<tag android:id="@id/pnd_replay_privacy" android:value="mask|unmask|block|none" />
 ```
 
-> Declare a privacy action directly in a layout XML file by nesting a `<tag>` element inside the view. Use the `pnd_replay_privacy` id and set `android:value` to `mask`, `unmask`, or `block`.
+> Declare a privacy action directly in a layout XML file by nesting a `<tag>` element inside the view. Use the `pnd_replay_privacy` id and set `android:value` to `mask`, `unmask`, `block`, or `none`.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -1103,7 +1072,7 @@ ReplayPrivacyExtensionsKt.clearPendoSRPrivacy(balanceTextView);
 | Attribute | Value | Description |
 | :---: | :---: | :--- |
 | android:id | @id/pnd_replay_privacy | Identifies the tag as a Pendo Session Replay privacy rule |
-| android:value | mask \| unmask \| block | The privacy action to apply to the enclosing view |
+| android:value | mask \| unmask \| block \| none | The privacy action to apply to the enclosing view |
 
 <b>Example</b>:
 
@@ -1136,7 +1105,7 @@ fun Modifier.applyPendoSRPrivacy(action: PrivacyAction): Modifier
 > Jetpack Compose `Modifier` extension that sets a Session Replay privacy action on a composable, overriding the active preset for that composable and its descendants.
 
 > [!IMPORTANT]
-> Apply a **single** privacy modifier per composable. Compose collapses same-node semantics, so chaining does **not** follow last-write-wins — the **first-declared** modifier wins. To clear a rule, omit the modifier entirely or use [`clearPendoSRPrivacy`](#modifierclearpendosrprivacy) on its own; do **not** append `clearPendoSRPrivacy()` after `applyPendoSRPrivacy(...)`.
+> Apply a **single** privacy modifier per composable. Compose collapses same-node semantics, so chaining does **not** follow last-write-wins — the **first-declared** modifier wins. To remove a rule, omit the modifier entirely or apply `PrivacyAction.NONE` on its own; do **not** append a second `applyPendoSRPrivacy(...)` to an existing one.
 
 <details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
 
@@ -1150,7 +1119,7 @@ fun Modifier.applyPendoSRPrivacy(action: PrivacyAction): Modifier
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| action | PrivacyAction | The privacy action to apply (`MASK`, `UNMASK`, or `BLOCK`) |
+| action | PrivacyAction | The privacy action to apply (`MASK`, `UNMASK`, `BLOCK`, or `NONE`) |
 
 <b>Example</b>:
 
@@ -1176,6 +1145,12 @@ Column(
 ) {
     // payment fields...
 }
+
+// Remove any rule so the composable inherits from an ancestor or the preset
+Text(
+    text = "No explicit rule — inherits preset",
+    modifier = Modifier.applyPendoSRPrivacy(PrivacyAction.NONE)
+)
 ```
 
 > [!WARNING]
@@ -1188,44 +1163,12 @@ Column(
 > ```
 </details>
 
-### `Modifier.clearPendoSRPrivacy`
-
-```kotlin
-fun Modifier.clearPendoSRPrivacy(): Modifier
-```
-
-> Jetpack Compose `Modifier` extension that clears any privacy rule for the composable, so it falls back to its inherited action or the active preset.
-
-<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
-
-<br>
-
-<b>Class</b>: Pendo
-<br><b>Kind</b>: Jetpack Compose Modifier
-<br>
-<b>Returns</b>: Modifier
-<br>
-
-<b>Example</b>:
-
-```kotlin
-import sdk.pendo.io.clearPendoSRPrivacy
-
-Text(
-    text = "No explicit rule — inherits preset",
-    modifier = Modifier.clearPendoSRPrivacy()
-)
-```
-
-> [!NOTE]
-> Use `clearPendoSRPrivacy()` on its own. Because the first-declared privacy modifier wins, appending it after `applyPendoSRPrivacy(...)` has no effect — to clear, simply omit the `applyPendoSRPrivacy` modifier or replace it with `clearPendoSRPrivacy()`.
-</details>
-
 ## Actions & behavior
 
 > - **MASK** — redacts the element's text, rendered as asterisks. Text-only.
 > - **UNMASK** — reveals text that the preset would otherwise mask. Text-only.
 > - **BLOCK** — replaces the element with a layout-preserving gray placeholder. Works for any element type: text, image, container, or media.
+> - **NONE** — removes any rule previously set on the element, so it falls back to its inherited action or the active preset. Not a force-reveal.
 >
 > `MASK` and `UNMASK` **never** affect images or media. Image and media capture is governed by `BLOCK` and the backend preset (a `blockedSelectors` `"img"` entry). To hide an image or region, use `BLOCK`. `MASK` does not gray out an image, and `UNMASK` does not lift an image block.
 
@@ -1257,10 +1200,10 @@ promoTextView.applyPendoSRPrivacy(PrivacyAction.UNMASK) // this child's text is 
 > [!CAUTION]
 > Sensitive inputs are **always masked**, even under an explicit `UNMASK`. This safety rail cannot be overridden. It covers password fields, credit-card fields, email and phone inputs, and any field with an autofill hint. Use `BLOCK` if you additionally want such a field rendered as a placeholder.
 
-## RecyclerView clear-in-bind
+## RecyclerView reset-in-bind
 
 > [!IMPORTANT]
-> The privacy tag is stored on the `View` and **persists across view recycling**. In a `RecyclerView`, a `View` set to `MASK` for one item can be reused for another item that should not be masked, leaking a stale rule. Always set the correct privacy for the bound item in `onBindViewHolder`, or call `clearPendoSRPrivacy()` when the new item needs no rule.
+> The privacy tag is stored on the `View` and **persists across view recycling**. In a `RecyclerView`, a `View` set to `MASK` for one item can be reused for another item that should not be masked, leaking a stale rule. Always set the correct privacy for the bound item in `onBindViewHolder`, or apply `PrivacyAction.NONE` when the new item needs no rule.
 
 <b>Example</b>:
 
@@ -1273,8 +1216,8 @@ override fun onBindViewHolder(holder: RowViewHolder, position: Int) {
     if (item.isSensitive) {
         holder.valueView.applyPendoSRPrivacy(PrivacyAction.MASK)
     } else {
-        // Clear any stale rule left over from a previous binding
-        holder.valueView.clearPendoSRPrivacy()
+        // Remove any stale rule left over from a previous binding
+        holder.valueView.applyPendoSRPrivacy(PrivacyAction.NONE)
     }
 }
 ```

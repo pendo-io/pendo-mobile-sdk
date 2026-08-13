@@ -218,7 +218,7 @@ Add the following **activity** to the application **AndroidManifest.xml** in the
 
 ## Session Replay privacy
 
-Session Replay privacy is configured server-side through a preset (for example, masking all text or masking input fields only). You can override that preset on individual elements from your app code, in Views/XML, Kotlin/Java, or Jetpack Compose, using the `PrivacyAction` enum (`MASK`, `UNMASK`, `BLOCK`):
+Session Replay privacy is configured server-side through a preset (for example, masking all text or masking input fields only). You can override that preset on individual elements from your app code, in Views/XML, Kotlin/Java, or Jetpack Compose, using the `PrivacyAction` enum (`MASK`, `UNMASK`, `BLOCK`, `NONE`):
 
 ```kotlin
 import sdk.pendo.io.PrivacyAction
@@ -234,7 +234,7 @@ Text(
 )
 ```
 
-`MASK`/`UNMASK` affect text only; use `BLOCK` to hide images, media, or whole regions. Actions cascade to descendants, `BLOCK` is terminal, and sensitive inputs are always masked. For the full reference, cascade rules, the Compose single-modifier contract, and the `RecyclerView` clear-in-bind pattern, see [Session Replay — Privacy Configuration](/api-documentation/native-android-apis.md#session-replay--privacy-configuration) in the API documentation.
+`MASK`/`UNMASK` affect text only; use `BLOCK` to hide images, media, or whole regions; apply `NONE` to remove a rule so the element falls back to its inherited action or the preset. Actions cascade to descendants, `BLOCK` is terminal, and sensitive inputs are always masked. For the full reference, cascade rules, the Compose single-modifier contract, and the `RecyclerView` reset-in-bind pattern, see [Session Replay — Privacy Configuration](/api-documentation/native-android-apis.md#session-replay--privacy-configuration) in the API documentation.
 
 ## Developer documentation
 
