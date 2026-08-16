@@ -31,6 +31,7 @@
 
 ### UIView
 [UIView.pendoRecognizeClickAnalytics](#uiviewpendorecognizeclickanalytics) ⇒ `void` <br>
+[UIView.applyPendoSRPrivacy](#uiviewapplypendosrprivacy) ⇒ `void` <br>
 
 ### View
 [View.pendoEnableSwiftUI](#viewpendoenableswiftui) ⇒ `void` <br>
@@ -38,6 +39,14 @@
 [View.pendoSkipAccessibilityScan](#viewpendoskipaccessibilityscan) ⇒ `some View`<br>
 [View.pendoTag](#viewpendotag) ⇒ `some View`<br>
 [View.trackPage](#viewtrackpage) ⇒ `some View`<br>
+[View.applyPendoSRPrivacy](#viewapplypendosrprivacy) ⇒ `some View`<br>
+
+### Session Replay — Privacy Configuration
+[PNDSRPrivacyAction](#pndsrprivacyaction) <br>
+[Resolution priority](#resolution-priority) <br>
+[Safety rail](#safety-rail) <br>
+[Block behavior](#block-behavior) <br>
+[Reused views (clear-in-bind)](#reused-views-clear-in-bind) <br>
 
 ### NSNotifications
 [kPNDDidSuccessfullyInitializeSDKNotification](#kpnddidsuccessfullyinitializesdknotification) <br>
@@ -592,6 +601,35 @@ someUIView.pendoRecognizeClickAnalytics();
 ```
 </details>
 
+### `UIView.applyPendoSRPrivacy`
+
+```swift 
+func applyPendoSRPrivacy(_ action: PNDSRPrivacyAction)
+```
+
+>Applies a Session Replay privacy action to this view instance, overriding the account-level preset. See [Session Replay — Privacy Configuration](#session-replay--privacy-configuration) below for the full reference, resolution order, and examples.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: UIView
+<br><b>Kind</b>: extension method
+<br>
+<b>Returns</b>: void
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| action | `PNDSRPrivacyAction` | `.mask`, `.unmask`, `.block`, or `.none` — see [Session Replay — Privacy Configuration](#session-replay--privacy-configuration) |
+
+<b>Example</b>:
+
+```swift
+myLabel.applyPendoSRPrivacy(.mask)
+```
+</details>
+
 <br>
 
 ## View
@@ -796,6 +834,35 @@ func trackPage(pageId: String) -> some View;
 
 ```swift
 someView.trackPage(pageId:"pageId");
+```
+</details>
+
+### `View.applyPendoSRPrivacy`
+
+```swift
+func applyPendoSRPrivacy(_ action: PNDSRPrivacyAction) -> some View
+```
+
+>Applies a Session Replay privacy action to this SwiftUI view's capture region, overriding the account-level preset. See [Session Replay — Privacy Configuration](#session-replay--privacy-configuration) below for the full reference, resolution order, and examples.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| action | `PNDSRPrivacyAction` | `.mask`, `.unmask`, `.block`, or `.none` — see [Session Replay — Privacy Configuration](#session-replay--privacy-configuration) |
+
+<br>
+
+<b>Class</b>: View
+<br><b>Kind</b>: extension class method
+<br><b>Returns</b>: some View
+<br>
+
+<b>Example</b>:
+
+```swift
+Text("Card #: 4242 4242 4242 4242")
+    .applyPendoSRPrivacy(.mask)
 ```
 </details>
 
@@ -1083,3 +1150,77 @@ PendoManager.shared().setup("your.app.key", with: options)
 ```
 
 </details>
+
+<br>
+
+## Session Replay — Privacy Configuration
+
+> Session Replay privacy presets are configured server-side: masking all captured text, or masking input fields only. Under both presets, input fields (`UITextField`, `UITextView`) are masked by default. The APIs below let you override that default on a per-view basis — natively on both UIKit and SwiftUI.
+
+### `PNDSRPrivacyAction`
+
+>The shared enum both [UIView.applyPendoSRPrivacy](#uiviewapplypendosrprivacy) and [View.applyPendoSRPrivacy](#viewapplypendosrprivacy) take — one entry point, one action parameter, matching the equivalent shape on the other Pendo SDKs (`view.applyPendoSRPrivacy(PrivacyAction.MASK)` on Android, `PendoSRPrivacy(PNDSRPrivacyAction.mask, ...)` on Flutter).
+
+| Value | Effect |
+| :--- | :--- |
+| `.mask` | Masks the view's text content only; layout and interactions are preserved. Use `.block` instead to hide images or other non-text content. |
+| `.unmask` | Reveals the view's content, overriding an inherited mask or the active preset. Cannot reveal a [safety rail](#safety-rail) field, nor lift a default-blocked media view. |
+| `.block` | Fully blocks the view and its subtree — rendered as an opaque gray placeholder in the replay. The layout is preserved but no content is read, and taps inside a blocked region are dropped, not just hidden, so tap coordinates over sensitive content (e.g. a PIN pad) never leave the device. Unconditionally terminal — nothing downstream can cancel a block. |
+| `.none` | Removes this view's own privacy override, falling back to inherited/account-preset behavior. Not the same as `.unmask`, which actively reveals content — `.none` just clears the rule. Use this when a reused view no longer needs an override — see [Reused views](#reused-views-clear-in-bind) below. |
+
+<b>Example</b>:
+
+```swift
+label.applyPendoSRPrivacy(.mask)
+
+Text("Public marketing copy").applyPendoSRPrivacy(.unmask)
+
+sensitiveWidgetView.applyPendoSRPrivacy(.block)
+
+label.applyPendoSRPrivacy(.none) // remove a previously applied override
+```
+
+### Resolution priority
+
+>Each view's Session Replay treatment is resolved in this order, highest priority first:
+>
+>1. **Safety rail** — see [Safety rail](#safety-rail) below. Always wins, except a stricter block.
+>2. **Default-blocked media** — `WKWebView`, `AVPlayerLayer`, `SCNView`, and `MTKView` are blocked by default; terminal, an instance tag can't lift it.
+>3. **This view's own tag** — the action applied directly via `applyPendoSRPrivacy`. `.none` clears this tier.
+>4. **Inherited** — the action cascaded down from the nearest tagged ancestor.
+>5. **Preset** — falls through to the account-level preset when nothing above applies.
+
+>`.block` is unconditionally terminal at every tier: once an ancestor resolves to `.block`, every descendant is forced to `.block` regardless of its own tag — there is no wrapper or tag that reveals part of a blocked subtree.
+
+### Safety rail
+
+>Always masked in Session Replay, regardless of preset, inherited action, or an explicit `.unmask` — they cannot be revealed:
+>- `UITextField` / `UITextView` with `isSecureTextEntry == true`.
+>- Inputs with an `.emailAddress`, `.phonePad`, `.namePhonePad`, or any numeric keyboard type (`.numberPad`, `.decimalPad`, `.asciiCapableNumberPad`) — covers PINs, card numbers, CVV codes, and SSNs entered on a hand-rolled numeric field.
+>- Inputs carrying a `.password`, `.newPassword`, `.emailAddress`, `.creditCardNumber`, `.telephoneNumber`, or `.oneTimeCode` `textContentType`, even with a default keyboard type.
+>
+>An explicit `.block` on such a field still blocks it (block is stricter than mask, so it wins), but no tag — instance, inherited, or preset — can unmask a safety rail field.
+
+### Block behavior
+
+>- A blocked view (`applyPendoSRPrivacy(.block)`) and its whole subtree render as an opaque gray placeholder — the layout is preserved, but content is never read and taps are never captured.
+>- Default-blocked media (`WKWebView`, `AVPlayerLayer`, `SCNView`, `MTKView`) is always rendered as a placeholder, the same as an explicit block.
+>- Masking is text-only. To hide an image or other non-text view, use `.block` instead of `.mask`.
+
+### Reused views (clear-in-bind)
+
+>The action is stored on the view instance, so it persists when a `UITableView` / `UICollectionView` cell is recycled for a different item — the same reuse hazard as a RecyclerView `ViewHolder` on Android. If a masked row's cell is reused for a row that should be visible, the stale `.mask` (or `.unmask`) leaks onto it.
+>
+>Always re-apply the action that matches the item being bound, or apply `.none` when the new item needs no rule:
+
+```swift
+func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = ...
+    if item.isSensitive {
+        cell.field.applyPendoSRPrivacy(.mask)
+    } else {
+        cell.field.applyPendoSRPrivacy(.none)
+    }
+    return cell
+}
+```
