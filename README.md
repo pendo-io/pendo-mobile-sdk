@@ -16,7 +16,8 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 [Android](/android/pnddocs/native-android.md) | 
 [iOS](/ios/pnddocs/native-ios.md)
 - Kotlin Multiplatform:
-[Native UI](/other/kotlin-multiplatform-native-ui.md)
+[Native UI](/other/kotlin-multiplatform-native-ui.md) |
+[Compose Multiplatform (Beta)](/other/compose-multiplatform.md)
 - React Native:
     - Using React Navigation:
     [Android](/android/pnddocs/rn-android.md) | 
@@ -55,6 +56,7 @@ For integration using signed metadata see: [JWT integration instructions](https:
 - [Xamarin Forms](/api-documentation/xamarin-forms-apis.md)
 - [MAUI](/api-documentation/xamarin-maui-apis.md)
 - [Flutter](/api-documentation/flutter-apis.md)
+- [Compose Multiplatform (Beta)](/api-documentation/compose-multiplatform-apis.md)
 
 
 ## Additional resources 
