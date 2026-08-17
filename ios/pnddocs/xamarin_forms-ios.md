@@ -123,9 +123,6 @@ and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-
     - `URL identifier` of type `String` with a value that begins with `pendo` (ex. `pendo-scheme-d`).
     - `URL Schemes` of type `Array`. Add a `String` item with `YOUR_SCHEME_ID` as the value.
 
-   >[!IMPORTANT]
-   >Use the complete scheme ID exactly as it appears in Subscription settings, including the `pendo-` prefix (for example, `pendo-a1b2c3d4`). From SDK `3.14`, pairing links whose scheme does not start with `pendo-`, or does not match a scheme registered here, are rejected.
-
 2. Add or modify the function **OpenURL**:
 
    Open ***AppDelegate.cs*** file and the following code:
