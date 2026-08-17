@@ -308,6 +308,9 @@ Examples of these views include `VStack`, `HStack`, `ZStack`, `LazyHStack`, `Laz
 4. **UIContextMenu, Menu, .contextMenu**: <br>
  SwiftUI's `Menu` and `.contextMenu` (and the UIKit `UIContextMenuInteraction` they're backed by) are not auto-tagged by the SDK — their items live in a system-owned presentation and are not part of the app view hierarchy. To track these interactions, wrap the trigger view with the [`.pendoTag("your-tag")`](/api-documentation/native-ios-apis.md#viewpendotag) modifier; clicks on the menu trigger will then be reported under the supplied tag.<br/>
 
+## Session Replay privacy configuration
+Use `applyPendoSRPrivacy(_:)` — available on `UIView` (UIKit) and as a `View` modifier (SwiftUI) — to control how an individual view or subtree is captured in Session Replay, on top of the account's privacy preset. See [Session Replay — Privacy Configuration](/api-documentation/native-ios-apis.md#session-replay--privacy-configuration) in the API documentation for the full reference and examples.
+
 ## Developer documentation
 
 - API documentation available [here](/api-documentation/native-ios-apis.md).
