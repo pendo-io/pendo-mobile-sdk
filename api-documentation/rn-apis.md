@@ -40,6 +40,11 @@
 [NavigationLibraryType](#navigationlibrarytype) <br>
 [PendoOptions](#pendooptions) <br>
 
+### Session Replay — Privacy Configuration
+
+[PendoReplayPrivacy](#pendoreplayprivacy) <br>
+[PendoPrivacyAction](#pendoprivacyaction) <br>
+
 
 ## Pendo React Components
 
@@ -776,3 +781,140 @@ PendoSDK.setup('your.app.key', navigationOptions, {
 });
 ```
 </details>
+
+## Session Replay — Privacy Configuration
+
+> [!IMPORTANT]
+> Session Replay privacy is first configured server-side through a **preset** (for example, masking all text, or masking input fields only). The `PendoReplayPrivacy` component lets you override that preset on individual elements from your React Native code. Privacy is enforced natively: the component wraps its children in a Pendo-owned native host view, and the native SDK reads the action during the Session Replay scan and applies it to that view and its subtree.
+
+> An element's privacy is expressed with the `PendoPrivacyAction` type: `'mask'`, `'unmask'`, `'block'`, or `'none'`. An action applies to the element it wraps and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
+
+### `PendoReplayPrivacy`
+
+```typescript
+<PendoReplayPrivacy action="mask | unmask | block | none">
+    {children}
+</PendoReplayPrivacy>
+```
+
+> A React component that sets a Session Replay privacy action on the element(s) it wraps, overriding the active preset for that subtree. It accepts all standard `ViewProps`, so it can be used in place of a `View` in your layout.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Import</b>: `import { PendoReplayPrivacy } from 'rn-pendo-sdk';`
+<br><b>Kind</b>: React component (extends `ViewProps`)
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| action | PendoPrivacyAction | The privacy action to apply (`'mask'`, `'unmask'`, `'block'`, or `'none'`) |
+| children | ReactNode | The element(s) the action applies to |
+
+> [!NOTE]
+> `PendoReplayPrivacy` renders a real native view and pins `collapsable={false}` internally so the privacy tag is never dropped by view flattening. Wrap the smallest subtree that needs the rule; the action cascades to all descendants.
+
+<b>Example</b>:
+
+```typescript
+import { PendoReplayPrivacy } from 'rn-pendo-sdk';
+
+// Redact the account balance text
+<PendoReplayPrivacy action="mask">
+    <Text>Balance: $42,850.00</Text>
+</PendoReplayPrivacy>
+
+// Reveal marketing copy the preset would otherwise mask
+<PendoReplayPrivacy action="unmask">
+    <Text>Public marketing copy — safe to show</Text>
+</PendoReplayPrivacy>
+
+// Hide an entire payment section (text, images, and media)
+<PendoReplayPrivacy action="block">
+    <View>
+        {/* payment fields... */}
+    </View>
+</PendoReplayPrivacy>
+
+// Remove a previously applied rule; the subtree reverts to inherited/preset behavior
+<PendoReplayPrivacy action="none">
+    <Text>No explicit rule — inherits preset</Text>
+</PendoReplayPrivacy>
+```
+</details>
+
+### `PendoPrivacyAction`
+
+```typescript
+type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
+```
+
+> The value passed to the `action` prop of `PendoReplayPrivacy`.
+
+<details>    <summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Kind</b>: type
+<br>
+
+| Value | Effect |
+| :---: | :--- |
+| mask | Redacts the element's **text**, which is rendered as asterisks in the replay. Text-only — does not affect images or media. |
+| unmask | Reveals **text** that the active preset would otherwise mask. Text-only — does not reveal a blocked image or media. |
+| block | Replaces the element (text, image, container, or media) with a layout-preserving gray placeholder, so its content is never captured. |
+| none | Removes any privacy action previously set on the element, so it falls back to its inherited action (from an ancestor) or the active preset. Not a force-reveal — use `'unmask'` to reveal text under a masked ancestor. |
+
+> [!NOTE]
+> `mask` and `unmask` affect **text only**. Images and other media are controlled by `block` together with the backend preset. To hide an image or a region, use `block`.
+
+</details>
+
+## Actions & behavior
+
+> - **mask** — redacts the element's text, rendered as asterisks. Text-only.
+> - **unmask** — reveals text that the preset would otherwise mask. Text-only.
+> - **block** — replaces the element with a layout-preserving gray placeholder. Works for any element type: text, image, container, or media.
+> - **none** — removes any rule previously set on the element, so it falls back to its inherited action or the active preset. Not a force-reveal.
+>
+> `mask` and `unmask` **never** affect images or media. Image and media capture is governed by `block` and the backend preset. To hide an image or region, use `block`. `mask` does not gray out an image, and `unmask` does not lift an image block.
+
+> [!TIP]
+> Use `'none'` to clear a rule **in place** on a wrapper whose action is dynamic, without unmounting the subtree. Removing the `PendoReplayPrivacy` wrapper entirely would remount its children and reset their state; switching the action to `'none'` keeps the subtree mounted while reverting to inherited/preset behavior.
+
+## Cascade & inheritance
+
+> A privacy action set on a `PendoReplayPrivacy` element applies to that element **and cascades down** the view hierarchy to all of its descendants, until a descendant overrides it with its own `PendoReplayPrivacy` action.
+
+> [!IMPORTANT]
+> **`block` is terminal.** Once an ancestor is blocked, a descendant `unmask` (or `mask`) cannot override the inherited `block` — the blocked subtree stays a placeholder.
+
+<b>Example</b>:
+
+```typescript
+// Container is blocked -> the whole subtree is a gray placeholder
+<PendoReplayPrivacy action="block">
+    <View>
+        {/* This has NO effect: a descendant cannot escape an inherited block */}
+        <PendoReplayPrivacy action="unmask">
+            <Text>Still blocked</Text>
+        </PendoReplayPrivacy>
+    </View>
+</PendoReplayPrivacy>
+
+// Container masks all text; a specific child is revealed
+<PendoReplayPrivacy action="mask">
+    <View>
+        <Text>Masked by the container</Text>
+        <PendoReplayPrivacy action="unmask">
+            <Text>This child's text is shown</Text>
+        </PendoReplayPrivacy>
+    </View>
+</PendoReplayPrivacy>
+```
+
+## Safety rails
+
+> [!CAUTION]
+> Sensitive inputs are **always masked**, even under an explicit `unmask`. This safety rail cannot be overridden. It covers password fields, credit-card fields, email and phone inputs, and any field with a matching autofill/keyboard type. Use `block` if you additionally want such a field rendered as a placeholder.
