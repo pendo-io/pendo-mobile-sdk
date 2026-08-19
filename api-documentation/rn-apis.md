@@ -918,3 +918,24 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 
 > [!CAUTION]
 > Sensitive inputs are **always masked**, even under an explicit `unmask`. This safety rail cannot be overridden. It covers password fields, credit-card fields, email and phone inputs, and any field with a matching autofill/keyboard type. Use `block` if you additionally want such a field rendered as a placeholder.
+
+## Lists & virtualization
+
+> Unlike the native `RecyclerView` APIs, `PendoReplayPrivacy` is **declarative**: the `action` prop is applied to the native host view on every render, so it also resets when a view is recycled. As long as `action` is driven by the row's data, each item gets the correct rule — there is no imperative "reset in bind" step to remember.
+
+> [!IMPORTANT]
+> Always bind `action` to the item's data, and prefer keeping the wrapper **mounted** with `action="none"` for non-sensitive rows rather than conditionally adding/removing the `PendoReplayPrivacy` wrapper. Toggling the wrapper in and out is safe in a plain `FlatList` (off-screen rows unmount), but keeping it mounted with an explicit action is more robust in recycling lists such as `FlashList`, `RecyclerListView`, or a `FlatList` with `removeClippedSubviews`.
+
+<b>Example</b>:
+
+```typescript
+const renderItem = ({ item }: { item: Row }) => (
+    // Always render the wrapper; drive the action from the item's data so a
+    // recycled row can never keep a previous row's rule.
+    <PendoReplayPrivacy action={item.isSensitive ? 'mask' : 'none'}>
+        <Text>{item.value}</Text>
+    </PendoReplayPrivacy>
+);
+
+<FlatList data={rows} renderItem={renderItem} keyExtractor={(r) => r.id} />
+```
