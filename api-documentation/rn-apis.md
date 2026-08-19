@@ -44,6 +44,10 @@
 
 [PendoReplayPrivacy](#pendoreplayprivacy) <br>
 [PendoPrivacyAction](#pendoprivacyaction) <br>
+[Actions & behavior](#actions--behavior) <br>
+[Cascade & inheritance](#cascade--inheritance) <br>
+[Safety rails](#safety-rails) <br>
+[Lists & virtualization](#lists--virtualization) <br>
 
 
 ## Pendo React Components
