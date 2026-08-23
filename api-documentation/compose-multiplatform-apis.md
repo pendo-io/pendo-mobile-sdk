@@ -34,6 +34,7 @@ Core APIs and modifiers are available from `com.pendo.cmp`. Navigation adapters 
 - [`PendoTracker`](#pendotracker)
 - [`PendoNavigator`](#pendonavigator)
 - [`PendoNav2`](#pendonav2)
+- [`PendoNav3`](#pendonav3)
 - [`PendoCircuit`](#pendocircuit)
 - [`pendoTag`](#pendotag)
 - [`pendoScreenId`](#pendoscreenid)
@@ -334,7 +335,7 @@ PendoTracker(navigator = PendoNav2(navController)) {
 sealed interface PendoNavigator
 ```
 
-Represents a supported navigation adapter for `PendoTracker`. Use `PendoNav2` for Jetpack Compose Navigation 2 or `PendoCircuit` for Slack Circuit.
+Represents a supported navigation adapter for `PendoTracker`. Use `PendoNav2` for Jetpack Compose Navigation 2, `PendoNav3` for Jetpack Navigation 3, or `PendoCircuit` for Slack Circuit.
 
 ### `PendoNav2`
 
@@ -351,6 +352,22 @@ PendoTracker(navigator = PendoNav2(navController)) {
     NavHost(navController, startDestination = "home") {
         // Destinations
     }
+}
+```
+
+### `PendoNav3`
+
+```kotlin
+class PendoNav3(
+    val backStack: List<Any>,
+) : PendoNavigator
+```
+
+Adapts a Jetpack Navigation 3 back stack for `PendoTracker`. The back stack must be snapshot-backed, such as `rememberNavBackStack(...)` or `mutableStateListOf(...)`. The screen is identified by the top key's class name.
+
+```kotlin
+PendoTracker(navigator = PendoNav3(backStack)) {
+    NavDisplay(backStack = backStack, entryProvider = entryProvider { /* Entries */ })
 }
 ```
 
