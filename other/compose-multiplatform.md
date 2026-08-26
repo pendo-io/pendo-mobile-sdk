@@ -17,6 +17,7 @@
 >
 > Supported navigation libraries:
 > - Jetpack Compose Navigation (Navigation 2)
+> - Jetpack Navigation 3
 > - Slack Circuit `0.20.0` or higher
 
 ## Step 1. Add the Pendo CMP SDK
@@ -66,7 +67,7 @@ Add the CMP SDK to `commonMain` in the shared KMP module's `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api("com.pendo:pendo-cmp:3.14.0")
+            api("com.pendo:pendo-cmp:3.14.1")
         }
     }
 }
@@ -76,7 +77,7 @@ Apply the Pendo compatibility plugin to the same shared KMP module:
 
 ```kotlin
 plugins {
-    id("com.pendo.cmp.compat") version "3.14.0"
+    id("com.pendo.cmp.compat") version "3.14.1"
 }
 ```
 
@@ -98,7 +99,7 @@ listOf(
     target.binaries.framework {
         baseName = "Shared" // Use your framework name
         isStatic = true
-        export("com.pendo:pendo-cmp:3.14.0")
+        export("com.pendo:pendo-cmp:3.14.1")
     }
 }
 ```
@@ -110,7 +111,7 @@ The native Pendo iOS SDK must be installed separately.
 #### CocoaPods
 
 1. Open the `Podfile`.
-2. Add `pod 'Pendo', '~> 3.14.0'`.
+2. Add `pod 'Pendo', '~> 3.14.1'`.
 
 #### Swift Package Manager
 
@@ -179,6 +180,38 @@ fun MyAppContent() {
     }
 }
 ```
+
+### Jetpack Navigation 3
+
+```kotlin
+import com.pendo.cmp.PendoTracker
+import com.pendo.cmp.nav.PendoNav3
+
+@Composable
+fun MyAppContent() {
+    val backStack = rememberNavBackStack(HomeKey)
+
+    PendoTracker(navigator = PendoNav3(backStack)) {
+        NavDisplay(
+            backStack = backStack,
+            entryProvider = entryProvider {
+                entry<HomeKey> {
+                    HomeScreen()
+                }
+            }
+        )
+    }
+}
+```
+
+The screen is identified by the top back-stack key's class name (`HomeKey`), so key arguments
+don't create separate screens: `DetailKey("42")` and `DetailKey("43")` are the same screen. Pass a
+snapshot-backed back stack — `rememberNavBackStack(...)` or `mutableStateListOf(...)` — otherwise
+only the initial screen is reported.
+
+Pendo Android SDK `3.14.1` or higher reports the same key on Android, including for an adaptive
+scene that displays two entries side by side. Earlier Android SDK versions identify such a scene by
+every entry it displays, which doesn't match the screen reported on iOS.
 
 ### Slack Circuit
 
@@ -367,7 +400,7 @@ Box(
 
 ## Known limitations
 
-- Automatic navigation tracking supports Jetpack Compose Navigation (Navigation 2) and Slack Circuit. Other navigation libraries, including Navigation 3, Voyager, and Decompose, aren't currently supported.
+- Automatic navigation tracking supports Jetpack Compose Navigation (Navigation 2), Jetpack Navigation 3, and Slack Circuit. Other navigation libraries, including Voyager and Decompose, aren't currently supported.
 - Drawers and bottom sheets require `Modifier.pendoStateModifier()` for state tracking.
 - Compose UI versions through `1.12` are supported. Future Pendo CMP releases will add support for newer Compose UI versions.
 - The native Pendo iOS SDK must use the same major and minor version as the CMP SDK.
