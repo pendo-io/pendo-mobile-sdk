@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "pendo-mobile-sdk",
+  "description": "Claude Code plugins for the Pendo Mobile SDK",
+  "owner": { "name": "Pendo", "email": "mobile-sdk@pendo.io" },
+  "plugins": [
+    {
+      "name": "pendo-mobile-sdk-tools",
+      "source": "./claude-plugin",
+      "description": "Install and configure the Pendo Mobile SDK directly in your app using Claude Code",
+      "category": "mobile",
+      "keywords": ["pendo", "mobile-sdk", "install", "ios", "android", "react-native", "expo", "flutter", "maui"]
+    }
+  ]
+}
