@@ -48,6 +48,39 @@ The Pendo Mobile SDK is a codeless library that collects analytics retroactively
 For integration using signed metadata see: [JWT integration instructions](https://support.pendo.io/hc/en-us/articles/360039616892-Send-signed-metadata-with-JWT)
 
 
+## Install via Claude Code, Cursor, or Codex (Beta)
+
+Prefer to have an AI coding assistant do the integration for you? A skill covering every
+platform above (native iOS/Android, React Native, Expo, Flutter, MAUI) ships from this repo.
+This integration is new — please [open an issue](https://github.com/pendo-io/pendo-mobile-sdk/issues)
+if you hit problems or have feedback.
+
+**Claude Code** (no clone needed):
+
+```
+/plugin marketplace add pendo-io/pendo-mobile-sdk
+/plugin install pendo-mobile-sdk-tools@pendo-mobile-sdk
+```
+
+Then, from your own app's repo, ask it to install Pendo.
+
+**Cursor / Codex** (one-time setup — pulls just the skill, not this whole repo):
+
+```bash
+git clone --filter=blob:none --no-checkout https://github.com/pendo-io/pendo-mobile-sdk.git
+cd pendo-mobile-sdk
+git sparse-checkout set claude-plugin
+git checkout master
+
+# Cursor
+ln -s "$(pwd)/claude-plugin/skills/install-pendo-mobile" ~/.cursor/skills/install-pendo-mobile
+# Codex
+ln -s "$(pwd)/claude-plugin/skills/install-pendo-mobile" ~/.agents/skills/install-pendo-mobile
+```
+
+`git pull` inside that clone picks up future updates to the skill for both tools.
+
+
 ## API documentation
 
 - [Native Android](/api-documentation/native-android-apis.md)
