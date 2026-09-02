@@ -791,12 +791,12 @@ PendoSDK.setup('your.app.key', navigationOptions, {
 > [!IMPORTANT]
 > Session Replay privacy is first configured server-side through a **preset** (for example, masking all text, or masking input fields only). The `PendoReplayPrivacy` component lets you override that preset on individual elements from your React Native code. Privacy is enforced natively: the component wraps its children in a Pendo-owned native host view, and the native SDK reads the action during the Session Replay scan and applies it to that view and its subtree.
 
-> An element's privacy is expressed with the `PendoPrivacyAction` type: `'mask'`, `'unmask'`, `'block'`, or `'none'`. An action applies to the element it wraps and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
+> An element's privacy is expressed with the `PendoPrivacyAction` enum: `PendoPrivacyAction.Mask`, `PendoPrivacyAction.Unmask`, `PendoPrivacyAction.Block`, or `PendoPrivacyAction.None`. An action applies to the element it wraps and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
 
 ### `PendoReplayPrivacy`
 
 ```typescript
-<PendoReplayPrivacy action="mask | unmask | block | none">
+<PendoReplayPrivacy action={PendoPrivacyAction}>
     {children}
 </PendoReplayPrivacy>
 ```
@@ -807,13 +807,13 @@ PendoSDK.setup('your.app.key', navigationOptions, {
 
 <br>
 
-<b>Import</b>: `import { PendoReplayPrivacy } from 'rn-pendo-sdk';`
+<b>Import</b>: `import { PendoReplayPrivacy, PendoPrivacyAction } from 'rn-pendo-sdk';`
 <br><b>Kind</b>: React component (extends `ViewProps`)
 <br>
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| action | PendoPrivacyAction | The privacy action to apply (`'mask'`, `'unmask'`, `'block'`, or `'none'`) |
+| action | PendoPrivacyAction | The privacy action to apply (`PendoPrivacyAction.Mask`, `PendoPrivacyAction.Unmask`, `PendoPrivacyAction.Block`, or `PendoPrivacyAction.None`) |
 | children | ReactNode | The element(s) the action applies to |
 
 > [!NOTE]
@@ -822,27 +822,27 @@ PendoSDK.setup('your.app.key', navigationOptions, {
 <b>Example</b>:
 
 ```typescript
-import { PendoReplayPrivacy } from 'rn-pendo-sdk';
+import { PendoReplayPrivacy, PendoPrivacyAction } from 'rn-pendo-sdk';
 
 // Redact the account balance text
-<PendoReplayPrivacy action="mask">
+<PendoReplayPrivacy action={PendoPrivacyAction.Mask}>
     <Text>Balance: $42,850.00</Text>
 </PendoReplayPrivacy>
 
 // Reveal marketing copy the preset would otherwise mask
-<PendoReplayPrivacy action="unmask">
+<PendoReplayPrivacy action={PendoPrivacyAction.Unmask}>
     <Text>Public marketing copy — safe to show</Text>
 </PendoReplayPrivacy>
 
 // Hide an entire payment section (text, images, and media)
-<PendoReplayPrivacy action="block">
+<PendoReplayPrivacy action={PendoPrivacyAction.Block}>
     <View>
         {/* payment fields... */}
     </View>
 </PendoReplayPrivacy>
 
 // Remove a previously applied rule; the subtree reverts to inherited/preset behavior
-<PendoReplayPrivacy action="none">
+<PendoReplayPrivacy action={PendoPrivacyAction.None}>
     <Text>No explicit rule — inherits preset</Text>
 </PendoReplayPrivacy>
 ```
@@ -851,7 +851,12 @@ import { PendoReplayPrivacy } from 'rn-pendo-sdk';
 ### `PendoPrivacyAction`
 
 ```typescript
-type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
+enum PendoPrivacyAction {
+    Mask = 'mask',
+    Unmask = 'unmask',
+    Block = 'block',
+    None = 'none',
+}
 ```
 
 > The value passed to the `action` prop of `PendoReplayPrivacy`.
@@ -860,15 +865,15 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 
 <br>
 
-<b>Kind</b>: type
+<b>Kind</b>: enum
 <br>
 
 | Value | Effect |
 | :---: | :--- |
-| mask | Redacts the element's **text**, which is rendered as asterisks in the replay. Text-only — does not affect images or media. |
-| unmask | Reveals **text** that the active preset would otherwise mask. Text-only — does not reveal a blocked image or media. |
-| block | Replaces the element (text, image, container, or media) with a layout-preserving gray placeholder, so its content is never captured. |
-| none | Removes any privacy action previously set on the element, so it falls back to its inherited action (from an ancestor) or the active preset. Not a force-reveal — use `'unmask'` to reveal text under a masked ancestor. |
+| PendoPrivacyAction.Mask | Redacts the element's **text**, which is rendered as asterisks in the replay. Text-only — does not affect images or media. |
+| PendoPrivacyAction.Unmask | Reveals **text** that the active preset would otherwise mask. Text-only — does not reveal a blocked image or media. |
+| PendoPrivacyAction.Block | Replaces the element (text, image, container, or media) with a layout-preserving gray placeholder, so its content is never captured. |
+| PendoPrivacyAction.None | Removes any privacy action previously set on the element, so it falls back to its inherited action (from an ancestor) or the active preset. Not a force-reveal — use `PendoPrivacyAction.Unmask` to reveal text under a masked ancestor. |
 
 > [!NOTE]
 > `mask` and `unmask` affect **text only**. Images and other media are controlled by `block` together with the backend preset. To hide an image or a region, use `block`.
@@ -885,7 +890,7 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 > `mask` and `unmask` **never** affect images or media. Image and media capture is governed by `block` and the backend preset. To hide an image or region, use `block`. `mask` does not gray out an image, and `unmask` does not lift an image block.
 
 > [!TIP]
-> Use `'none'` to clear a rule **in place** on a wrapper whose action is dynamic, without unmounting the subtree. Removing the `PendoReplayPrivacy` wrapper entirely would remount its children and reset their state; switching the action to `'none'` keeps the subtree mounted while reverting to inherited/preset behavior.
+> Use `PendoPrivacyAction.None` to clear a rule **in place** on a wrapper whose action is dynamic, without unmounting the subtree. Removing the `PendoReplayPrivacy` wrapper entirely would remount its children and reset their state; switching the action to `PendoPrivacyAction.None` keeps the subtree mounted while reverting to inherited/preset behavior.
 
 ## Cascade & inheritance
 
@@ -898,20 +903,20 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 
 ```typescript
 // Container is blocked -> the whole subtree is a gray placeholder
-<PendoReplayPrivacy action="block">
+<PendoReplayPrivacy action={PendoPrivacyAction.Block}>
     <View>
         {/* This has NO effect: a descendant cannot escape an inherited block */}
-        <PendoReplayPrivacy action="unmask">
+        <PendoReplayPrivacy action={PendoPrivacyAction.Unmask}>
             <Text>Still blocked</Text>
         </PendoReplayPrivacy>
     </View>
 </PendoReplayPrivacy>
 
 // Container masks all text; a specific child is revealed
-<PendoReplayPrivacy action="mask">
+<PendoReplayPrivacy action={PendoPrivacyAction.Mask}>
     <View>
         <Text>Masked by the container</Text>
-        <PendoReplayPrivacy action="unmask">
+        <PendoReplayPrivacy action={PendoPrivacyAction.Unmask}>
             <Text>This child's text is shown</Text>
         </PendoReplayPrivacy>
     </View>
@@ -928,7 +933,7 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 > Unlike the native `RecyclerView` APIs, `PendoReplayPrivacy` is **declarative**: the `action` prop is applied to the native host view on every render, so it also resets when a view is recycled. As long as `action` is driven by the row's data, each item gets the correct rule — there is no imperative "reset in bind" step to remember.
 
 > [!IMPORTANT]
-> Always bind `action` to the item's data, and prefer keeping the wrapper **mounted** with `action="none"` for non-sensitive rows rather than conditionally adding/removing the `PendoReplayPrivacy` wrapper. Toggling the wrapper in and out is safe in a plain `FlatList` (off-screen rows unmount), but keeping it mounted with an explicit action is more robust in recycling lists such as `FlashList`, `RecyclerListView`, or a `FlatList` with `removeClippedSubviews`.
+> Always bind `action` to the item's data, and prefer keeping the wrapper **mounted** with `action={PendoPrivacyAction.None}` for non-sensitive rows rather than conditionally adding/removing the `PendoReplayPrivacy` wrapper. Toggling the wrapper in and out is safe in a plain `FlatList` (off-screen rows unmount), but keeping it mounted with an explicit action is more robust in recycling lists such as `FlashList`, `RecyclerListView`, or a `FlatList` with `removeClippedSubviews`.
 
 <b>Example</b>:
 
@@ -936,7 +941,7 @@ type PendoPrivacyAction = 'mask' | 'unmask' | 'block' | 'none';
 const renderItem = ({ item }: { item: Row }) => (
     // Always render the wrapper; drive the action from the item's data so a
     // recycled row can never keep a previous row's rule.
-    <PendoReplayPrivacy action={item.isSensitive ? 'mask' : 'none'}>
+    <PendoReplayPrivacy action={item.isSensitive ? PendoPrivacyAction.Mask : PendoPrivacyAction.None}>
         <Text>{item.value}</Text>
     </PendoReplayPrivacy>
 );
