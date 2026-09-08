@@ -18,8 +18,8 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "Pendo",
-            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/3.14.3.12602/pendo-ios-sdk-xcframework.3.14.3.12602.zip",
-            checksum: "4b601780307654c754c81cddc7ede45d49eae14a6eef2cf7211c270fdf61acf2"
+            url: "https://software.mobile.pendo.io/artifactory/ios-sdk-release/3.14.4.12685/pendo-ios-sdk-xcframework.3.14.4.12685.zip",
+            checksum: "8b557459c4f6beb26dac257870bad06c3a88009b9cd2ca82e23b78a3de307ccf"
         ),
     ]
 )
