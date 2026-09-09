@@ -276,6 +276,8 @@ Of the five documented choices, Expo's own guides use three: `ReactNavigation`, 
 
 It goes at **module level**, before any navigation container renders — **never inside `useEffect`**. That follows directly from the ordering requirement quoted above: the `WithPendo*` wrapper calls run at module-evaluation time, before any component renders, and `setup()` must run before every one of them or they are silently ignored.
 
+**Module-level placement alone only orders code within the same file.** If the `WithPendo*` wrapper is declared in a module the root layout merely imports (e.g. a separate navigation-config file), that module's top-level code evaluates before the root layout's own body runs, regardless of source-line order. Guard against this: put the `setup()` call in its own module and make it the **first import statement** in the root layout, before any import that could transitively reach a `WithPendo*` wrapper call. Import order is evaluation order.
+
 `startSession` is called wherever the visitor is actually identified — see **Visitor identity** below.
 
 ### Expo Router: wrapping the root layout
@@ -493,7 +495,7 @@ If the app has no account/organization/tenant concept (visitor-only), the React 
 
 Return, for the router's report:
 
-- **Every file touched**, with a one-line reason each. On `prebuilt` that includes the native files from step 6 — plus `ios/Podfile.lock` and `ios/<App>.xcodeproj/project.pbxproj` if Phase 7's `pod install` rewrote them.
+- **Every file touched**, with a one-line reason each. On `prebuilt` that includes the native files from step 6. Do not add `ios/Podfile.lock` or `ios/<App>.xcodeproj/project.pbxproj` here even if Phase 7's `pod install` later rewrites them — that is Phase 7's own build churn, reported separately under "Files the build touched" per `SKILL.md`'s Phase 7/Phase 8 contract, never folded into this reference's own edit list.
 - **The resolved `rn-pendo-sdk` version**, noting that upstream pins none.
 - **The Expo Go entry** (§0) — mandatory on both `managed` and `prebuilt`.
 - **On `managed`**: that the config plugin's native output only materializes at the next `npx expo prebuild` / `expo run:*` / EAS build, and that no native file was created or edited by this install.

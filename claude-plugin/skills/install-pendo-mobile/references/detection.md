@@ -22,7 +22,7 @@ Different from §2 below — that one is a false ambiguity the router's fast-pat
 Router rule (`SKILL.md` Phase 1): `expo` in `package.json` dependencies wins over `react-native` when both are present, because every RN and Expo repo ships native `ios/`/`android/` shells alongside `react-native` in `package.json` — that combination alone is not evidence of a native app.
 
 ### Confirming indicators — Expo
-- `expo` (or any `expo-*` package, e.g. `expo-router`, `expo-modules-core`) in the **app's own** `package.json` dependencies — not just a hoisted root in a monorepo/workspace, since a workspace root's dependency list can mask what an individual app actually depends on.
+- `expo` — **the exact package name, not any `expo-*` prefix** — in the **app's own** `package.json` dependencies (not just a hoisted root in a monorepo/workspace, since a workspace root's dependency list can mask what an individual app actually depends on). An `expo-*` module alone (e.g. `expo-router`, `expo-modules-core`, without `expo` itself) is a bare React Native app that has adopted one Expo module — see `SKILL.md` Phase 1 ("The Expo signal is the `expo` package exactly") — it is not a confirming Expo indicator on its own.
 - `app.json` or `app.config.js`/`app.config.ts` with a top-level `"expo": {...}` key.
 - `.expo/` directory present (local Expo dev-client cache).
 - `package.json` `"main"` set to `"expo-router/entry"` or `"expo/AppEntry.js"`, or a `"scripts"` entry invoking `expo start` / `expo prebuild` / `expo run:ios` / `expo run:android`.

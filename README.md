@@ -72,6 +72,8 @@ cd pendo-mobile-sdk
 git sparse-checkout set claude-plugin
 git checkout master
 
+mkdir -p ~/.cursor/skills ~/.agents/skills
+
 # Cursor
 ln -s "$(pwd)/claude-plugin/skills/install-pendo-mobile" ~/.cursor/skills/install-pendo-mobile
 # Codex

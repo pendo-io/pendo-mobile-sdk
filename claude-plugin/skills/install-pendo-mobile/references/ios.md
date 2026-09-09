@@ -170,6 +170,12 @@ Use the same `<CURRENT_VERSION>` resolved in Tier 1's version note — do not ha
 [PackageRef UUID] /* XCRemoteSwiftPackageReference "pendo-mobile-sdk" */,
 ```
 
+**Insertion point 5 — append to the app target's `PBXNativeTarget.packageProductDependencies`.** Find the app target's own `PBXNativeTarget` object (inside `/* Begin PBXNativeTarget section */` … `/* End PBXNativeTarget section */` — identify it by `name` matching the app target, not a test or extension target). It may not yet have a `packageProductDependencies = ( ... );` field — add it (as a sibling of `buildPhases`/`dependencies`) if absent, then append:
+```
+[ProductDep UUID] /* Pendo */,
+```
+This step is not optional. `PBXProject.packageReferences` (point 4) only registers the package in the project graph — it does not make any target *use* it. Skip this insertion point and the package resolves fine while the app target never actually links Pendo: `xcodebuild -resolvePackageDependencies` below only resolves the package graph, so it passes either way, and the gap surfaces only the first time the app target is genuinely built (a real `import Pendo` failing to compile).
+
 **Always run afterward, to prove the file still parses:**
 ```bash
 xcodebuild -resolvePackageDependencies

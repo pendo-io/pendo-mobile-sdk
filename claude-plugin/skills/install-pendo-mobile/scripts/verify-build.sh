@@ -150,9 +150,12 @@ head_verdict() {
   local head="$1" output="$2"
 
   if [ -z "$output" ]; then
-    # Nothing captured to inspect — err on the side of caution and report a
-    # real failure rather than guessing.
-    return 1
+    # No output to inspect for a Pendo mention. Per this function's own exit
+    # codes above, that is "not verified" (2), not an attributable failure
+    # (1) — a build that produced no evidence either way must not be
+    # blamed on this install.
+    err "${head} build failed with no captured output — nothing to check for a Pendo mention, treating this as unverifiable rather than attributing it to the Pendo install"
+    return 2
   fi
 
   if printf '%s\n' "$output" | grep -qi 'pendo'; then
@@ -530,6 +533,7 @@ cross_platform_js_build() {
       # Whatever prebuild creates is recorded before it runs, so a partial
       # failure is cleaned up too.
       GENERATED_NATIVE_DIRS="ios android"
+      trap remove_generated_native_dirs EXIT
       if ! npx expo prebuild --no-install; then
         err "npx expo prebuild failed"
         remove_generated_native_dirs
