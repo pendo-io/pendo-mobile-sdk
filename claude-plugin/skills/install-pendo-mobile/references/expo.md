@@ -276,7 +276,7 @@ Of the five documented choices, Expo's own guides use three: `ReactNavigation`, 
 
 It goes at **module level**, before any navigation container renders — **never inside `useEffect`**. That follows directly from the ordering requirement quoted above: the `WithPendo*` wrapper calls run at module-evaluation time, before any component renders, and `setup()` must run before every one of them or they are silently ignored.
 
-**Module-level placement alone only orders code within the same file.** If the `WithPendo*` wrapper is declared in a module the root layout merely imports (e.g. a separate navigation-config file), that module's top-level code evaluates before the root layout's own body runs, regardless of source-line order. Guard against this: put the `setup()` call in its own module and make it the **first import statement** in the root layout, before any import that could transitively reach a `WithPendo*` wrapper call. Import order is evaluation order.
+**Module-level placement alone only orders code within the same file.** If the `WithPendo*` wrapper is declared in a module the root layout merely imports (e.g. a separate navigation-config file), that module's top-level code evaluates before the root layout's own body runs, regardless of source-line order. When the wrapper lives in another module, put the `setup()` call in its own module and make it the **first import statement** in the root layout, before any import that could transitively reach a `WithPendo*` wrapper call. Import order is evaluation order.
 
 `startSession` is called wherever the visitor is actually identified — see **Visitor identity** below.
 

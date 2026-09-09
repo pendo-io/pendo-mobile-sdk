@@ -150,10 +150,7 @@ head_verdict() {
   local head="$1" output="$2"
 
   if [ -z "$output" ]; then
-    # No output to inspect for a Pendo mention. Per this function's own exit
-    # codes above, that is "not verified" (2), not an attributable failure
-    # (1) — a build that produced no evidence either way must not be
-    # blamed on this install.
+    # Empty output can never mention Pendo, so this is "not verified", not attributable.
     err "${head} build failed with no captured output — nothing to check for a Pendo mention, treating this as unverifiable rather than attributing it to the Pendo install"
     return 2
   fi

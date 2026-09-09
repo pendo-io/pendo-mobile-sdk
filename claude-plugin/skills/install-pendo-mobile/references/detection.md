@@ -89,7 +89,7 @@ A single project can show more than one of these signals if it supports multiple
 
 ## 5. Android — sub-framework (Views vs. Compose vs. hybrid)
 
-Determines which of Pendo's two wiring paths applies. Source: `android/pnddocs/native-android.md` — tracking is automatic for both. Standard Views need nothing extra; Compose needs `Modifier.pendoStateModifier(...)` only when a Drawer/`ModalBottomSheetLayout` isn't visible to automatic detection, and `Modifier.pendoTag(...)` is optional — manual click-tracking/tooltip anchors, not required for a baseline install (see `references/android.md` §5).
+Determines whether `references/android.md` §5's optional Compose tagging applies. Screen tracking is automatic for both Views and Compose — Compose navigation is auto-detected from SDK 3.12 (`api-documentation/native-android-apis.md`). Per `android/pnddocs/native-android.md`: standard Views need nothing extra; Compose needs `Modifier.pendoStateModifier(...)` only for a Drawer/`ModalBottomSheetLayout` that automatic detection can't see into, and `Modifier.pendoTag(...)` is explicitly "(Optional)" — manual click-tracking/tooltip anchors, not required for a baseline install.
 
 ### Views-only
 - `res/layout/*.xml` layout files present for the app's screens.

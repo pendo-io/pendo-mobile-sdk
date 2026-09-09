@@ -20,7 +20,7 @@ Phase 3 stops the whole run if **any** of these are found — check all of them:
 ## 1. Sub-platform and UI framework — two independent axes
 
 - **`subPlatform` (`kotlin`/`java`)** — resolved by `SKILL.md`'s phase contract, governs which language the code samples below use. If an Application subclass **already exists**, write into it in *its own* language regardless of `subPlatform` (don't introduce a second-language file just to match the repo's dominant language). Only use `subPlatform` to choose the language when **creating** a new Application class.
-- **UI framework (Views / Compose / hybrid)** — a separate axis, not part of `subPlatform`. Resolve with `references/detection.md` §5 when not obvious from a quick scan (`setContentView` vs `setContent`, `androidx.compose.*` in `build.gradle[.kts]`). Screen/navigation tracking is **automatic for both** Views and Compose — this axis only changes whether the optional manual-tagging note in §5 below applies, and whether the legacy §6 Compose-navigation step is even relevant.
+- **UI framework (Views / Compose / hybrid)** — a separate axis, not part of `subPlatform`. Resolve with `references/detection.md` §5 when not obvious from a quick scan (`setContentView` vs `setContent`, `androidx.compose.*` in `build.gradle[.kts]`). Screen/navigation tracking is **automatic for both** Views and Compose — this axis only changes whether §5's legacy Compose-navigation step and its optional manual-tagging note are even relevant.
 
 ## 2. Dependency
 
@@ -69,10 +69,12 @@ dependencies {
 **Resolve `<currentMinor>` from the live Maven metadata — never hardcode a value, and never reuse whatever this file last showed.** Pendo ships new Android SDK minors between doc updates, the same way `ios.md`'s `<CURRENT_VERSION>` drifts from `Package.swift` (see that file's "Version note"). Run:
 
 ```bash
-curl -s https://software.mobile.pendo.io/artifactory/androidx-release/sdk/pendo/io/pendoIO/maven-metadata.xml | grep -oE '<release>[0-9]+\.[0-9]+' | head -1
+curl -fsS https://software.mobile.pendo.io/artifactory/androidx-release/sdk/pendo/io/pendoIO/maven-metadata.xml | grep -oE '<release>[0-9]+\.[0-9]+' | head -1 | cut -d'>' -f2
 ```
 
-and take the `major.minor` out of the `<release>` tag it prints (e.g. `<release>3.14.2.10535</release>` → `currentMinor` = `3.14`). This is Pendo's own public Android artifact registry — the same host the `repositories { }` block above already resolves this dependency against — so it reflects exactly what Gradle would actually select. Do not substitute `pendo-io/pendo-mobile-sdk`'s GitHub tags for this: they name releases across every platform this SDK ships for, and can lag what's actually published to this Android registry specifically.
+It prints the `major.minor` of the registry's current release — `3.14` for `<release>3.14.2.10535</release>` — and that is `currentMinor`. This is Pendo's own public Android artifact registry — the same host the `repositories { }` block above already resolves this dependency against — so it reflects exactly what Gradle would actually select. Do not substitute `pendo-io/pendo-mobile-sdk`'s GitHub tags for this: they name releases across every platform this SDK ships for, and can lag what's actually published to this Android registry specifically.
+
+**If the command prints nothing, the lookup failed** (unreachable host, proxy block, HTTP error — `-fsS` reports the cause on stderr). Do not proceed on a guess: ask the user for the current `major.minor`, pointing them at the URL above, and if they cannot supply it, stop with Phase 8's early-exit report. Neither a value remembered from this file nor a GitHub tag is a resolution.
 
 The trailing `.+` is not part of `currentMinor` and never changes: it is what makes the pin dynamic within that minor, so Gradle keeps picking up new patch releases on its own dynamic-version cache TTL (`cacheDynamicVersionsFor`, 24h by default, or immediately with `--refresh-dependencies`) without this file needing to move again until the minor itself changes.
 
@@ -137,7 +139,7 @@ Everything about *where* this call goes, *which* visitor/account identifier to u
 
 ## 5. Compose navigation — legacy path, SDK < 3.12 only (omit by default)
 
-`Pendo.setComposeNavigationController(...)` is **not** merely unnecessary on current SDKs — per the API reference it is **"Deprecated from SDK 3.12.+. The SDK automatically performs the logic, removing the need to use this API. Calling it will be ignored."** Since this skill installs `3.13.+`, this whole step is **skipped by default** — do not emit it as a normal install step.
+`Pendo.setComposeNavigationController(...)` is **not** merely unnecessary on current SDKs — per the API reference it is **"Deprecated from SDK 3.12.+. The SDK automatically performs the logic, removing the need to use this API. Calling it will be ignored."** Since this skill installs the current minor (≥ 3.12, resolved in §2), this whole step is **skipped by default** — do not emit it as a normal install step.
 
 Only surface it if this specific repo is pinning a Pendo Android SDK version below 3.12 (e.g. an existing `sdk.pendo.io:pendoIO` dependency already present at a pre-3.12 version that the install is deliberately not upgrading). In that case: this corpus extract confirms the method name and its version gate, but does not carry a verified call-site code sample for it — don't fabricate one. State the constraint to the user (method name, deprecation boundary, and Pendo's own recommendation to wire it *before* the `startSession` call so the SDK captures the correct initial screen: "set up Compose navigation before calling startSession") and point them to Pendo's current docs for the exact call shape rather than emitting unverified code.
 
