@@ -1,5 +1,9 @@
 # Flutter Android
 
+> [!TIP]
+> Prefer not to do this by hand? Ask Claude Code, Cursor, or Codex to
+> install Pendo for you — see [Install via AI assistant](../../README.md#install-via-claude-code-cursor-or-codex-beta).
+
 >[!IMPORTANT]
 >[Flutter Obfuscation issue](https://github.com/pendo-io/pendo-mobile-sdk/issues/196#issue-2605284796)<br><br>
 >Migration from the track-event solution to the low-code solution:

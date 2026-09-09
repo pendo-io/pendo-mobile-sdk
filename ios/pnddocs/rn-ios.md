@@ -1,5 +1,9 @@
 # React Native iOS using React Navigation
 
+> [!TIP]
+> Prefer not to do this by hand? Ask Claude Code, Cursor, or Codex to
+> install Pendo for you — see [Install via AI assistant](../../README.md#install-via-claude-code-cursor-or-codex-beta).
+
 >[!NOTE]
 >**Expo SDK** 41-56 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/ios/pnddocs/expo_rn-ios.md).
 
