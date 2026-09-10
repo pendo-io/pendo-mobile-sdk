@@ -1,5 +1,9 @@
 # Native iOS
 
+> [!TIP]
+> Prefer not to do this by hand? Ask Claude Code, Cursor, or Codex to
+> install Pendo for you — see [Install via AI assistant](../../README.md#install-via-claude-code-cursor-or-codex-beta).
+
 <!-- ![Cocoapods platforms](https://img.shields.io/cocoapods/p/Pendo)  -->
 ![Cocoapods](https://img.shields.io/cocoapods/l/Pendo)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fpendo-io%2Fpendo-mobile-sdk%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/pendo-io/pendo-mobile-sdk)
