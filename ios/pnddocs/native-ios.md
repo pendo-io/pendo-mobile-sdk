@@ -21,6 +21,9 @@
 >[!IMPORTANT]
 ><b>SwiftUI</b> codeless solution is fully supported from `iOS 15`. <br/> <b>SwiftUI</b> screen navigation tracking is available from `iOS 13`.
 
+>[!NOTE]
+>iOS 27 support requires SDK `3.14.4` or later. Earlier SDK versions may fail to match some navigation bar and iPad sidebar tags after upgrading to iOS 27.
+
 >[!IMPORTANT]
 >Requirements:
 >- Deployment target of `iOS 11` or higher 
