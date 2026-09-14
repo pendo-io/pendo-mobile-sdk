@@ -48,6 +48,7 @@
 [Cascade & inheritance](#cascade--inheritance) <br>
 [Safety rails](#safety-rails) <br>
 [Lists & virtualization](#lists--virtualization) <br>
+[Platform & architecture support](#platform--architecture-support) <br>
 
 
 ## Pendo React Components
@@ -793,6 +794,8 @@ PendoSDK.setup('your.app.key', navigationOptions, {
 
 > An element's privacy is expressed with the `PendoPrivacyAction` enum: `PendoPrivacyAction.Mask`, `PendoPrivacyAction.Unmask`, `PendoPrivacyAction.Block`, or `PendoPrivacyAction.None`. An action applies to the element it wraps and **cascades down** to its descendants, unless a descendant sets its own action (see [Cascade & inheritance](#cascade--inheritance)).
 
+> The component works on **iOS and Android**, on both the old architecture (Paper) and the New Architecture (Fabric), with no setup in your app — see [Platform & architecture support](#platform--architecture-support).
+
 ### `PendoReplayPrivacy`
 
 ```typescript
@@ -878,6 +881,9 @@ enum PendoPrivacyAction {
 > [!NOTE]
 > `mask` and `unmask` affect **text only**. Images and other media are controlled by `block` together with the backend preset. To hide an image or a region, use `block`.
 
+> [!NOTE]
+> The enum values (`'mask'`, `'unmask'`, `'block'`, `'none'`) are the strings sent to the native SDK, so plain JavaScript callers can pass them directly. Any other value — including an empty string, `null`, or `undefined` — is treated as `PendoPrivacyAction.None` on both platforms, so a typo silently removes the rule rather than applying an unintended one. Prefer the enum so TypeScript catches this at compile time.
+
 </details>
 
 ## Actions & behavior
@@ -948,3 +954,19 @@ const renderItem = ({ item }: { item: Row }) => (
 
 <FlatList data={rows} renderItem={renderItem} keyExtractor={(r) => r.id} />
 ```
+
+## Platform & architecture support
+
+> `PendoReplayPrivacy` is backed by a native view manager on **iOS and Android**, and both are registered by the Pendo SDK itself. There is nothing to add to your `MainApplication`, `AppDelegate`, or `Podfile` beyond the standard Pendo setup.
+
+| Architecture | iOS | Android |
+| :--- | :--- | :--- |
+| Old architecture (Paper) | Supported | Supported |
+| New Architecture (Fabric) | Supported through React Native's legacy view-manager interop | Supported through React Native's legacy view-manager interop |
+
+> On the New Architecture the component is mounted through React Native's interop layer for legacy view managers rather than a codegen (Fabric-native) component. This is an implementation detail: the JavaScript API, the props, and the privacy behavior are identical on both architectures.
+
+> [!NOTE]
+> If Session Replay privacy is not being applied on iOS with the New Architecture, check the Pendo log for:
+> `PendoRNPrivacyView is not registered with the legacy-view-manager interop. PendoReplayPrivacy will have no native backing and mask/unmask/block/none will not be applied.`
+> This line is logged at info level, or as a warning when [debug mode](#setdebugmode) is on. It means the wrapper rendered but no privacy action reached the native SDK.
