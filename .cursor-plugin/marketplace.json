@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "pendo-mobile-sdk-tools",
-      "source": "./claude-plugin",
+      "source": "./plugin",
       "description": "Install and configure the Pendo Mobile SDK directly in your app using Cursor (Beta)",
       "category": "mobile",
       "keywords": ["pendo", "mobile-sdk", "install", "ios", "android", "react-native", "expo", "flutter", "maui"],

@@ -69,15 +69,15 @@ Then, from your own app's repo, ask it to install Pendo.
 ```bash
 git clone --filter=blob:none --no-checkout https://github.com/pendo-io/pendo-mobile-sdk.git
 cd pendo-mobile-sdk
-git sparse-checkout set claude-plugin
+git sparse-checkout set plugin
 git checkout master
 
 mkdir -p ~/.cursor/skills ~/.agents/skills
 
 # Cursor
-ln -s "$(pwd)/claude-plugin/skills/install-pendo-mobile" ~/.cursor/skills/install-pendo-mobile
+ln -s "$(pwd)/plugin/skills/install-pendo-mobile" ~/.cursor/skills/install-pendo-mobile
 # Codex
-ln -s "$(pwd)/claude-plugin/skills/install-pendo-mobile" ~/.agents/skills/install-pendo-mobile
+ln -s "$(pwd)/plugin/skills/install-pendo-mobile" ~/.agents/skills/install-pendo-mobile
 ```
 
 `git pull` inside that clone picks up future updates to the skill for both tools.
