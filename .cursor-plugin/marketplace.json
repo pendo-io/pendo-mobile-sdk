@@ -1,0 +1,17 @@
+{
+  "name": "pendo-mobile-sdk",
+  "owner": { "name": "Pendo", "email": "mobile-sdk@pendo.io" },
+  "metadata": {
+    "description": "Cursor plugins for the Pendo Mobile SDK"
+  },
+  "plugins": [
+    {
+      "name": "pendo-mobile-sdk-tools",
+      "source": "./plugin",
+      "description": "Install and configure the Pendo Mobile SDK directly in your app using Cursor (Beta)",
+      "category": "mobile",
+      "keywords": ["pendo", "mobile-sdk", "install", "ios", "android", "react-native", "expo", "flutter", "maui"],
+      "skills": "skills"
+    }
+  ]
+}

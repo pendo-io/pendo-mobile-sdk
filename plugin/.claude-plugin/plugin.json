@@ -1,0 +1,5 @@
+{
+  "name": "pendo-mobile-sdk-tools",
+  "description": "Install and configure the Pendo Mobile SDK directly in your app using Claude Code (Beta)",
+  "author": { "name": "Pendo", "email": "mobile-sdk@pendo.io" }
+}

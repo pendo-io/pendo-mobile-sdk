@@ -1,5 +1,9 @@
 # Flutter iOS
 
+> [!TIP]
+> Prefer not to do this by hand? Ask Claude Code, Cursor, or Codex to
+> install Pendo for you — see [Install via AI assistant](../../README.md#install-via-claude-code-cursor-or-codex-beta).
+
 >[!WARNING]
 >**CocoaPods Deprecation Notice:** CocoaPods has announced that their registry will become read-only in December 2026. Pendo will stop publishing new SDK versions to CocoaPods. While existing versions will remain functional, we recommend migrating your iOS project to Swift Package Manager (SPM) to continue receiving updates. See our [CocoaPods to SPM Migration Guide](/migration-docs/cocoapods-to-spm-migration.md) for details.
 
