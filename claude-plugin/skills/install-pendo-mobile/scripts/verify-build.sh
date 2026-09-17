@@ -690,8 +690,7 @@ flutter_build() {
     if [ "$pendo_installed" -eq 1 ] && ! grep -q 'PendoSDK\.setup(' "$target"; then
       if [ -z "$setup_call_sites" ]; then
         err "${target}: no PendoSDK.setup() call anywhere under lib/ — no launch path initializes Pendo"
-        fails=$((fails + 1))
-        heads=$((heads + 1))
+        record_head "${target} setup()" 1
       else
         err "${target}: setup() is not in this entry point but is in ${setup_call_sites}— correct if this path reaches it via a shared bootstrap, otherwise this flavor will not initialize Pendo. Not counted against the verdict; confirm by reading the call chain."
       fi
