@@ -77,9 +77,9 @@ click or screen-change event.
 While offline, uploads simply fail, so events keep accumulating in on-device storage until
 the connection returns.
 
-- **Storage cap.** The buffer is capped (default 10 MB, up to 500 MB). When it reaches the
-  cap, the SDK deletes the **oldest** events until the buffer is back down to 80% of the
-  cap, then keeps collecting. So the newest events are always kept.
+- **Storage cap.** The buffer is capped (default 10 MB, up to 1000 MB; 500 MB before
+  SDK 3.14.4). When it reaches the cap, the SDK deletes the **oldest** events until the
+  buffer is back down to 80% of the cap, then keeps collecting. So the newest events are always kept.
 - **Reconnect.** When the connection returns, the SDK uploads everything it has stored in
   one request — it does not trickle it out in small batches.
 - **Retry backoff.** After a failed upload the SDK waits before trying again: 1 s, then
@@ -185,7 +185,7 @@ The 300 MB low-device-storage pause does **not** emit `AppOfflineLimitReached`.
 |---|---|---|---|---|
 | Analytics | Batch size (`bufferQueueSize`) | Yes | 20 events | Max 1000; commonly set to 10 |
 | Analytics | Time interval (`bufferDuration`) | Yes | 30 s | Max 300 s |
-| Analytics | Storage cap (`maxStorageSizeMB`) | Yes | 10 MB | Max 500 MB |
+| Analytics | Storage cap (`maxStorageSizeMB`) | Yes | 10 MB | Max 1000 MB (500 MB before 3.14.4) |
 | Analytics | Urgent events (`immediateEvents`) | Yes | `AppSessionEnd`, `AppInBackground`, `GuideDismissed`, `GuideSnoozed` | Uploaded immediately |
 | Analytics | Overflow behavior | Fixed | Drop oldest, trim to 80% of cap | Offline / retry only |
 | Analytics | Retry backoff | Fixed | 1 s → doubles → 60 s max | Resets on success/reconnect |
