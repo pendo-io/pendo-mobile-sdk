@@ -3,7 +3,7 @@
 Consulted by two different callers, for two different jobs:
 
 1. **The router (`SKILL.md` Phase 1)** — only when its six-row fast-path table matches ambiguously or not at all. Most repos never reach this file.
-2. **Platform reference files** (`references/ios.md`, `android.md`, `react-native.md`, `expo.md` — built in later tasks) — for sub-framework, lifecycle, and navigation-library detail that the router's `subPlatform` table (`SKILL.md`, "The phase contract") does not resolve on its own.
+2. **Platform reference files** (`references/ios.md`, `android.md`, `react-native.md`, `expo.md`) — for sub-framework, lifecycle, and navigation-library detail that the router's `subPlatform` table (`SKILL.md`, "The phase contract") does not resolve on its own.
 
 Never guess past what a section below can confirm. If signals are genuinely absent or contradictory, ask the user — do not default to the more common case.
 
@@ -22,7 +22,7 @@ Different from §2 below — that one is a false ambiguity the router's fast-pat
 Router rule (`SKILL.md` Phase 1): `expo` in `package.json` dependencies wins over `react-native` when both are present, because every RN and Expo repo ships native `ios/`/`android/` shells alongside `react-native` in `package.json` — that combination alone is not evidence of a native app.
 
 ### Confirming indicators — Expo
-- `expo` — **the exact package name, not any `expo-*` prefix** — in the **app's own** `package.json` dependencies (not just a hoisted root in a monorepo/workspace, since a workspace root's dependency list can mask what an individual app actually depends on). An `expo-*` module alone (e.g. `expo-router`, `expo-modules-core`, without `expo` itself) is a bare React Native app that has adopted one Expo module — see `SKILL.md` Phase 1 ("The Expo signal is the `expo` package exactly") — it is not a confirming Expo indicator on its own.
+- The `expo` package itself in the **app's own** `package.json` dependencies — not just a hoisted root in a monorepo/workspace, since a workspace root's dependency list can mask what an individual app actually depends on. An `expo-*` module without `expo` is a bare React Native app (see `SKILL.md` Phase 1).
 - `app.json` or `app.config.js`/`app.config.ts` with a top-level `"expo": {...}` key.
 - `.expo/` directory present (local Expo dev-client cache).
 - `package.json` `"main"` set to `"expo-router/entry"` or `"expo/AppEntry.js"`, or a `"scripts"` entry invoking `expo start` / `expo prebuild` / `expo run:ios` / `expo run:android`.

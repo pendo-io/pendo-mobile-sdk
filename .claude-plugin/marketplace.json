@@ -7,9 +7,9 @@
     {
       "name": "pendo-mobile-sdk-tools",
       "source": "./plugin",
-      "description": "Install and configure the Pendo Mobile SDK directly in your app using Claude Code (Beta)",
+      "description": "Install, check and fix the Pendo Mobile SDK in your app using Claude Code (Beta)",
       "category": "mobile",
-      "keywords": ["pendo", "mobile-sdk", "install", "ios", "android", "react-native", "expo", "flutter", "maui"]
+      "keywords": ["pendo", "mobile-sdk", "install", "doctor", "audit", "ios", "android", "react-native", "expo", "flutter", "maui"]
     }
   ]
 }
