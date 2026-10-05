@@ -64,6 +64,8 @@ if you hit problems or have feedback.
 
 Then, from your own app's repo, ask it to install Pendo. If Pendo is already in your app, ask it to check your Pendo integration instead: its doctor mode reports problems by severity and fixes only the ones you pick, on a new branch.
 
+For modes, arguments, example prompts and troubleshooting, see the [plugin guide](plugin/README.md).
+
 **Keeping it up to date.** Claude Code doesn't update plugins from this marketplace automatically unless you turn it on: run `/plugin`, open **Marketplaces**, select **pendo-mobile-sdk** and choose **Enable auto-update**. To update by hand instead:
 
 ```
