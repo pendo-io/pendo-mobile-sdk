@@ -70,7 +70,7 @@ Under `--dry-run`: render `**Branch:** (not created — dry run)`, rename `### F
 
 ## Early-exit report
 
-Used on any stop: Phase 0's dirty tree, Phase 1's declined toolchain warning, Phase 2's missing reference, Phase 3's gate, Phase 4's AGP floor (read directly, or inferred from a Gradle wrapper below 8.0) or a declined mismatch. Also Phase 6's Android version lookup (`references/android.md` §2) when it fails and the user cannot supply the version. That stop comes after the branch exists, so Phase 5 step 2's rollback runs first. **Missing credentials are never an exit**: Phase 5 writes a placeholder and the run completes. **In `detect` and `doctor` the only exit here is Phase 2's missing reference**: they run neither Phase 0 nor Phase 5, and their Phase 3 and 4 stops are findings in their own reports.
+Used on any stop: Phase 0's dirty tree, Phase 1's declined toolchain warning, Phase 2's missing reference, Phase 3's gate, Phase 4's AGP floor (read directly, or inferred from a Gradle wrapper below 8.0) or a declined mismatch. Also Phase 6's Android version lookup (`references/android.md` §2) when it fails and the user cannot supply the version. That stop comes after the branch exists, so Phase 5 step 2's rollback runs first. **Missing credentials are never an exit**: Phase 5 writes a placeholder and the run completes. **In `detect`, `doctor` and `report` the only exit here is Phase 2's missing reference**: they run neither Phase 0 nor Phase 5, and their Phase 3 and 4 stops are findings in their own reports.
 
 ```markdown
 ## Pendo install stopped
@@ -87,4 +87,4 @@ Used on any stop: Phase 0's dirty tree, Phase 1's declined toolchain warning, Ph
 For Phase 3's gate, the classified state's next step from Phase 3: "already instrumented — nothing to do" for **complete**; for **partial**, which pieces are wired and which are not, plus the ways forward, starting with `--mode doctor` to finish it. Name the SDK generation if visible, and stop there: this skill installs, it does not upgrade.>
 ```
 
-If a branch was created in Phase 5 and the run stops before the install report, undo this run's edits, switch back to `originalRef` and delete the install branch, all as `SKILL.md` Phase 5 step 2 describes, and reflect that in the Branch line. Under `--force-dirty`, also list any mixed file that was left as it is.
+If a branch was created in Phase 5 and the run stops before the install report, undo this run's edits, switch back to `originalRef` and delete the install branch, all as `references/integrate.md` Phase 5 step 2 describes, and reflect that in the Branch line. Under `--force-dirty`, also list any mixed file that was left as it is.
