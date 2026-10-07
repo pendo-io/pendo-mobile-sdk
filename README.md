@@ -62,7 +62,7 @@ if you hit problems or have feedback.
 /plugin install pendo-mobile-sdk-tools@pendo-mobile-sdk
 ```
 
-Then, from your own app's repo, ask it to install Pendo. If Pendo is already in your app, ask it to check your Pendo integration instead: its doctor mode reports problems by severity and fixes only the ones you pick, on a new branch.
+Then, from your own app's repo, ask it to install Pendo. If Pendo is already in your app, ask it to check your Pendo integration instead: its doctor mode reports problems by severity and fixes only the ones you pick, on a new branch. To open a Pendo support ticket, ask it for a report for Pendo support: it writes up your app's Pendo setup with keys and user values masked.
 
 For modes, arguments, example prompts and troubleshooting, see the [plugin guide](plugin/README.md).
 

@@ -1,6 +1,6 @@
 # Native iOS — Install Reference
 
-Dispatched by `SKILL.md` Phase 6 for `platform = ios`. Entered with `apiKey`, `urlScheme`, and `subPlatform` (`uikit` | `swiftui`) already resolved per the phase contract — never re-ask, never re-detect. Read once in Phase 2 and reused for Phase 3's gate and Phase 6's execution.
+Dispatched by `references/integrate.md` Phase 6 for `platform = ios`. Entered with `apiKey`, `urlScheme`, and `subPlatform` (`uikit` | `swiftui`) already resolved per the phase contract — never re-ask, never re-detect. Read once in Phase 2 and reused for Phase 3's gate and Phase 6's execution.
 
 Code blocks below use `<API_KEY>`, `<SCHEME>`, and `<CURRENT_VERSION>` as substitution markers. Replace each with the real resolved value before writing the file — never write the literal bracket text into the app, and never invent a value for any of them (Constraints, `SKILL.md`).
 

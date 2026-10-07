@@ -182,7 +182,7 @@ attributed_step() {
 }
 
 # Folds one native head's 0/1/2 into the running tally and prints the
-# "<Label> head:" line SKILL.md Phase 7 requires for every head of every
+# "<Label> head:" line references/integrate.md Phase 7 requires for every head of every
 # dual-head platform — the line is emitted here, once, so no head can be
 # built without one. Reads and updates the caller's `heads`/`fails` locals:
 # bash has no by-reference return, and threading two counters back through
@@ -205,8 +205,8 @@ record_head() {
 # Every head below probes ios/ and android/ relative to the current
 # directory and resolves JS/Dart dependencies there, so the contract is "run
 # me from the app root" — which in a monorepo is *not* the git root. The git
-# root is exactly where a caller is likely to be standing, since SKILL.md's
-# Phase 0 (git status) and Phase 5 (git checkout -b) both run there.
+# root is exactly where a caller is likely to be standing, since Phase 0
+# (git status) and Phase 5 (git checkout -b) in references/integrate.md both run there.
 # Undetected, that produces a bare "nothing could be verified" which reads as
 # "this repo has no native heads" rather than "you are looking in the wrong
 # place". Observed on a real Flutter pub workspace whose app lives at
@@ -571,7 +571,7 @@ cross_platform_js_build() {
 
 # Flutter gets the same two guarantees the react-native/expo path has, and
 # previously had neither: a per-head "<Label> head:" line for every head
-# (SKILL.md Phase 7 promises one "always", and this function used to collapse
+# (references/integrate.md Phase 7 promises one "always", and this function used to collapse
 # a passing iOS head and a failing Android head into the single line
 # "BUILD FAILED (flutter)"), and failure attribution, so a pre-existing
 # breakage is not reported as Pendo's doing. The pub-get and analyze gates
