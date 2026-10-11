@@ -36,6 +36,14 @@ GRADLE_COORDINATE = re.compile(
 GRADLE_NAMED_COORDINATE = re.compile(
     rf"\b(?:{'|'.join(GRADLE_CONFIGURATIONS)})\s*\(?\s*group\s*[:=]\s*[\"']([^\"']+)[\"']\s*,\s*"
     r"""name\s*[:=]\s*["']([^"']+)["'](?:\s*,\s*version\s*[:=]\s*["']([^"']+)["'])?""")
+CATALOG_SUFFIX = ".versions.toml"
+CATALOG_ALIAS_SEPARATOR = re.compile(r"[-_.]")
+CATALOG_BUNDLES = "bundles."
+CATALOG_PROVIDER_CALL = re.compile(r"\.(?:get|orNull|asProvider)$")
+CATALOG_LOOKUP = re.compile(r"""\bfind(Library|Bundle)\(\s*["']([^"']+)["']""")
+INCLUDED_BUILD = re.compile(r"""\bincludeBuild\s*\(?\s*["']([^"']+)["']""")
+BUILD_SRC = "buildSrc"
+CONVENTION_PLUGIN_SOURCES = (".kt", ".groovy", ".java")
 YAML_COMMENT = re.compile(r"(?:^|\s)#.*$")
 GRADLE_LOCK_LINE = re.compile(r"^([\w.\-]+:[\w.\-]+):([^=]+)=")
 PUBSPEC_SECTION = re.compile(r"^(dependencies|dev_dependencies):\s*$")
@@ -250,9 +258,32 @@ def read_ios_head(reading):
     read_swift_packages(reading)
 
 
-def catalog_libraries(catalog):
+def catalog_alias(name):
+    """The accessor path Gradle generates for a catalog alias: navigation-compose -> navigation.compose."""
+    return CATALOG_ALIAS_SEPARATOR.sub(".", name)
+
+
+def catalog_references(build_texts, accessor):
+    """Accessor paths of the libraries and bundles the build uses from one catalog."""
+    static = re.compile(rf"(?<![\w.])(?:(?:rootProject|project)\.)?{re.escape(accessor)}\.([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)")
+    references = set()
+    for text in build_texts:
+        references.update(CATALOG_PROVIDER_CALL.sub("", path) for path in static.findall(text))
+        references.update((CATALOG_BUNDLES if kind == "Bundle" else "") + catalog_alias(alias)
+                          for kind, alias in CATALOG_LOOKUP.findall(text))
+    return references
+
+
+def catalog_libraries(catalog, references):
+    """The libraries the build references, or every library when nothing references this catalog."""
+    used = {alias for alias in references if not alias.startswith(CATALOG_BUNDLES)}
+    for bundle, members in catalog.get("bundles", {}).items():
+        if CATALOG_BUNDLES + catalog_alias(bundle) in references:
+            used.update(catalog_alias(member) for member in members)
     versions = catalog.get("versions", {})
-    for entry in catalog.get("libraries", {}).values():
+    for alias, entry in catalog.get("libraries", {}).items():
+        if references and catalog_alias(alias) not in used:
+            continue
         if isinstance(entry, str):
             group, artifact, *version = entry.split(":")
             yield f"{group}:{artifact}", version[0] if version else ""
@@ -264,18 +295,47 @@ def catalog_libraries(catalog):
         yield module, str(version)
 
 
+def plugin_build_roots(app_root):
+    """buildSrc and the included builds the settings files name, inside the app and outside node_modules."""
+    root = os.path.realpath(app_root)
+    roots = [os.path.join(root, BUILD_SRC)]
+    for path in find_files(app_root, lambda _, name: name.startswith("settings.gradle")):
+        for included in INCLUDED_BUILD.findall(read_text(path) or ""):
+            target = os.path.realpath(os.path.join(os.path.dirname(path), included))
+            if target.startswith(root + os.sep) and "node_modules" not in target.split(os.sep):
+                roots.append(target)
+    return roots
+
+
+def convention_plugin_texts(app_root):
+    return [read_text(path) or "" for plugin_root in plugin_build_roots(app_root)
+            for path in find_files(plugin_root, lambda _, name: name.endswith(CONVENTION_PLUGIN_SOURCES))]
+
+
 def read_android(reading):
     def is_gradle_file(_, name):
         return name.endswith((".gradle", ".gradle.kts")) and not name.startswith("settings.")
 
+    build_texts = []
     for path in find_files(reading.app_root, is_gradle_file):
         text = read_text(path) or ""
+        build_texts.append(text)
         coordinates = GRADLE_COORDINATE.findall(text) + GRADLE_NAMED_COORDINATE.findall(text)
         if coordinates:
             reading.source(path)
         for group, artifact, version in coordinates:
             reading.declare(f"{group}:{artifact}", version)
-    for path in find_files(reading.app_root, lambda _, name: name.endswith(".versions.toml")):
+    read_version_catalogs(reading, build_texts + convention_plugin_texts(reading.app_root))
+    for path in find_files(reading.app_root, lambda _, name: name == "gradle.lockfile"):
+        reading.source(path)
+        for line in (read_text(path) or "").splitlines():
+            found = GRADLE_LOCK_LINE.match(line)
+            if found:
+                reading.resolved.setdefault(found.group(1), found.group(2))
+
+
+def read_version_catalogs(reading, build_texts):
+    for path in find_files(reading.app_root, lambda _, name: name.endswith(CATALOG_SUFFIX)):
         if tomllib is None:
             reading.unread.append(os.path.relpath(path, reading.app_root))
             continue
@@ -285,14 +345,9 @@ def read_android(reading):
             reading.unread.append(os.path.relpath(path, reading.app_root))
             continue
         reading.source(path)
-        for module, version in catalog_libraries(catalog):
+        accessor = os.path.basename(path)[:-len(CATALOG_SUFFIX)]
+        for module, version in catalog_libraries(catalog, catalog_references(build_texts, accessor)):
             reading.declare(module, version)
-    for path in find_files(reading.app_root, lambda _, name: name == "gradle.lockfile"):
-        reading.source(path)
-        for line in (read_text(path) or "").splitlines():
-            found = GRADLE_LOCK_LINE.match(line)
-            if found:
-                reading.resolved.setdefault(found.group(1), found.group(2))
 
 
 def read_flutter(reading):

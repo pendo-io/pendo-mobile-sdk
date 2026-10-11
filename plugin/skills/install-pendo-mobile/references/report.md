@@ -22,7 +22,7 @@ Report reads only. Its one write is `pendo-support-report.md` and `pendo-support
    - any `environmentName`, custom host or other Pendo option passed to init
 5. **Framework and build:** the framework and language versions (React Native, Expo SDK, Flutter, Dart, .NET, Swift, Kotlin), minimum OS versions, minify/R8, Hermes, React Native's New Architecture, and whether the iOS target is SwiftUI, UIKit or both.
 6. **Requirements:** every Phase 4 row with the value read, the floor, and its outcome. Anything Phase 4 or the platform reference sends to "Requires your attention" (for example Expo Go) goes here as its own row: this template has no such section.
-7. **Libraries that matter to Pendo.** Run `python3 "<skill-dir>/scripts/list_dependencies.py" <platform> --app-root <app root>` and use its JSON as it is. It reads the manifests and lockfiles and returns `relevant` (libraries on its curated list, by category) and `direct` (every direct dependency), each with the declared and the resolved version, plus the files it read (`sources`) and the lockfiles it could not read (`unread`). On React Native, Expo and Flutter it also reads the `ios/` and `android/` projects: a curated library declared there is in `relevant` with `head` set to `ios` or `android`. In the table, write it as `<name> (iOS)` or `<name> (Android)`. Then list WebView use by file and line: `WKWebView`, `android.webkit.WebView`, `react-native-webview`, `webview_flutter`, `flutter_inappwebview`, MAUI `WebView`.
+7. **Libraries that matter to Pendo.** Run `python3 "<skill-dir>/scripts/list_dependencies.py" <platform> --app-root '<app root>'` and use its JSON as it is. It reads the manifests and lockfiles and returns `relevant` (libraries on its curated list, by category) and `direct` (every direct dependency), each with the declared and the resolved version, plus the files it read (`sources`) and the lockfiles it could not read (`unread`). On React Native, Expo and Flutter it also reads the `ios/` and `android/` projects: a curated library declared there is in `relevant` with `head` set to `ios` or `android`. In the table, write it as `<name> (iOS)` or `<name> (Android)`. Then list WebView use by file and line: `WKWebView`, `android.webkit.WebView`, `react-native-webview`, `webview_flutter`, `flutter_inappwebview`, MAUI `WebView`.
 
    | Category | Why TS looks at it |
    |---|---|
@@ -37,7 +37,7 @@ Report reads only. Its one write is `pendo-support-report.md` and `pendo-support
    | analytics, session_replay, crash | these SDKs also watch screens, taps or the app lifecycle, so TS checks them first when Pendo misses screens or taps |
 
    The curated list is data in `scripts/relevant_libraries.json`: add libraries there, not in a single run.
-8. **Environment:** run `python3 "<skill-dir>/scripts/collect_env.py" <platform> --app-root <app root>` and use its JSON as it is. A missing toolchain from Phase 1 is reported here.
+8. **Environment:** run `python3 "<skill-dir>/scripts/collect_env.py" <platform> --app-root '<app root>'` and use its JSON as it is. A missing toolchain from Phase 1 is reported here.
 9. **Working tree:** `clean`, or `dirty` with the number of changed paths from `git status --porcelain`.
 10. **Skill version:** the `version` in the plugin manifest at `<skill-dir>/../../.claude-plugin/plugin.json`. If the file or its `version` field is missing, use `unversioned`.
 
@@ -140,16 +140,22 @@ The JSON file uses exactly this schema:
 
 ## R3 Redact
 
-Pass the rendered report to the script on stdin, with a **quoted** heredoc so the shell expands nothing in it. Then run the same two commands for the JSON, so it gets its own temp file and its own summary line:
+Pass the rendered report to the script on stdin, with a **quoted** heredoc so the shell expands nothing in it. First create the temp file and a heredoc end word:
 
 ```bash
-REDACTED="$(mktemp "${TMPDIR:-/tmp}/pendo-support-report.XXXXXX")" && echo "$REDACTED"
-python3 "<skill-dir>/scripts/redact_report.py" > "$REDACTED" <<'PENDO_SUPPORT_REPORT_EOF'
-<the rendered report>
-PENDO_SUPPORT_REPORT_EOF
+REDACTED="$(mktemp "${TMPDIR:-/tmp}/pendo-support-report.XXXXXX")" && echo "$REDACTED" \
+  && python3 -c 'import secrets; print("PENDO_REPORT_" + secrets.token_hex(8))'
 ```
 
-Note the path it prints: later commands may not keep shell variables, so use that path, not `$REDACTED`. Never write the unredacted text to a file. Show the contents of the Markdown file, which is the redacted report (the JSON is not shown in chat), and never any part of the text from before redaction. If the script is missing or fails, do not show the report: say redaction could not run and stop.
+Then redact, with the printed path in place of `<temp file>` and the printed word in place of `<end word>`:
+
+```bash
+python3 "<skill-dir>/scripts/redact_report.py" > "<temp file>" <<'<end word>'
+<the rendered report>
+<end word>
+```
+
+The end word is new on every run, so a line quoted from the repo cannot end the heredoc early and run what follows as shell commands. Never use a fixed end word. Run both commands again for the JSON, so it gets its own temp file, end word and summary line. Never write the unredacted text to a file. Show the contents of the Markdown file, which is the redacted report (the JSON is not shown in chat), and never any part of the text from before redaction. If the script is missing or fails, do not show the report: say redaction could not run and stop.
 
 After the report, add only these lines: the script's one-line summary from stderr for each file (for example "redacted 3 value(s): email=1, literal=2"), and either R4's question or, under `--dry-run`, a note that saving was skipped.
 
@@ -159,4 +165,4 @@ Skip this step under `--dry-run`.
 
 Ask once: "Save this report to `pendo-support-report.md` and its data to `pendo-support-report.json` in `<app root>`?"
 - **No:** write nothing, and say nothing was saved.
-- **Yes:** if either file exists, ask whether to overwrite them or save as `pendo-support-report-<YYYYMMDD-HHMM>.md` and `.json`. Copy R3's two redacted files to them, so the saved text is exactly what the script produced, not a copy you typed. Then run `python3 "<skill-dir>/scripts/redact_report.py" --check < <file>` on each. If either does not exit `0`, delete both files, say they were not saved and why, and stop. Do not stage them, commit them, or add them to `.gitignore`. Tell the user both full paths and that they can attach both to their Pendo support ticket.
+- **Yes:** if either name exists, even as a link (`[ -e '<file>' ] || [ -L '<file>' ]`), ask whether to overwrite them or save as `pendo-support-report-<YYYYMMDD-HHMM>.md` and `.json`. Run `python3 "<skill-dir>/scripts/redact_report.py" --check < '<temp file>'` on both R3 temp files first, and save nothing unless both exit `0`. Then save each from its temp file with `python3 "<skill-dir>/scripts/redact_report.py" --save '<app root>/<file name>' < '<temp file>'`, so the saved text is exactly what the script produced, not a copy you typed. Never write them with `cp`, `>` or a file tool: the script saves only text with nothing left to mask, and replaces a link at that path instead of writing through it. Put every path in single quotes so the shell expands nothing in it; if a path itself contains a single quote, do not save, and say why. If a save does not exit `0`, do not run the other one; say which file was saved, which was not, and why (the script's stderr line), and stop. Do not stage them, commit them, or add them to `.gitignore`. Tell the user both full paths and that they can attach both to their Pendo support ticket.

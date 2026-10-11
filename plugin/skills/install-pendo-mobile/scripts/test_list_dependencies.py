@@ -114,16 +114,24 @@ class ListDependenciesTest(unittest.TestCase):
             '  implementation("androidx.compose.ui:ui")\n'
             '  implementation("io.sentry:sentry-android:$sentryVersion")\n'
             "  implementation(libs.navigation.compose)\n"
+            "  implementation(libs.rx.java.get())\n"
+            "  implementation libs.bundles.product.analytics\n"
             "  implementation 'com.squareup.okhttp3:okhttp:4.12.0'\n"
             "  implementation group: 'sdk.pendo.io', name: 'pendoIO', version: '3.14.+', changing: true\n"
             '  implementation(group = "com.airbnb.android", name = "lottie", version = "6.5.0")\n'
             "}\n")
         catalog = ('[versions]\nnavigation = "2.8.0"\n\n[libraries]\n'
-                   'navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }\n')
+                   'navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }\n'
+                   'rx_java = "io.reactivex.rxjava3:rxjava:3.1.8"\n'
+                   'mixpanel = "com.mixpanel.android:mixpanel-android:7.5.2"\n'
+                   'instabug = "com.instabug.library:instabug:13.0.0"\n\n'
+                   '[bundles]\nproduct-analytics = ["mixpanel"]\n')
         lockfile = "androidx.navigation:navigation-compose:2.8.1=releaseRuntimeClasspath\n"
         result = listed("android", {"app/build.gradle.kts": build_gradle, "gradle/libs.versions.toml": catalog,
                                     "app/gradle.lockfile": lockfile})
         self.assertEqual(result["relevant"], [
+            {"name": "com.mixpanel.android:mixpanel-android", "category": "analytics", "declared": "7.5.2", "resolved": ""},
+            {"name": "io.reactivex.rxjava3:rxjava", "category": "architecture", "declared": "3.1.8", "resolved": ""},
             {"name": "io.sentry:sentry-android", "category": "crash", "declared": "$sentryVersion", "resolved": ""},
             {"name": "com.airbnb.android:lottie", "category": "gestures_animation", "declared": "6.5.0", "resolved": ""},
             {"name": "androidx.navigation:navigation-compose", "category": "navigation", "declared": "2.8.0",
@@ -134,6 +142,23 @@ class ListDependenciesTest(unittest.TestCase):
         self.assertIn({"name": "com.squareup.okhttp3:okhttp", "declared": "4.12.0", "resolved": ""}, result["direct"])
         self.assertIn({"name": "sdk.pendo.io:pendoIO", "declared": "3.14.+", "resolved": ""}, result["direct"])
         self.assertIn({"name": "com.airbnb.android:lottie", "declared": "6.5.0", "resolved": ""}, result["direct"])
+
+    def test_android_declares_catalog_libraries_the_build_references(self):
+        catalog = ('[libraries]\nhilt-android = "com.google.dagger:hilt-android:2.52"\n'
+                   'instabug = "com.instabug.library:instabug:13.0.0"\n')
+        plugin = 'add("implementation", libs.findLibrary("hilt-android").get())\n'
+        cases = {
+            "project prefix": ({"app/build.gradle.kts": "implementation(project.libs.hilt.android)\n"}, ["hilt-android"]),
+            "orNull provider": ({"app/build.gradle.kts": "implementation(libs.hilt.android.orNull)\n"}, ["hilt-android"]),
+            "included build plugin": ({"settings.gradle.kts": 'pluginManagement { includeBuild("gradle/plugins") }\n',
+                                       "gradle/plugins/src/main/kotlin/Hilt.kt": plugin}, ["hilt-android"]),
+            "no reference to the catalog": ({"app/build.gradle.kts": "implementation(deps.hilt.android)\n"},
+                                            ["hilt-android", "instabug"]),
+        }
+        for name, (files, expected) in cases.items():
+            with self.subTest(name):
+                result = listed("android", files | {"gradle/libs.versions.toml": catalog})
+                self.assertEqual([entry["name"].split(":")[1] for entry in result["direct"]], expected)
 
     def test_flutter_reads_pubspec_and_lock(self):
         pubspec = ("name: shop\ndependencies:\n  flutter:\n    sdk: flutter\n  go_router: ^14.2.0\n"

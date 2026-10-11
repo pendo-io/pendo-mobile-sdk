@@ -2,11 +2,15 @@
 """Mask secrets in a Pendo support report before it is shown or saved."""
 import argparse
 import collections
+import contextlib
+import os
 import re
 import sys
+import tempfile
 from typing import NamedTuple
 
 EXIT_SECRETS_FOUND = 1
+EXIT_NOT_SAVED = 3
 PLACEHOLDERS = frozenset({"YOUR_API_KEY_HERE", "YOUR_SCHEME_ID_HERE"})
 LITERAL_KIND = "literal"
 SECRET_KIND = "secret"
@@ -38,15 +42,17 @@ XML_SECRET_RULES = (
     re.compile(r"(?is)(<key>[^<]*(?:key|secret|token|password)[^<]*</key>\s*<string>)([^<]+)(</string>)"),
     re.compile(r'(?is)(<string\s+name="[^"]*(?:key|secret|token|password)[^"]*"\s*>)([^<]+)(</string>)'),
 )
-CODE_IDENTIFIER = re.compile(r"(?:[A-Z]?[a-z]{2,}|\d+)+")
+CODE_IDENTIFIER = re.compile(r"(?:[A-Z]?[a-z]{2,}|[A-Z]?\d+)+")
+PATH_SEPARATOR = "/"
+SOURCE_FILE_EXTENSION = re.compile(r"\.(?:swift|mm?|h|kts?|java|gradle|xml|plist|[jt]sx?|dart|cs|xaml)\b")
 
 PATTERN_RULES = (
     ("bearer", re.compile(r"(?i)\bbearer\s+[A-Za-z0-9._~+/=-]{8,}")),
     ("jwt", re.compile(r"(?:\b[A-Za-z0-9_-]+\.)?\beyJ[A-Za-z0-9_-]{4,}(?:\.[A-Za-z0-9_-]+){0,2}")),
     ("email", re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b")),
     ("hex", re.compile(r"\b[0-9a-fA-F]{32,}\b")),
-    ("base64", re.compile(r"(?=[A-Za-z0-9+_-]*\d)(?=[A-Za-z0-9+_-]*[a-z])(?=[A-Za-z0-9+_-]*[A-Z])"
-                          r"[A-Za-z0-9+_-]{24,}={0,2}")),
+    ("base64", re.compile(r"(?=[A-Za-z0-9+/_-]*\d)(?=[A-Za-z0-9+/_-]*[a-z])(?=[A-Za-z0-9+/_-]*[A-Z])"
+                          r"[A-Za-z0-9+/_-]{24,}={0,2}")),
 )
 
 
@@ -166,8 +172,20 @@ def mask_home_folders(text, counts):
     return HOME_FOLDER.sub(lambda found: found.group(0) if found.group(2).startswith("<redacted:") else replace(found), text)
 
 
+def is_code_name(found):
+    """A code identifier or a path of them; before a source file extension, only the file name must be one."""
+    *folders, name = found.group(0).split(PATH_SEPARATOR)
+    names = [name] if SOURCE_FILE_EXTENSION.match(found.string, found.end()) else folders + [name]
+    return all(CODE_IDENTIFIER.fullmatch(part) for part in names)
+
+
+def is_secret_shape(kind, found):
+    return not is_mask_or_placeholder(found.group(0)) and not (kind == "base64" and is_code_name(found))
+
+
 def secret_kind(value):
-    return next((kind for kind, pattern in PATTERN_RULES if pattern.search(value)), None)
+    return next((kind for kind, pattern in PATTERN_RULES
+                 if any(is_secret_shape(kind, found) for found in pattern.finditer(value))), None)
 
 
 def mask_split_literals(text, counts):
@@ -205,9 +223,8 @@ def mask_named_secrets(text, counts):
 def mask_secret_shapes(text, counts):
     for kind, pattern in PATTERN_RULES:
         def replace(found, kind=kind):
-            value = found.group(0)
-            if is_mask_or_placeholder(value) or (kind == "base64" and CODE_IDENTIFIER.fullmatch(value)):
-                return value
+            if not is_secret_shape(kind, found):
+                return found.group(0)
             counts[kind] += 1
             return mask(kind)
 
@@ -234,13 +251,46 @@ def summary(counts):
     return f"redacted {sum(counts.values())} value(s): {details}"
 
 
+def save(text, path):
+    """Write through a temp file renamed into place, so a link at path is replaced, never followed."""
+    descriptor, temp_path = tempfile.mkstemp(dir=os.path.dirname(os.path.abspath(path)), prefix=".pendo-report-")
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            handle.write(text)
+        os.replace(temp_path, path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            os.unlink(temp_path)
+        raise
+
+
+def save_unless_secret(text, counts, path, stderr):
+    if not path:
+        print("not saved: the path is empty", file=stderr)
+        return EXIT_NOT_SAVED
+    if counts:
+        print("not saved: the text still has values to mask", file=stderr)
+        return EXIT_SECRETS_FOUND
+    try:
+        save(text, path)
+    except OSError as error:
+        print(f"not saved: {error}", file=stderr)
+        return EXIT_NOT_SAVED
+    return 0
+
+
 def main(argv=None, stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="exit 1 if anything would be masked")
+    action = parser.add_mutually_exclusive_group()
+    action.add_argument("--check", action="store_true", help="exit 1 if anything would be masked")
+    action.add_argument("--save", metavar="PATH", help="save the text to PATH only if nothing would be masked")
     args = parser.parse_args(argv)
-    redacted, counts = redact(stdin.read())
+    text = stdin.read()
+    redacted, counts = redact(text)
     if args.check:
         return EXIT_SECRETS_FOUND if counts else 0
+    if args.save is not None:
+        return save_unless_secret(text, counts, args.save, stderr)
     stdout.write(redacted)
     print(summary(counts), file=stderr)
     return 0

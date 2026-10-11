@@ -1,8 +1,10 @@
 import io
 import json
+import os
+import tempfile
 import unittest
 
-from redact_report import EXIT_SECRETS_FOUND, main, redact
+from redact_report import EXIT_NOT_SAVED, EXIT_SECRETS_FOUND, main, redact
 
 FAKE_JWT = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcHAta2V5LXRlc3QifQ.c2lnbmF0dXJlLXZhbHVlLXRlc3Q"
 LITERAL = "<redacted:literal>"
@@ -78,6 +80,15 @@ class RedactTest(unittest.TestCase):
             "hex": ("secret blob 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b", "secret blob <redacted:hex>"),
             "base64": ("blob Zm9vYmFyQmF6UXV4MTIzNDU2Nzg5MGFiY2RlZmdoaWprbG1u done",
                        "blob <redacted:base64> done"),
+            "base64 with slashes": ('let k = "Ab3dEf9h/Jk2LmN0pQ/rS4tUv6Wx/Yz8aBcD0eF"', 'let k = "<redacted:base64>"'),
+            "aws-style secret": ("| wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY |", "| <redacted:base64> |"),
+            "secret before a file extension": ("https://cdn.example.com/files/wJalrXUtnFEMI2K7MDENGbPxRfiCYEXAMPLEKEY.json",
+                                               "https://cdn.example.<redacted:base64>.json"),
+            "secret before a method call": ("val s = wJalrXUtnFEMI2K7MDENGbPxRfiCYEXAMPLEKEY.decodeBase64()",
+                                            "val s = <redacted:base64>.decodeBase64()"),
+            "secret as a host name": ("https://abcDEF123ghiJKL456mnoPQR789.ngrok.io/hook", "https:<redacted:base64>.ngrok.io/hook"),
+            "split base64 with slashes": ('let k = "Ab3dEf9h/Jk2LmN0pQ/" + "rS4tUv6Wx/Yz8aBcD0eF"',
+                                          'let k = "<redacted:base64>" + "<redacted:base64>"'),
         }
         for name, (given, expected) in cases.items():
             with self.subTest(name):
@@ -104,6 +115,11 @@ class RedactTest(unittest.TestCase):
             "<key>CFBundleURLSchemes</key>\n<array><string>pendo-aaaa1111</string></array>",
             "applicationId com.acme.shop, scheme pendo-aaaa1111",
             "android/app/src/main/java/com/acme/shop/ShopApplication.kt:9",
+            "Student/Student/Submissions/ArcSubmission/V2SubmissionViewController.swift:57",
+            "ios/MyApp/UI/iOS/v1/HomeScreen2ViewController.swift:12",
+            'let path = "Core/Core/Features/" + "Dashboard/DashboardViewController2.swift"',
+            "https://software.mobile.pendo.io/artifactory/androidx-release",
+            "Pendo starts in `V2SubmissionViewController`",
             "PendoNavigationContainerWrapper2Impl in src/App.tsx",
             "rn-pendo-sdk 3.14.2, maven 3.14.5.10846",
             "token = response.data.token",
@@ -146,6 +162,32 @@ class MainTest(unittest.TestCase):
     def test_check_mode_exit_codes(self):
         self.assertEqual(self.run_main(["--check"], "mail jane@acme.com")[:2], (EXIT_SECRETS_FOUND, ""))
         self.assertEqual(self.run_main(["--check"], "nothing secret here")[:2], (0, ""))
+
+    def test_save_replaces_a_link_at_the_destination_instead_of_writing_through_it(self):
+        for target_exists in (True, False):
+            with self.subTest(target_exists=target_exists), tempfile.TemporaryDirectory() as root:
+                target, destination = os.path.join(root, "target"), os.path.join(root, "pendo-support-report.md")
+                if target_exists:
+                    with open(target, "w") as handle:
+                        handle.write("original")
+                os.symlink(target, destination)
+                self.assertEqual(self.run_main(["--save", destination], "report text")[0], 0)
+                with open(destination) as handle:
+                    self.assertEqual((os.path.islink(destination), handle.read()), (False, "report text"))
+                self.assertEqual(sorted(os.listdir(root)), ["pendo-support-report.md"] + (["target"] if target_exists else []))
+                if target_exists:
+                    with open(target) as handle:
+                        self.assertEqual(handle.read(), "original")
+
+    def test_save_writes_nothing_when_it_cannot_save_safely(self):
+        with tempfile.TemporaryDirectory() as root:
+            destination = os.path.join(root, "pendo-support-report.md")
+            self.assertEqual(self.run_main(["--save", destination], "mail jane@acme.com")[:2], (EXIT_SECRETS_FOUND, ""))
+            self.assertEqual(os.listdir(root), [])
+            os.mkdir(destination)
+            self.assertEqual(self.run_main(["--save", destination], "report text")[:2], (EXIT_NOT_SAVED, ""))
+            self.assertEqual(os.listdir(root), ["pendo-support-report.md"])
+            self.assertEqual(self.run_main(["--save", ""], "report text")[:2], (EXIT_NOT_SAVED, ""))
 
 
 if __name__ == "__main__":
