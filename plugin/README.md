@@ -26,7 +26,7 @@ An install run does these steps, in order:
 4. Asks for your API key and URL scheme, or uses clearly marked placeholders.
 5. Creates a branch named `pendo-install-<platform>`.
 6. Adds the SDK dependency, `setup()`, `startSession()` where your app has a real user ID, and the deep-link scheme for Pendo Designer pairing.
-7. Builds the app, in `verify` mode only.
+7. Builds the app, in `verify` mode only. `verify` runs the full install, then a real build (see [Modes](#modes)).
 8. Prints a report of what changed and what is left for you to do.
 
 ## Before you start
@@ -35,7 +35,7 @@ An install run does these steps, in order:
 |---|---|
 | **A clean git tree** | The install modes refuse to run on uncommitted changes (override with `--force-dirty`). Git is the rollback. |
 | **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select the app → **App Details**. The key looks like a UUID, the scheme like `pendo-xxxxxxxx`. |
-| **The platform toolchain**, for `verify` | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect`, `report` or the doctor's read-only check. |
+| **The platform toolchain**, for [`verify`](#modes) | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect`, `report` or the doctor's read-only check. |
 
 You do not need the key or scheme to start. If you do not have them, the install writes `YOUR_API_KEY_HERE` and `YOUR_SCHEME_ID_HERE`. The report lists every place they were written. The app compiles with them, but no analytics reach Pendo and Designer pairing does not work until you replace them.
 
