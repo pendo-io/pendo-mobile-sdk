@@ -1,6 +1,6 @@
 # Pendo Mobile SDK tools (Beta)
 
-A [Claude Code](https://claude.com/claude-code) plugin, also usable from Cursor and Codex, that installs the Pendo Mobile SDK in your app, checks an existing install, and fixes what is wrong with it.
+A [Claude Code](https://claude.com/claude-code) plugin, also usable from Cursor and Codex, that installs the Pendo Mobile SDK in your app, checks an existing install, fixes what is wrong with it, and writes a support report for Pendo Technical Support.
 
 It supports native iOS, native Android, React Native, Expo, Flutter and .NET MAUI, and installs the 3.x SDK.
 
@@ -13,6 +13,7 @@ It supports native iOS, native Android, React Native, Expo, Flutter and .NET MAU
 - [How your repo is kept safe](#how-your-repo-is-kept-safe)
 - [What you get back](#what-you-get-back)
 - [Doctor: reading the findings](#doctor-reading-the-findings)
+- [Support report](#support-report)
 - [Troubleshooting](#troubleshooting)
 
 ## What it does
@@ -34,7 +35,7 @@ An install run does these steps, in order:
 |---|---|
 | **A clean git tree** | The install modes refuse to run on uncommitted changes (override with `--force-dirty`). Git is the rollback. |
 | **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select the app → **App Details**. The key looks like a UUID, the scheme like `pendo-xxxxxxxx`. |
-| **The platform toolchain**, for `verify` | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect` or the doctor's read-only check. |
+| **The platform toolchain**, for `verify` | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect`, `report` or the doctor's read-only check. |
 
 You do not need the key or scheme to start. If you do not have them, the install writes `YOUR_API_KEY_HERE` and `YOUR_SCHEME_ID_HERE`. The report lists every place they were written. The app compiles with them, but no analytics reach Pendo and Designer pairing does not work until you replace them.
 
@@ -81,8 +82,9 @@ The skill detects the platform, asks for the key and scheme once, creates `pendo
 | Install Pendo | `integrate` (default) | Yes, on a new branch | Yes, or uses placeholders |
 | Install Pendo and prove it compiles | `verify` | Yes, on a new branch | Yes, or uses placeholders |
 | Audit or fix an existing install | `doctor` | Only the fixes you pick, on a new branch | Only if a fix needs it |
+| Send Pendo support a report about your app's Pendo setup | `report` | Only if you say yes: two report files, never committed | Never |
 
-Without `--mode`, the skill picks one from your request: a question gets `detect`, "install" gets `integrate`, "check that it builds" gets `verify`, and "why isn't Pendo working?" gets `doctor`. The first line of the report says which mode ran.
+Without `--mode`, the skill picks one from your request: a question gets `detect`, "install" gets `integrate`, "check that it builds" gets `verify`, "why isn't Pendo working?" gets `doctor`, and "a report for Pendo support" gets `report`. The first line of the report says which mode ran.
 
 A passing `verify` build proves the code is valid. If placeholders were written, it does not prove Pendo is live.
 
@@ -90,11 +92,11 @@ A passing `verify` build proves the code is valid. If placeholders were written,
 
 | Argument | Meaning |
 |---|---|
-| `--mode detect\|integrate\|verify\|doctor` | How far to run. Default `integrate`. |
+| `--mode detect\|integrate\|verify\|doctor\|report` | How far to run. Default `integrate`. |
 | `--api-key KEY` | Your Pendo integration key. Skips the question. |
 | `--scheme pendo-xxxx` | Your Designer pairing scheme. Skips the question. |
 | `--platform ios\|android\|react-native\|expo\|flutter\|maui` | Skips platform detection. Use it in a monorepo or when two platforms match. |
-| `--dry-run` | Plans the install and writes nothing, not even a branch. Cannot be combined with `--mode verify`. |
+| `--dry-run` | Plans the install and writes nothing, not even a branch. Cannot be combined with `--mode verify`. With `--mode report`, shows the report and skips the question about saving it. |
 | `--force-dirty` | Runs on a tree with uncommitted changes. Your changes are tracked separately in the report. |
 
 ## Example prompts
@@ -110,6 +112,7 @@ Plain language works for every case:
 | Ask a question | "Which Pendo SDK package does this app need?" |
 | Check an install | "Why isn't Pendo working in this app?" |
 | Audit | "Check my Pendo integration." |
+| Support report | "Create a report for Pendo support." |
 
 And the explicit forms:
 
@@ -118,6 +121,7 @@ And the explicit forms:
 /pendo-mobile-sdk-tools:install-pendo-mobile --dry-run
 /pendo-mobile-sdk-tools:install-pendo-mobile --mode verify --platform android
 /pendo-mobile-sdk-tools:install-pendo-mobile --mode doctor
+/pendo-mobile-sdk-tools:install-pendo-mobile --mode report
 /pendo-mobile-sdk-tools:install-pendo-mobile --api-key <key> --scheme pendo-xxxx
 ```
 
@@ -192,12 +196,30 @@ After the report, doctor asks which fixes to apply: `all`, a list like `D1,D2`, 
 | Type | Meaning |
 |---|---|
 | `auto` | Follows directly from the install steps. Doctor applies it when you pick it. |
-| `needs-input` | Needs a value from you, such as the key, the scheme or which identifier to use. Doctor asks once. |
+| `needs-input` | Needs a value or a decision from you, such as the key, the scheme, which identifier to use, or whether to apply a fix adapted to your app. Doctor asks once. |
 | `manual` | Work this tool does not do (major upgrades, AGP or `compileSdk` changes, choosing between two dependency mechanisms). Reported with the remedy; cannot be picked. |
 
 Doctor changes nothing until you pick fixes, and it asks for a clean tree first. After applying each fix it runs the same check again and reports `fixed` only if the check now passes. It can then run a build if you ask.
 
 On a 2.x install doctor runs only the checks that do not depend on the SDK generation, and lists the rest as not checked. It never upgrades across a major version.
+
+When Pendo's standard fix would break something your app does on purpose (for example, `setup()` runs after login because your API key comes from your backend), doctor proposes a fix that fits your app and says why, or leaves the change to you.
+
+## Support report
+
+`report` writes up your app's Pendo setup for Pendo Technical Support, so a support ticket starts with the facts instead of a round of questions. It only reads your repo and never asks for your key.
+
+The report covers:
+- **Summary:** platform, Pendo SDK version and the newest 3.x, install state, navigation, and the most important findings.
+- **App, framework and build:** bundle IDs or application IDs, targets and flavors, minimum OS versions, and the build settings that affect Pendo.
+- **Libraries that matter to Pendo:** navigation, modals and sheets, UI kits, gestures, lists, WebViews, and other analytics, crash and session replay SDKs, with declared and resolved versions.
+- **Pendo SDK:** how it is added, and where `setup()`, `startSession()`, navigation wrappers and pairing schemes are wired, with file and line.
+- **Environment:** toolchain versions.
+- **Integration check:** doctor's findings, the checks that passed, and the ones that could not run.
+
+**What is never in it:** API keys, credentials, and real visitor or account values. A script masks them before the report is shown (`<redacted:literal>`), and checks the files again before they are saved. Your app's name, bundle IDs and `pendo-` pairing schemes are included, because support needs them to find your app.
+
+**Saving:** the report is shown in chat first. If you say yes, it is saved in your app's root as `pendo-support-report.md`, with the same data as `pendo-support-report.json`. The files are not staged or committed. Attach both to your support ticket.
 
 ## Troubleshooting
 
