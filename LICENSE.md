@@ -1,1 +1,1 @@
-The software is governed by the Pendo License Terms and Conditions available at https://www.pendo.io/legal/license-terms-and-conditions-may-2020/ (including any successor site).
+This software is governed by the Pendo Platform Terms of Service, available at https://go.pendo.io/rs/185-LQW-370/images/Pendo-Platform-Terms-of-Service-23Feb2026-FINAL.pdf (or any successor location).
