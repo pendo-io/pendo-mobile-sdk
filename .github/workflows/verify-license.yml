@@ -1,0 +1,30 @@
+name: Verify license
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  verify-license:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify the license terms URL resolves
+        # curl --retry covers timeouts and 5xx; a 4xx fails immediately.
+        run: |
+          urls=$(grep -oiE 'https?://[^[:space:])]+' LICENSE.md | sed -E 's/[.,;]+$//')
+          if [ -z "$urls" ]; then
+            echo "License check failed: LICENSE.md does not link to any license terms" >&2
+            exit 1
+          fi
+          for url in $urls; do
+            if ! curl --fail --silent --show-error --location --output /dev/null \
+                --max-time 15 --retry 3 --retry-delay 2 "$url"; then
+              echo "License check failed: $url is not reachable" >&2
+              exit 1
+            fi
+            echo "OK $url"
+          done
