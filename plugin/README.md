@@ -34,9 +34,8 @@ An install run does these steps, in order:
 | You need | Why |
 |---|---|
 | **A clean git tree** | The install modes refuse to run on uncommitted changes (override with `--force-dirty`). Git is the rollback. |
-| **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select your iOS or Android app → **App Details**. The key is the **Public App ID** (labeled API Key in older versions of the Pendo UI), a long token; the scheme looks like `pendo-xxxxxxxx`. Your iOS and Android apps use the same key and scheme. |
+| **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select the app → **App Details**. The key is a long JWT, the scheme like `pendo-xxxxxxxx`. |
 | **The platform toolchain**, for [`verify`](#modes) | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect`, `report` or the doctor's read-only check. |
-| **Python 3.11 or newer**, for [`report`](#modes) on Android apps with a Gradle version catalog | The report reads `gradle/*.versions.toml` with Python's built-in TOML reader, added in 3.11. macOS ships 3.9; on it the report stops and names the catalog it could not read. Every other mode and platform works with 3.9. |
 
 You do not need the key or scheme to start. If you do not have them, the install writes `YOUR_API_KEY_HERE` and `YOUR_SCHEME_ID_HERE`. The report lists every place they were written. The app compiles with them, but no analytics reach Pendo and Designer pairing does not work until you replace them.
 
@@ -152,7 +151,7 @@ An install report, abridged. The values are illustrative.
 ### Replace before this works
 - `YOUR_API_KEY_HERE` in `App.tsx:12` — your Pendo integration key. Until then no analytics reach Pendo.
 - `YOUR_SCHEME_ID_HERE` in `ios/MyApp/Info.plist:41`, `android/app/src/main/AndroidManifest.xml:28` — your Designer scheme. Until then Designer pairing never works.
-Both are at Pendo UI → Settings → Subscription settings → select your iOS or Android app → App Details, as **Public App ID** and **Scheme ID**. Both apps use the same values.
+Both are at Pendo UI → Settings → Subscription settings → select the app → App Details.
 
 ### Files changed
 - `package.json` — added the Pendo SDK dependency.

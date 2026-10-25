@@ -1,12 +1,9 @@
-import contextlib
-import io
 import json
 import os
 import tempfile
 import unittest
-from unittest import mock
 
-from list_dependencies import CATEGORIES, CatalogNeedsNewerPython, list_dependencies, load_relevant_libraries, main
+from list_dependencies import CATEGORIES, list_dependencies, load_relevant_libraries
 
 
 def write_files(root, files):
@@ -162,25 +159,6 @@ class ListDependenciesTest(unittest.TestCase):
             with self.subTest(name):
                 result = listed("android", files | {"gradle/libs.versions.toml": catalog})
                 self.assertEqual([entry["name"].split(":")[1] for entry in result["direct"]], expected)
-
-    def test_android_catalog_without_tomllib_fails_naming_the_file(self):
-        with mock.patch("list_dependencies.tomllib", None):
-            with self.assertRaisesRegex(CatalogNeedsNewerPython, r"gradle/libs\.versions\.toml.*Python 3\.11"):
-                listed("android", {"gradle/libs.versions.toml": "[libraries]\n"})
-
-    def test_android_without_catalog_does_not_need_tomllib(self):
-        with mock.patch("list_dependencies.tomllib", None):
-            result = listed("android", {"app/build.gradle": 'dependencies {\n  implementation("com.squareup.okhttp3:okhttp:4.12.0")\n}\n'})
-        self.assertIn({"name": "com.squareup.okhttp3:okhttp", "declared": "4.12.0", "resolved": ""}, result["direct"])
-
-    def test_main_explains_a_catalog_it_cannot_read_and_exits_2(self):
-        with tempfile.TemporaryDirectory() as root:
-            write_files(root, {"gradle/libs.versions.toml": "[libraries]\n"})
-            stderr = io.StringIO()
-            with mock.patch("list_dependencies.tomllib", None), contextlib.redirect_stderr(stderr):
-                exit_code = main(["android", "--app-root", root])
-        self.assertEqual(exit_code, 2)
-        self.assertRegex(stderr.getvalue(), r"gradle/libs\.versions\.toml.*Python 3\.11")
 
     def test_flutter_reads_pubspec_and_lock(self):
         pubspec = ("name: shop\ndependencies:\n  flutter:\n    sdk: flutter\n  go_router: ^14.2.0\n"

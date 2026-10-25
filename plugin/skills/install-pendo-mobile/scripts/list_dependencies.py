@@ -12,17 +12,6 @@ try:
 except ModuleNotFoundError:
     tomllib = None
 
-TOMLLIB_PYTHON = "3.11"
-CATALOG_NEEDS_NEWER_PYTHON_EXIT = 2
-
-
-class CatalogNeedsNewerPython(Exception):
-    def __init__(self, catalog):
-        running = ".".join(str(part) for part in sys.version_info[:2])
-        super().__init__(f"reading the Gradle version catalog {catalog} needs Python {TOMLLIB_PYTHON} or newer "
-                         f"(this is Python {running}). Re-run with python{TOMLLIB_PYTHON} or newer.")
-
-
 RELEVANT_LIBRARIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "relevant_libraries.json")
 CATEGORIES = ("core", "navigation", "modals_sheets", "ui_kit", "gestures_animation", "lists", "webview",
               "architecture", "analytics", "session_replay", "crash")
@@ -348,7 +337,8 @@ def read_android(reading):
 def read_version_catalogs(reading, build_texts):
     for path in find_files(reading.app_root, lambda _, name: name.endswith(CATALOG_SUFFIX)):
         if tomllib is None:
-            raise CatalogNeedsNewerPython(os.path.relpath(path, reading.app_root))
+            reading.unread.append(os.path.relpath(path, reading.app_root))
+            continue
         try:
             catalog = tomllib.loads(read_text(path) or "")
         except tomllib.TOMLDecodeError:
@@ -469,11 +459,7 @@ def main(argv=None):
     parser.add_argument("platform", choices=sorted(READERS))
     parser.add_argument("--app-root", default=".")
     args = parser.parse_args(argv)
-    try:
-        print(json.dumps(list_dependencies(args.platform, args.app_root), indent=2))
-    except CatalogNeedsNewerPython as error:
-        print(f"list_dependencies.py: {error}", file=sys.stderr)
-        return CATALOG_NEEDS_NEWER_PYTHON_EXIT
+    print(json.dumps(list_dependencies(args.platform, args.app_root), indent=2))
     return 0
 
 

@@ -43,7 +43,7 @@ In the terminal, run: `flutter pub get`
 ### Step 1. Install the Pendo SDK
 
 >[!NOTE]
->Find your Public App ID (labeled API Key in older versions of the Pendo UI) under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
+>Find your Public App ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID.
 
 
 1. Add the Pendo repository to **android/build.gradle**:
@@ -166,7 +166,7 @@ class App : Application() {
 ### Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
+>Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID.
 
 This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 
@@ -222,7 +222,7 @@ In your native app folder, run: `pod install`
 ### Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->Find your Public App ID (labeled API Key in older versions of the Pendo UI) under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
+>Find your Public App ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID.
 
 
 <details open>
@@ -319,7 +319,7 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
 ### Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
->Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
+>Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID.
 
 These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 

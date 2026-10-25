@@ -74,7 +74,7 @@ static synchronized void setup(Context context, String appKey, PendoOptions opti
 | Param  | Type | Description |
 | :---: | :---: | :--- |
 | context | Context | The hosting application Context (Activity / Service / Application) |
-| appKey | String | The Public App ID (labeled API Key in older versions of the Pendo UI), listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
+| appKey | String | The Public App ID, listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
 | pendoOptions | PendoOptions | PendoOptions should be null unless instructed otherwise by Pendo Support |
 | pendoPhasesCallback | PendoPhasesCallbackInterface | See the PendoPhasesCallbackInterface method table below for more details. Using these callbacks is optional |
 

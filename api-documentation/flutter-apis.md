@@ -52,7 +52,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | String | The Public App ID (labeled API Key in older versions of the Pendo UI), listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
+| appKey | String | The Public App ID, listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
 | pendoOptions | Map<String, dynamic>? | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
 
 
