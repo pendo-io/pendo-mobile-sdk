@@ -34,7 +34,7 @@ An install run does these steps, in order:
 | You need | Why |
 |---|---|
 | **A clean git tree** | The install modes refuse to run on uncommitted changes (override with `--force-dirty`). Git is the rollback. |
-| **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select the app → **App Details**. The key is a long JWT, the scheme like `pendo-xxxxxxxx`. |
+| **Your Pendo API key and URL scheme** | Pendo UI → **Settings** → **Subscription settings** → select the app → **App Details**. The key looks like a UUID, the scheme like `pendo-xxxxxxxx`. |
 | **The platform toolchain**, for [`verify`](#modes) | Xcode (iOS), Gradle and a JDK (Android), Node (React Native, Expo), Flutter, or .NET with the `maui` workload. Not needed for `integrate`, `detect`, `report` or the doctor's read-only check. |
 
 You do not need the key or scheme to start. If you do not have them, the install writes `YOUR_API_KEY_HERE` and `YOUR_SCHEME_ID_HERE`. The report lists every place they were written. The app compiles with them, but no analytics reach Pendo and Designer pairing does not work until you replace them.
