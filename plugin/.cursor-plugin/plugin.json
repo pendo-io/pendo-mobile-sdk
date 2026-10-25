@@ -1,7 +1,7 @@
 {
   "name": "pendo-mobile-sdk-tools",
   "displayName": "Pendo Mobile SDK Tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Install, check and fix the Pendo Mobile SDK in your app, and create a support report, using Cursor (Beta)",
   "author": {
     "name": "Pendo",

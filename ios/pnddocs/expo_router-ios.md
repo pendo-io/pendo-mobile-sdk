@@ -34,7 +34,8 @@ yarn add rn-pendo-sdk
 ## Step 2. Project setup
 
 >[!NOTE]
->Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
+>Set `ios-scheme` and `android-scheme` to the same scheme ID.
 
 In the `app.config.js` or `app.json`, add the following:
 ```json
@@ -43,8 +44,8 @@ In the `app.config.js` or `app.json`, add the following:
     [
       "rn-pendo-sdk",
       {
-        "ios-scheme": "YOUR_IOS_SCHEME_ID",
-        "android-scheme": "YOUR_ANDROID_SCHEME_ID"
+        "ios-scheme": "YOUR_SCHEME_ID_HERE",
+        "android-scheme": "YOUR_SCHEME_ID_HERE"
       }
     ]
   ]
@@ -63,8 +64,8 @@ Add `"ios-use-spm": true` to your plugin properties:
     [
       "rn-pendo-sdk",
       {
-        "ios-scheme": "YOUR_IOS_SCHEME_ID",
-        "android-scheme": "YOUR_ANDROID_SCHEME_ID",
+        "ios-scheme": "YOUR_SCHEME_ID_HERE",
+        "android-scheme": "YOUR_SCHEME_ID_HERE",
         "ios-use-spm": true
       }
     ]
@@ -96,7 +97,7 @@ module.exports = {
 ## Step 4. Integration
 
 >[!NOTE]
->Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your Public App ID (labeled API Key in older versions of the Pendo UI) under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
 
 1. In the application main file (App.js/.ts/.tsx), add the following code:
 

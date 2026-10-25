@@ -58,7 +58,7 @@ Establishes the connection to Pendo. Call this once, as early as possible during
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `appKey` | `String` | The app key shown in the Pendo UI under the application’s settings. |
+| `appKey` | `String` | The Public App ID (labeled API Key in older versions of the Pendo UI), listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
 | `options` | `PendoOptions?` | Optional SDK configuration. |
 | `callback` | `PendoInitCallback?` | Optional initialization callback. |
 

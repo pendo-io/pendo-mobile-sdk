@@ -84,7 +84,7 @@ flutter build ios
 ## Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your Public App ID (labeled API Key in older versions of the Pendo UI) under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
 
 1. For optimal integration place the following code at the beginning of your app's execution:
     ```dart
@@ -223,7 +223,7 @@ Wrap the main widget with a PendoActionListener in the root of the project:
 ## Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
-> Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID. For apps created before May 2023, check each app's `App Details`, as the values may differ.
 
 These steps enable  <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 

@@ -89,7 +89,7 @@ void Setup(string appKey)
 
 | Param  |  Type  | Description                                                              |
 |:------:|:------:|:-------------------------------------------------------------------------|
-| appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
+| appKey | string | The Public App ID (labeled API Key in older versions of the Pendo UI), listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
 
 <b>Example:</b>
     

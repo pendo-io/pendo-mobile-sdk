@@ -26,7 +26,7 @@ Used in `detect` mode. There is no branch, no changed file and no build to repor
 ### Next step
 <**When Phase 3 found an install, this is that state's next step, never an install command** — `integrate` would refuse this repo. Complete: nothing to do. Partial: which pieces are wired and which are not, and the ways forward from Phase 3, starting with `--mode doctor` to finish it. Name the SDK generation if visible, but never offer an upgrade.
 
-Otherwise, the exact command: `--mode integrate` to install, or `--mode verify` to install and build. Say that a Pendo API key **and** a Designer URL scheme are both needed for a working install, found together at Pendo UI → `Settings` → `Subscription settings` → select the app → `App Details`, and that not having them yet is not a blocker: the install uses clearly marked placeholders to replace later. Mention a dirty tree if one was seen, since `integrate` will refuse it unless run with `--force-dirty`.>
+Otherwise, the exact command: `--mode integrate` to install, or `--mode verify` to install and build. Say that a Pendo API key **and** a Designer URL scheme are both needed for a working install, found together at Pendo UI → `Settings` → `Subscription settings` → select the iOS or Android app → `App Details` as **Public App ID** and **Scheme ID** (the same values for both apps), and that not having them yet is not a blocker: the install uses clearly marked placeholders to replace later. Mention a dirty tree if one was seen, since `integrate` will refuse it unless run with `--force-dirty`.>
 ```
 
 ## Install report

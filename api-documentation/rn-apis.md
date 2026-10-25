@@ -257,7 +257,7 @@ static setup(appKey: string, navigationOptions: NavigationOptions, pendoOptions?
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
+| appKey | string | The Public App ID (labeled API Key in older versions of the Pendo UI), listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
 | navigationOptions | NavigationOptions | Convey the navigation library used by your app |
 | pendoOptions | PendoOptions | Optional configuration including debug mode and initialization callbacks. See [PendoOptions](#pendooptions) |
 

@@ -2,6 +2,14 @@
 
 Changes to the `pendo-mobile-sdk-tools` plugin and its `install-pendo-mobile` skill. The version is the `version` field in `.claude-plugin/plugin.json`.
 
+## 1.2.1 — 2026-10-25
+
+### Changed
+- The API key is called **Public App ID**, its current label in the Pendo UI. The iOS and Android apps of one mobile app share it and the scheme, so the install asks for them once.
+- The README no longer says the key looks like a UUID.
+- Doctor does not flag different iOS and Android schemes under one key without asking first: apps created in Pendo before May 2023 can have them.
+- The support report's library list stops with a clear error when an Android version catalog needs Python 3.11 or newer to read, instead of leaving those libraries out.
+
 ## 1.2.0 — 2026-10-07
 
 ### Added

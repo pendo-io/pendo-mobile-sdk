@@ -1,6 +1,6 @@
 {
   "name": "pendo-mobile-sdk-tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Install, check and fix the Pendo Mobile SDK in your app, and create a support report, using Claude Code (Beta)",
   "author": {
     "name": "Pendo",
