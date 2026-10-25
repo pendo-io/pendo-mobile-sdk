@@ -52,7 +52,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | String | The Public App ID, listed in your Pendo Subscription Settings in App Details. Your iOS and Android apps use the same one. |
+| appKey | String | Your Public App ID. Find it under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. |
 | pendoOptions | Map<String, dynamic>? | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
 
 
