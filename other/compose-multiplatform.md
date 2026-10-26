@@ -312,9 +312,7 @@ Add the Pendo pairing activity to `AndroidManifest.xml`:
 > [!NOTE]
 > This activity is only used by Pendo's pairing mode (page tagging and on-device guide testing) and isn't required by your production app. If you prefer not to expose it in release builds, add it to a debug-only manifest (`src/debug/AndroidManifest.xml`) instead of the main manifest. Pairing will then be available only in debug builds.
 
-## Step 5. Optional: Add additional tracking
-
-These steps are optional. Use them when your app needs them.
+## Step 5. Track Compose components
 
 ### Drawers and bottom sheets
 
@@ -364,7 +362,7 @@ fun AppBottomSheet() {
 
 Update the drawer or sheet state when the component is dismissed so Pendo stops detecting it as the current page.
 
-### Tag features
+### (Optional) Tag features
 
 Use [`Modifier.pendoTag()`](/api-documentation/compose-multiplatform-apis.md#pendotag) to give an element a stable identifier that doesn't depend on its displayed text. Apply it once in shared code and it works on both Android and iOS:
 
@@ -384,7 +382,7 @@ Button(
 
 Pendo treats a tagged element as clickable, and the tag appears in the element's attributes in the Pendo Designer. Use it to tag a Feature when automatic tagging can't uniquely identify the element, when the element's text is localized, or when the element isn't otherwise clickable.
 
-### Identify custom screens
+### (Optional) Identify custom screens
 
 Use [`Modifier.pendoScreenId()`](/api-documentation/compose-multiplatform-apis.md#pendoscreenid) for tabs or other state-driven content that doesn't have its own navigation route:
 
