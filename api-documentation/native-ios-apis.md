@@ -111,7 +111,7 @@ func setup(_ appKey: String, with options: PendoOptions?)
 
 | Param  | Type | Description |
 | :---: | :---: | :--- |
-| appKey | String | The App Key is listed in your Pendo Subscription Settings in App Details |
+| appKey | String | Your Public App ID. Find it under `Settings` > `Subscription settings` > select your app > `App Details`. |
 | pendoOptions | PendoOptions | PendoOptions should be `nil` unless instructed otherwise by Pendo Support |
 
 
@@ -133,7 +133,7 @@ func initWith(_ url: URL)
 
 >This API should be called either in the appDelegate or sceneDelegate class inside the openURL or openURLContexts method respectively.
 
->Setting up the Pendo URL scheme in your app is required for your device to pair. The scheme ID can be found in your Pendo Subscription Settings in App Details. 
+>Setting up the Pendo URL scheme in your app is required for your device to pair. Find your scheme ID under `Settings` > `Subscription settings` > select your app > `App Details`.
 
 >For more information see the native iOS installation instructions. Additional steps for pure SwiftUI applications are required and can be found in the installation instructions as well. 
 

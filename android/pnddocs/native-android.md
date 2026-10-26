@@ -79,7 +79,7 @@
 ## Step 2. Integrate with the Pendo SDK
 
 > [!NOTE]
-> Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> Find your Public App ID under `Settings` > `Subscription settings` > select your app > `App Details`.
 
 1. Set up Pendo in the **Application class**.
 
@@ -191,7 +191,7 @@
 ## Step 4. Connect mobile device for tagging and testing
 
 > [!NOTE]
-> Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+> Find your scheme ID under `Settings` > `Subscription settings` > select your app > `App Details`.
 
 This step enables Page <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide</a> testing capabilities.

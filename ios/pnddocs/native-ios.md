@@ -49,7 +49,7 @@
 ## Step 2. Establish a connection to Pendo's server on app launch
 
 >[!NOTE]
->Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your Public App ID under `Settings` > `Subscription settings` > select your app > `App Details`.
 
 Identify if your app project contains an `AppDelegate` file or a `SceneDelegate` file. Pure SwiftUI projects do not include either of these files. To use Pendo in your app, you will need to create one of them.  
 
@@ -165,7 +165,7 @@ struct YourView: View {
 ## Step 4. Configure Pairing Mode for tagging and testing
 
 >[!NOTE]
->Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your scheme ID under `Settings` > `Subscription settings` > select your app > `App Details`.
 
 For additional information, see <a href="https://support.pendo.io/hc/en-us/articles/360033609651-Tagging-Mobile-Pages#HowtoTagaPage" target="_blank">page tagging</a>
 and <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing</a>.

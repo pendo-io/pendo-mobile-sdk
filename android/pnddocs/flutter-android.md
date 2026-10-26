@@ -82,7 +82,7 @@ The optimizations line should look like this:
 ## Step 2. Integrate with the Pendo SDK
 
 >[!NOTE]
->Find your API key in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your Public App ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID.
 
 1. For optimal integration place the following code at the beginning of your app's execution:
 
@@ -231,7 +231,7 @@ await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondPro
 ## Step 3. Mobile device connectivity for testing
 
 >[!NOTE]
->Find your scheme ID in the Pendo UI under `Settings` > `Subscription settings` > select an app > `App Details`.
+>Find your scheme ID under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same scheme ID.
 
 This step enables <a href="https://support.pendo.io/hc/en-us/articles/360033487792-Creating-a-Mobile-Guide#test-guide-on-device-0-6" target="_blank">guide testing capabilities</a>.
 

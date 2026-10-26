@@ -73,7 +73,7 @@ void Setup(string appKey)
 
 | Param  |  Type  | Description                                                              |
 |:------:|:------:|:-------------------------------------------------------------------------|
-| appKey | string | The App Key is listed in your Pendo Subscription Settings in App Details |
+| appKey | string | Your Public App ID. Find it under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. |
 
 <br>
 <b>Example:</b>

@@ -124,7 +124,7 @@ No separate native SDK installation is required for Android.
 ## Step 2. Connect to Pendo
 
 > [!NOTE]
-> Find your API key in the Pendo UI under **Settings > Subscription settings > select an app > App Details**.
+> Find your Public App ID under **Settings > Subscription settings > select your iOS or Android app > App Details**. Both apps use the same Public App ID.
 
 `Pendo.setup()` and `Pendo.setDebugMode()` are common CMP APIs and can be called from shared code. Call `setup()` once, as early as possible. Start a session whenever your app is ready to begin collecting activity:
 
@@ -234,7 +234,7 @@ fun MyCircuitContent(circuit: Circuit) {
 
 ## Step 4. Configure Pairing Mode
 
-These steps enable page tagging and guide testing. Find your scheme ID in the Pendo UI under **Settings > Subscription settings > select an app > App Details**.
+These steps enable page tagging and guide testing. Find your scheme ID under **Settings > Subscription settings > select your iOS or Android app > App Details**. Both apps use the same scheme ID.
 
 ### iOS
 
