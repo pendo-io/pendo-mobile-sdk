@@ -396,12 +396,18 @@ fun Modifier.pendoTag(
 ): Modifier
 ```
 
-Adds a stable, localization-independent identifier to a Compose element. Tagged elements can be identified in analytics and targeted by guides.
+Adds a stable, localization-independent identifier to a Compose element. Use it from shared code to tag Features on both Android and iOS. Pendo treats a tagged element as clickable, and the tag appears in the element's attributes in the Pendo Designer, so the element can be tagged as a Feature, tracked in analytics, and targeted by guides.
+
+Use this modifier when automatic tagging doesn't uniquely identify an element, when the element's text is localized, or when you want to track or anchor a guide to an element that isn't otherwise clickable.
+
+For Compose Multiplatform content, use this modifier instead of the SwiftUI [`.pendoTag()`](/api-documentation/native-ios-apis.md#viewpendotag) modifier, which applies only to native SwiftUI views.
+
+Available in all Pendo CMP SDK releases (`3.14.x` and later).
 
 | Parameter | Type | Description |
 | :--- | :--- | :--- |
-| `tag` | `String` | Unique identifier for the element. |
-| `mergeDescendants` | `Boolean` | Merges descendant semantics into this element when `true`. |
+| `tag` | `String` | Unique identifier for the element. Use a descriptive value that is unique within the screen. |
+| `mergeDescendants` | `Boolean` | Merges descendant semantics into this element when `true`, which can provide additional attributes for identifying it. Defaults to `false`. |
 
 ```kotlin
 Button(

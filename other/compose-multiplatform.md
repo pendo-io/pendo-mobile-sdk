@@ -360,9 +360,11 @@ fun AppBottomSheet() {
 
 Update the drawer or sheet state when the component is dismissed so Pendo stops detecting it as the current page.
 
-## Step 6. Identify elements and custom screens
+## Step 6. Tag features and identify custom screens
 
-Use [`Modifier.pendoTag()`](/api-documentation/compose-multiplatform-apis.md#pendotag) to give an element a stable identifier that doesn't depend on its displayed text:
+### Tag features
+
+Use [`Modifier.pendoTag()`](/api-documentation/compose-multiplatform-apis.md#pendotag) to give an element a stable identifier that doesn't depend on its displayed text. Apply it once in shared code and it works on both Android and iOS:
 
 ```kotlin
 import com.pendo.cmp.pendoTag
@@ -377,6 +379,13 @@ Button(
     Text("Checkout")
 }
 ```
+
+Pendo treats a tagged element as clickable, and the tag appears in the element's attributes in the Pendo Designer. Use it to tag a Feature when automatic tagging can't uniquely identify the element, when the element's text is localized, or when the element isn't otherwise clickable.
+
+> [!NOTE]
+> For Compose Multiplatform content, use `Modifier.pendoTag()` on both platforms. The SwiftUI [`.pendoTag()`](/api-documentation/native-ios-apis.md#viewpendotag) modifier described in the native iOS documentation applies only to native SwiftUI views and isn't needed for screens built with Compose Multiplatform.
+
+### Identify custom screens
 
 Use [`Modifier.pendoScreenId()`](/api-documentation/compose-multiplatform-apis.md#pendoscreenid) for tabs or other state-driven content that doesn't have its own navigation route:
 

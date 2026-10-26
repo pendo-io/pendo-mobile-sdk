@@ -749,6 +749,9 @@ struct PortfolioView: View {
 > [!NOTE]
 > Available from SDK 3.13 on iOS 13 and above.
 
+> [!TIP]
+> For screens built with Compose Multiplatform, use [`Modifier.pendoTag()`](/api-documentation/compose-multiplatform-apis.md#pendotag) from shared Kotlin code instead.
+
 ```swift
 func pendoTag(_ pendoTag: String) -> some View
 ```
