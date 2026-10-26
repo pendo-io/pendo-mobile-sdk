@@ -400,8 +400,6 @@ Adds a stable, localization-independent identifier to a Compose element. Use it 
 
 Use this modifier when automatic tagging doesn't uniquely identify an element, when the element's text is localized, or when you want to track or anchor a guide to an element that isn't otherwise clickable.
 
-For Compose Multiplatform content, use this modifier instead of the SwiftUI [`.pendoTag()`](/api-documentation/native-ios-apis.md#viewpendotag) modifier, which applies only to native SwiftUI views.
-
 Available in all Pendo CMP SDK releases (`3.14.x` and later).
 
 | Parameter | Type | Description |

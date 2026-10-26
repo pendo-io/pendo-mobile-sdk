@@ -382,9 +382,6 @@ Button(
 
 Pendo treats a tagged element as clickable, and the tag appears in the element's attributes in the Pendo Designer. Use it to tag a Feature when automatic tagging can't uniquely identify the element, when the element's text is localized, or when the element isn't otherwise clickable.
 
-> [!NOTE]
-> For Compose Multiplatform content, use `Modifier.pendoTag()` on both platforms. The SwiftUI [`.pendoTag()`](/api-documentation/native-ios-apis.md#viewpendotag) modifier described in the native iOS documentation applies only to native SwiftUI views and isn't needed for screens built with Compose Multiplatform.
-
 ### Identify custom screens
 
 Use [`Modifier.pendoScreenId()`](/api-documentation/compose-multiplatform-apis.md#pendoscreenid) for tabs or other state-driven content that doesn't have its own navigation route:
