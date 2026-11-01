@@ -154,8 +154,8 @@ Compare the repo's versions against these router-level minimums. The platform re
 |---|---|
 | `ios` | `IPHONEOS_DEPLOYMENT_TARGET` ≥ **11.0** |
 | `android` | `minSdkVersion` ≥ **21**, `compileSdkVersion` ≥ **35** (report-only), AGP ≥ **8.0** (hard stop), Kotlin ≥ **1.9.0**, Java ≥ **11** (report-only, read as `sourceCompatibility`) |
-| `react-native` | `react-native` **0.66–0.84**, plus both native minimums above |
-| `expo` | Expo SDK **41–56**, plus both native minimums above. **Expo Go cannot run Pendo; a development build is required.** |
+| `react-native` | `react-native` **0.66–0.88**, plus both native minimums above |
+| `expo` | Expo SDK **41–58**, plus both native minimums above. **Expo Go cannot run Pendo; a development build is required.** |
 | `flutter` | Flutter ≥ **3.16.0**, Dart ≥ **3.2.0**, plus the Android native minimum above |
 | `maui` | **.NET 8–10**, read from the application head's `TargetFrameworks`. Kotlin ≥ 1.9.0 for the Android head: **outcome 4, not applicable** (below). |
 
@@ -207,7 +207,7 @@ Pendo states no Gradle requirement anywhere; the Gradle floors above are Android
 
 **`compileSdkVersion` and Java `sourceCompatibility` are reported, never asked.** They are the app's own build settings, and `references/android.md` forbids this skill from changing them, so a prompt has no branch that behaves differently, while it would fire on nearly every React Native and Flutter app (RN 0.74's template ships `compileSdkVersion 34`; `flutter create` ships `VERSION_1_8`). When one falls short, list it under "Requires your attention" with the file and property to raise, and Pendo's floors (`compileSDKVersion 35`, `JAVA version 11`, `android/pnddocs/native-android.md`). Do not prompt, stop or omit it. In `verify`, Phase 7's build surfaces a real incompatibility concretely; in `integrate` the remedy line is all the developer gets, so write it carefully.
 
-**Every other row is report-and-ask**: Kotlin, `minSdkVersion`, `IPHONEOS_DEPLOYMENT_TARGET`, and the bounded ranges (`react-native` 0.66–0.84, Expo SDK 41–56, the Flutter/Dart floors, .NET 8–10). A value below a floor, **above a bounded range's ceiling**, or below any sub-value of a multi-value row is a mismatch: **report it and ask whether to continue. Never skip silently.** If the user declines, **stop** (early-exit report). **In `detect`, report the mismatch and do not ask**: it goes in the requirements list and sets `Can install` to no, with the value read and the floor it missed. **`doctor` treats every row as `detect` does** and passes the outcomes to `references/doctor.md` as `REQ` findings. `report` does the same.
+**Every other row is report-and-ask**: Kotlin, `minSdkVersion`, `IPHONEOS_DEPLOYMENT_TARGET`, and the bounded ranges (`react-native` 0.66–0.88, Expo SDK 41–58, the Flutter/Dart floors, .NET 8–10). A value below a floor, **above a bounded range's ceiling**, or below any sub-value of a multi-value row is a mismatch: **report it and ask whether to continue. Never skip silently.** If the user declines, **stop** (early-exit report). **In `detect`, report the mismatch and do not ask**: it goes in the requirements list and sets `Can install` to no, with the value read and the floor it missed. **`doctor` treats every row as `detect` does** and passes the outcomes to `references/doctor.md` as `REQ` findings. `report` does the same.
 
 Whatever the outcome, every row reaches the user: a mismatch as a stop or an ask, report-only and indeterminate rows under "Requires your attention", a not-applicable row named as such. **A constraint that goes unmentioned is the one forbidden outcome**, including one never actually resolved.
 

@@ -63,7 +63,7 @@ This is a workflow-ending fact for exactly the developers most likely to be on `
 
 > **Expo Go can no longer run this app.** Pendo ships native code that the Expo Go client does not bundle, so Expo Go is not supported at all. Use a development build instead — `npx expo run:ios` / `npx expo run:android`, or an EAS development build.
 
-**Scope check**: this file assumes the repo's Expo SDK version already passed `SKILL.md` Phase 4's **bounded range 41–56** (a floor *and* a ceiling). Nothing below re-derives that check.
+**Scope check**: this file assumes the repo's Expo SDK version already passed `SKILL.md` Phase 4's **bounded range 41–58** (a floor *and* a ceiling). Nothing below re-derives that check.
 
 ---
 
@@ -507,4 +507,4 @@ Return, for the router's report:
 
 **Expo Go cannot run this SDK at all**, regardless of version — see §0; that is a hard blocker, not a version floor.
 
-Beyond that, Phase 4 has already confirmed Expo SDK 41–56. The Android/iOS native-head minimums in `SKILL.md`'s Global Constraints table (iOS 11+/Swift 5.7+/Xcode 14+; AGP 8.0+/Kotlin 1.9.0+/Java 11+/minSdk 21+/compileSdk 35+) apply as written on `prebuilt`, where those values exist in the committed `android/`/`ios/` projects. On `managed` they are not present in the repo at all — Expo derives them from the SDK version at prebuild — and `SKILL.md` Phase 4 says explicitly what to do in that case. Nothing is re-derived here.
+Beyond that, Phase 4 has already confirmed Expo SDK 41–58. The Android/iOS native-head minimums in `SKILL.md`'s Global Constraints table (iOS 11+/Swift 5.7+/Xcode 14+; AGP 8.0+/Kotlin 1.9.0+/Java 11+/minSdk 21+/compileSdk 35+) apply as written on `prebuilt`, where those values exist in the committed `android/`/`ios/` projects. On `managed` they are not present in the repo at all — Expo derives them from the SDK version at prebuild — and `SKILL.md` Phase 4 says explicitly what to do in that case. Nothing is re-derived here.
