@@ -5,10 +5,10 @@
 > install Pendo for you — see [Install via AI assistant](../../README.md#install-via-claude-code-cursor-or-codex-beta).
 
 >[!NOTE]
->**Expo SDK** 41-56 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
+>**Expo SDK** 41-58 using React Navigation 5+ is supported. See dedicated [Expo integration instructions](/android/pnddocs/expo_rn-android.md).
 
 >[!IMPORTANT]
->- We support a codeless solution for React Native 0.66-0.84 using react-navigation 5+.
+>- We support a codeless solution for React Native 0.66-0.88 using react-navigation 5+.
 >- Support for React Native's New Architecture (Fabric) is available starting from version 3.7.2.
 
 >[!IMPORTANT]
