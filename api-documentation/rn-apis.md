@@ -752,6 +752,7 @@ interface PendoOptions {
     debugMode?: boolean;
     onInitComplete?: () => void;
     onInitFailed?: () => void;
+    offlineMode?: boolean;
 }
 ```
 
@@ -769,6 +770,7 @@ interface PendoOptions {
 | debugMode | boolean | Set to `true` to enable debug logs. Equivalent to calling `setDebugMode(true)` before `setup` |
 | onInitComplete | () => void | Callback invoked when the SDK successfully initializes and validates the app key |
 | onInitFailed | () => void | Callback invoked when SDK initialization fails (e.g., invalid app key, network error). On Android, the SDK auto-retries when network connectivity is restored |
+| offlineMode | boolean | Set to `true` to turn on [offline mode](/other/offline-mode.md). Default `false`. Read once, when `setup` runs. Available from SDK 3.15.0 |
 
 
 <b>Example</b>:

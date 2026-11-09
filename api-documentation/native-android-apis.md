@@ -84,6 +84,15 @@ static synchronized void setup(Context context, String appKey, PendoOptions opti
 ```java
 Pendo.setup(appContext, "your.app.key", null, null)    
 ```
+
+To turn on [offline mode](/other/offline-mode.md) (SDK 3.15.0+), build the options with `setOfflineMode(true)`. It's read once, when `setup` runs:
+
+```java
+Pendo.PendoOptions options = new Pendo.PendoOptions.Builder()
+        .setOfflineMode(true)
+        .build();
+Pendo.setup(appContext, "your.app.key", options, null);
+```
 </details>
 
 
