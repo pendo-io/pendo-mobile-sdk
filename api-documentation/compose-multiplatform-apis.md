@@ -273,11 +273,13 @@ data class PendoOptions(
     val environmentName: String? = null,
     val disableAnalytics: Boolean = false,
     val includeAllGuideContent: Boolean = false,
+    val offlineMode: Boolean = false,
 )
 ```
 
 | Property | Type | Default | Description |
 | :--- | :--- | :--- | :--- |
+| `offlineMode` | `Boolean` | `false` | Turns on [offline mode](/other/offline-mode.md). Read once, when `setup` runs. Available from 3.15.0. |
 | `environmentName` | `String?` | `null` | Optional environment name, such as `staging` or `production`. |
 | `disableAnalytics` | `Boolean` | `false` | Disables analytics collection when `true`. |
 | `includeAllGuideContent` | `Boolean` | `false` | Includes all guide content in the initialization model when `true`. |

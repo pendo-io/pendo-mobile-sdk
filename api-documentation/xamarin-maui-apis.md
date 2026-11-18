@@ -96,6 +96,13 @@ void Setup(string appKey)
 ```c#
 Pendo.Setup("your.app.key");  
 ```
+
+To turn on [offline mode](/other/offline-mode.md) (3.15.0+), pass `offlineMode` in the options. It's read once, when `Setup` runs:
+
+```c#
+var options = new Dictionary<string, object> { { "offlineMode", true } };
+Pendo.Setup("your.app.key", options);
+```
 </details>
 
 

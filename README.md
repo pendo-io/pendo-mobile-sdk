@@ -113,6 +113,7 @@ ln -s "$(pwd)/plugin/skills/install-pendo-mobile" ~/.agents/skills/install-pendo
 - [Using Pendo with hybrid apps](https://support.pendo.io/hc/en-us/articles/23804736263195-Use-Pendo-with-hybrid-apps)
 - [Configuring CNAME Hostnames](https://support.pendo.io/hc/en-us/articles/360047607631-Configure-CNAME-for-Pendo-Mobile)
 - [Work with dynamic content in your mobile app](https://support.pendo.io/hc/en-us/articles/24836902488219-Work-with-dynamic-content-in-your-mobile-app)
+- [Offline mode: guides and analytics without a connection (SDK 3.15.0+)](/other/offline-mode.md)
 - [Mobile offline support analytics](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
 - [iOS analytics & Session Replay: data handling and offline behavior (developer reference)](/ios/pnddocs/offline-support-ios.md)
 

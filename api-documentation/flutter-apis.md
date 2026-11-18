@@ -53,7 +53,7 @@ static Future<void> setup(String appKey, {Map<String, dynamic>? pendoOptions}) a
 | Param  | Type | Description |
 | :---: | :---: | :--- |
 | appKey | String | Your Public App ID. Find it under `Settings` > `Subscription settings` > select your iOS or Android app > `App Details`. Both apps use the same Public App ID. |
-| pendoOptions | Map<String, dynamic>? | PendoOptions should be `null` unless instructed otherwise by Pendo Support |
+| pendoOptions | Map<String, dynamic>? | PendoOptions should be `null` unless instructed otherwise by Pendo Support. The exception is `{'offlineMode': true}`, which turns on [offline mode](/other/offline-mode.md) (SDK 3.15.0+, read once, when `setup` runs) |
 
 
 <b>Example</b>:

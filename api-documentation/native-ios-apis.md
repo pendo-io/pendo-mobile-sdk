@@ -1151,6 +1151,31 @@ PendoManager.shared().setup("your.app.key", with: options)
 
 </details>
 
+### `offlineMode`
+
+```swift
+@property (nonatomic) BOOL offlineMode;
+```
+
+>Turns on offline guides and offline analytics. Read once, when `setup` runs. Available from SDK 3.15.0. See [Offline mode](/other/offline-mode.md).
+<details><summary> <b>Details</b><i> - Click to expand or collapse</i></summary>
+
+<br>
+
+<b>Class</b>: PendoOptions<br>
+<b>Type</b>: BOOL<br>
+<b>Default</b>: false<br>
+
+<b>Example</b>:
+
+```swift
+let options = PendoOptions()
+options.offlineMode = true
+PendoManager.shared().setup("your.app.key", with: options)
+```
+
+</details>
+
 <br>
 
 ## Session Replay — Privacy Configuration
