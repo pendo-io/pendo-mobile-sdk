@@ -150,6 +150,19 @@ PendoManager.shared().startSession(visitorId, accountId:accountId, visitorData:v
 >[!TIP]
 >To begin a session for an  <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass ```nil``` or an empty string ```""``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, set `offlineMode` on the `PendoOptions` you pass to `setup`:
+>
+> ```swift
+> let options = PendoOptions()
+> options.offlineMode = true
+> PendoManager.shared().setup("YOUR_API_KEY_HERE", with: options)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ### Supporting SwiftUI with older SDK (below 3.1) additional step 
 
 If using SDK below 3.1 the `pendoEnableSwiftUI()` modifier must be applied to the application rootView. If there are multiple rootViews (ex. usage of multiple UIHostingControllers), apply the modifier to each main rootView. See example below:

@@ -146,6 +146,17 @@ and change your integration to the following:
 const PendoNavigationContainer = WithPendoReactNavigation(NavigationContainer, {nativeIDs:["myProp"]});
 ```
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `{offlineMode: true}` as the third argument to `setup`:
+>
+> ```typescript
+> PendoSDK.setup(pendoKey, navigationOptions, {offlineMode: true});
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ## Step 5. Running the project
 
 To run the project with Pendo integration, you should be able to generate iOS and Android projects.

@@ -151,6 +151,20 @@ Find your Public App ID under **Settings > Subscription settings > select your i
 > [!TIP]
 > To start an [anonymous visitor](https://support.pendo.io/hc/en-us/articles/360032202751), pass `null` or `""` as the visitor ID. Call `startSession` again to identify the visitor or switch visitors.
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `PendoOptions` built with `setOfflineMode(true)` to `setup`:
+>
+> ```kotlin
+> val options = Pendo.PendoOptions.Builder()
+>     .setOfflineMode(true)
+>     .build()
+> Pendo.setup(this, "YOUR_API_KEY_HERE", options, null)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ### Track Android UI
 
 For classic Android Views, follow the standard native setup above. The Compose-specific modifiers in this section do not apply.
@@ -316,6 +330,19 @@ An existing SwiftUI `App.init()` can remain alongside `UIApplicationDelegateAdap
 
 > [!TIP]
 > To start an [anonymous visitor](https://support.pendo.io/hc/en-us/articles/360032202751), pass `nil` or `""` as the visitor ID. Call `startSession` again to identify the visitor or switch visitors.
+
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, set `offlineMode` on the `PendoOptions` you pass to `setup`:
+>
+> ```swift
+> let options = PendoOptions()
+> options.offlineMode = true
+> PendoManager.shared().setup("YOUR_API_KEY_HERE", with: options)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
 
 ### Track SwiftUI
 

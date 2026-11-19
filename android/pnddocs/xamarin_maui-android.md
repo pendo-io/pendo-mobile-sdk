@@ -138,6 +138,18 @@ The optimizations line should look like this:
     }
     ```
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `offlineMode` in the options you give `Setup`:
+>
+> ```c#
+> var options = new Dictionary<string, object> { { "offlineMode", true } };
+> pendo.Setup(apiKey, options);
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ## Step 3. Connect mobile device for tagging and testing
 
 >[!NOTE]

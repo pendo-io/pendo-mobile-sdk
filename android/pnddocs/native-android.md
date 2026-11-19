@@ -125,6 +125,20 @@
 > [!TIP]
 > To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` or an empty string `""` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions).
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `PendoOptions` built with `setOfflineMode(true)` to `setup`:
+>
+> ```kotlin
+> val options = Pendo.PendoOptions.Builder()
+>     .setOfflineMode(true)
+>     .build()
+> Pendo.setup(this, "YOUR_API_KEY_HERE", options, null)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ## Step 3. Tracking Jetpack Compose
 
 1. **Drawer or ModalBottomSheetLayout Support (Add if applicable)**

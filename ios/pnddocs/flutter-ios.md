@@ -220,6 +220,17 @@ Wrap the main widget with a PendoActionListener in the root of the project:
  await PendoSDK.track('name', { 'firstProperty': 'firstPropertyValue', 'secondProperty': 'secondPropertyValue'});
 ```
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `{'offlineMode': true}` in `pendoOptions`:
+>
+> ```dart
+> await PendoSDK.setup(pendoKey, pendoOptions: {'offlineMode': true});
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ## Step 3. Mobile device connectivity and testing
 
 >[!NOTE]
