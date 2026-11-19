@@ -204,8 +204,9 @@ to **start** a session with no connection.
 - Saved events have a storage limit. If the device stays offline long enough to reach it, the oldest
   events are dropped first.
 
-For storage limits, upload batching and Session Replay offline behavior, see the
-[iOS data handling reference](/ios/pnddocs/offline-support-ios.md).
+For storage limits, upload batching and Session Replay offline behavior, see the data handling
+reference for [iOS](/ios/pnddocs/offline-support-ios.md) and
+[Android](/android/pnddocs/offline-support-android.md).
 
 ## Limitations
 
