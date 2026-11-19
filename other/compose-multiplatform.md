@@ -157,6 +157,20 @@ fun App() {
 > [!TIP]
 > To begin a session for an <a href="https://support.pendo.io/hc/en-us/articles/360032202751" target="_blank">anonymous visitor</a>, pass `null` as the visitor ID. You can call `startSession()` again to move from an anonymous session to an identified session or to switch visitors.
 
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `PendoOptions(offlineMode = true)` to `setup`:
+>
+> ```kotlin
+> Pendo.setup(
+>     appKey = "YOUR_API_KEY_HERE",
+>     options = PendoOptions(offlineMode = true),
+> )
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
+
 ## Step 3. Add PendoTracker
 
 Wrap your shared navigable content with [`PendoTracker`](/api-documentation/compose-multiplatform-apis.md#pendotracker) to enable Pendo tracking on both Android and iOS.

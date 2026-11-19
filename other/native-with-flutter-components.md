@@ -161,7 +161,19 @@ class App : Application() {
 >[!TIP]
 >To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
 
-
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, pass `PendoOptions` built with `setOfflineMode(true)` to `setup`:
+>
+> ```kotlin
+> val options = Pendo.PendoOptions.Builder()
+>     .setOfflineMode(true)
+>     .build()
+> Pendo.setup(this, "YOUR_API_KEY_HERE", options, null)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
 
 ### Step 3. Mobile device connectivity for testing
 
@@ -315,6 +327,19 @@ Setup the SDK in the native code in your `AppDelegate` file and register the plu
 
 >[!TIP]
 >To begin a session for an  <a href="https://help.pendo.io/resources/support-library/analytics/anonymous-visitors.html" target="_blank">anonymous visitor</a>, pass ```null``` or an empty string ```''``` as the Visitor ID. You can call the `startSession` API more than once and transition from an anonymous session to an identified session (or even switch between multiple identified sessions). 
+
+> [!NOTE]
+> **Offline mode (optional, SDK 3.15.0+).** With offline mode on, Pendo keeps working when the device can't reach Pendo:
+> guides set to show offline still appear, and analytics are saved on the device and sent when the connection returns.
+> It's opt-in and off by default. To turn it on, set `offlineMode` on the `PendoOptions` you pass to `setup`:
+>
+> ```swift
+> let options = PendoOptions()
+> options.offlineMode = true
+> PendoManager.shared().setup("YOUR_API_KEY_HERE", with: options)
+> ```
+>
+> The SDK reads this option once, when `setup` runs. For requirements, guide setup and limitations, see [Offline mode](/other/offline-mode.md).
 
 ### Step 3. Mobile device connectivity and testing
 

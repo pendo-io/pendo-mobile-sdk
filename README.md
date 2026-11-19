@@ -116,6 +116,7 @@ ln -s "$(pwd)/plugin/skills/install-pendo-mobile" ~/.agents/skills/install-pendo
 - [Offline mode: guides and analytics without a connection (SDK 3.15.0+)](/other/offline-mode.md)
 - [Mobile offline support analytics](https://support.pendo.io/hc/en-us/articles/360043016412-Mobile-offline-support-for-analytics)
 - [iOS analytics & Session Replay: data handling and offline behavior (developer reference)](/ios/pnddocs/offline-support-ios.md)
+- [Android analytics & Session Replay: data handling and offline behavior (developer reference)](/android/pnddocs/offline-support-android.md)
 
 
 Visit the [Mobile Resource Center](https://support.pendo.io/hc/en-us/categories/23324531103771-Mobile-implementation) For additional documentation.
