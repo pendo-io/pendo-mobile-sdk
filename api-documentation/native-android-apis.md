@@ -3,7 +3,8 @@
 > [!IMPORTANT]
 >The `setup` API must be called before the `startSession` API. <br> 
 > All other APIs must be called after both the `setup` and `startSession` APIs, otherwise they will be ignored. <br>
->The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.
+>The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.<br>
+>The [track without a session](#track-without-a-session) API is also an exception: `setup` must have run once on the device, but not in the current process.
 
 ### Pendo APIs
 [setup](#setup) ⇒ `void` <br>
@@ -12,6 +13,7 @@
 [setAccountData](#setaccountdata) ⇒ `void` <br>
 [endSession](#endsession) ⇒ `void` <br>
 [track](#track) ⇒ `void` <br>
+[track (without a session)](#track-without-a-session) ⇒ `void` <br>
 [screenContentChanged](#screencontentchanged) ⇒ `void` <br>
 [sendClickAnalytic](#sendclickanalytic) ⇒ `void` <br>
 [pauseGuides](#pauseguides) ⇒ `void` <br>
@@ -276,6 +278,87 @@ static void track(String eventName, @Nullable Map<String, Object> properties)
 HashMap trackEventProperties = new HashMap<>();
 trackEventProperties.put("Theme", "Dark Mode");
 Pendo.track("App Opened", trackEventProperties);
+```
+</details>
+
+
+### `track` (without a session)
+
+```java
+static void track(@NonNull Context context,
+                  @NonNull String eventName,
+                  @Nullable Map<String, Object> properties,
+                  @NonNull String trackEventSecret,
+                  @NonNull String visitorId,
+                  @Nullable String accountId,
+                  @Nullable PendoTrackEventCallback callback)
+```
+
+>Sends a track event straight to Pendo when no Pendo session is running, for example from a push notification receiver. Available from SDK 3.15.0.
+
+> [!NOTE]
+>`Pendo.setup` must have run at least once on the device; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
+
+<details>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+<b>Class</b>: Pendo<br>
+<b>Kind</b>: static method<br>
+<b>Returns</b>: void<br>
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| context | Context | Any context of the application |
+| eventName | String | The track event name. Spaces at the start and end are removed |
+| properties | Map<String, Object> | Additional metadata to be sent as part of the track event (optional). Values that are not strings, numbers, booleans, lists, arrays or maps are sent as their `toString()` value |
+| trackEventSecret | String | The Track Event Shared Secret from the Pendo app settings (not the app key) |
+| visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
+| accountId | String | The visitor's account (optional) |
+| callback | PendoTrackEventCallback | Told the result once, on the main thread (optional) |
+
+| PendoTrackEventCallback | Description |
+| :---: | :--- |
+| onSuccess() | Pendo received the event |
+| onFailure(String reason) | The event wasn't sent or Pendo rejected it. Nothing is stored, so send it again if it matters |
+
+<b>Notes:</b>
+- Android can stop your process when a receiver or service returns. To make sure the event is sent, call `goAsync()` and finish it from the callback.
+- Short network problems (no connection, DNS error, HTTP 429, 502, 503 or 504) are retried up to 2 times. Nothing is stored offline.
+- The result is also written to Logcat with the tag `Pendo`: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
+- The secret is part of your app, so it can be extracted from it.
+- In Pendo, these events have the source `api` and no country or region.
+
+| Failure reason | Meaning |
+| :--- | :--- |
+| `Pendo.setup has not run on this device yet` | Run `setup` once on the device first |
+| `eventName and visitorId are required` / `context and trackEventSecret are required` | A required parameter is empty |
+| `Invalid properties` | The properties can't be sent as JSON (for example `Double.NaN`) |
+| `Network error: ...` | No connection, a timeout, or another network problem |
+| `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
+
+<b>Example:</b>
+
+```java
+public class PushDismissedReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        PendingResult pending = goAsync();
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("campaignId", intent.getStringExtra("campaignId"));
+        Pendo.track(context, "Push Dismissed", properties, TRACK_EVENT_SECRET, visitorId, accountId,
+                new PendoTrackEventCallback() {
+                    @Override
+                    public void onSuccess() {
+                        pending.finish();
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull String reason) {
+                        pending.finish();
+                    }
+                });
+    }
+}
 ```
 </details>
 
