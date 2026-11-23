@@ -156,7 +156,7 @@ Compare the repo's versions against these router-level minimums. The platform re
 | `android` | `minSdkVersion` ≥ **21**, `compileSdkVersion` ≥ **35** (report-only), AGP ≥ **8.0** (hard stop), Kotlin ≥ **1.9.0**, Java ≥ **11** (report-only, read as `sourceCompatibility`) |
 | `react-native` | `react-native` **0.66–0.88**, plus both native minimums above |
 | `expo` | Expo SDK **41–58**, plus both native minimums above. **Expo Go cannot run Pendo; a development build is required.** |
-| `flutter` | Flutter ≥ **3.16.0**, Dart ≥ **3.2.0**, plus the Android native minimum above |
+| `flutter` | Flutter ≥ **3.22.0**, Dart ≥ **3.4.0**, plus the Android native minimum above |
 | `maui` | **.NET 8–10**, read from the application head's `TargetFrameworks`. Kotlin ≥ 1.9.0 for the Android head: **outcome 4, not applicable** (below). |
 
 **The MAUI application head** is the `.csproj` with both `<UseMaui>true</UseMaui>` **and** an executable `<OutputType>` (`Exe` or `WinExe`, possibly with a per-TFM `Condition`), the same markers `scripts/verify-build.sh`'s `find_maui_head_project()` uses, so this phase and Phase 7 read the same project. `UseMaui` alone is not enough: MAUI class libraries set it too. If no project has both, say the head could not be identified and treat the .NET row as indeterminate.

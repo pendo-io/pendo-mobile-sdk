@@ -18,7 +18,7 @@ Follow these instructions to resolve breaking changes in your app::
 
 <b>2.x (deprecated):</b> `2.0.0 - 2.10.5`
 <br>
-<b>3.x:</b> `3.3.0`
+<b>3.x:</b> `3.22.0`
 
 </td>
 </tr>
@@ -31,7 +31,7 @@ Follow these instructions to resolve breaking changes in your app::
 
 <b>2.x (deprecated):</b> `2.12.0 - 2.16.2`
 <br>
-<b>3.x:</b> `2.18`
+<b>3.x:</b> `3.4.0`
 
 </td>
 </tr>
