@@ -290,6 +290,11 @@ static void track(@NonNull Context context,
 > [!NOTE]
 >`Pendo.setup` must have run at least once on the device; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
 
+> [!IMPORTANT]
+>**You must provide the Track Event Shared Secret, and keep it secret.**<br>
+>Where to get it: in Pendo, open your app > **App Details** > **Basic Settings** > **Track Event Shared Secret** > **Show**, and copy the value. It is not the Scheme ID or the Public App ID on the same page. The SDK can't find it by itself; pass it on every call.<br>
+>Keep it secret: anyone who has it can send track events to your app in Pendo. Treat it like an API key: keep it out of public source control, logs, analytics and your UI. Store it in your build config or secure storage, or get it from your own backend. The SDK sends it only in a request header to Pendo and never logs or saves it.
+
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: Pendo<br>
@@ -302,7 +307,7 @@ static void track(@NonNull Context context,
 | context | Context | Any context of the application |
 | eventName | String | The track event name. Spaces at the start and end are removed |
 | properties | Map<String, Object> | Additional metadata to be sent as part of the track event (optional). Values that are not strings, numbers, booleans, lists, arrays or maps are sent as their `toString()` value |
-| trackEventSecret | String | The Track Event Shared Secret from the Pendo app settings (not the app key) |
+| trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
 | visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
 | accountId | String | The visitor's account (optional) |
 | callback | PendoTrackEventCallback | Told the result once, on the main thread (optional) |
@@ -310,13 +315,12 @@ static void track(@NonNull Context context,
 | PendoTrackEventCallback | Description |
 | :---: | :--- |
 | onSuccess() | Pendo received the event |
-| onFailure(String reason) | The event wasn't sent or Pendo rejected it. Nothing is stored, so send it again if it matters |
+| onFailure(String reason) | The event wasn't sent, Pendo rejected it, or the 10 s limit passed. Nothing is stored. Pendo may still have the event (for example after a timeout), so sending it again can create a duplicate |
 
 <b>Notes:</b>
-- Android can stop your process when a receiver or service returns. To make sure the event is sent, call `goAsync()` and finish it from the callback.
-- Short network problems (no connection, DNS error, HTTP 429, 502, 503 or 504) are retried up to 2 times. Nothing is stored offline.
+- Android can stop your process when a receiver or service returns. To make sure the event is sent, keep the work alive until the callback. The example uses `goAsync()` and finishes it from the callback, but that is only one way: you can use any way your app already has, such as waiting for the callback inside `FirebaseMessagingService.onMessageReceived` or a `WorkManager` job. You can also pass `null` as the callback and not wait.
+- Short problems (no connection, DNS error, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
 - The result is also written to Logcat with the tag `Pendo`: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
-- The secret is part of your app, so it can be extracted from it.
 - In Pendo, these events have the source `api` and no country or region.
 
 | Failure reason | Meaning |
@@ -326,6 +330,7 @@ static void track(@NonNull Context context,
 | `Invalid properties` | The properties can't be sent as JSON (for example `Double.NaN`) |
 | `Network error: ...` | No connection, a timeout, or another network problem |
 | `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
+| `Timed out after 10 s` | Pendo didn't answer within 10 s, retries included |
 
 <b>Example:</b>
 
@@ -333,6 +338,7 @@ static void track(@NonNull Context context,
 public class PushDismissedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+        // One way to keep the receiver alive until Pendo answers; use any way your app already has.
         PendingResult pending = goAsync();
         Map<String, Object> properties = new HashMap<>();
         properties.put("campaignId", intent.getStringExtra("campaignId"));
