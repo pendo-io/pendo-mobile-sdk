@@ -2,8 +2,8 @@
 
 >[!IMPORTANT]
 >Requirements:
->- Flutter: ">=3.3.0"
->- SDK: ">=2.18.0 < 4.0.0" 
+>- Flutter: ">=3.22.0"
+>- SDK: ">=3.4.0 < 4.0.0" 
 
 >[!NOTE]
 >These instructions assume prior knowledge of [Flutter integrated into your existing native app as a library or module](https://docs.flutter.dev/add-to-app).

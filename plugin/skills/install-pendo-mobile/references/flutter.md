@@ -352,8 +352,8 @@ Source: `ios/pnddocs/flutter-ios.md`. Calling `super` matters here specifically 
 
 | Requirement | Floor |
 |---|---|
-| Flutter | ≥ 3.16.0 |
-| Dart | ≥ 3.2.0 (`>=3.2.0 <4.0.0`) |
+| Flutter | ≥ 3.22.0 |
+| Dart | ≥ 3.4.0 (`>=3.4.0 <4.0.0`) |
 | GoRouter (if used) | ≥ 13.0 |
 | AutoRoute (if used) | ≥ 7.0 |
 | Android head — AGP | ≥ 8.0 |
@@ -362,13 +362,13 @@ Source: `ios/pnddocs/flutter-ios.md`. Calling `super` matters here specifically 
 | Android head — minSdkVersion | ≥ 21 |
 | Android head — compileSdkVersion | ≥ 35 |
 
-Verbatim source for Flutter/Dart: `Flutter: ">=3.16.0"`, `SDK (Dart): ">=3.2.0 < 4.0.0"` (`ios/pnddocs/flutter-ios.md`, `android/pnddocs/flutter-android.md`). Android floors are restated in the same two files, identical to native Android's own minimums.
+Verbatim source for Flutter/Dart: `Flutter: ">=3.22.0"`, `SDK (Dart): ">=3.4.0 < 4.0.0"` (`ios/pnddocs/flutter-ios.md`, `android/pnddocs/flutter-android.md`). Android floors are restated in the same two files, identical to native Android's own minimums.
 
 **iOS deployment target is not directly sourced for Flutter.** Pendo's Flutter docs restate the Android native floor explicitly but never separately restate an iOS deployment-target floor for Flutter. Native iOS's own documented floor (`iOS 11`, confirmed independently by the SDK's `Package.swift`: `platforms: [.iOS(.v11)]`) almost certainly still applies underneath, since Flutter's iOS plugin wraps the same native SDK — but treat that as inherited by implication, not a directly-sourced Flutter-specific claim. This matches `SKILL.md` Phase 4's note on this exact point; do not restate it there as if newly confirmed.
 
-iOS dependency manager: CocoaPods by default. Swift Package Manager is available as an opt-in but requires Flutter ≥ 3.24 on the host app — a separately higher floor than the plugin's own 3.16.0 minimum, relevant only if opting into SPM.
+iOS dependency manager: CocoaPods by default. Swift Package Manager is available as an opt-in but requires Flutter ≥ 3.24 on the host app — a separately higher floor than the plugin's own 3.22.0 minimum, relevant only if opting into SPM.
 
-Superseded, do not use: `migration-docs/flutter-2.x-to-3.x-migration.md` states an older Flutter `3.3.0`/Dart `2.18` floor — that was the 2.x→3.0 baseline and is superseded by the `3.16.0`/`3.2.0` floors above.
+`migration-docs/flutter-2.x-to-3.x-migration.md` and `other/native-with-flutter-components.md` state the same `3.22.0`/`3.4.0` floors.
 
 ## Session (`startSession`)
 
