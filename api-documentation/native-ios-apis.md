@@ -377,6 +377,11 @@ func track(_ event: String,
 > [!NOTE]
 >`setup` must have run at least once on the device; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
 
+> [!IMPORTANT]
+>**You must provide the Track Event Shared Secret, and keep it secret.**<br>
+>Where to get it: in Pendo, open your app > **App Details** > **Basic Settings** > **Track Event Shared Secret** > **Show**, and copy the value. It is not the Scheme ID or the Public App ID on the same page. The SDK can't find it by itself; pass it on every call.<br>
+>Keep it secret: anyone who has it can send track events to your app in Pendo. Treat it like an API key: keep it out of public source control, logs, analytics and your UI. Store it in your build config or secure storage, or get it from your own backend. The SDK sends it only in a request header to Pendo and never logs or saves it.
+
 <details>
 <summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
 <b>Class</b>: PendoManager<br>
@@ -388,17 +393,16 @@ func track(_ event: String,
 | :---: | :---: | :--- |
 | event | String | The track event name. Spaces at the start and end are removed |
 | properties | [AnyHashable : Any]? | Additional metadata to be sent as part of the track event (optional). The same rules as `track` apply |
-| trackEventSecret | String | The Track Event Shared Secret from the Pendo app settings (not the app key) |
+| trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
 | visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
 | accountId | String? | The visitor's account (optional) |
-| completion | ((Bool, String?) -> Void)? | Called once on the main queue: `true` when Pendo received the event; otherwise the reason (optional). Nothing is stored, so send it again if it matters |
+| completion | ((Bool, String?) -> Void)? | Called once on the main queue: `true` when Pendo received the event; otherwise the reason (optional). Called within about 10 s. Nothing is stored. Pendo may still have the event (for example after a timeout), so sending it again can create a duplicate |
 
 <b>Notes:</b>
-- The SDK keeps the app running in the background until it has the result. Call your push handler's `completionHandler` from the completion, so iOS doesn't suspend the app before the event is sent.
+- The SDK keeps the app running in the background until it has the result. The example calls the push handler's `completionHandler` from the completion, so iOS doesn't suspend the app before the event is sent. That is only one way: call it from any push code your app already has and finish in your own way, or pass `nil` as the completion and not wait.
 - "Push received" needs a background push (`content-available: 1`). iOS may delay these pushes and never delivers them to an app the user swiped away, so it is best effort. To get "push dismissed", the notification category must use `.customDismissAction`.
-- Short network problems (cannot connect, DNS error, not connected, HTTP 429, 502, 503 or 504) are retried up to 2 times. Nothing is stored offline.
+- Short problems (cannot connect, DNS error, not connected, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
 - The result is also written to the console: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
-- The secret is part of your app, so it can be extracted from it.
 - In Pendo, these events have the source `api` and no country or region. Notification Service Extensions are not supported yet.
 
 | Failure reason | Meaning |
@@ -408,6 +412,7 @@ func track(_ event: String,
 | `Invalid properties` | The properties can't be sent as JSON |
 | `Network error: ...` | No connection, a timeout, or another network problem |
 | `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
+| `Timed out after 10 s` | Pendo didn't answer within 10 s, retries included |
 | `Background time expired` | iOS ended the background time before the event was sent |
 
 <b>Example:</b>
