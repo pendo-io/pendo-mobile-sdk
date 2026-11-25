@@ -368,14 +368,13 @@ func track(_ event: String,
            properties: [AnyHashable : Any]?,
            trackEventSecret: String,
            visitorId: String,
-           accountId: String?,
-           completion: ((Bool, String?) -> Void)?)
+           accountId: String?)
 ```
 
 >Sends a track event straight to Pendo when no Pendo session is running, for example when the app handles a push notification after a background launch. Available from SDK 3.15.0.
 
 > [!NOTE]
->`setup` must have run at least once on the device; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
+>`setup` must have run at least once on the device, with the Pendo kill switch off; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
 
 > [!IMPORTANT]
 >**You must provide the Track Event Shared Secret, and keep it secret.**<br>
@@ -396,16 +395,16 @@ func track(_ event: String,
 | trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
 | visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
 | accountId | String? | The visitor's account (optional) |
-| completion | ((Bool, String?) -> Void)? | Called once on the main queue: `true` when Pendo received the event; otherwise the reason (optional). Called within about 10 s. Nothing is stored. Pendo may still have the event (for example after a timeout), so sending it again can create a duplicate |
 
 <b>Notes:</b>
-- The SDK keeps the app running in the background until it has the result. The example calls the push handler's `completionHandler` from the completion, so iOS doesn't suspend the app before the event is sent. That is only one way: call it from any push code your app already has and finish in your own way, or pass `nil` as the completion and not wait.
+- The call returns right away and never throws. The SDK sends the event in the background. There is no result completion.
+- The SDK keeps the app running in the background until the send ends, so you can call your push handler's `completionHandler` right after this call, as the example does. If iOS ends the background time before the send ends, the send fails with `Background time expired`; if the background time already ran out when the call starts, nothing is sent.
 - "Push received" needs a background push (`content-available: 1`). iOS may delay these pushes and never delivers them to an app the user swiped away, so it is best effort. To get "push dismissed", the notification category must use `.customDismissAction`.
 - Short problems (cannot connect, DNS error, not connected, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
-- The result is also written to the console: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
+- The result is written to the console (Xcode console, or Console.app with the device connected), also in release builds: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
 - In Pendo, these events have the source `api` and no country or region. Notification Service Extensions are not supported yet.
 
-| Failure reason | Meaning |
+| Failure reason in the console | Meaning |
 | :--- | :--- |
 | `Pendo setup has not run on this device yet` | Run `setup` once on the device first |
 | `event, trackEventSecret and visitorId are required` | A required parameter is empty |
@@ -426,9 +425,8 @@ func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 properties: ["campaignId": response.notification.request.content.userInfo["campaignId"] ?? ""],
                                 trackEventSecret: trackEventSecret,
                                 visitorId: visitorId,
-                                accountId: accountId) { _, _ in
-        completionHandler()
-    }
+                                accountId: accountId)
+    completionHandler()
 }
 ```
 </details>
