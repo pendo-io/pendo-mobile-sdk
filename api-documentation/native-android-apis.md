@@ -281,14 +281,13 @@ static void track(@NonNull Context context,
                   @Nullable Map<String, Object> properties,
                   @NonNull String trackEventSecret,
                   @NonNull String visitorId,
-                  @Nullable String accountId,
-                  @Nullable PendoTrackEventCallback callback)
+                  @Nullable String accountId)
 ```
 
 >Sends a track event straight to Pendo when no Pendo session is running, for example from a push notification receiver. Available from SDK 3.15.0.
 
 > [!NOTE]
->`Pendo.setup` must have run at least once on the device; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
+>`Pendo.setup` must have run at least once on the device, with the Pendo kill switch off; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
 
 > [!IMPORTANT]
 >**You must provide the Track Event Shared Secret, and keep it secret.**<br>
@@ -310,20 +309,16 @@ static void track(@NonNull Context context,
 | trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
 | visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
 | accountId | String | The visitor's account (optional) |
-| callback | PendoTrackEventCallback | Told the result once, on the main thread (optional) |
-
-| PendoTrackEventCallback | Description |
-| :---: | :--- |
-| onSuccess() | Pendo received the event |
-| onFailure(String reason) | The event wasn't sent, Pendo rejected it, or the 10 s limit passed. Nothing is stored. Pendo may still have the event (for example after a timeout), so sending it again can create a duplicate |
 
 <b>Notes:</b>
-- Android can stop your process when a receiver or service returns. To make sure the event is sent, keep the work alive until the callback. The example uses `goAsync()` and finishes it from the callback, but that is only one way: you can use any way your app already has, such as waiting for the callback inside `FirebaseMessagingService.onMessageReceived` or a `WorkManager` job. You can also pass `null` as the callback and not wait.
+- The call returns right away and never throws. The SDK sends the event in the background. There is no result callback.
+- The result is written to Logcat with the tag `Pendo`: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
+- If Android stops your process before the send ends, the event is lost. With a working network the send usually takes well under a second.
+- For "Push Received", send the push with **high priority**. For a normal-priority push, Android Doze can block the network while the device is idle, and the event is lost. The event is also lost when Data Saver is on or the app's battery setting is "Restricted".
 - Short problems (no connection, DNS error, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
-- The result is also written to Logcat with the tag `Pendo`: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
 - In Pendo, these events have the source `api` and no country or region.
 
-| Failure reason | Meaning |
+| Failure reason in Logcat | Meaning |
 | :--- | :--- |
 | `Pendo.setup has not run on this device yet` | Run `setup` once on the device first |
 | `eventName and visitorId are required` / `context and trackEventSecret are required` | A required parameter is empty |
@@ -332,28 +327,29 @@ static void track(@NonNull Context context,
 | `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
 | `Timed out after 10 s` | Pendo didn't answer within 10 s, retries included |
 
-<b>Example:</b>
+<b>Example:</b> push received, in a Firebase Cloud Messaging service
+
+```java
+public class MyMessagingService extends FirebaseMessagingService {
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage message) {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("campaignId", message.getData().get("campaignId"));
+        Pendo.track(this, "Push Received", properties, TRACK_EVENT_SECRET, visitorId, accountId);
+        // Show the notification as usual.
+    }
+}
+```
+
+<b>Example:</b> push dismissed, from the notification's `deleteIntent`
 
 ```java
 public class PushDismissedReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        // One way to keep the receiver alive until Pendo answers; use any way your app already has.
-        PendingResult pending = goAsync();
         Map<String, Object> properties = new HashMap<>();
         properties.put("campaignId", intent.getStringExtra("campaignId"));
-        Pendo.track(context, "Push Dismissed", properties, TRACK_EVENT_SECRET, visitorId, accountId,
-                new PendoTrackEventCallback() {
-                    @Override
-                    public void onSuccess() {
-                        pending.finish();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull String reason) {
-                        pending.finish();
-                    }
-                });
+        Pendo.track(context, "Push Dismissed", properties, TRACK_EVENT_SECRET, visitorId, accountId);
     }
 }
 ```
