@@ -3,7 +3,8 @@
 > [!IMPORTANT]
 >The `setup` API must be called before the `startSession` API. <br> 
 > All other APIs must be called after both the `setup` and `startSession` APIs, otherwise they will be ignored. <br>
->The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.
+>The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.<br>
+>The [track without a session](#track-without-a-session) API is also an exception: `setup` must have run once on the device, but not in the current process.
 
 ### Pendo APIs
 [setup](#setup) ⇒ `void` <br>
@@ -12,6 +13,7 @@
 [setAccountData](#setaccountdata) ⇒ `void` <br>
 [endSession](#endsession) ⇒ `void` <br>
 [track](#track) ⇒ `void` <br>
+[track (without a session)](#track-without-a-session) ⇒ `void` <br>
 [screenContentChanged](#screencontentchanged) ⇒ `void` <br>
 [sendClickAnalytic](#sendclickanalytic) ⇒ `void` <br>
 [pauseGuides](#pauseguides) ⇒ `void` <br>
@@ -276,6 +278,89 @@ static void track(String eventName, @Nullable Map<String, Object> properties)
 HashMap trackEventProperties = new HashMap<>();
 trackEventProperties.put("Theme", "Dark Mode");
 Pendo.track("App Opened", trackEventProperties);
+```
+</details>
+
+
+### `track` (without a session)
+
+```java
+static void track(@NonNull Context context,
+                  @NonNull String eventName,
+                  @Nullable Map<String, Object> properties,
+                  @NonNull String trackEventSecret,
+                  @NonNull String visitorId,
+                  @Nullable String accountId)
+```
+
+>Sends a track event straight to Pendo when no Pendo session is running, for example from a push notification receiver. Available from SDK 3.15.0.
+
+> [!NOTE]
+>`Pendo.setup` must have run at least once on the device, with the Pendo kill switch off; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
+
+> [!IMPORTANT]
+>**You must provide the Track Event Shared Secret, and keep it secret.**<br>
+>Where to get it: in Pendo, open your app > **App Details** > **Basic Settings** > **Track Event Shared Secret** > **Show**, and copy the value. It is not the Scheme ID or the Public App ID on the same page. The SDK can't find it by itself; pass it on every call.<br>
+>Keep it secret: anyone who has it can send track events to your app in Pendo. Treat it like an API key: keep it out of public source control, logs, analytics and your UI. Store it in your build config or secure storage, or get it from your own backend. The SDK sends it only in a request header to Pendo and never logs or saves it.
+
+<details>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+<b>Class</b>: Pendo<br>
+<b>Kind</b>: static method<br>
+<b>Returns</b>: void<br>
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| context | Context | Any context of the application |
+| eventName | String | The track event name. Spaces at the start and end are removed |
+| properties | Map<String, Object> | Additional metadata to be sent as part of the track event (optional). Values that are not strings, numbers, booleans, lists, arrays or maps are sent as their `toString()` value |
+| trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
+| visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
+| accountId | String | The visitor's account (optional) |
+
+<b>Notes:</b>
+- The call returns right away and never throws. The SDK sends the event in the background. There is no result callback.
+- The result is written to Logcat with the tag `Pendo`: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
+- If Android stops your process before the send ends, the event is lost. With a working network the send usually takes well under a second.
+- For "Push Received", send the push with **high priority**. For a normal-priority push, Android Doze can block the network while the device is idle, and the event is lost. The event is also lost when Data Saver is on or the app's battery setting is "Restricted".
+- Short problems (no connection, DNS error, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
+- In Pendo, these events have the source `api` and no country or region.
+
+| Failure reason in Logcat | Meaning |
+| :--- | :--- |
+| `Pendo.setup has not run on this device yet` | Run `setup` once on the device first |
+| `eventName and visitorId are required` / `context and trackEventSecret are required` | A required parameter is empty |
+| `Invalid properties` | The properties can't be sent as JSON (for example `Double.NaN`) |
+| `Network error: ...` | No connection, a timeout, or another network problem |
+| `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
+| `Timed out after 10 s` | Pendo didn't answer within 10 s, retries included |
+
+<b>Example:</b> push received, in a Firebase Cloud Messaging service
+
+```java
+public class MyMessagingService extends FirebaseMessagingService {
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage message) {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("campaignId", message.getData().get("campaignId"));
+        Pendo.track(this, "Push Received", properties, TRACK_EVENT_SECRET, visitorId, accountId);
+        // Show the notification as usual.
+    }
+}
+```
+
+<b>Example:</b> push dismissed, from the notification's `deleteIntent`
+
+```java
+public class PushDismissedReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("campaignId", intent.getStringExtra("campaignId"));
+        Pendo.track(context, "Push Dismissed", properties, TRACK_EVENT_SECRET, visitorId, accountId);
+    }
+}
 ```
 </details>
 
