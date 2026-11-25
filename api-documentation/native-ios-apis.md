@@ -3,7 +3,8 @@
 > [!IMPORTANT]
 >The `setup` API must be called before the `startSession` API. <br> 
 > All other APIs must be called after both the `setup` and `startSession` APIs, otherwise they will be ignored. <br>
->The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.
+>The `setDebugMode` API is the exception to that rule and may be called anywhere in the code.<br>
+>The [track without a session](#track-without-a-session) API is also an exception: `setup` must have run once on the device, but not in the current process.
 
 > [!TIP]
 >Checkout out these sample apps integrated with Pendo:
@@ -19,6 +20,7 @@
 [setAccountData](#setaccountdata) ⇒ `void` <br>
 [endSession](#endsession) ⇒ `void` <br>
 [track](#track) ⇒ `void` <br>
+[track (without a session)](#track-without-a-session) ⇒ `void` <br>
 [screenContentChanged](#screencontentchanged) ⇒ `void` <br>
 [pauseGuides](#pauseguides) ⇒ `void` <br>
 [resumeGuides](#resumeguides) ⇒ `void` <br>
@@ -355,6 +357,77 @@ func track(_ event: String, properties: [AnyHashable : Any]?)
 ```swift
 var trackEventProperties = ["theme": "Dark Mode"]
 PendoManager.shared().track("App Opened", properties: trackEventProperties);
+```
+</details>
+
+
+### `track` (without a session)
+
+```swift
+func track(_ event: String,
+           properties: [AnyHashable : Any]?,
+           trackEventSecret: String,
+           visitorId: String,
+           accountId: String?)
+```
+
+>Sends a track event straight to Pendo when no Pendo session is running, for example when the app handles a push notification after a background launch. Available from SDK 3.15.0.
+
+> [!NOTE]
+>`setup` must have run at least once on the device, with the Pendo kill switch off; `setup` and `startSession` are not needed in the current process. While a session is running, use [track](#track): this API doesn't trigger guides.
+
+> [!IMPORTANT]
+>**You must provide the Track Event Shared Secret, and keep it secret.**<br>
+>Where to get it: in Pendo, open your app > **App Details** > **Basic Settings** > **Track Event Shared Secret** > **Show**, and copy the value. It is not the Scheme ID or the Public App ID on the same page. The SDK can't find it by itself; pass it on every call.<br>
+>Keep it secret: anyone who has it can send track events to your app in Pendo. Treat it like an API key: keep it out of public source control, logs, analytics and your UI. Store it in your build config or secure storage, or get it from your own backend. The SDK sends it only in a request header to Pendo and never logs or saves it.
+
+<details>
+<summary> <b>Details</b><i> - Click to expand or collapse</i></summary><br>
+<b>Class</b>: PendoManager<br>
+<b>Kind</b>: class method<br>
+<b>Returns</b>: void<br>
+<br>
+
+| Param  | Type | Description |
+| :---: | :---: | :--- |
+| event | String | The track event name. Spaces at the start and end are removed |
+| properties | [AnyHashable : Any]? | Additional metadata to be sent as part of the track event (optional). The same rules as `track` apply |
+| trackEventSecret | String | The Track Event Shared Secret from Pendo: App Details > Basic Settings > Track Event Shared Secret > Show. Not the Scheme ID or Public App ID. Keep it secret (see above) |
+| visitorId | String | The visitor of the event. Use the same ID as in `startSession` |
+| accountId | String? | The visitor's account (optional) |
+
+<b>Notes:</b>
+- The call returns right away and never throws. The SDK sends the event in the background. There is no result completion.
+- The SDK keeps the app running in the background until the send ends, so you can call your push handler's `completionHandler` right after this call, as the example does. If iOS ends the background time before the send ends, the send fails with `Background time expired`; if the background time already ran out when the call starts, nothing is sent.
+- "Push received" needs a background push (`content-available: 1`). iOS may delay these pushes and never delivers them to an app the user swiped away, so it is best effort. To get "push dismissed", the notification category must use `.customDismissAction`.
+- Short problems (cannot connect, DNS error, not connected, HTTP 429 or 503) are retried up to 2 times. One 10 s limit covers the whole send, retries included. Nothing is stored offline.
+- The result is written to the console (Xcode console, or Console.app with the device connected), also in release builds: `Pendo API | track without session sent: <event>` or `... failed: <reason>`.
+- In Pendo, these events have the source `api` and no country or region. Notification Service Extensions are not supported yet.
+
+| Failure reason in the console | Meaning |
+| :--- | :--- |
+| `Pendo setup has not run on this device yet` | Run `setup` once on the device first |
+| `event, trackEventSecret and visitorId are required` | A required parameter is empty |
+| `Invalid properties` | The properties can't be sent as JSON |
+| `Network error: ...` | No connection, a timeout, or another network problem |
+| `HTTP <code>` | Pendo answered with an error, for example for a wrong secret |
+| `Timed out after 10 s` | Pendo didn't answer within 10 s, retries included |
+| `Background time expired` | iOS ended the background time before the event was sent |
+
+<b>Example:</b>
+
+```swift
+func userNotificationCenter(_ center: UNUserNotificationCenter,
+                            didReceive response: UNNotificationResponse,
+                            withCompletionHandler completionHandler: @escaping () -> Void) {
+    let event = response.actionIdentifier == UNNotificationDismissActionIdentifier ? "Push Dismissed" : "Push Opened"
+    PendoManager.shared().track(event,
+                                properties: ["campaignId": response.notification.request.content.userInfo["campaignId"] ?? ""],
+                                trackEventSecret: trackEventSecret,
+                                visitorId: visitorId,
+                                accountId: accountId)
+    completionHandler()
+}
 ```
 </details>
 
